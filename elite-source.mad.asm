@@ -120,27 +120,27 @@
 
 .ZP
 
-   .ds 0                 ; The start of the zero page workspace
+  .ds 0                 ; The start of the zero page workspace
 
 .RAND
 
-   .ds 4                 ; Four 8-bit seeds for the random number generation
+  .ds 4                 ; Four 8-bit seeds for the random number generation
                         ; system implemented in the DORND routine
 
 .TRTB%
 
-   .ds 2                 ; Contains the address of the keyboard translation
+  .ds 2                 ; Contains the address of the keyboard translation
                         ; table, which is used to translate internal key
                         ; numbers to ASCII
 
 .T1
 
-   .ds 1                 ; Temporary storage, used in a number of places
+  .ds 1                 ; Temporary storage, used in a number of places
 
 .SC
 
-   .ds 1                 ; Screen address (low byte)
-                        \
+  .ds 1                 ; Screen address (low byte)
+                        ;
                         ; Elite draws on-screen by poking bytes directly into
                         ; screen memory, and SC(1 0) is typically set to the
                         ; address of the character block containing the pixel
@@ -150,20 +150,20 @@
 
 .SCH
 
-   .ds 1                 ; Screen address (high byte)
+  .ds 1                 ; Screen address (high byte)
 
 .XX16
 
-   .ds 18                ; Temporary storage for a block of values, used in a
+  .ds 18                ; Temporary storage for a block of values, used in a
                         ; number of places
 
 .P
 
-   .ds 3                 ; Temporary storage, used in a number of places
+  .ds 3                 ; Temporary storage, used in a number of places
 
 .XX0
 
-   .ds 2                 ; Temporary storage, used to store the address of a ship
+  .ds 2                 ; Temporary storage, used to store the address of a ship
                         ; blueprint. For example, it is used when we add a new
                         ; ship to the local bubble in routine NWSHP, and it
                         ; contains the address of the current ship's blueprint
@@ -172,51 +172,51 @@
 
 .INF
 
-   .ds 2                 ; Temporary storage, typically used for storing the
+  .ds 2                 ; Temporary storage, typically used for storing the
                         ; address of a ship's data block, so it can be copied
                         ; to and from the internal workspace at INWK
 
 .V
 
-   .ds 2                 ; Temporary storage, typically used for storing an
+  .ds 2                 ; Temporary storage, typically used for storing an
                         ; address pointer
 
 .XX
 
-   .ds 2                 ; Temporary storage, typically used for storing a 16-bit
+  .ds 2                 ; Temporary storage, typically used for storing a 16-bit
                         ; x-coordinate
 
 .YY
 
-   .ds 2                 ; Temporary storage, typically used for storing a 16-bit
+  .ds 2                 ; Temporary storage, typically used for storing a 16-bit
                         ; y-coordinate
 
 .SUNX
 
-   .ds 2                 ; The 16-bit x-coordinate of the vertical centre axis
+  .ds 2                 ; The 16-bit x-coordinate of the vertical centre axis
                         ; of the sun (which might be off-screen)
 
 .BETA
 
-   .ds 1                 ; The current pitch angle beta, which is reduced from
+  .ds 1                 ; The current pitch angle beta, which is reduced from
                         ; JSTY to a sign-magnitude value between -8 and +8
-                        \
+                        ;
                         ; This describes how fast we are pitching our ship, and
                         ; determines how fast the universe pitches around us
-                        \
+                        ;
                         ; The sign bit is also stored in BET2, while the
                         ; opposite sign is stored in BET2+1
 
 .BET1
 
-   .ds 1                 ; The magnitude of the pitch angle beta, i.e. |beta|,
+  .ds 1                 ; The magnitude of the pitch angle beta, i.e. |beta|,
                         ; which is a positive value between 0 and 8
 
 .XC
 
-   .ds 1                 ; The x-coordinate of the text cursor (i.e. the text
+  .ds 1                 ; The x-coordinate of the text cursor (i.e. the text
                         ; column), which can be from 0 to 32
-                        \
+                        ;
                         ; A value of 0 denotes the leftmost column and 32 the
                         ; rightmost column, but because the top part of the
                         ; screen (the space view) has a white border that
@@ -225,26 +225,26 @@
 
 .YC
 
-   .ds 1                 ; The y-coordinate of the text cursor (i.e. the text
+  .ds 1                 ; The y-coordinate of the text cursor (i.e. the text
                         ; row), which can be from 0 to 23
-                        \
+                        ;
                         ; The screen actually has 31 character rows if you
                         ; include the dashboard, but the text printing routines
                         ; only work on the top part (the space view), so the
                         ; text cursor only goes up to a maximum of 23, the row
                         ; just before the screen splits
-                        \
+                        ;
                         ; A value of 0 denotes the top row, but because the
                         ; top part of the screen has a white border that clashes
                         ; with row 0, text is always shown at row 1 or greater
 
 .QQ22
 
-   .ds 2                 ; The two hyperspace countdown counters
-                        \
+  .ds 2                 ; The two hyperspace countdown counters
+                        ;
                         ; Before a hyperspace jump, both QQ22 and QQ22+1 are
                         ; set to 15
-                        \
+                        ;
                         ; QQ22 is an internal counter that counts down by 1
                         ; each time TT102 is called, which happens every
                         ; iteration of the main game loop. When it reaches
@@ -253,20 +253,20 @@
                         ; continues (so the first tick of the hyperspace counter
                         ; takes 15 iterations to happen, but subsequent ticks
                         ; take 5 iterations each)
-                        \
+                        ;
                         ; QQ22+1 contains the number that's shown on-screen
                         ; during the countdown. It counts down from 15 to 1, and
                         ; when it hits 0, the hyperspace engines kick in
 
 .ECMA
 
-   .ds 1                 ; The E.C.M. countdown timer, which determines whether
+  .ds 1                 ; The E.C.M. countdown timer, which determines whether
                         ; an E.C.M. system is currently operating:
-                        \
+                        ;
                         ;   * 0 = E.C.M. is off
-                        \
+                        ;
                         ;   * Non-zero = E.C.M. is on and is counting down
-                        \
+                        ;
                         ; The counter starts at 32 when an E.C.M. is activated,
                         ; either by us or by an opponent, and it decreases by 1
                         ; in each iteration of the main flight loop until it
@@ -276,194 +276,194 @@
 
 .XX15
 
-   .ds 0                 ; Temporary storage, typically used for storing screen
+  .ds 0                 ; Temporary storage, typically used for storing screen
                         ; coordinates in line-drawing routines
-                        \
+                        ;
                         ; There are six bytes of storage, from XX15 TO XX15+5.
                         ; The first four bytes have the following aliases:
-                        \
+                        ;
                         ;   X1 = XX15
                         ;   Y1 = XX15+1
                         ;   X2 = XX15+2
                         ;   Y2 = XX15+3
-                        \
+                        ;
                         ; These are typically used for describing lines in terms
                         ; of screen coordinates, i.e. (X1, Y1) to (X2, Y2)
-                        \
+                        ;
                         ; The last two bytes of XX15 do not have aliases
 
 .X1
 
-   .ds 1                 ; Temporary storage, typically used for x-coordinates in
+  .ds 1                 ; Temporary storage, typically used for x-coordinates in
                         ; line-drawing routines
 
 .Y1
 
-   .ds 1                 ; Temporary storage, typically used for y-coordinates in
+  .ds 1                 ; Temporary storage, typically used for y-coordinates in
                         ; line-drawing routines
 
 .X2
 
-   .ds 1                 ; Temporary storage, typically used for x-coordinates in
+  .ds 1                 ; Temporary storage, typically used for x-coordinates in
                         ; line-drawing routines
 
 .Y2
 
-   .ds 1                 ; Temporary storage, typically used for y-coordinates in
+  .ds 1                 ; Temporary storage, typically used for y-coordinates in
                         ; line-drawing routines
 
-   .ds 2                 ; The last two bytes of the XX15 block
+  .ds 2                 ; The last two bytes of the XX15 block
 
 .XX12
 
-   .ds 6                 ; Temporary storage for a block of values, used in a
+  .ds 6                 ; Temporary storage for a block of values, used in a
                         ; number of places
 
 .K
 
-   .ds 4                 ; Temporary storage, used in a number of places
+  .ds 4                 ; Temporary storage, used in a number of places
 
 .KL
 
-   .ds 1                 ; The following bytes implement a key logger that
+  .ds 1                 ; The following bytes implement a key logger that
                         ; enables Elite to scan for concurrent key presses of
                         ; the primary flight keys, plus a secondary flight key
-                        \
+                        ;
                         ; See the deep dive on "The key logger" for more details
-                        \
+                        ;
                         ; If a key is being pressed that is not in the keyboard
                         ; table at KYTB, it can be stored here (as seen in
                         ; routine DK4, for example)
 
 .KY1
 
-   .ds 1                 ; "?" is being pressed
-                        \
+  .ds 1                 ; "?" is being pressed
+                        ;
                         ;   * 0 = no
-                        \
+                        ;
                         ;   * Non-zero = yes
 
 .KY2
 
-   .ds 1                 ; Space is being pressed
-                        \
+  .ds 1                 ; Space is being pressed
+                        ;
                         ;   * 0 = no
-                        \
+                        ;
                         ;   * Non-zero = yes
 
 .KY3
 
-   .ds 1                 ; "<" is being pressed
-                        \
+  .ds 1                 ; "<" is being pressed
+                        ;
                         ;   * 0 = no
-                        \
+                        ;
                         ;   * Non-zero = yes
 
 .KY4
 
-   .ds 1                 ; ">" is being pressed
-                        \
+  .ds 1                 ; ">" is being pressed
+                        ;
                         ;   * 0 = no
-                        \
+                        ;
                         ;   * Non-zero = yes
 
 .KY5
 
-   .ds 1                 ; "X" is being pressed
-                        \
+  .ds 1                 ; "X" is being pressed
+                        ;
                         ;   * 0 = no
-                        \
+                        ;
                         ;   * Non-zero = yes
 
 .KY6
 
-   .ds 1                 ; "S" is being pressed
-                        \
+  .ds 1                 ; "S" is being pressed
+                        ;
                         ;   * 0 = no
-                        \
+                        ;
                         ;   * Non-zero = yes
 
 .KY7
 
-   .ds 1                 ; "A" is being pressed
-                        \
+  .ds 1                 ; "A" is being pressed
+                        ;
                         ;   * 0 = no
-                        \
+                        ;
                         ;   * Non-zero = yes
-                        \
+                        ;
                         ; This is also set when the joystick fire button has
                         ; been pressed
 
 .KY12
 
-   .ds 1                 ; TAB is being pressed
-                        \
+  .ds 1                 ; TAB is being pressed
+                        ;
                         ;   * 0 = no
-                        \
+                        ;
                         ;   * Non-zero = yes
 
 .KY13
 
-   .ds 1                 ; ESCAPE is being pressed
-                        \
+  .ds 1                 ; ESCAPE is being pressed
+                        ;
                         ;   * 0 = no
-                        \
+                        ;
                         ;   * Non-zero = yes
 
 .KY14
 
-   .ds 1                 ; "T" is being pressed
-                        \
+  .ds 1                 ; "T" is being pressed
+                        ;
                         ;   * 0 = no
-                        \
+                        ;
                         ;   * Non-zero = yes
 
 .KY15
 
-   .ds 1                 ; "U" is being pressed
-                        \
+  .ds 1                 ; "U" is being pressed
+                        ;
                         ;   * 0 = no
-                        \
+                        ;
                         ;   * Non-zero = yes
 
 .KY16
 
-   .ds 1                 ; "M" is being pressed
-                        \
+  .ds 1                 ; "M" is being pressed
+                        ;
                         ;   * 0 = no
-                        \
+                        ;
                         ;   * Non-zero = yes
 
 .KY17
 
-   .ds 1                 ; "E" is being pressed
-                        \
+  .ds 1                 ; "E" is being pressed
+                        ;
                         ;   * 0 = no
-                        \
+                        ;
                         ;   * Non-zero = yes
 
 .KY18
 
-   .ds 1                 ; "J" is being pressed
-                        \
+  .ds 1                 ; "J" is being pressed
+                        ;
                         ;   * 0 = no
-                        \
+                        ;
                         ;   * Non-zero = yes
 
 .KY19
 
-   .ds 1                 ; "C" is being pressed
-                        \
+  .ds 1                 ; "C" is being pressed
+                        ;
                         ;   * 0 = no
-                        \
+                        ;
                         ;   * Non-zero = yes
 
 .LAS
 
-   .ds 1                 ; Contains the laser power of the laser fitted to the
+  .ds 1                 ; Contains the laser power of the laser fitted to the
                         ; current space view (or 0 if there is no laser fitted
                         ; to the current view)
-                        \
+                        ;
                         ; This gets set to bits 0-6 of the laser power byte from
                         ; the commander data block, which contains the laser's
                         ; power (bit 7 doesn't denote laser power, just whether
@@ -471,23 +471,23 @@
 
 .MSTG
 
-   .ds 1                 ; The current missile lock target
-                        \
+  .ds 1                 ; The current missile lock target
+                        ;
                         ;   * $FF = no target
-                        \
+                        ;
                         ;   * 1-12 = the slot number of the ship that our
                         ;            missile is locked onto
 
 .XX1
 
-   .ds 0                 ; This is an alias for INWK that is used in the main
+  .ds 0                 ; This is an alias for INWK that is used in the main
                         ; ship-drawing routine at LL9
 
 .INWK
 
-   .ds 33                ; The zero-page internal workspace for the current ship
+  .ds 33                ; The zero-page internal workspace for the current ship
                         ; data block
-                        \
+                        ;
                         ; As operations on zero page locations are faster and
                         ; have smaller opcodes than operations on the rest of
                         ; the addressable memory, Elite tends to store oft-used
@@ -507,133 +507,133 @@
 
 .LSP
 
-   .ds 1                 ; The ball line heap pointer, which contains the number
+  .ds 1                 ; The ball line heap pointer, which contains the number
                         ; of the first free byte after the end of the LSX2 and
                         ; LSY2 heaps (see the deep dive on "The ball line heap"
                         ; for details)
 
 .QQ15
 
-   .ds 6                 ; The three 16-bit seeds for the selected system, i.e.
+  .ds 6                 ; The three 16-bit seeds for the selected system, i.e.
                         ; the one in the crosshairs in the Short-range Chart
-                        \
+                        ;
                         ; See the deep dives on "Galaxy and system seeds" and
                         ; "Twisting the system seeds" for more details
 
 .K5
 
-   .ds 0                 ; Temporary storage used to store segment coordinates
+  .ds 0                 ; Temporary storage used to store segment coordinates
                         ; across successive calls to BLINE, the ball line
                         ; routine
 
 .XX18
 
-   .ds 0                 ; Temporary storage used to store coordinates in the
+  .ds 0                 ; Temporary storage used to store coordinates in the
                         ; LL9 ship-drawing routine
 
 .QQ17
 
-   .ds 1                 ; Contains a number of flags that affect how text tokens
+  .ds 1                 ; Contains a number of flags that affect how text tokens
                         ; are printed, particularly capitalisation:
-                        \
+                        ;
                         ;   * If all bits are set (255) then text printing is
                         ;     disabled
-                        \
+                        ;
                         ;   * Bit 7: 0 = ALL CAPS
                         ;            1 = Sentence Case, bit 6 determines the
                         ;                case of the next letter to print
-                        \
+                        ;
                         ;   * Bit 6: 0 = print the next letter in upper case
                         ;            1 = print the next letter in lower case
-                        \
+                        ;
                         ;   * Bits 0-5: If any of bits 0-5 are set, print in
                         ;               lower case
-                        \
+                        ;
                         ; So:
-                        \
+                        ;
                         ;   * QQ17 = 0 means case is set to ALL CAPS
-                        \
+                        ;
                         ;   * QQ17 = %10000000 means Sentence Case, currently
                         ;            printing upper case
-                        \
+                        ;
                         ;   * QQ17 = %11000000 means Sentence Case, currently
                         ;            printing lower case
-                        \
+                        ;
                         ;   * QQ17 = %11111111 means printing is disabled
 
 .QQ19
 
-   .ds 3                 ; Temporary storage, used in a number of places
+  .ds 3                 ; Temporary storage, used in a number of places
 
 .K6
 
-   .ds 5                 ; Temporary storage, typically used for storing
+  .ds 5                 ; Temporary storage, typically used for storing
                         ; coordinates during vector calculations
 
 .ALP1
 
-   .ds 1                 ; Magnitude of the roll angle alpha, i.e. |alpha|,
+  .ds 1                 ; Magnitude of the roll angle alpha, i.e. |alpha|,
                         ; which is a positive value between 0 and 31
 
 .ALP2
 
-   .ds 2                 ; Bit 7 of ALP2 = sign of the roll angle in ALPHA
-                        \
+  .ds 2                 ; Bit 7 of ALP2 = sign of the roll angle in ALPHA
+                        ;
                         ; Bit 7 of ALP2+1 = opposite sign to ALP2 and ALPHA
 
 .BET2
 
-   .ds 2                 ; Bit 7 of BET2 = sign of the pitch angle in BETA
-                        \
+  .ds 2                 ; Bit 7 of BET2 = sign of the pitch angle in BETA
+                        ;
                         ; Bit 7 of BET2+1 = opposite sign to BET2 and BETA
 
 .DELTA
 
-   .ds 1                 ; Our current speed, in the range 1-40
+  .ds 1                 ; Our current speed, in the range 1-40
 
 .DELT4
 
-   .ds 2                 ; Our current speed * 64 as a 16-bit value
-                        \
+  .ds 2                 ; Our current speed * 64 as a 16-bit value
+                        ;
                         ; This is stored as DELT4(1 0), so the high byte in
                         ; DELT4+1 therefore contains our current speed / 4
 
 .U
 
-   .ds 1                 ; Temporary storage, used in a number of places
+  .ds 1                 ; Temporary storage, used in a number of places
 
 .Q
 
-   .ds 1                 ; Temporary storage, used in a number of places
+  .ds 1                 ; Temporary storage, used in a number of places
 
 .R
 
-   .ds 1                 ; Temporary storage, used in a number of places
+  .ds 1                 ; Temporary storage, used in a number of places
 
 .S
 
-   .ds 1                 ; Temporary storage, used in a number of places
+  .ds 1                 ; Temporary storage, used in a number of places
 
 .XSAV
 
-   .ds 1                 ; Temporary storage for saving the value of the X
+  .ds 1                 ; Temporary storage for saving the value of the X
                         ; register, used in a number of places
 
 .YSAV
 
-   .ds 1                 ; Temporary storage for saving the value of the Y
+  .ds 1                 ; Temporary storage for saving the value of the Y
                         ; register, used in a number of places
 
 .XX17
 
-   .ds 1                 ; Temporary storage, used in BPRNT to store the number
+  .ds 1                 ; Temporary storage, used in BPRNT to store the number
                         ; of characters to print, and as the edge counter in the
                         ; main ship-drawing routine
 
 .QQ11
 
-   .ds 1                 ; The type of the current view:
-                        \
+  .ds 1                 ; The type of the current view:
+                        ;
                         ;   0   = Space view
                         ;   1   = Title screen
                         ;         Get commander name ("@", save/load commander)
@@ -649,22 +649,22 @@
                         ;   32  = Equip Ship screen (red key f3)
                         ;   64  = Long-range Chart (red key f4)
                         ;   128 = Short-range Chart (red key f5)
-                        \
+                        ;
                         ; This value is typically set by calling routine TT66
 
 .ZZ
 
-   .ds 1                 ; Temporary storage, typically used for distance values
+  .ds 1                 ; Temporary storage, typically used for distance values
 
 .XX13
 
-   .ds 1                 ; Temporary storage, typically used in the line-drawing
+  .ds 1                 ; Temporary storage, typically used in the line-drawing
                         ; routines
 
 .MCNT
 
-   .ds 1                 ; The main loop counter
-                        \
+  .ds 1                 ; The main loop counter
+                        ;
                         ; This counter determines how often certain actions are
                         ; performed within the main loop. See the deep dive on
                         ; "Scheduling tasks with the main loop counter" for more
@@ -672,8 +672,8 @@
 
 .DL
 
-   .ds 1                 ; Vertical sync flag
-                        \
+  .ds 1                 ; Vertical sync flag
+                        ;
                         ; DL gets set to 30 every time we reach vertical sync on
                         ; the video system, which happens 50 times a second
                         ; (50Hz). The WSCAN routine uses this to pause until the
@@ -682,8 +682,8 @@
 
 .TYPE
 
-   .ds 1                 ; The current ship type
-                        \
+  .ds 1                 ; The current ship type
+                        ;
                         ; This is where we store the current ship type for when
                         ; we are iterating through the ships in the local bubble
                         ; as part of the main flight loop. See the table at XX21
@@ -691,16 +691,16 @@
 
 .JSTX
 
-   .ds 1                 ; Our current roll rate
-                        \
+  .ds 1                 ; Our current roll rate
+                        ;
                         ; This value is shown in the dashboard's RL indicator,
                         ; and determines the rate at which we are rolling
-                        \
+                        ;
                         ; The value ranges from 1 to 255 with 128 as the centre
                         ; point, so 1 means roll is decreasing at the maximum
                         ; rate, 128 means roll is not changing, and 255 means
                         ; roll is increasing at the maximum rate
-                        \
+                        ;
                         ; This value is updated by "<" and ">" key presses, or
                         ; if joysticks are enabled, from the joystick. If
                         ; keyboard damping is enabled (which it is by default),
@@ -710,16 +710,16 @@
 
 .JSTY
 
-   .ds 1                 ; Our current pitch rate
-                        \
+  .ds 1                 ; Our current pitch rate
+                        ;
                         ; This value is shown in the dashboard's DC indicator,
                         ; and determines the rate at which we are pitching
-                        \
+                        ;
                         ; The value ranges from 1 to 255 with 128 as the centre
                         ; point, so 1 means pitch is decreasing at the maximum
                         ; rate, 128 means pitch is not changing, and 255 means
                         ; pitch is increasing at the maximum rate
-                        \
+                        ;
                         ; This value is updated by "S" and "X" key presses, or
                         ; if joysticks are enabled, from the joystick. If
                         ; keyboard damping is enabled (which it is by default),
@@ -729,32 +729,32 @@
 
 .ALPHA
 
-   .ds 1                 ; The current roll angle alpha, which is reduced from
+  .ds 1                 ; The current roll angle alpha, which is reduced from
                         ; JSTX to a sign-magnitude value between -31 and +31
-                        \
+                        ;
                         ; This describes how fast we are rolling our ship, and
                         ; determines how fast the universe rolls around us
-                        \
+                        ;
                         ; The sign bit is also stored in ALP2, while the
                         ; opposite sign is stored in ALP2+1
 
 .QQ12
 
-   .ds 1                 ; Our "docked" status
-                        \
+  .ds 1                 ; Our "docked" status
+                        ;
                         ;   * 0 = we are not docked
-                        \
+                        ;
                         ;   * $FF = we are docked
 
 .TGT
 
-   .ds 1                 ; Temporary storage, typically used as a target value
+  .ds 1                 ; Temporary storage, typically used as a target value
                         ; for counters when drawing explosion clouds and partial
                         ; circles
 
 .SWAP
 
-   .ds 1                 ; Temporary storage, used to store a flag that records
+  .ds 1                 ; Temporary storage, used to store a flag that records
                         ; whether or not we had to swap a line's start and end
                         ; coordinates around when clipping the line in routine
                         ; LL145 (the flag is used in places like BLINE to swap
@@ -762,90 +762,90 @@
 
 .COL
 
-   .ds 1                 ; Temporary storage, used to store colour information
+  .ds 1                 ; Temporary storage, used to store colour information
                         ; when drawing pixels in the dashboard
 
 .FLAG
 
-   .ds 1                 ; A flag that's used to define whether this is the first
+  .ds 1                 ; A flag that's used to define whether this is the first
                         ; call to the ball line routine in BLINE, so it knows
                         ; whether to wait for the second call before storing
                         ; segment data in the ball line heap
 
 .CNT
 
-   .ds 1                 ; Temporary storage, typically used for storing the
+  .ds 1                 ; Temporary storage, typically used for storing the
                         ; number of iterations required when looping
 
 .CNT2
 
-   .ds 1                 ; Temporary storage, used in the planet-drawing routine
+  .ds 1                 ; Temporary storage, used in the planet-drawing routine
                         ; to store the segment number where the arc of a partial
                         ; circle should start
 
 .STP
 
-   .ds 1                 ; The step size for drawing circles
-                        \
+  .ds 1                 ; The step size for drawing circles
+                        ;
                         ; Circles in Elite are split up into 64 points, and the
                         ; step size determines how many points to skip with each
                         ; straight-line segment, so the smaller the step size,
                         ; the smoother the circle. The values used are:
-                        \
+                        ;
                         ;   * 2 for big planets and the circles on the charts
                         ;   * 4 for medium planets and the launch tunnel
                         ;   * 8 for small planets and the hyperspace tunnel
-                        \
+                        ;
                         ; As the step size increases we move from smoother
                         ; circles at the top to more polygonal at the bottom.
                         ; See the CIRCLE2 routine for more details
 
 .XX4
 
-   .ds 1                 ; Temporary storage, used in a number of places
+  .ds 1                 ; Temporary storage, used in a number of places
 
 .XX20
 
-   .ds 1                 ; Temporary storage, used in a number of places
+  .ds 1                 ; Temporary storage, used in a number of places
 
 .XX14
 
-   .ds 1                 ; This byte appears to be unused
+  .ds 1                 ; This byte appears to be unused
 
 .RAT
 
-   .ds 1                 ; Used to store different signs depending on the current
+  .ds 1                 ; Used to store different signs depending on the current
                         ; space view, for use in calculating stardust movement
 
 .RAT2
 
-   .ds 1                 ; Temporary storage, used to store the pitch and roll
+  .ds 1                 ; Temporary storage, used to store the pitch and roll
                         ; signs when moving objects and stardust
 
 .K2
 
-   .ds 4                 ; Temporary storage, used in a number of places
+  .ds 4                 ; Temporary storage, used in a number of places
 
  ORG $00D1
 
 .T
 
-   .ds 1                 ; Temporary storage, used in a number of places
+  .ds 1                 ; Temporary storage, used in a number of places
 
 .K3
 
-   .ds 0                 ; Temporary storage, used in a number of places
+  .ds 0                 ; Temporary storage, used in a number of places
 
 .XX2
 
-   .ds 14                ; Temporary storage, used to store the visibility of the
+  .ds 14                ; Temporary storage, used to store the visibility of the
                         ; ship's faces during the ship-drawing routine at LL9
 
 .K4
 
-   .ds 2                 ; Temporary storage, used in a number of places
+  .ds 2                 ; Temporary storage, used in a number of places
 
- PRINT "Zero page variables from ", ~ZP, " to ", ~P%
+ PRINT "Zero page variables from ", ZP, " to ", *
 
 ; ******************************************************************************
 ;
@@ -866,7 +866,7 @@
 
 .XX3
 
-   .ds 256               ; Temporary storage, typically used for storing tables
+  .ds 256               ; Temporary storage, typically used for storing tables
                         ; of values such as screen coordinates or ship data
 
 ; ******************************************************************************
@@ -888,41 +888,41 @@
 
 .T%
 
-   .ds 0                 ; The start of the T% workspace
+  .ds 0                 ; The start of the T% workspace
 
 .TP
 
-   .ds 1                 ; The current mission status, which is always 0 for the
+  .ds 1                 ; The current mission status, which is always 0 for the
                         ; cassette version of Elite as there are no missions
 
 .QQ0
 
-   .ds 1                 ; The current system's galactic x-coordinate (0-256)
+  .ds 1                 ; The current system's galactic x-coordinate (0-256)
 
 .QQ1
 
-   .ds 1                 ; The current system's galactic y-coordinate (0-256)
+  .ds 1                 ; The current system's galactic y-coordinate (0-256)
 
 .QQ21
 
-   .ds 6                 ; The three 16-bit seeds for the current galaxy
-                        \
+  .ds 6                 ; The three 16-bit seeds for the current galaxy
+                        ;
                         ; These seeds define system 0 in the current galaxy, so
                         ; they can be used as a starting point to generate all
                         ; 256 systems in the galaxy
-                        \
+                        ;
                         ; Using a galactic hyperdrive rotates each byte to the
                         ; left (rolling each byte within itself) to get the
                         ; seeds for the next galaxy, so after eight galactic
                         ; jumps, the seeds roll around to the first galaxy again
-                        \
+                        ;
                         ; See the deep dives on "Galaxy and system seeds" and
                         ; "Twisting the system seeds" for more details
 
 .CASH
 
-   .ds 4                 ; Our current cash pot
-                        \
+  .ds 4                 ; Our current cash pot
+                        ;
                         ; The cash stash is stored as a 32-bit unsigned integer,
                         ; with the most significant byte in CASH and the least
                         ; significant in CASH+3. This is big-endian, which is
@@ -932,8 +932,8 @@
 
 .QQ14
 
-   .ds 1                 ; Our current fuel level (0-70)
-                        \
+  .ds 1                 ; Our current fuel level (0-70)
+                        ;
                         ; The fuel level is stored as the number of light years
                         ; multiplied by 10, so QQ14 = 1 represents 0.1 light
                         ; years, and the maximum possible value is 70, for 7.0
@@ -941,107 +941,107 @@
 
 .COK
 
-   .ds 1                 ; Flags used to generate the competition code
-                        \
+  .ds 1                 ; Flags used to generate the competition code
+                        ;
                         ; See the deep dive on "The competition code" for
                         ; details of these flags and how they are used in
                         ; generating and decoding the competition code
 
 .GCNT
 
-   .ds 1                 ; The number of the current galaxy (0-7)
-                        \
+  .ds 1                 ; The number of the current galaxy (0-7)
+                        ;
                         ; When this is displayed in-game, 1 is added to the
                         ; number, so we start in galaxy 1 in-game, but it's
                         ; stored as galaxy 0 internally
-                        \
+                        ;
                         ; The galaxy number increases by one every time a
                         ; galactic hyperdrive is used, and wraps back around to
                         ; the start after eight galaxies
 
 .LASER
 
-   .ds 4                 ; The specifications of the lasers fitted to each of the
+  .ds 4                 ; The specifications of the lasers fitted to each of the
                         ; four space views:
-                        \
+                        ;
                         ;   * Byte #0 = front view
                         ;   * Byte #1 = rear view
                         ;   * Byte #2 = left view
                         ;   * Byte #3 = right view
-                        \
+                        ;
                         ; For each of the views:
-                        \
+                        ;
                         ;   * 0 = no laser is fitted to this view
-                        \
+                        ;
                         ;   * Non-zero = a laser is fitted to this view, with
                         ;     the following specification:
-                        \
+                        ;
                         ;     * Bits 0-6 contain the laser's power
-                        \
+                        ;
                         ;     * Bit 7 determines whether or not the laser pulses
                         ;       (0 = pulse laser) or is always on (1 = beam
                         ;       laser)
 
-   .ds 2                 ; These bytes appear to be unused (they were originally
+  .ds 2                 ; These bytes appear to be unused (they were originally
                         ; used for up/down lasers, but they were dropped)
 
 .CRGO
 
-   .ds 1                 ; Our ship's cargo capacity
-                        \
+  .ds 1                 ; Our ship's cargo capacity
+                        ;
                         ;   * 22 = standard cargo bay of 20 tonnes
-                        \
+                        ;
                         ;   * 37 = large cargo bay of 35 tonnes
-                        \
+                        ;
                         ; The value is two greater than the actual capacity to
                         ; make the maths in tnpr slightly more efficient
 
 .QQ20
 
-   .ds 17                ; The contents of our cargo hold
-                        \
+  .ds 17                ; The contents of our cargo hold
+                        ;
                         ; The amount of market item X that we have in our hold
                         ; can be found in the X-th byte of QQ20. For example:
-                        \
+                        ;
                         ;   * QQ20 contains the amount of food (item 0)
-                        \
+                        ;
                         ;   * QQ20+7 contains the amount of computers (item 7)
-                        \
+                        ;
                         ; See QQ23 for a list of market item numbers and their
                         ; storage units
 
 .ECM
 
-   .ds 1                 ; E.C.M. system
-                        \
+  .ds 1                 ; E.C.M. system
+                        ;
                         ;   * 0 = not fitted
-                        \
+                        ;
                         ;   * $FF = fitted
 
 .BST
 
-   .ds 1                 ; Fuel scoops (BST stands for "barrel status")
-                        \
+  .ds 1                 ; Fuel scoops (BST stands for "barrel status")
+                        ;
                         ;   * 0 = not fitted
-                        \
+                        ;
                         ;   * $FF = fitted
 
 .BOMB
 
-   .ds 1                 ; Energy bomb
-                        \
+  .ds 1                 ; Energy bomb
+                        ;
                         ;   * 0 = not fitted
-                        \
+                        ;
                         ;   * $7F = fitted
 
 .ENGY
 
-   .ds 1                 ; Energy unit
-                        \
+  .ds 1                 ; Energy unit
+                        ;
                         ;   * 0 = not fitted
-                        \
+                        ;
                         ;   * Non-zero = fitted
-                        \
+                        ;
                         ; The actual value determines the refresh rate of our
                         ; energy banks, as they refresh by ENGY+1 each time (so
                         ; our ship's energy level goes up by 2 each time if we
@@ -1049,59 +1049,59 @@
 
 .DKCMP
 
-   .ds 1                 ; Docking computer
-                        \
+  .ds 1                 ; Docking computer
+                        ;
                         ;   * 0 = not fitted
-                        \
+                        ;
                         ;   * $FF = fitted
 
 .GHYP
 
-   .ds 1                 ; Galactic hyperdrive
-                        \
+  .ds 1                 ; Galactic hyperdrive
+                        ;
                         ;   * 0 = not fitted
-                        \
+                        ;
                         ;   * $FF = fitted
 
 .ESCP
 
-   .ds 1                 ; Escape pod
-                        \
+  .ds 1                 ; Escape pod
+                        ;
                         ;   * 0 = not fitted
-                        \
+                        ;
                         ;   * $FF = fitted
 
-   .ds 4                 ; These bytes appear to be unused
+  .ds 4                 ; These bytes appear to be unused
 
 .NOMSL
 
-   .ds 1                 ; The number of missiles we have fitted (0-4)
+  .ds 1                 ; The number of missiles we have fitted (0-4)
 
 .FIST
 
-   .ds 1                 ; Our legal status (FIST stands for "fugitive/innocent
+  .ds 1                 ; Our legal status (FIST stands for "fugitive/innocent
                         ; status"):
-                        \
+                        ;
                         ;   * 0 = Clean
-                        \
+                        ;
                         ;   * 1-49 = Offender
-                        \
+                        ;
                         ;   * 50+ = Fugitive
-                        \
+                        ;
                         ; You get 64 points if you kill a cop, so that's a fast
                         ; ticket to fugitive status
 
 .AVL
 
-   .ds 17                ; Market availability in the current system
-                        \
+  .ds 17                ; Market availability in the current system
+                        ;
                         ; The available amount of market item X is stored in
                         ; the X-th byte of AVL, so for example:
-                        \
+                        ;
                         ;   * AVL contains the amount of food (item 0)
-                        \
+                        ;
                         ;   * AVL+7 contains the amount of computers (item 7)
-                        \
+                        ;
                         ; See QQ23 for a list of market item numbers and their
                         ; storage units, and the deep dive on "Market item
                         ; prices and availability" for details of the algorithm
@@ -1109,8 +1109,8 @@
 
 .QQ26
 
-   .ds 1                 ; A random value used to randomise market data
-                        \
+  .ds 1                 ; A random value used to randomise market data
+                        ;
                         ; This value is set to a new random number for each
                         ; change of system, so we can add a random factor into
                         ; the calculations for market prices (for details of how
@@ -1118,39 +1118,39 @@
 
 .TALLY
 
-   .ds 2                 ; Our combat rank
-                        \
+  .ds 2                 ; Our combat rank
+                        ;
                         ; The combat rank is stored as the number of kills, in a
                         ; 16-bit number TALLY(1 0) - so the high byte is in
                         ; TALLY+1 and the low byte in TALLY
-                        \
+                        ;
                         ; If the high byte in TALLY+1 is 0 then we have between
                         ; 0 and 255 kills, so our rank is Harmless, Mostly
                         ; Harmless, Poor, Average or Above Average, according to
                         ; the value of the low byte in TALLY:
-                        \
+                        ;
                         ;   Harmless        = %00000000 to %00000011 = 0 to 3
                         ;   Mostly Harmless = %00000100 to %00000111 = 4 to 7
                         ;   Poor            = %00001000 to %00001111 = 8 to 15
                         ;   Average         = %00010000 to %00011111 = 16 to 31
                         ;   Above Average   = %00100000 to %11111111 = 32 to 255
-                        \
+                        ;
                         ; If the high byte in TALLY+1 is non-zero then we are
                         ; Competent, Dangerous, Deadly or Elite, according to
                         ; the high byte in TALLY+1:
-                        \
+                        ;
                         ;   Competent       = 1           = 256 to 511 kills
                         ;   Dangerous       = 2 to 9      = 512 to 2559 kills
                         ;   Deadly          = 10 to 24    = 2560 to 6399 kills
                         ;   Elite           = 25 and up   = 6400 kills and up
-                        \
+                        ;
                         ; You can see the rating calculation in the STATUS
                         ; subroutine
 
 .SVC
 
-   .ds 1                 ; The save count
-                        \
+  .ds 1                 ; The save count
+                        ;
                         ; When a new commander is created, the save count gets
                         ; set to 128. This value gets halved each time the
                         ; commander file is saved, but it is otherwise unused.
@@ -1158,8 +1158,8 @@
                         ; competition, possibly another flag to catch out
                         ; entries with manually altered commander files
 
-   .ds 2                 ; The commander file checksum
-                        \
+  .ds 2                 ; The commander file checksum
+                        ;
                         ; These two bytes are reserved for the commander file
                         ; checksum, so when the current commander block is
                         ; copied from here to the last saved commander block at
@@ -1179,7 +1179,7 @@
  SKIP NOST + 1          ; This is where we store the x_lo coordinates for all
                         ; the stardust particles
 
- PRINT "T% workspace from  ", ~T%, " to ", ~P%
+ PRINT "T% workspace from  ", T%, " to ", *
 
 ; ******************************************************************************
 ;
@@ -1390,19 +1390,19 @@ ENDMACRO
 .QQ18
 
  RTOK 111               ; Token 0:      "FUEL SCOOPS ON {beep}"
- RTOK 131               \
+ RTOK 131               ;
  CONT 7                 ; Encoded as:   "[111][131]{7}"
  EQUB 0
 
  CHAR ' '               ; Token 1:      " CHART"
- CHAR 'C'               \
+ CHAR 'C'               ;
  CHAR 'H'               ; Encoded as:   " CH<138>T"
  TWOK 'A', 'R'
  CHAR 'T'
  EQUB 0
 
  CHAR 'G'               ; Token 2:      "GOVERNMENT"
- CHAR 'O'               \
+ CHAR 'O'               ;
  TWOK 'V', 'E'          ; Encoded as:   "GO<150>RNM<146>T"
  CHAR 'R'
  CHAR 'N'
@@ -1412,7 +1412,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'D'               ; Token 3:      "DATA ON {selected system name}"
- TWOK 'A', 'T'          \
+ TWOK 'A', 'T'          ;
  CHAR 'A'               ; Encoded as:   "D<145>A[131]{3}"
  RTOK 131
  CONT 3
@@ -1420,7 +1420,7 @@ ENDMACRO
 
  TWOK 'I', 'N'          ; Token 4:      "INVENTORY{crlf}
  TWOK 'V', 'E'          ;               "
- CHAR 'N'               \
+ CHAR 'N'               ;
  CHAR 'T'               ; Encoded as:   "<140><150>NT<153>Y{13}"
  TWOK 'O', 'R'
  CHAR 'Y'
@@ -1428,19 +1428,19 @@ ENDMACRO
  EQUB 0
 
  CHAR 'S'               ; Token 5:      "SYSTEM"
- CHAR 'Y'               \
+ CHAR 'Y'               ;
  CHAR 'S'               ; Encoded as:   "SYS<156>M"
  TWOK 'T', 'E'
  CHAR 'M'
  EQUB 0
 
  CHAR 'P'               ; Token 6:      "PRICE"
- TWOK 'R', 'I'          \
+ TWOK 'R', 'I'          ;
  TWOK 'C', 'E'          ; Encoded as:   "P<158><133>"
  EQUB 0
 
  CONT 2                 ; Token 7:      "{current system name} MARKET PRICES"
- CHAR ' '               \
+ CHAR ' '               ;
  TWOK 'M', 'A'          ; Encoded as:   "{2} <139>RKET [6]S"
  CHAR 'R'
  CHAR 'K'
@@ -1452,7 +1452,7 @@ ENDMACRO
  EQUB 0
 
  TWOK 'I', 'N'          ; Token 8:      "INDUSTRIAL"
- CHAR 'D'               \
+ CHAR 'D'               ;
  TWOK 'U', 'S'          ; Encoded as:   "<140>D<136>T<158><128>"
  CHAR 'T'
  TWOK 'R', 'I'
@@ -1460,7 +1460,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'A'               ; Token 9:      "AGRICULTURAL"
- CHAR 'G'               \
+ CHAR 'G'               ;
  TWOK 'R', 'I'          ; Encoded as:   "AG<158>CULTU<148>L"
  CHAR 'C'
  CHAR 'U'
@@ -1472,67 +1472,67 @@ ENDMACRO
  EQUB 0
 
  TWOK 'R', 'I'          ; Token 10:     "RICH "
- CHAR 'C'               \
+ CHAR 'C'               ;
  CHAR 'H'               ; Encoded as:   "<158>CH "
  CHAR ' '
  EQUB 0
 
  CHAR 'A'               ; Token 11:     "AVERAGE "
- TWOK 'V', 'E'          \
+ TWOK 'V', 'E'          ;
  TWOK 'R', 'A'          ; Encoded as:   "A<150><148><131> "
  TWOK 'G', 'E'
  CHAR ' '
  EQUB 0
 
  CHAR 'P'               ; Token 12:     "POOR "
- CHAR 'O'               \
+ CHAR 'O'               ;
  TWOK 'O', 'R'          ; Encoded as:   "PO<153> "
  CHAR ' '
  EQUB 0
 
  TWOK 'M', 'A'          ; Token 13:     "MAINLY "
- TWOK 'I', 'N'          \
+ TWOK 'I', 'N'          ;
  CHAR 'L'               ; Encoded as:   "<139><140>LY "
  CHAR 'Y'
  CHAR ' '
  EQUB 0
 
  CHAR 'U'               ; Token 14:     "UNIT"
- CHAR 'N'               \
+ CHAR 'N'               ;
  CHAR 'I'               ; Encoded as:   "UNIT"
  CHAR 'T'
  EQUB 0
 
  CHAR 'V'               ; Token 15:     "VIEW "
- CHAR 'I'               \
+ CHAR 'I'               ;
  CHAR 'E'               ; Encoded as:   "VIEW "
  CHAR 'W'
  CHAR ' '
  EQUB 0
 
  TWOK 'Q', 'U'          ; Token 16:     "QUANTITY"
- TWOK 'A', 'N'          \
+ TWOK 'A', 'N'          ;
  TWOK 'T', 'I'          ; Encoded as:   "<154><155><151>TY"
  CHAR 'T'
  CHAR 'Y'
  EQUB 0
 
  TWOK 'A', 'N'          ; Token 17:     "ANARCHY"
- TWOK 'A', 'R'          \
+ TWOK 'A', 'R'          ;
  CHAR 'C'               ; Encoded as:   "<155><138>CHY"
  CHAR 'H'
  CHAR 'Y'
  EQUB 0
 
  CHAR 'F'               ; Token 18:     "FEUDAL"
- CHAR 'E'               \
+ CHAR 'E'               ;
  CHAR 'U'               ; Encoded as:   "FEUD<128>"
  CHAR 'D'
  TWOK 'A', 'L'
  EQUB 0
 
  CHAR 'M'               ; Token 19:     "MULTI-GOVERNMENT"
- CHAR 'U'               \
+ CHAR 'U'               ;
  CHAR 'L'               ; Encoded as:   "MUL<151>-[2]"
  TWOK 'T', 'I'
  CHAR '-'
@@ -1540,7 +1540,7 @@ ENDMACRO
  EQUB 0
 
  TWOK 'D', 'I'          ; Token 20:     "DICTATORSHIP"
- CHAR 'C'               \
+ CHAR 'C'               ;
  CHAR 'T'               ; Encoded as:   "<141>CT<145><153>[25]"
  TWOK 'A', 'T'
  TWOK 'O', 'R'
@@ -1548,7 +1548,7 @@ ENDMACRO
  EQUB 0
 
  RTOK 91                ; Token 21:     "COMMUNIST"
- CHAR 'M'               \
+ CHAR 'M'               ;
  CHAR 'U'               ; Encoded as:   "[91]MUN<157>T"
  CHAR 'N'
  TWOK 'I', 'S'
@@ -1556,7 +1556,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'C'               ; Token 22:     "CONFEDERACY"
- TWOK 'O', 'N'          \
+ TWOK 'O', 'N'          ;
  CHAR 'F'               ; Encoded as:   "C<159>F<152><144>ACY"
  TWOK 'E', 'D'
  TWOK 'E', 'R'
@@ -1566,7 +1566,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'D'               ; Token 23:     "DEMOCRACY"
- CHAR 'E'               \
+ CHAR 'E'               ;
  CHAR 'M'               ; Encoded as:   "DEMOC<148>CY"
  CHAR 'O'
  CHAR 'C'
@@ -1576,7 +1576,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'C'               ; Token 24:     "CORPORATE STATE"
- TWOK 'O', 'R'          \
+ TWOK 'O', 'R'          ;
  CHAR 'P'               ; Encoded as:   "C<153>P<153><145>E [43]<145>E"
  TWOK 'O', 'R'
  TWOK 'A', 'T'
@@ -1588,13 +1588,13 @@ ENDMACRO
  EQUB 0
 
  CHAR 'S'               ; Token 25:     "SHIP"
- CHAR 'H'               \
+ CHAR 'H'               ;
  CHAR 'I'               ; Encoded as:   "SHIP"
  CHAR 'P'
  EQUB 0
 
  CHAR 'P'               ; Token 26:     "PRODUCT"
- CHAR 'R'               \
+ CHAR 'R'               ;
  CHAR 'O'               ; Encoded as:   "PRODUCT"
  CHAR 'D'
  CHAR 'U'
@@ -1603,13 +1603,13 @@ ENDMACRO
  EQUB 0
 
  CHAR ' '               ; Token 27:     " LASER"
- TWOK 'L', 'A'          \
+ TWOK 'L', 'A'          ;
  CHAR 'S'               ; Encoded as:   " <149>S<144>"
  TWOK 'E', 'R'
  EQUB 0
 
  CHAR 'H'               ; Token 28:     "HUMAN COLONIAL"
- CHAR 'U'               \
+ CHAR 'U'               ;
  CHAR 'M'               ; Encoded as:   "HUM<155> COL<159>I<128>"
  TWOK 'A', 'N'
  CHAR ' '
@@ -1622,7 +1622,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'H'               ; Token 29:     "HYPERSPACE "
- CHAR 'Y'               \
+ CHAR 'Y'               ;
  CHAR 'P'               ; Encoded as:   "HYP<144>SPA<133> "
  TWOK 'E', 'R'
  CHAR 'S'
@@ -1633,7 +1633,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'S'               ; Token 30:     "SHORT RANGE CHART"
- CHAR 'H'               \
+ CHAR 'H'               ;
  TWOK 'O', 'R'          ; Encoded as:   "SH<153>T [42][1]"
  CHAR 'T'
  CHAR ' '
@@ -1642,13 +1642,13 @@ ENDMACRO
  EQUB 0
 
  TWOK 'D', 'I'          ; Token 31:     "DISTANCE"
- RTOK 43                \
+ RTOK 43                ;
  TWOK 'A', 'N'          ; Encoded as:   "<141>[43]<155><133>"
  TWOK 'C', 'E'
  EQUB 0
 
  CHAR 'P'               ; Token 32:     "POPULATION"
- CHAR 'O'               \
+ CHAR 'O'               ;
  CHAR 'P'               ; Encoded as:   "POPUL<145>I<159>"
  CHAR 'U'
  CHAR 'L'
@@ -1658,7 +1658,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'G'               ; Token 33:     "GROSS PRODUCTIVITY"
- CHAR 'R'               \
+ CHAR 'R'               ;
  CHAR 'O'               ; Encoded as:   "GROSS [26]IVITY"
  CHAR 'S'
  CHAR 'S'
@@ -1672,7 +1672,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'E'               ; Token 34:     "ECONOMY"
- CHAR 'C'               \
+ CHAR 'C'               ;
  TWOK 'O', 'N'          ; Encoded as:   "EC<159>OMY"
  CHAR 'O'
  CHAR 'M'
@@ -1680,7 +1680,7 @@ ENDMACRO
  EQUB 0
 
  CHAR ' '               ; Token 35:     " LIGHT YEARS"
- CHAR 'L'               \
+ CHAR 'L'               ;
  CHAR 'I'               ; Encoded as:   " LIGHT YE<138>S"
  CHAR 'G'
  CHAR 'H'
@@ -1693,7 +1693,7 @@ ENDMACRO
  EQUB 0
 
  TWOK 'T', 'E'          ; Token 36:     "TECH.LEVEL"
- CHAR 'C'               \
+ CHAR 'C'               ;
  CHAR 'H'               ; Encoded as:   "<156>CH.<129><150>L"
  CHAR '.'
  TWOK 'L', 'E'
@@ -1702,25 +1702,25 @@ ENDMACRO
  EQUB 0
 
  CHAR 'C'               ; Token 37:     "CASH"
- CHAR 'A'               \
+ CHAR 'A'               ;
  CHAR 'S'               ; Encoded as:   "CASH"
  CHAR 'H'
  EQUB 0
 
  CHAR ' '               ; Token 38:     " BILLION"
- TWOK 'B', 'I'          \
+ TWOK 'B', 'I'          ;
  RTOK 118               ; Encoded as:   " <134>[118]I<159>"
  CHAR 'I'
  TWOK 'O', 'N'
  EQUB 0
 
  RTOK 122               ; Token 39:     "GALACTIC CHART{galaxy number}"
- RTOK 1                 \
+ RTOK 1                 ;
  CONT 1                 ; Encoded as:   "[122][1]{1}"
  EQUB 0
 
  CHAR 'T'               ; Token 40:     "TARGET LOST"
- TWOK 'A', 'R'          \
+ TWOK 'A', 'R'          ;
  TWOK 'G', 'E'          ; Encoded as:   "T<138><131>T LO[43]"
  CHAR 'T'
  CHAR ' '
@@ -1730,7 +1730,7 @@ ENDMACRO
  EQUB 0
 
  RTOK 106               ; Token 41:     "MISSILE JAMMED"
- CHAR ' '               \
+ CHAR ' '               ;
  CHAR 'J'               ; Encoded as:   "[106] JAMM<152>"
  CHAR 'A'
  CHAR 'M'
@@ -1739,28 +1739,28 @@ ENDMACRO
  EQUB 0
 
  CHAR 'R'               ; Token 42:     "RANGE"
- TWOK 'A', 'N'          \
+ TWOK 'A', 'N'          ;
  TWOK 'G', 'E'          ; Encoded as:   "R<155><131>"
  EQUB 0
 
  CHAR 'S'               ; Token 43:     "ST"
- CHAR 'T'               \
+ CHAR 'T'               ;
  EQUB 0                 ; Encoded as:   "ST"
 
  RTOK 16                ; Token 44:     "QUANTITY OF "
- CHAR ' '               \
+ CHAR ' '               ;
  CHAR 'O'               ; Encoded as:   "[16] OF "
  CHAR 'F'
  CHAR ' '
  EQUB 0
 
  CHAR 'S'               ; Token 45:     "SELL"
- CHAR 'E'               \
+ CHAR 'E'               ;
  RTOK 118               ; Encoded as:   "SE[118]"
  EQUB 0
 
  CHAR ' '               ; Token 46:     " CARGO{sentence case}"
- CHAR 'C'               \
+ CHAR 'C'               ;
  TWOK 'A', 'R'          ; Encoded as:   " C<138>GO{6}"
  CHAR 'G'
  CHAR 'O'
@@ -1768,26 +1768,26 @@ ENDMACRO
  EQUB 0
 
  CHAR 'E'               ; Token 47:     "EQUIP"
- TWOK 'Q', 'U'          \
+ TWOK 'Q', 'U'          ;
  CHAR 'I'               ; Encoded as:   "E<154>IP"
  CHAR 'P'
  EQUB 0
 
  CHAR 'F'               ; Token 48:     "FOOD"
- CHAR 'O'               \
+ CHAR 'O'               ;
  CHAR 'O'               ; Encoded as:   "FOOD"
  CHAR 'D'
  EQUB 0
 
  TWOK 'T', 'E'          ; Token 49:     "TEXTILES"
- CHAR 'X'               \
+ CHAR 'X'               ;
  TWOK 'T', 'I'          ; Encoded as:   "<156>X<151>L<137>"
  CHAR 'L'
  TWOK 'E', 'S'
  EQUB 0
 
  TWOK 'R', 'A'          ; Token 50:     "RADIOACTIVES"
- TWOK 'D', 'I'          \
+ TWOK 'D', 'I'          ;
  CHAR 'O'               ; Encoded as:   "<148><141>OAC<151><150>S"
  CHAR 'A'
  CHAR 'C'
@@ -1797,13 +1797,13 @@ ENDMACRO
  EQUB 0
 
  CHAR 'S'               ; Token 51:     "SLAVES"
- TWOK 'L', 'A'          \
+ TWOK 'L', 'A'          ;
  TWOK 'V', 'E'          ; Encoded as:   "S<149><150>S"
  CHAR 'S'
  EQUB 0
 
  CHAR 'L'               ; Token 52:     "LIQUOR/WINES"
- CHAR 'I'               \
+ CHAR 'I'               ;
  TWOK 'Q', 'U'          ; Encoded as:   "LI<154><153>/W<140><137>"
  TWOK 'O', 'R'
  CHAR '/'
@@ -1813,7 +1813,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'L'               ; Token 53:     "LUXURIES"
- CHAR 'U'               \
+ CHAR 'U'               ;
  CHAR 'X'               ; Encoded as:   "LUXU<158><137>"
  CHAR 'U'
  TWOK 'R', 'I'
@@ -1821,7 +1821,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'N'               ; Token 54:     "NARCOTICS"
- TWOK 'A', 'R'          \
+ TWOK 'A', 'R'          ;
  CHAR 'C'               ; Encoded as:   "N<138>CO<151>CS"
  CHAR 'O'
  TWOK 'T', 'I'
@@ -1830,7 +1830,7 @@ ENDMACRO
  EQUB 0
 
  RTOK 91                ; Token 55:     "COMPUTERS"
- CHAR 'P'               \
+ CHAR 'P'               ;
  CHAR 'U'               ; Encoded as:   "[91]PUT<144>S"
  CHAR 'T'
  TWOK 'E', 'R'
@@ -1838,7 +1838,7 @@ ENDMACRO
  EQUB 0
 
  TWOK 'M', 'A'          ; Token 56:     "MACHINERY"
- CHAR 'C'               \
+ CHAR 'C'               ;
  CHAR 'H'               ; Encoded as:   "<139>CH<140><144>Y"
  TWOK 'I', 'N'
  TWOK 'E', 'R'
@@ -1846,13 +1846,13 @@ ENDMACRO
  EQUB 0
 
  RTOK 117               ; Token 57:     "ALLOYS"
- CHAR 'O'               \
+ CHAR 'O'               ;
  CHAR 'Y'               ; Encoded as:   "[117]OYS"
  CHAR 'S'
  EQUB 0
 
  CHAR 'F'               ; Token 58:     "FIREARMS"
- CHAR 'I'               \
+ CHAR 'I'               ;
  TWOK 'R', 'E'          ; Encoded as:   "FI<142><138>MS"
  TWOK 'A', 'R'
  CHAR 'M'
@@ -1860,26 +1860,26 @@ ENDMACRO
  EQUB 0
 
  CHAR 'F'               ; Token 59:     "FURS"
- CHAR 'U'               \
+ CHAR 'U'               ;
  CHAR 'R'               ; Encoded as:   "FURS"
  CHAR 'S'
  EQUB 0
 
  CHAR 'M'               ; Token 60:     "MINERALS"
- TWOK 'I', 'N'          \
+ TWOK 'I', 'N'          ;
  TWOK 'E', 'R'          ; Encoded as:   "M<140><144><128>S"
  TWOK 'A', 'L'
  CHAR 'S'
  EQUB 0
 
  CHAR 'G'               ; Token 61:     "GOLD"
- CHAR 'O'               \
+ CHAR 'O'               ;
  CHAR 'L'               ; Encoded as:   "GOLD"
  CHAR 'D'
  EQUB 0
 
  CHAR 'P'               ; Token 62:     "PLATINUM"
- CHAR 'L'               \
+ CHAR 'L'               ;
  TWOK 'A', 'T'          ; Encoded as:   "PL<145><140>UM"
  TWOK 'I', 'N'
  CHAR 'U'
@@ -1887,7 +1887,7 @@ ENDMACRO
  EQUB 0
 
  TWOK 'G', 'E'          ; Token 63:     "GEM-STONES"
- CHAR 'M'               \
+ CHAR 'M'               ;
  CHAR '-'               ; Encoded as:   "<131>M-[43]<159><137>"
  RTOK 43
  TWOK 'O', 'N'
@@ -1895,7 +1895,7 @@ ENDMACRO
  EQUB 0
 
  TWOK 'A', 'L'          ; Token 64:     "ALIEN ITEMS"
- CHAR 'I'               \
+ CHAR 'I'               ;
  TWOK 'E', 'N'          ; Encoded as:   "<128>I<146> [127]S"
  CHAR ' '
  RTOK 127
@@ -1903,7 +1903,7 @@ ENDMACRO
  EQUB 0
 
  CHAR '('               ; Token 65:     "(Y/N)?"
- CHAR 'Y'               \
+ CHAR 'Y'               ;
  CHAR '/'               ; Encoded as:   "(Y/N)?"
  CHAR 'N'
  CHAR ')'
@@ -1911,67 +1911,67 @@ ENDMACRO
  EQUB 0
 
  CHAR ' '               ; Token 66:     " CR"
- CHAR 'C'               \
+ CHAR 'C'               ;
  CHAR 'R'               ; Encoded as:   " CR"
  EQUB 0
 
  CHAR 'L'               ; Token 67:     "LARGE"
- TWOK 'A', 'R'          \
+ TWOK 'A', 'R'          ;
  TWOK 'G', 'E'          ; Encoded as:   "L<138><131>"
  EQUB 0
 
  CHAR 'F'               ; Token 68:     "FIERCE"
- CHAR 'I'               \
+ CHAR 'I'               ;
  TWOK 'E', 'R'          ; Encoded as:   "FI<144><133>"
  TWOK 'C', 'E'
  EQUB 0
 
  CHAR 'S'               ; Token 69:     "SMALL"
- TWOK 'M', 'A'          \
+ TWOK 'M', 'A'          ;
  RTOK 118               ; Encoded as:   "S<139>[118]"
  EQUB 0
 
  CHAR 'G'               ; Token 70:     "GREEN"
- TWOK 'R', 'E'          \
+ TWOK 'R', 'E'          ;
  TWOK 'E', 'N'          ; Encoded as:   "G<142><146>"
  EQUB 0
 
  CHAR 'R'               ; Token 71:     "RED"
- TWOK 'E', 'D'          \
+ TWOK 'E', 'D'          ;
  EQUB 0                 ; Encoded as:   "R<152>"
 
  CHAR 'Y'               ; Token 72:     "YELLOW"
- CHAR 'E'               \
+ CHAR 'E'               ;
  RTOK 118               ; Encoded as:   "YE[118]OW"
  CHAR 'O'
  CHAR 'W'
  EQUB 0
 
  CHAR 'B'               ; Token 73:     "BLUE"
- CHAR 'L'               \
+ CHAR 'L'               ;
  CHAR 'U'               ; Encoded as:   "BLUE"
  CHAR 'E'
  EQUB 0
 
  CHAR 'B'               ; Token 74:     "BLACK"
- TWOK 'L', 'A'          \
+ TWOK 'L', 'A'          ;
  CHAR 'C'               ; Encoded as:   "B<149>CK"
  CHAR 'K'
  EQUB 0
 
  RTOK 136               ; Token 75:     "HARMLESS"
- EQUB 0                 \
+ EQUB 0                 ;
                         ; Encoded as:   "[136]"
 
  CHAR 'S'               ; Token 76:     "SLIMY"
- CHAR 'L'               \
+ CHAR 'L'               ;
  CHAR 'I'               ; Encoded as:   "SLIMY"
  CHAR 'M'
  CHAR 'Y'
  EQUB 0
 
  CHAR 'B'               ; Token 77:     "BUG-EYED"
- CHAR 'U'               \
+ CHAR 'U'               ;
  CHAR 'G'               ; Encoded as:   "BUG-EY<152>"
  CHAR '-'
  CHAR 'E'
@@ -1980,61 +1980,61 @@ ENDMACRO
  EQUB 0
 
  CHAR 'H'               ; Token 78:     "HORNED"
- TWOK 'O', 'R'          \
+ TWOK 'O', 'R'          ;
  CHAR 'N'               ; Encoded as:   "H<153>N<152>"
  TWOK 'E', 'D'
  EQUB 0
 
  CHAR 'B'               ; Token 79:     "BONY"
- TWOK 'O', 'N'          \
+ TWOK 'O', 'N'          ;
  CHAR 'Y'               ; Encoded as:   "B<159>Y"
  EQUB 0
 
  CHAR 'F'               ; Token 80:     "FAT"
- TWOK 'A', 'T'          \
+ TWOK 'A', 'T'          ;
  EQUB 0                 ; Encoded as:   "F<145>"
 
  CHAR 'F'               ; Token 81:     "FURRY"
- CHAR 'U'               \
+ CHAR 'U'               ;
  CHAR 'R'               ; Encoded as:   "FURRY"
  CHAR 'R'
  CHAR 'Y'
  EQUB 0
 
  CHAR 'R'               ; Token 82:     "RODENT"
- CHAR 'O'               \
+ CHAR 'O'               ;
  CHAR 'D'               ; Encoded as:   "ROD<146>T"
  TWOK 'E', 'N'
  CHAR 'T'
  EQUB 0
 
  CHAR 'F'               ; Token 83:     "FROG"
- CHAR 'R'               \
+ CHAR 'R'               ;
  CHAR 'O'               ; Encoded as:   "FROG"
  CHAR 'G'
  EQUB 0
 
  CHAR 'L'               ; Token 84:     "LIZARD"
- CHAR 'I'               \
+ CHAR 'I'               ;
  TWOK 'Z', 'A'          ; Encoded as:   "LI<132>RD"
  CHAR 'R'
  CHAR 'D'
  EQUB 0
 
  CHAR 'L'               ; Token 85:     "LOBSTER"
- CHAR 'O'               \
+ CHAR 'O'               ;
  CHAR 'B'               ; Encoded as:   "LOB[43]<144>"
  RTOK 43
  TWOK 'E', 'R'
  EQUB 0
 
  TWOK 'B', 'I'          ; Token 86:     "BIRD"
- CHAR 'R'               \
+ CHAR 'R'               ;
  CHAR 'D'               ; Encoded as:   "<134>RD"
  EQUB 0
 
  CHAR 'H'               ; Token 87:     "HUMANOID"
- CHAR 'U'               \
+ CHAR 'U'               ;
  CHAR 'M'               ; Encoded as:   "HUM<155>OID"
  TWOK 'A', 'N'
  CHAR 'O'
@@ -2043,39 +2043,39 @@ ENDMACRO
  EQUB 0
 
  CHAR 'F'               ; Token 88:     "FELINE"
- CHAR 'E'               \
+ CHAR 'E'               ;
  CHAR 'L'               ; Encoded as:   "FEL<140>E"
  TWOK 'I', 'N'
  CHAR 'E'
  EQUB 0
 
  TWOK 'I', 'N'          ; Token 89:     "INSECT"
- CHAR 'S'               \
+ CHAR 'S'               ;
  CHAR 'E'               ; Encoded as:   "<140>SECT"
  CHAR 'C'
  CHAR 'T'
  EQUB 0
 
  RTOK 11                ; Token 90:     "AVERAGE RADIUS"
- TWOK 'R', 'A'          \
+ TWOK 'R', 'A'          ;
  TWOK 'D', 'I'          ; Encoded as:   "[11]<148><141><136>"
  TWOK 'U', 'S'
  EQUB 0
 
  CHAR 'C'               ; Token 91:     "COM"
- CHAR 'O'               \
+ CHAR 'O'               ;
  CHAR 'M'               ; Encoded as:   "COM"
  EQUB 0
 
  RTOK 91                ; Token 92:     "COMMANDER"
- CHAR 'M'               \
+ CHAR 'M'               ;
  TWOK 'A', 'N'          ; Encoded as:   "[91]M<155>D<144>"
  CHAR 'D'
  TWOK 'E', 'R'
  EQUB 0
 
  CHAR ' '               ; Token 93:     " DESTROYED"
- CHAR 'D'               \
+ CHAR 'D'               ;
  TWOK 'E', 'S'          ; Encoded as:   " D<137>TROY<152>"
  CHAR 'T'
  CHAR 'R'
@@ -2085,7 +2085,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'B'               ; Token 94:     "BY D.BRABEN & I.BELL"
- CHAR 'Y'               \
+ CHAR 'Y'               ;
  CHAR ' '               ; Encoded as:   "BY D.B<148><147>N & I.<147>[118]"
  CHAR 'D'
  CHAR '.'
@@ -2105,7 +2105,7 @@ ENDMACRO
  RTOK 14                ; Token 95:     "UNIT  QUANTITY{crlf}
  CHAR ' '               ;                 PRODUCT   UNIT PRICE FOR SALE{crlf}
  CHAR ' '               ;                                              {lf}"
- RTOK 16                \
+ RTOK 16                ;
  CONT 13                ; Encoded as:   "[14]  [16]{13} [26]   [14] [6] F<153>
  CHAR ' '               ;                 SA<129>{13}{10}"
  RTOK 26
@@ -2127,48 +2127,48 @@ ENDMACRO
  EQUB 0
 
  CHAR 'F'               ; Token 96:     "FRONT"
- CHAR 'R'               \
+ CHAR 'R'               ;
  TWOK 'O', 'N'          ; Encoded as:   "FR<159>T"
  CHAR 'T'
  EQUB 0
 
  TWOK 'R', 'E'          ; Token 97:     "REAR"
- TWOK 'A', 'R'          \
+ TWOK 'A', 'R'          ;
  EQUB 0                 ; Encoded as:   "<142><138>"
 
  TWOK 'L', 'E'          ; Token 98:     "LEFT"
- CHAR 'F'               \
+ CHAR 'F'               ;
  CHAR 'T'               ; Encoded as:   "<129>FT"
  EQUB 0
 
  TWOK 'R', 'I'          ; Token 99:     "RIGHT"
- CHAR 'G'               \
+ CHAR 'G'               ;
  CHAR 'H'               ; Encoded as:   "<158>GHT"
  CHAR 'T'
  EQUB 0
 
  RTOK 121               ; Token 100:    "ENERGY LOW{beep}"
- CHAR 'L'               \
+ CHAR 'L'               ;
  CHAR 'O'               ; Encoded as:   "[121]LOW{7}"
  CHAR 'W'
  CONT 7
  EQUB 0
 
  RTOK 99                ; Token 101:    "RIGHT ON COMMANDER!"
- RTOK 131               \
+ RTOK 131               ;
  RTOK 92                ; Encoded as:   "[99][131][92]!"
  CHAR '!'
  EQUB 0
 
  CHAR 'E'               ; Token 102:    "EXTRA "
- CHAR 'X'               \
+ CHAR 'X'               ;
  CHAR 'T'               ; Encoded as:   "EXT<148> "
  TWOK 'R', 'A'
  CHAR ' '
  EQUB 0
 
  CHAR 'P'               ; Token 103:    "PULSE LASER"
- CHAR 'U'               \
+ CHAR 'U'               ;
  CHAR 'L'               ; Encoded as:   "PULSE[27]"
  CHAR 'S'
  CHAR 'E'
@@ -2176,26 +2176,26 @@ ENDMACRO
  EQUB 0
 
  TWOK 'B', 'E'          ; Token 104:    "BEAM LASER"
- CHAR 'A'               \
+ CHAR 'A'               ;
  CHAR 'M'               ; Encoded as:   "<147>AM[27]"
  RTOK 27
  EQUB 0
 
  CHAR 'F'               ; Token 105:    "FUEL"
- CHAR 'U'               \
+ CHAR 'U'               ;
  CHAR 'E'               ; Encoded as:   "FUEL"
  CHAR 'L'
  EQUB 0
 
  CHAR 'M'               ; Token 106:    "MISSILE"
- TWOK 'I', 'S'          \
+ TWOK 'I', 'S'          ;
  CHAR 'S'               ; Encoded as:   "M<157>SI<129>"
  CHAR 'I'
  TWOK 'L', 'E'
  EQUB 0
 
  RTOK 67                ; Token 107:    "LARGE CARGO{sentence case} BAY"
- RTOK 46                \
+ RTOK 46                ;
  CHAR ' '               ; Encoded as:   "[67][46] BAY"
  CHAR 'B'
  CHAR 'A'
@@ -2203,7 +2203,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'E'               ; Token 108:    "E.C.M.SYSTEM"
- CHAR '.'               \
+ CHAR '.'               ;
  CHAR 'C'               ; Encoded as:   "E.C.M.[5]"
  CHAR '.'
  CHAR 'M'
@@ -2212,17 +2212,17 @@ ENDMACRO
  EQUB 0
 
  RTOK 102               ; Token 109:    "EXTRA PULSE LASERS"
- RTOK 103               \
+ RTOK 103               ;
  CHAR 'S'               ; Encoded as:   "[102][103]S"
  EQUB 0
 
  RTOK 102               ; Token 110:    "EXTRA BEAM LASERS"
- RTOK 104               \
+ RTOK 104               ;
  CHAR 'S'               ; Encoded as:   "[102][104]S"
  EQUB 0
 
  RTOK 105               ; Token 111:    "FUEL SCOOPS"
- CHAR ' '               \
+ CHAR ' '               ;
  CHAR 'S'               ; Encoded as:   "[105] SCOOPS"
  CHAR 'C'
  CHAR 'O'
@@ -2232,7 +2232,7 @@ ENDMACRO
  EQUB 0
 
  TWOK 'E', 'S'          ; Token 112:    "ESCAPE POD"
- CHAR 'C'               \
+ CHAR 'C'               ;
  CHAR 'A'               ; Encoded as:   "<137>CAPE POD"
  CHAR 'P'
  CHAR 'E'
@@ -2243,43 +2243,43 @@ ENDMACRO
  EQUB 0
 
  RTOK 121               ; Token 113:    "ENERGY BOMB"
- CHAR 'B'               \
+ CHAR 'B'               ;
  CHAR 'O'               ; Encoded as:   "[121]BOMB"
  CHAR 'M'
  CHAR 'B'
  EQUB 0
 
  RTOK 121               ; Token 114:    "ENERGY UNIT"
- RTOK 14                \
+ RTOK 14                ;
  EQUB 0                 ; Encoded as:   "[121][14]"
 
  RTOK 124               ; Token 115:    "DOCKING COMPUTERS"
- TWOK 'I', 'N'          \
+ TWOK 'I', 'N'          ;
  CHAR 'G'               ; Encoded as:   "[124]<140>G [55]"
  CHAR ' '
  RTOK 55
  EQUB 0
 
  RTOK 122               ; Token 116:    "GALACTIC HYPERSPACE "
- CHAR ' '               \
+ CHAR ' '               ;
  RTOK 29                ; Encoded as:   "[122] [29]"
  EQUB 0
 
  CHAR 'A'               ; Token 117:    "ALL"
- RTOK 118               \
+ RTOK 118               ;
  EQUB 0                 ; Encoded as:   "A[118]"
 
  CHAR 'L'               ; Token 118:    "LL"
- CHAR 'L'               \
+ CHAR 'L'               ;
  EQUB 0                 ; Encoded as:   "LL"
 
  RTOK 37                ; Token 119:    "CASH:{cash} CR{crlf}
  CHAR ':'               ;               "
- CONT 0                 \
+ CONT 0                 ;
  EQUB 0                 ; Encoded as:   "[37]:{0}"
 
  TWOK 'I', 'N'          ; Token 120:    "INCOMING MISSILE"
- RTOK 91                \
+ RTOK 91                ;
  TWOK 'I', 'N'          ; Encoded as:   "<140>[91]<140>G [106]"
  CHAR 'G'
  CHAR ' '
@@ -2287,14 +2287,14 @@ ENDMACRO
  EQUB 0
 
  TWOK 'E', 'N'          ; Token 121:    "ENERGY "
- TWOK 'E', 'R'          \
+ TWOK 'E', 'R'          ;
  CHAR 'G'               ; Encoded as:   "<146><144>GY "
  CHAR 'Y'
  CHAR ' '
  EQUB 0
 
  CHAR 'G'               ; Token 122:    "GALACTIC"
- CHAR 'A'               \
+ CHAR 'A'               ;
  TWOK 'L', 'A'          ; Encoded as:   "GA<149>C<151>C"
  CHAR 'C'
  TWOK 'T', 'I'
@@ -2303,7 +2303,7 @@ ENDMACRO
 
  CONT 13                ; Token 123:    "{crlf}
  RTOK 92                ;                COMMANDER'S NAME? "
- CHAR '`'               \
+ CHAR '`'               ;
  CHAR 'S'               ; Encoded as:   "{13}[92]'S NAME? "
  CHAR ' '
  CHAR 'N'
@@ -2315,7 +2315,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'D'               ; Token 124:    "DOCK"
- CHAR 'O'               \
+ CHAR 'O'               ;
  CHAR 'C'               ; Encoded as:   "DOCK"
  CHAR 'K'
  EQUB 0
@@ -2323,7 +2323,7 @@ ENDMACRO
  CONT 5                 ; Token 125:    "FUEL: {fuel level} LIGHT YEARS{crlf}
  TWOK 'L', 'E'          ;                CASH:{cash} CR{crlf}
  CHAR 'G'               ;                LEGAL STATUS:"
- TWOK 'A', 'L'          \
+ TWOK 'A', 'L'          ;
  CHAR ' '               ; Encoded as:   "{5}<129>G<128> [43]<145><136>:"
  RTOK 43
  TWOK 'A', 'T'
@@ -2339,7 +2339,7 @@ ENDMACRO
  CONT 13                ;                HYPERSPACE SYSTEM{tab to column 21}:
  CONT 6                 ;                {selected system name}{crlf}
  RTOK 145               ;                CONDITION{tab to column 21}:"
- CHAR ' '               \
+ CHAR ' '               ;
  RTOK 5                 ; Encoded as:   "[92] {4}{13}{13}{13}{6}[145] [5]{9}{2}
  CONT 9                 ;                {13}[29][5]{9}{3}{13}C<159><141><151>
  CONT 2                 ;                <159>{9}"
@@ -2358,14 +2358,14 @@ ENDMACRO
  EQUB 0
 
  CHAR 'I'               ; Token 127:    "ITEM"
- TWOK 'T', 'E'          \
+ TWOK 'T', 'E'          ;
  CHAR 'M'               ; Encoded as:   "I<156>M"
  EQUB 0
 
  CHAR ' '               ; Token 128:    "  LOAD NEW COMMANDER (Y/N)?{crlf}
  CHAR ' '               ;                {crlf}
  CHAR 'L'               ;               "
- CHAR 'O'               \
+ CHAR 'O'               ;
  CHAR 'A'               ; Encoded as:   "  LOAD NEW [92] [65]{13}{13}"
  CHAR 'D'
  CHAR ' '
@@ -2381,25 +2381,25 @@ ENDMACRO
  EQUB 0
 
  CONT 6                 ; Token 129:    "{sentence case}DOCKED"
- RTOK 124               \
+ RTOK 124               ;
  TWOK 'E', 'D'          ; Encoded as:   "{6}[124]<152>"
  EQUB 0
 
  TWOK 'R', 'A'          ; Token 130:    "RATING:"
- TWOK 'T', 'I'          \
+ TWOK 'T', 'I'          ;
  CHAR 'N'               ; Encoded as:   "<148><151>NG:"
  CHAR 'G'
  CHAR ':'
  EQUB 0
 
  CHAR ' '               ; Token 131:    " ON "
- TWOK 'O', 'N'          \
+ TWOK 'O', 'N'          ;
  CHAR ' '               ; Encoded as:   " <159> "
  EQUB 0
 
  CONT 13                ; Token 132:    "{crlf}
  CONT 8                 ;                {all caps}EQUIPMENT: {sentence case}"
- RTOK 47                \
+ RTOK 47                ;
  CHAR 'M'               ; Encoded as:   "{13}{8}[47]M<146>T:{6}"
  TWOK 'E', 'N'
  CHAR 'T'
@@ -2408,12 +2408,12 @@ ENDMACRO
  EQUB 0
 
  CHAR 'C'               ; Token 133:    "CLEAN"
- TWOK 'L', 'E'          \
+ TWOK 'L', 'E'          ;
  TWOK 'A', 'N'          ; Encoded as:   "C<129><155>"
  EQUB 0
 
  CHAR 'O'               ; Token 134:    "OFFENDER"
- CHAR 'F'               \
+ CHAR 'F'               ;
  CHAR 'F'               ; Encoded as:   "OFF<146>D<144>"
  TWOK 'E', 'N'
  CHAR 'D'
@@ -2421,7 +2421,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'F'               ; Token 135:    "FUGITIVE"
- CHAR 'U'               \
+ CHAR 'U'               ;
  CHAR 'G'               ; Encoded as:   "FUGI<151><150>"
  CHAR 'I'
  TWOK 'T', 'I'
@@ -2429,7 +2429,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'H'               ; Token 136:    "HARMLESS"
- TWOK 'A', 'R'          \
+ TWOK 'A', 'R'          ;
  CHAR 'M'               ; Encoded as:   "H<138>M<129>SS"
  TWOK 'L', 'E'
  CHAR 'S'
@@ -2437,7 +2437,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'M'               ; Token 137:    "MOSTLY HARMLESS"
- CHAR 'O'               \
+ CHAR 'O'               ;
  RTOK 43                ; Encoded as:   "MO[43]LY [136]"
  CHAR 'L'
  CHAR 'Y'
@@ -2446,15 +2446,15 @@ ENDMACRO
  EQUB 0
 
  RTOK 12                ; Token 138:    "POOR "
- EQUB 0                 \
+ EQUB 0                 ;
                         ; Encoded as:   "[12]"
 
  RTOK 11                ; Token 139:    "AVERAGE "
- EQUB 0                 \
+ EQUB 0                 ;
                         ; Encoded as:   "[11]"
 
  CHAR 'A'               ; Token 140:    "ABOVE AVERAGE "
- CHAR 'B'               \
+ CHAR 'B'               ;
  CHAR 'O'               ; Encoded as:   "ABO<150> [11]"
  TWOK 'V', 'E'
  CHAR ' '
@@ -2462,7 +2462,7 @@ ENDMACRO
  EQUB 0
 
  RTOK 91                ; Token 141:    "COMPETENT"
- CHAR 'P'               \
+ CHAR 'P'               ;
  CHAR 'E'               ; Encoded as:   "[91]PET<146>T"
  CHAR 'T'
  TWOK 'E', 'N'
@@ -2470,7 +2470,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'D'               ; Token 142:    "DANGEROUS"
- TWOK 'A', 'N'          \
+ TWOK 'A', 'N'          ;
  TWOK 'G', 'E'          ; Encoded as:   "D<155><131>RO<136>"
  CHAR 'R'
  CHAR 'O'
@@ -2478,7 +2478,7 @@ ENDMACRO
  EQUB 0
 
  CHAR 'D'               ; Token 143:    "DEADLY"
- CHAR 'E'               \
+ CHAR 'E'               ;
  CHAR 'A'               ; Encoded as:   "DEADLY"
  CHAR 'D'
  CHAR 'L'
@@ -2486,7 +2486,7 @@ ENDMACRO
  EQUB 0
 
  CHAR '-'               ; Token 144:    "---- E L I T E ----"
- CHAR '-'               \
+ CHAR '-'               ;
  CHAR '-'               ; Encoded as:   "---- E L I T E ----"
  CHAR '-'
  CHAR ' '
@@ -2507,14 +2507,14 @@ ENDMACRO
  EQUB 0
 
  CHAR 'P'               ; Token 145:    "PRESENT"
- TWOK 'R', 'E'          \
+ TWOK 'R', 'E'          ;
  CHAR 'S'               ; Encoded as:   "P<142>S<146>T"
  TWOK 'E', 'N'
  CHAR 'T'
  EQUB 0
 
  CONT 8                 ; Token 146:    "{all caps}GAME OVER"
- CHAR 'G'               \
+ CHAR 'G'               ;
  CHAR 'A'               ; Encoded as:   "{8}GAME O<150>R"
  CHAR 'M'
  CHAR 'E'
@@ -2527,7 +2527,7 @@ ENDMACRO
  CHAR 'P'               ; Token 147:    "PRESS FIRE OR SPACE,COMMANDER.{crlf}
  CHAR 'R'               ;                {crlf}
  TWOK 'E', 'S'          ;               "
- CHAR 'S'               \
+ CHAR 'S'               ;
  CHAR ' '               ; Encoded as:   "PR<137>S FI<142> <153> SPA<133>,[92].
  CHAR 'F'               ;                {13}{13}"
  CHAR 'I'
@@ -2547,7 +2547,7 @@ ENDMACRO
  EQUB 0
 
  CHAR '('               ; Token 148:    "(C) ACORNSOFT 1984"
- CHAR 'C'               \
+ CHAR 'C'               ;
  CHAR ')'               ; Encoded as:   "(C) AC<153>N<135>FT 1984"
  CHAR ' '
  CHAR 'A'
@@ -2571,14 +2571,14 @@ ENDMACRO
 ; ******************************************************************************
 
  PRINT "WORDS9"
- PRINT "Assembled at ", ~CODE_WORDS%
- PRINT "Ends at ", ~P%
- PRINT "Code size is ", ~(P% - CODE_WORDS%)
- PRINT "Execute at ", ~LOAD_WORDS%
- PRINT "Reload at ", ~LOAD_WORDS%
+ PRINT "Assembled at ", CODE_WORDS%
+ PRINT "Ends at ", *
+ PRINT "Code size is ", (* - CODE_WORDS%)
+ PRINT "Execute at ", LOAD_WORDS%
+ PRINT "Reload at ", LOAD_WORDS%
 
- PRINT "S.WORDS9 ",~CODE_WORDS%," ",~P%," ",~LOAD_WORDS%," ",~LOAD_WORDS%
- SAVE "3-assembled-output/WORDS9.bin", CODE_WORDS%, P%, LOAD_WORDS%
+ PRINT "S.WORDS9 ",~CODE_WORDS%," ",~*," ",LOAD_WORDS%," ",LOAD_WORDS%
+ SAVE "3-assembled-output/WORDS9.bin", CODE_WORDS%, *, LOAD_WORDS%
 
 ; ******************************************************************************
 ;
@@ -2626,32 +2626,32 @@ ENDMACRO
 
 .WP
 
-   .ds 0                 ; The start of the WP workspace
+  .ds 0                 ; The start of the WP workspace
 
 .FRIN
 
  SKIP NOSH + 1          ; Slots for the ships in the local bubble of universe
-                        \
+                        ;
                         ; There are #NOSH + 1 slots, but the ship-spawning
                         ; routine at NWSHP only populates #NOSH of them, so
                         ; there are 13 slots but only 12 are used for ships
                         ; (the last slot is effectively used as a null
                         ; terminator when shuffling the slots down in the
                         ; KILLSHP routine)
-                        \
+                        ;
                         ; See the deep dive on "The local bubble of universe"
                         ; for details of how Elite stores the local universe in
                         ; FRIN, UNIV and K%
 
 .CABTMP
 
-   .ds 0                 ; Cabin temperature
-                        \
+  .ds 0                 ; Cabin temperature
+                        ;
                         ; The ambient cabin temperature in deep space is 30,
                         ; which is displayed as one notch on the dashboard bar
-                        \
+                        ;
                         ; We get higher temperatures closer to the sun
-                        \
+                        ;
                         ; CABTMP shares a location with MANY, but that's OK as
                         ; MANY+0 would contain the number of ships of type 0,
                         ; and as there is no ship type 0 (they start at 1), the
@@ -2662,22 +2662,22 @@ ENDMACRO
 
  SKIP SST               ; The number of ships of each type in the local bubble
                         ; of universe
-                        \
+                        ;
                         ; The number of ships of type X in the local bubble is
                         ; stored at MANY+X
-                        \
+                        ;
                         ; See the deep dive on "Ship blueprints" for a list of
                         ; ship types
 
 .SSPR
 
  SKIP NTY + 1 - SST     ; "Space station present" flag
-                        \
+                        ;
                         ;   * Non-zero if we are inside the space station's safe
                         ;     zone
-                        \
+                        ;
                         ;   * 0 if we aren't (in which case we can show the sun)
-                        \
+                        ;
                         ; This flag is at MANY+SST, which is no coincidence, as
                         ; MANY+SST is a count of how many space stations there
                         ; are in our local bubble, which is the same as saying
@@ -2685,48 +2685,48 @@ ENDMACRO
 
 .ECMP
 
-   .ds 1                 ; Our E.C.M. status
-                        \
+  .ds 1                 ; Our E.C.M. status
+                        ;
                         ;   * 0 = E.C.M. is off
-                        \
+                        ;
                         ;   * Non-zero = E.C.M. is on
 
 .MJ
 
-   .ds 1                 ; Are we in witchspace (i.e. have we mis-jumped)?
-                        \
+  .ds 1                 ; Are we in witchspace (i.e. have we mis-jumped)?
+                        ;
                         ;   * 0 = no, we are in normal space
-                        \
+                        ;
                         ;   * $FF = yes, we are in witchspace
 
 .LAS2
 
-   .ds 1                 ; Laser power for the current laser
-                        \
+  .ds 1                 ; Laser power for the current laser
+                        ;
                         ;   * Bits 0-6 contain the laser power of the current
                         ;     space view
-                        \
+                        ;
                         ;   * Bit 7 denotes whether or not the laser pulses:
-                        \
+                        ;
                         ;     * 0 = pulsing laser
-                        \
+                        ;
                         ;     * 1 = beam laser (i.e. always on)
 
 .MSAR
 
-   .ds 1                 ; The targeting state of our leftmost missile
-                        \
+  .ds 1                 ; The targeting state of our leftmost missile
+                        ;
                         ;   * 0 = missile is not looking for a target, or it
                         ;     already has a target lock (indicator is not
                         ;     yellow/white)
-                        \
+                        ;
                         ;   * Non-zero = missile is currently looking for a
                         ;     target (indicator is yellow/white)
 
 .VIEW
 
-   .ds 1                 ; The number of the current space view
-                        \
+  .ds 1                 ; The number of the current space view
+                        ;
                         ;   * 0 = front
                         ;   * 1 = rear
                         ;   * 2 = left
@@ -2734,43 +2734,43 @@ ENDMACRO
 
 .LASCT
 
-   .ds 1                 ; The laser pulse count for the current laser
-                        \
+  .ds 1                 ; The laser pulse count for the current laser
+                        ;
                         ; This is a counter that defines the gap between the
                         ; pulses of a pulse laser. It is set as follows:
-                        \
+                        ;
                         ;   * 0 for a beam laser
-                        \
+                        ;
                         ;   * 10 for a pulse laser
-                        \
+                        ;
                         ; It gets decremented every vertical sync (in the LINSCN
                         ; routine, which is called 50 times a second) and is set
                         ; to a non-zero value for pulse lasers only
-                        \
+                        ;
                         ; The laser only fires when the value of LASCT hits
                         ; zero, so for pulse lasers with a value of 10, that
                         ; means the laser fires once every 10 vertical syncs (or
                         ; 5 times a second)
-                        \
+                        ;
                         ; In comparison, beam lasers fire continuously as the
                         ; value of LASCT is always 0
 
 .GNTMP
 
-   .ds 1                 ; Laser temperature (or "gun temperature")
-                        \
+  .ds 1                 ; Laser temperature (or "gun temperature")
+                        ;
                         ; If the laser temperature exceeds 242 then the laser
                         ; overheats and cannot be fired again until it has
                         ; cooled down
 
 .HFX
 
-   .ds 1                 ; A flag that toggles the hyperspace colour effect
-                        \
+  .ds 1                 ; A flag that toggles the hyperspace colour effect
+                        ;
                         ;   * 0 = no colour effect
-                        \
+                        ;
                         ;   * Non-zero = hyperspace colour effect enabled
-                        \
+                        ;
                         ; When HFX is set to 1, the mode 4 screen that makes
                         ; up the top part of the display is temporarily switched
                         ; to mode 5 (the same screen mode as the dashboard),
@@ -2785,25 +2785,25 @@ ENDMACRO
 
 .EV
 
-   .ds 1                 ; The "extra vessels" spawning counter
-                        \
+  .ds 1                 ; The "extra vessels" spawning counter
+                        ;
                         ; This counter is set to 0 on arrival in a system and
                         ; following an in-system jump, and is bumped up when we
                         ; spawn bounty hunters or pirates (i.e. "extra vessels")
-                        \
+                        ;
                         ; It decreases by 1 each time we consider spawning more
                         ; "extra vessels" in part 4 of the main game loop, so
                         ; increasing the value of EV has the effect of delaying
                         ; the spawning of more vessels
-                        \
+                        ;
                         ; In other words, this counter stops bounty hunters and
                         ; pirates from continually appearing, and ensures that
                         ; there's a delay between spawnings
 
 .DLY
 
-   .ds 1                 ; In-flight message delay
-                        \
+  .ds 1                 ; In-flight message delay
+                        ;
                         ; This counter is used to keep an in-flight message up
                         ; for a specified time before it gets removed. The value
                         ; in DLY is decremented each time we start another
@@ -2811,44 +2811,44 @@ ENDMACRO
 
 .de
 
-   .ds 1                 ; Equipment destruction flag
-                        \
+  .ds 1                 ; Equipment destruction flag
+                        ;
                         ;   * Bit 1 denotes whether or not the in-flight message
                         ;     about to be shown by the MESS routine is about
                         ;     destroyed equipment:
-                        \
+                        ;
                         ;     * 0 = the message is shown normally
-                        \
+                        ;
                         ;     * 1 = the string " DESTROYED" gets added to the
                         ;       end of the message
 
 .LSX
 
-   .ds 0                 ; LSX is an alias that points to the first byte of the
+  .ds 0                 ; LSX is an alias that points to the first byte of the
                         ; sun line heap at LSO
-                        \
+                        ;
                         ;   * $FF indicates the sun line heap is empty
-                        \
+                        ;
                         ;   * Otherwise the LSO heap contains the line data for
                         ;     the sun
 
 .LSO
 
-   .ds 192               ; The ship line heap for the space station (see NWSPS)
+  .ds 192               ; The ship line heap for the space station (see NWSPS)
                         ; and the sun line heap (see SUN)
-                        \
+                        ;
                         ; The spaces can be shared as our local bubble of
                         ; universe can support either the sun or a space
                         ; station, but not both
 
 .LSX2
 
-   .ds 78                ; The ball line heap for storing x-coordinates (see the
+  .ds 78                ; The ball line heap for storing x-coordinates (see the
                         ; deep dive on "The ball line heap" for details)
 
 .LSY2
 
-   .ds 78                ; The ball line heap for storing y-coordinates (see the
+  .ds 78                ; The ball line heap for storing y-coordinates (see the
                         ; deep dive on "The ball line heap" for details)
 
 .SY
@@ -2873,74 +2873,74 @@ ENDMACRO
 
 .XSAV2
 
-   .ds 1                 ; Temporary storage, used for storing the value of the X
+  .ds 1                 ; Temporary storage, used for storing the value of the X
                         ; register in the TT26 routine
 
 .YSAV2
 
-   .ds 1                 ; Temporary storage, used for storing the value of the Y
+  .ds 1                 ; Temporary storage, used for storing the value of the Y
                         ; register in the TT26 routine
 
 .MCH
 
-   .ds 1                 ; The text token number of the in-flight message that is
+  .ds 1                 ; The text token number of the in-flight message that is
                         ; currently being shown, and which will be removed by
                         ; the me2 routine when the counter in DLY reaches zero
 
 .FSH
 
-   .ds 1                 ; Forward shield status
-                        \
+  .ds 1                 ; Forward shield status
+                        ;
                         ;   * 0 = empty
-                        \
+                        ;
                         ;   * $FF = full
 
 .ASH
 
-   .ds 1                 ; Aft shield status
-                        \
+  .ds 1                 ; Aft shield status
+                        ;
                         ;   * 0 = empty
-                        \
+                        ;
                         ;   * $FF = full
 
 .ENERGY
 
-   .ds 1                 ; Energy bank status
-                        \
+  .ds 1                 ; Energy bank status
+                        ;
                         ;   * 0 = empty
-                        \
+                        ;
                         ;   * $FF = full
 
 .LASX
 
-   .ds 1                 ; The x-coordinate of the tip of the laser line
+  .ds 1                 ; The x-coordinate of the tip of the laser line
 
 .LASY
 
-   .ds 1                 ; The y-coordinate of the tip of the laser line
+  .ds 1                 ; The y-coordinate of the tip of the laser line
 
 .COMX
 
-   .ds 1                 ; The x-coordinate of the compass dot
+  .ds 1                 ; The x-coordinate of the compass dot
 
 .COMY
 
-   .ds 1                 ; The y-coordinate of the compass dot
+  .ds 1                 ; The y-coordinate of the compass dot
 
 .QQ24
 
-   .ds 1                 ; Temporary storage, used to store the current market
+  .ds 1                 ; Temporary storage, used to store the current market
                         ; item's price in routine TT151
 
 .QQ25
 
-   .ds 1                 ; Temporary storage, used to store the current market
+  .ds 1                 ; Temporary storage, used to store the current market
                         ; item's availability in routine TT151
 
 .QQ28
 
-   .ds 1                 ; The current system's economy (0-7)
-                        \
+  .ds 1                 ; The current system's economy (0-7)
+                        ;
                         ;   * 0 = Rich Industrial
                         ;   * 1 = Average Industrial
                         ;   * 2 = Poor Industrial
@@ -2949,32 +2949,32 @@ ENDMACRO
                         ;   * 5 = Rich Agricultural
                         ;   * 6 = Average Agricultural
                         ;   * 7 = Poor Agricultural
-                        \
+                        ;
                         ; See the deep dive on "Generating system data" for more
                         ; information on economies
 
 .QQ29
 
-   .ds 1                 ; Temporary storage, used in a number of places
+  .ds 1                 ; Temporary storage, used in a number of places
 
 .gov
 
-   .ds 1                 ; The current system's government type (0-7)
-                        \
+  .ds 1                 ; The current system's government type (0-7)
+                        ;
                         ; See the deep dive on "Generating system data" for
                         ; details of the various government types
 
 .tek
 
-   .ds 1                 ; The current system's tech level (0-14)
-                        \
+  .ds 1                 ; The current system's tech level (0-14)
+                        ;
                         ; See the deep dive on "Generating system data" for more
                         ; information on tech levels
 
 .SLSP
 
-   .ds 2                 ; The address of the bottom of the ship line heap
-                        \
+  .ds 2                 ; The address of the bottom of the ship line heap
+                        ;
                         ; The ship line heap is a descending block of memory
                         ; that starts at WP and descends down to SLSP. It can be
                         ; extended downwards by the NWSHP routine when adding
@@ -2984,36 +2984,36 @@ ENDMACRO
 
 .XX24
 
-   .ds 1                 ; This byte appears to be unused
+  .ds 1                 ; This byte appears to be unused
 
 .ALTIT
 
-   .ds 1                 ; Our altitude above the surface of the planet or sun
-                        \
+  .ds 1                 ; Our altitude above the surface of the planet or sun
+                        ;
                         ;   * 255 = we are a long way above the surface
-                        \
+                        ;
                         ;   * 1-254 = our altitude as the square root of:
-                        \
+                        ;
                         ;       x_hi^2 + y_hi^2 + z_hi^2 - 6^2
-                        \
+                        ;
                         ;     where our ship is at the origin, the centre of the
                         ;     planet/sun is at (x_hi, y_hi, z_hi), and the
                         ;     radius of the planet/sun is 6
-                        \
+                        ;
                         ;   * 0 = we have crashed into the surface
 
 .QQ2
 
-   .ds 6                 ; The three 16-bit seeds for the current system, i.e.
+  .ds 6                 ; The three 16-bit seeds for the current system, i.e.
                         ; the one we are currently in
-                        \
+                        ;
                         ; See the deep dives on "Galaxy and system seeds" and
                         ; "Twisting the system seeds" for more details
 
 .QQ3
 
-   .ds 1                 ; The selected system's economy (0-7)
-                        \
+  .ds 1                 ; The selected system's economy (0-7)
+                        ;
                         ;   * 0 = Rich Industrial
                         ;   * 1 = Average Industrial
                         ;   * 2 = Poor Industrial
@@ -3022,47 +3022,47 @@ ENDMACRO
                         ;   * 5 = Rich Agricultural
                         ;   * 6 = Average Agricultural
                         ;   * 7 = Poor Agricultural
-                        \
+                        ;
                         ; See the deep dive on "Generating system data" for more
                         ; information on economies
 
 .QQ4
 
-   .ds 1                 ; The selected system's government (0-7)
-                        \
+  .ds 1                 ; The selected system's government (0-7)
+                        ;
                         ; See the deep dive on "Generating system data" for more
                         ; details of the various government types
 
 .QQ5
 
-   .ds 1                 ; The selected system's tech level (0-14)
-                        \
+  .ds 1                 ; The selected system's tech level (0-14)
+                        ;
                         ; See the deep dive on "Generating system data" for more
                         ; information on tech levels
 
 .QQ6
 
-   .ds 2                 ; The selected system's population in billions * 10
+  .ds 2                 ; The selected system's population in billions * 10
                         ; (1-71), so the maximum population is 7.1 billion
-                        \
+                        ;
                         ; See the deep dive on "Generating system data" for more
                         ; details on population levels
 
 .QQ7
 
-   .ds 2                 ; The selected system's productivity in M CR (96-62480)
-                        \
+  .ds 2                 ; The selected system's productivity in M CR (96-62480)
+                        ;
                         ; See the deep dive on "Generating system data" for more
                         ; details about productivity levels
 
 .QQ8
 
-   .ds 2                 ; The distance from the current system to the selected
+  .ds 2                 ; The distance from the current system to the selected
                         ; system in light years * 10, stored as a 16-bit number
-                        \
+                        ;
                         ; The distance will be 0 if the selected system is the
                         ; current system
-                        \
+                        ;
                         ; The galaxy chart is 102.4 light years wide and 51.2
                         ; light years tall (see the intra-system distance
                         ; calculations in routine TT111 for details), which
@@ -3070,23 +3070,23 @@ ENDMACRO
 
 .QQ9
 
-   .ds 1                 ; The galactic x-coordinate of the crosshairs in the
+  .ds 1                 ; The galactic x-coordinate of the crosshairs in the
                         ; galaxy chart (and, most of the time, the selected
                         ; system's galactic x-coordinate)
 
 .QQ10
 
-   .ds 1                 ; The galactic y-coordinate of the crosshairs in the
+  .ds 1                 ; The galactic y-coordinate of the crosshairs in the
                         ; galaxy chart (and, most of the time, the selected
                         ; system's galactic y-coordinate)
 
 .NOSTM
 
-   .ds 1                 ; The number of stardust particles shown on screen,
+  .ds 1                 ; The number of stardust particles shown on screen,
                         ; which is 18 (#NOST) for normal space, and 3 for
                         ; witchspace
 
- PRINT "WP workspace from  ", ~WP," to ", ~P%
+ PRINT "WP workspace from  ", WP," to ", *
 
 ; ******************************************************************************
 ;
@@ -3137,59 +3137,59 @@ ENDMACRO
 
 .COMC
 
-   .ds 1                 ; The colour of the dot on the compass
-                        \
+  .ds 1                 ; The colour of the dot on the compass
+                        ;
                         ;   * $F0 = the object in the compass is in front of us,
                         ;     so the dot is yellow/white
-                        \
+                        ;
                         ;   * $FF = the object in the compass is behind us, so
                         ;     the dot is green/cyan
 
 .DNOIZ
 
-   .ds 1                 ; Sound on/off configuration setting
-                        \
+  .ds 1                 ; Sound on/off configuration setting
+                        ;
                         ;   * 0 = sound is on (default)
-                        \
+                        ;
                         ;   * Non-zero = sound is off
-                        \
+                        ;
                         ; Toggled by pressing "S" when paused, see the DK4
                         ; routine for details
 
 .DAMP
 
-   .ds 1                 ; Keyboard damping configuration setting
-                        \
+  .ds 1                 ; Keyboard damping configuration setting
+                        ;
                         ;   * 0 = damping is enabled (default)
-                        \
+                        ;
                         ;   * $FF = damping is disabled
-                        \
+                        ;
                         ; Toggled by pressing CAPS LOCK when paused, see the
                         ; DKS3 routine for details
 
 .DJD
 
-   .ds 1                 ; Keyboard auto-recentre configuration setting
-                        \
+  .ds 1                 ; Keyboard auto-recentre configuration setting
+                        ;
                         ;   * 0 = auto-recentre is enabled (default)
-                        \
+                        ;
                         ;   * $FF = auto-recentre is disabled
-                        \
+                        ;
                         ; Toggled by pressing "A" when paused, see the DKS3
                         ; routine for details
 
 .PATG
 
-   .ds 1                 ; Configuration setting to show the author names on the
+  .ds 1                 ; Configuration setting to show the author names on the
                         ; start-up screen and enable manual hyperspace mis-jumps
-                        \
+                        ;
                         ;   * 0 = no author names or manual mis-jumps (default)
-                        \
+                        ;
                         ;   * $FF = show author names and allow manual mis-jumps
-                        \
+                        ;
                         ; Toggled by pressing "X" when paused, see the DKS3
                         ; routine for details
-                        \
+                        ;
                         ; This needs to be turned on for manual mis-jumps to be
                         ; possible. To do a manual mis-jump, first toggle the
                         ; author display by pausing the game (COPY) and pressing
@@ -3199,45 +3199,45 @@ ENDMACRO
 
 .FLH
 
-   .ds 1                 ; Flashing console bars configuration setting
-                        \
+  .ds 1                 ; Flashing console bars configuration setting
+                        ;
                         ;   * 0 = static bars (default)
-                        \
+                        ;
                         ;   * $FF = flashing bars
-                        \
+                        ;
                         ; Toggled by pressing "F" when paused, see the DKS3
                         ; routine for details
 
 .JSTGY
 
-   .ds 1                 ; Reverse joystick Y-channel configuration setting
-                        \
+  .ds 1                 ; Reverse joystick Y-channel configuration setting
+                        ;
                         ;   * 0 = standard Y-channel (default)
-                        \
+                        ;
                         ;   * $FF = reversed Y-channel
-                        \
+                        ;
                         ; Toggled by pressing "Y" when paused, see the DKS3
                         ; routine for details
 
 .JSTE
 
-   .ds 1                 ; Reverse both joystick channels configuration setting
-                        \
+  .ds 1                 ; Reverse both joystick channels configuration setting
+                        ;
                         ;   * 0 = standard channels (default)
-                        \
+                        ;
                         ;   * $FF = reversed channels
-                        \
+                        ;
                         ; Toggled by pressing "J" when paused, see the DKS3
                         ; routine for details
 
 .JSTK
 
-   .ds 1                 ; Keyboard or joystick configuration setting
-                        \
+  .ds 1                 ; Keyboard or joystick configuration setting
+                        ;
                         ;   * 0 = keyboard (default)
-                        \
+                        ;
                         ;   * $FF = joystick
-                        \
+                        ;
                         ; Toggled by pressing "K" when paused, see the DKS3
                         ; routine for details
 
@@ -3311,7 +3311,7 @@ ENDMACRO
 
                         ; The roll rate in JSTX increases if we press ">" (and
                         ; the RL indicator on the dashboard goes to the right)
-                        \
+                        ;
                         ; This rolls our ship to the right (clockwise), but we
                         ; actually implement this by rolling everything else
                         ; to the left (anti-clockwise), so a positive roll rate
@@ -3333,7 +3333,7 @@ ENDMACRO
 
  TYA                    ; Set A to the roll rate but with the sign bit flipped
 
- BPL P%+7               ; If the value of A is positive, skip the following
+ BPL *+7               ; If the value of A is positive, skip the following
                         ; three instructions
 
  EOR #%11111111         ; A is negative, so change the sign of A using two's
@@ -3344,7 +3344,7 @@ ENDMACRO
  LSR A
 
  CMP #8                 ; If A >= 8, skip the following two instructions
- BCS P%+4
+ BCS *+4
 
  LSR A                  ; A < 8, so halve A again
 
@@ -3353,16 +3353,16 @@ ENDMACRO
                         ; instruction)
 
  STA ALP1               ; Store A in ALP1, so we now have:
-                        \
+                        ;
                         ;   ALP1 = |JSTX| / 8    if |JSTX| < 32
-                        \
+                        ;
                         ;   ALP1 = |JSTX| / 4    if |JSTX| >= 32
-                        \
+                        ;
                         ; This means that at lower roll rates, the roll angle is
                         ; reduced closer to zero than at higher roll rates,
                         ; which gives us finer control over the ship's roll at
                         ; lower roll rates
-                        \
+                        ;
                         ; Because JSTX is in the range -127 to +127, ALP1 is
                         ; in the range 0 to 31
 
@@ -3389,7 +3389,7 @@ ENDMACRO
 
  TYA                    ; Set A to the pitch rate but with the sign bit flipped
 
- BPL P%+4               ; If the value of A is positive, skip the following
+ BPL *+4               ; If the value of A is positive, skip the following
                         ; instruction
 
  EOR #%11111111         ; A is negative, so flip the bits
@@ -3403,21 +3403,21 @@ ENDMACRO
  LSR A
 
  CMP #3                 ; If A >= 3, skip the following instruction
- BCS P%+3
+ BCS *+3
 
  LSR A                  ; A < 3, so halve A again
 
  STA BET1               ; Store A in BET1, so we now have:
-                        \
+                        ;
                         ;   BET1 = |JSTY| / 32    if |JSTY| < 48
-                        \
+                        ;
                         ;   BET1 = |JSTY| / 16    if |JSTY| >= 48
-                        \
+                        ;
                         ; This means that at lower pitch rates, the pitch angle
                         ; is reduced closer to zero than at higher pitch rates,
                         ; which gives us finer control over the ship's pitch at
                         ; lower pitch rates
-                        \
+                        ;
                         ; Because JSTY is in the range -131 to +131, BET1 is in
                         ; the range 0 to 8
 
@@ -3558,7 +3558,7 @@ ENDMACRO
 
  LDA KY13               ; If ESCAPE is being pressed and we have an escape pod
  AND ESCP               ; fitted, keep going, otherwise skip the next
- BEQ P%+5               ; instruction
+ BEQ *+5               ; instruction
 
  JMP ESCAPE             ; The button is being pressed to launch an escape pod
                         ; and we have an escape pod fitted, so jump to ESCAPE to
@@ -3566,7 +3566,7 @@ ENDMACRO
                         ; call
 
  LDA KY18               ; If "J" is being pressed, keep going, otherwise skip
- BEQ P%+5               ; the next instruction
+ BEQ *+5               ; the next instruction
 
  JSR WARP               ; Call the WARP routine to do an in-system jump
 
@@ -3720,7 +3720,7 @@ ENDMACRO
  STX XSAV               ; Store the current slot number in XSAV
 
  LDA FRIN,X             ; Fetch the contents of this slot into A. If it is 0
- BNE P%+5               ; then this slot is empty and we have no more ships to
+ BNE *+5               ; then this slot is empty and we have no more ships to
  JMP MA18               ; process, so jump to MA18 below, otherwise A contains
                         ; the type of ship that's in this slot, so skip over the
                         ; JMP MA18 instruction and keep going
@@ -3917,7 +3917,7 @@ ENDMACRO
                         ; checks in the TACTICS routine
 
  CPX #OIL               ; If ship type >= OIL (i.e. it's a cargo canister,
- BCS P%+5               ; Thargon or escape pod), skip the JMP instruction and
+ BCS *+5               ; Thargon or escape pod), skip the JMP instruction and
  JMP MA58               ; continue on, otherwise jump to MA58 to process a
                         ; potential collision
 
@@ -4491,7 +4491,7 @@ ENDMACRO
  LDA ENGY               ; level goes up by 2 if we have an energy unit fitted,
  ADC ENERGY             ; otherwise it goes up by 1
 
- BCS P%+5               ; If the value of A did not overflow (the maximum
+ BCS *+5               ; If the value of A did not overflow (the maximum
  STA ENERGY             ; energy level is $FF), then store A in ENERGY
 
 ; ******************************************************************************
@@ -4563,19 +4563,19 @@ ENDMACRO
                         ; We now check the distance from our ship (at the
                         ; origin) towards the point where we will spawn the
                         ; space station if we are close enough
-                        \
+                        ;
                         ; This point is calculated by starting at the planet's
                         ; centre and adding 2 * nosev, which takes us to a point
                         ; above the planet's surface, at an altitude that
                         ; matches the planet's radius
-                        \
+                        ;
                         ; This point pitches and rolls around the planet as the
                         ; nosev vector rotates with the planet, and if our ship
                         ; is within a distance of (192 0) from this point in all
                         ; three axes, then we spawn the space station at this
                         ; point, with the station's slot facing towards the
                         ; planet, along the nosev vector
-                        \
+                        ;
                         ; This works because in the following, we calculate the
                         ; station's coordinates one axis at a time, and store
                         ; the results in the INWK block, so by the time we have
@@ -4585,9 +4585,9 @@ ENDMACRO
  INX                    ; Set X = 0 (as we ended the above loop with X as $FF)
 
  LDY #9                 ; Call MAS1 with X = 0, Y = 9 to do the following:
- JSR MAS1               \
+ JSR MAS1               ;
                         ;   (x_sign x_hi x_lo) += (nosev_x_hi nosev_x_lo) * 2
-                        \
+                        ;
                         ;   A = |x_sign|
 
  BNE MA23S              ; If A > 0, jump to MA23S to skip the following, as we
@@ -4595,9 +4595,9 @@ ENDMACRO
                         ; bump into a space station
 
  LDX #3                 ; Call MAS1 with X = 3, Y = 11 to do the following:
- LDY #11                \
+ LDY #11                ;
  JSR MAS1               ;   (y_sign y_hi y_lo) += (nosev_y_hi nosev_y_lo) * 2
-                        \
+                        ;
                         ;   A = |y_sign|
 
  BNE MA23S              ; If A > 0, jump to MA23S to skip the following, as we
@@ -4605,9 +4605,9 @@ ENDMACRO
                         ; bump into a space station
 
  LDX #6                 ; Call MAS1 with X = 6, Y = 13 to do the following:
- LDY #13                \
+ LDY #13                ;
  JSR MAS1               ;   (z_sign z_hi z_lo) += (nosev_z_hi nosev_z_lo) * 2
-                        \
+                        ;
                         ;   A = |z_sign|
 
  BNE MA23S              ; If A > 0, jump to MA23S to skip the following, as we
@@ -4623,7 +4623,7 @@ ENDMACRO
                         ; enough to the planet to bump into a space station)
 
  LDA QQ11               ; If the current view is not a space view, skip the
- BNE P%+5               ; following instruction (so we only remove the sun from
+ BNE *+5               ; following instruction (so we only remove the sun from
                         ; the screen if we are potentially looking at it)
 
  JSR WPLS               ; Call WPLS to remove the sun from the screen, as we
@@ -4680,7 +4680,7 @@ ENDMACRO
 
  LDA #50                ; If our energy bank status in ENERGY is >= 50, skip
  CMP ENERGY             ; printing the following message (so the message is
- BCC P%+6               ; only shown if our energy is low)
+ BCC *+6               ; only shown if our energy is low)
 
  ASL A                  ; Print recursive token 100 ("ENERGY LOW{beep}") as an
  JSR MESS               ; in-flight message
@@ -4719,9 +4719,9 @@ ENDMACRO
  JSR LL5                ; work out how close. We know from the above that A
                         ; contains our altitude squared, so we store A in R
                         ; and call LL5 to calculate:
-                        \
+                        ;
                         ;   Q = SQRT(R Q) = SQRT(A Q)
-                        \
+                        ;
                         ; Interestingly, Q doesn't appear to be set to 0 for
                         ; this calculation, so presumably this doesn't make a
                         ; difference
@@ -4774,11 +4774,11 @@ ENDMACRO
 
  ADC #30                ; Add the minimum cabin temperature of 30, so we get
                         ; one of the following:
-                        \
+                        ;
                         ;   * If the C flag is clear, A contains the cabin
                         ;     temperature, ranging from 30 to 255, that's hotter
                         ;     the closer we are to the sun
-                        \
+                        ;
                         ;   * If the C flag is set, the addition has rolled over
                         ;     and the cabin temperature is over 255
 
@@ -4809,7 +4809,7 @@ ENDMACRO
  ADC QQ14               ; Set A = A + the current fuel level * 10 (from QQ14)
 
  CMP #70                ; If A > 70 then set A = 70 (as 70 is the maximum fuel
- BCC P%+4               ; level, or 7.0 light years)
+ BCC *+4               ; level, or 7.0 light years)
  LDA #70
 
  STA QQ14               ; Store the updated fuel level in QQ14
@@ -4851,13 +4851,13 @@ ENDMACRO
                         ; turned off and stays off until LASCT reaches zero and
                         ; the next pulse can start (if the fire button is still
                         ; being pressed)
-                        \
+                        ;
                         ; For pulse lasers, LASCT gets set to 10 in ma1 above,
                         ; and it decrements every vertical sync (50 times a
                         ; second), so this means it pulses five times a second,
                         ; with the laser being on for the first 3/10 of each
                         ; pulse and off for the rest of the pulse
-                        \
+                        ;
                         ; If this is a beam laser, LASCT is 0 so we always keep
                         ; going here. This means the laser doesn't pulse, but it
                         ; does get drawn and removed every cycle, in a slightly
@@ -5106,7 +5106,7 @@ ENDMACRO
  ADC R                  ; Add A (high byte of third result) to R, so R now
                         ; contains the sum of x_hi^2 + y_hi^2 + z_hi^2
 
- BCC P%+4               ; If there is no carry, skip the following instruction
+ BCC *+4               ; If there is no carry, skip the following instruction
                         ; to return straight from the subroutine
 
 .MA30
@@ -5156,7 +5156,7 @@ ENDMACRO
  BNE MV3                ; The result will be zero when "counter mod 15" matches
                         ; the slot number, so this makes sure we call TIDY 12
                         ; times every 16 main loop iterations, like this:
-                        \
+                        ;
                         ;   Iteration 0, tidy the ship in slot 0
                         ;   Iteration 1, tidy the ship in slot 1
                         ;   Iteration 2, tidy the ship in slot 2
@@ -5168,7 +5168,7 @@ ENDMACRO
                         ;   Iteration 15, do nothing
                         ;   Iteration 16, tidy the ship in slot 0
                         ;     ...
-                        \
+                        ;
                         ; and so on
 
  JSR TIDY               ; Call TIDY to tidy up the orientation vectors, to
@@ -5197,7 +5197,7 @@ ENDMACRO
 .MV3
 
  LDX TYPE               ; If the type of the ship we are moving is positive,
- BPL P%+5               ; i.e. it is not a planet (types 128 and 130) or sun
+ BPL *+5               ; i.e. it is not a planet (types 128 and 130) or sun
                         ; (type 129), then skip the following instruction
 
  JMP MV40               ; This item is the planet or sun, so jump to MV40 to
@@ -5224,7 +5224,7 @@ ENDMACRO
                         ; the slot number mod 8, so this makes sure we call
                         ; TACTICS 12 times every 8 main loop iterations, like
                         ; this:
-                        \
+                        ;
                         ;   Iteration 0, apply tactics to slots 0 and 8
                         ;   Iteration 1, apply tactics to slots 1 and 9
                         ;   Iteration 2, apply tactics to slots 2 and 10
@@ -5235,7 +5235,7 @@ ENDMACRO
                         ;   Iteration 7, apply tactics to slot 7
                         ;   Iteration 8, apply tactics to slots 0 and 8
                         ;     ...
-                        \
+                        ;
                         ; and so on
 
 .MV26
@@ -5278,15 +5278,15 @@ ENDMACRO
  STA R                  ;       = |nosev_x_hi| * speed / 64
 
  LDA INWK+10            ; If nosev_x_hi is positive, then:
- LDX #0                 \
+ LDX #0                 ;
  JSR MVT1-2             ;   (x_sign x_hi x_lo) = (x_sign x_hi x_lo) + R
-                        \
+                        ;
                         ; If nosev_x_hi is negative, then:
-                        \
+                        ;
                         ;   (x_sign x_hi x_lo) = (x_sign x_hi x_lo) - R
-                        \
+                        ;
                         ; So in effect, this does:
-                        \
+                        ;
                         ;   (x_sign x_hi x_lo) += nosev_x_hi * speed / 64
 
  LDA INWK+12            ; Set A = |nosev_y_hi|
@@ -5296,15 +5296,15 @@ ENDMACRO
  STA R                  ;       = |nosev_y_hi| * speed / 64
 
  LDA INWK+12            ; If nosev_y_hi is positive, then:
- LDX #3                 \
+ LDX #3                 ;
  JSR MVT1-2             ;   (y_sign y_hi y_lo) = (y_sign y_hi y_lo) + R
-                        \
+                        ;
                         ; If nosev_y_hi is negative, then:
-                        \
+                        ;
                         ;   (y_sign y_hi y_lo) = (y_sign y_hi y_lo) - R
-                        \
+                        ;
                         ; So in effect, this does:
-                        \
+                        ;
                         ;   (y_sign y_hi y_lo) += nosev_y_hi * speed / 64
 
  LDA INWK+14            ; Set A = |nosev_z_hi|
@@ -5314,15 +5314,15 @@ ENDMACRO
  STA R                  ;       = |nosev_z_hi| * speed / 64
 
  LDA INWK+14            ; If nosev_y_hi is positive, then:
- LDX #6                 \
+ LDX #6                 ;
  JSR MVT1-2             ;   (z_sign z_hi z_lo) = (z_sign z_hi z_lo) + R
-                        \
+                        ;
                         ; If nosev_z_hi is negative, then:
-                        \
+                        ;
                         ;   (z_sign z_hi z_lo) = (z_sign z_hi z_lo) - R
-                        \
+                        ;
                         ; So in effect, this does:
-                        \
+                        ;
                         ;   (z_sign z_hi z_lo) += nosev_z_hi * speed / 64
 
 ; ******************************************************************************
@@ -5345,7 +5345,7 @@ ENDMACRO
  CLC                    ; acceleration in byte #28
  ADC INWK+28
 
- BPL P%+4               ; If the result is positive, skip the following
+ BPL *+4               ; If the result is positive, skip the following
                         ; instruction
 
  LDA #0                 ; Set A to 0 to stop the speed from going negative
@@ -5355,7 +5355,7 @@ ENDMACRO
                         ; use as an index
 
  CMP (XX0),Y            ; If A < the ship's maximum speed, skip the following
- BCC P%+4               ; instruction
+ BCC *+4               ; instruction
 
  LDA (XX0),Y            ; Set A to the ship's maximum speed
 
@@ -5397,7 +5397,7 @@ ENDMACRO
 
  STA P+2                ; Store the high byte of the result in P+2, so we now
                         ; have:
-                        \
+                        ;
                         ; P(2 1 0) = (x_hi x_lo) * alpha
 
  LDA ALP2+1             ; Fetch the flipped sign of the current roll angle alpha
@@ -5407,7 +5407,7 @@ ENDMACRO
                         ; contain the sign bit of x_sign * flipped alpha sign,
                         ; which is the opposite to the sign of the above result,
                         ; so we now have:
-                        \
+                        ;
                         ; (A P+2 P+1) = - (x_sign x_hi x_lo) * alpha / 256
 
  LDX #3                 ; Set (A P+2 P+1) = (y_sign y_hi y_lo) + (A P+2 P+1)
@@ -5425,7 +5425,7 @@ ENDMACRO
  STA K2+2
 
                         ; So we now have result 1 above:
-                        \
+                        ;
                         ; K2(3 2 1) = (A P+2 P+1)
                         ;           = y - x * alpha / 256
 
@@ -5437,7 +5437,7 @@ ENDMACRO
 
  STA P+2                ; Store the high byte of the result in P+2, so we now
                         ; have:
-                        \
+                        ;
                         ; P(2 1 0) = K2(2 1) * beta
 
  LDA K2+3               ; Fetch the sign of the above result in K(3 2 1) from
@@ -5447,7 +5447,7 @@ ENDMACRO
                         ; will contain the sign bit of K(3 2 1) * beta, which is
                         ; the same as the sign of the above result, so we now
                         ; have:
-                        \
+                        ;
                         ; (A P+2 P+1) = K2(3 2 1) * beta / 256
 
  LDX #6                 ; Set (A P+2 P+1) = (z_sign z_hi z_lo) + (A P+2 P+1)
@@ -5465,19 +5465,19 @@ ENDMACRO
  STA INWK+7
 
                         ; So we now have result 2 above:
-                        \
+                        ;
                         ; (z_sign z_hi z_lo) = (A P+2 P+1)
                         ;                    = z + K2 * beta / 256
 
  JSR MLTU2              ; MLTU2 doesn't change Q, and Q was set to beta in
                         ; the previous call to MLTU2, so this call does:
-                        \
+                        ;
                         ; (A P+1 P) = (A ~P) * Q
                         ;           = (z_hi z_lo) * beta
 
  STA P+2                ; Set P+2 = A = the high byte of the result, so we
                         ; now have:
-                        \
+                        ;
                         ; P(2 1 0) = (z_hi z_lo) * beta
 
  LDA K2+3               ; Set y_sign = K2+3
@@ -5513,11 +5513,11 @@ ENDMACRO
 
  LDA #1                 ; Negate (y_sign y_hi y_lo) using two's complement,
  SBC INWK+3             ; first doing the low bytes:
- STA INWK+3             \
+ STA INWK+3             ;
                         ; y_lo = 1 - y_lo
 
  LDA #0                 ; Then the high bytes:
- SBC INWK+4             \
+ SBC INWK+4             ;
  STA INWK+4             ; y_hi = 0 - y_hi
 
  LDA INWK+5             ; And finally flip the sign in y_sign
@@ -5527,7 +5527,7 @@ ENDMACRO
 .MV44
 
                         ; So we now have result 3 above:
-                        \
+                        ;
                         ; (y_sign y_hi y_lo) = K2(2 1) - P(2 1)
                         ;                    = K2 - beta * z
 
@@ -5545,7 +5545,7 @@ ENDMACRO
 
  STA P+2                ; Store the high byte of the result in P+2, so we now
                         ; have:
-                        \
+                        ;
                         ; P(2 1 0) = (y_hi y_lo) * alpha
 
  LDA ALP2               ; Fetch the correct sign of the current roll angle alpha
@@ -5555,7 +5555,7 @@ ENDMACRO
                         ; contain the sign bit of x_sign * correct alpha sign,
                         ; which is the same as the sign of the above result,
                         ; so we now have:
-                        \
+                        ;
                         ; (A P+2 P+1) = (y_sign y_hi y_lo) * alpha / 256
 
  LDX #0                 ; Set (A P+2 P+1) = (x_sign x_hi x_lo) + (A P+2 P+1)
@@ -5570,9 +5570,9 @@ ENDMACRO
  STA INWK
 
                         ; So we now have result 4 above:
-                        \
+                        ;
                         ; x = x + alpha * y
-                        \
+                        ;
                         ; and the rotation of (x, y, z) is done
 
 ; ******************************************************************************
@@ -5613,14 +5613,14 @@ ENDMACRO
                         ; a 16-bit number containing -R, or -speed
 
  LDX #6                 ; Set X to the z-axis so the call to MVT1 does this:
- JSR MVT1               \
+ JSR MVT1               ;
                         ; (z_sign z_hi z_lo) = (z_sign z_hi z_lo) + (A R)
                         ;                    = (z_sign z_hi z_lo) - speed
 
  LDA TYPE               ; If the ship type is not the sun (129) then skip the
  AND #%10000001         ; next instruction, otherwise return from the subroutine
  CMP #129               ; as we don't need to rotate the sun around its origin.
- BNE P%+3               ; Having both the AND and the CMP is a little odd, as
+ BNE *+3               ; Having both the AND and the CMP is a little odd, as
                         ; the sun is the only ship type with bits 0 and 7 set,
                         ; so the AND has no effect and could be removed
 
@@ -5841,7 +5841,7 @@ ENDMACRO
                         ; delta_hi << 1 in A
 
  STA S                  ; Set S = delta_hi << 1
-                        \
+                        ;
                         ; This also clears bit 0 of S
 
  LDA #0                 ; Set T = just the sign bit of delta (in bit 7)
@@ -5850,7 +5850,7 @@ ENDMACRO
 
  LSR S                  ; Set S = delta_hi >> 1
                         ;       = |delta_hi|
-                        \
+                        ;
                         ; This also clear the C flag, as we know that bit 0 of
                         ; S was clear before the LSR
 
@@ -5860,18 +5860,18 @@ ENDMACRO
                         ; At this point, we know x_sign and delta have the same
                         ; sign, that sign is in T, and S contains |delta_hi|,
                         ; so now we want to do:
-                        \
+                        ;
                         ;   (x_sign x_hi x_lo) = (x_sign x_hi x_lo) + (S R)
-                        \
+                        ;
                         ; and then set the sign of the result to the same sign
                         ; as x_sign and delta
 
  LDA R                  ; First we add the low bytes, so:
- ADC INWK,X             \
+ ADC INWK,X             ;
  STA INWK,X             ;   x_lo = x_lo + R
 
  LDA S                  ; Then we add the high bytes:
- ADC INWK+1,X           \
+ ADC INWK+1,X           ;
  STA INWK+1,X           ;   x_hi = x_hi + S
 
  LDA INWK+2,X           ; And finally we add any carry into x_sign, and if the
@@ -5886,19 +5886,19 @@ ENDMACRO
                         ; If we get here, we know x_sign and delta have
                         ; different signs, with delta's sign in T, and
                         ; |delta_hi| in S, so now we want to do:
-                        \
+                        ;
                         ;   (x_sign x_hi x_lo) = (x_sign x_hi x_lo) - (S R)
-                        \
+                        ;
                         ; and then set the sign of the result according to
                         ; the signs of x_sign and delta
 
  LDA INWK,X             ; First we subtract the low bytes, so:
- SEC                    \
+ SEC                    ;
  SBC R                  ;   x_lo = x_lo - R
  STA INWK,X
 
  LDA INWK+1,X           ; Then we subtract the high bytes:
- SBC S                  \
+ SBC S                  ;
  STA INWK+1,X           ;   x_hi = x_hi - S
 
  LDA INWK+2,X           ; And finally we subtract any borrow from bits 0-6 of
@@ -5917,23 +5917,23 @@ ENDMACRO
                         ; Otherwise our subtraction underflowed because
                         ; (x_sign x_hi x_lo) < (S R), so we now need to flip the
                         ; subtraction around by using two's complement to this:
-                        \
+                        ;
                         ;   (S R) - (x_sign x_hi x_lo)
-                        \
+                        ;
                         ; and then we need to give the result the same sign as
                         ; (S R), the delta, as that's the dominant figure in the
                         ; sum
 
  LDA #1                 ; First we subtract the low bytes, so:
- SBC INWK,X             \
+ SBC INWK,X             ;
  STA INWK,X             ;   x_lo = 1 - x_lo
 
  LDA #0                 ; Then we subtract the high bytes:
- SBC INWK+1,X           \
+ SBC INWK+1,X           ;
  STA INWK+1,X           ;   x_hi = 0 - x_hi
 
  LDA #0                 ; And then we subtract the sign bytes:
- SBC INWK+2,X           \
+ SBC INWK+2,X           ;
                         ;   x_sign = 0 - x_sign
 
  AND #%01111111         ; Finally, we set the sign bit to the sign in T, the
@@ -6116,9 +6116,9 @@ ENDMACRO
 
  JSR MAD                ; Set (A X) = Q * A + (S R)
  STA INWK+3,Y           ;           = alpha * -nosev_x_hi + nosev_y
- STX INWK+2,Y           \
+ STX INWK+2,Y           ;
                         ; and store (A X) in nosev_y, so this does:
-                        \
+                        ;
                         ; nosev_y = nosev_y - alpha * nosev_x_hi
 
  STX P                  ; This instruction has no effect as MAD overwrites P,
@@ -6133,9 +6133,9 @@ ENDMACRO
 
  JSR MAD                ; Set (A X) = Q * A + (S R)
  STA INWK+1,Y           ;           = alpha * nosev_y_hi + nosev_x
- STX INWK,Y             \
+ STX INWK,Y             ;
                         ; and store (A X) in nosev_x, so this does:
-                        \
+                        ;
                         ; nosev_x = nosev_x + alpha * nosev_y_hi
 
  STX P                  ; This instruction has no effect as MAD overwrites P,
@@ -6158,9 +6158,9 @@ ENDMACRO
 
  JSR MAD                ; Set (A X) = Q * A + (S R)
  STA INWK+3,Y           ;           = beta * -nosev_z_hi + nosev_y
- STX INWK+2,Y           \
+ STX INWK+2,Y           ;
                         ; and store (A X) in nosev_y, so this does:
-                        \
+                        ;
                         ; nosev_y = nosev_y - beta * nosev_z_hi
 
  STX P                  ; This instruction has no effect as MAD overwrites P,
@@ -6175,9 +6175,9 @@ ENDMACRO
 
  JSR MAD                ; Set (A X) = Q * A + (S R)
  STA INWK+5,Y           ;           = beta * nosev_y_hi + nosev_z
- STX INWK+4,Y           \
+ STX INWK+4,Y           ;
                         ; and store (A X) in nosev_z, so this does:
-                        \
+                        ;
                         ; nosev_z = nosev_z + beta * nosev_y_hi
 
  RTS                    ; Return from the subroutine
@@ -6255,25 +6255,25 @@ ENDMACRO
 
  LDA INWK+1,X           ; Fetch roofv_x_hi, clear the sign bit, divide by 2 and
  AND #%01111111         ; store in T, so:
- LSR A                  \
+ LSR A                  ;
  STA T                  ; T = |roofv_x_hi| / 2
                         ;   = |roofv_x| / 512
-                        \
+                        ;
                         ; The above is true because:
-                        \
+                        ;
                         ; |roofv_x| = |roofv_x_hi| * 256 + roofv_x_lo
-                        \
+                        ;
                         ; so:
-                        \
+                        ;
                         ; |roofv_x| / 512 = |roofv_x_hi| * 256 / 512
                         ;                    + roofv_x_lo / 512
                         ;                  = |roofv_x_hi| / 2
 
  LDA INWK,X             ; Now we do the following subtraction:
- SEC                    \
+ SEC                    ;
  SBC T                  ; (S R) = (roofv_x_hi roofv_x_lo) - |roofv_x| / 512
  STA R                  ;       = (1 - 1/512) * roofv_x
-                        \
+                        ;
                         ; by doing the low bytes first
 
  LDA INWK+1,X           ; And then the high bytes (the high byte of the right
@@ -6301,7 +6301,7 @@ ENDMACRO
 
  ORA T                  ; Set the sign of A to the sign in T (i.e. the sign of
                         ; the original nosev_x), so now:
-                        \
+                        ;
                         ; (A P) = nosev_x / 16
 
  EOR RAT2               ; Give it the sign as if we multiplied by the direction
@@ -6320,15 +6320,15 @@ ENDMACRO
 
  LDA INWK+1,Y           ; Fetch nosev_x_hi, clear the sign bit, divide by 2 and
  AND #%01111111         ; store in T, so:
- LSR A                  \
+ LSR A                  ;
  STA T                  ; T = |nosev_x_hi| / 2
                         ;   = |nosev_x| / 512
 
  LDA INWK,Y             ; Now we do the following subtraction:
- SEC                    \
+ SEC                    ;
  SBC T                  ; (S R) = (nosev_x_hi nosev_x_lo) - |nosev_x| / 512
  STA R                  ;       = (1 - 1/512) * nosev_x
-                        \
+                        ;
                         ; by doing the low bytes first
 
  LDA INWK+1,Y           ; And then the high bytes (the high byte of the right
@@ -6356,7 +6356,7 @@ ENDMACRO
 
  ORA T                  ; Set the sign of A to the opposite sign to T (i.e. the
  EOR #%10000000         ; sign of the original -roofv_x), so now:
-                        \
+                        ;
                         ; (A P) = -roofv_x / 16
 
  EOR RAT2               ; Give it the sign as if we multiplied by the direction
@@ -6434,12 +6434,12 @@ ENDMACRO
                         ; arguments and keep the sign to get the result
 
  LDA P+1                ; First we add the low bytes:
- CLC                    \
+ CLC                    ;
  ADC INWK,X             ;   P+1 = P+1 + x_lo
  STA P+1
 
  LDA P+2                ; And then the high bytes:
- ADC INWK+1,X           \
+ ADC INWK+1,X           ;
  STA P+2                ;   P+2 = P+2 + x_hi
 
  TYA                    ; Restore the original A argument that we stored earlier
@@ -6450,12 +6450,12 @@ ENDMACRO
 .MV50
 
  LDA INWK,X             ; First we subtract the low bytes:
- SEC                    \
+ SEC                    ;
  SBC P+1                ;   P+1 = x_lo - P+1
  STA P+1
 
  LDA INWK+1,X           ; And then the high bytes:
- SBC P+2                \
+ SBC P+2                ;
  STA P+2                ;   P+2 = x_hi - P+2
 
  BCC MV51               ; If the last subtraction underflowed, then the C flag
@@ -6476,11 +6476,11 @@ ENDMACRO
 
  LDA #1                 ; Our subtraction underflowed, so we negate the result
  SBC P+1                ; using two's complement, first with the low byte:
- STA P+1                \
+ STA P+1                ;
                         ;   P+1 = 1 - P+1
 
  LDA #0                 ; And then the high byte:
- SBC P+2                \
+ SBC P+2                ;
  STA P+2                ;   P+2 = 0 - P+2
 
  TYA                    ; Restore the original A argument that we stored earlier
@@ -6527,9 +6527,9 @@ ENDMACRO
  LDA INWK+2             ; Set A = x_sign
 
  JSR MULT3              ; Set K(3 2 1 0) = (A P+1 P) * Q
-                        \
+                        ;
                         ; which also means:
-                        \
+                        ;
                         ;   K(3 2 1) = (A P+1 P) * Q / 256
                         ;            = x * -alpha / 256
                         ;            = - alpha * x / 256
@@ -6550,25 +6550,25 @@ ENDMACRO
  STA Q
 
  LDA K+3                ; Set K+3 to K2+3, so now we have result 1 above:
- STA K2+3               \
+ STA K2+3               ;
                         ;   K2(3 2 1) = K(3 2 1)
                         ;             = y - alpha * x / 256
 
                         ; We also have:
-                        \
+                        ;
                         ;   A = K+3
-                        \
+                        ;
                         ;   P(1 0) = K(2 1)
-                        \
+                        ;
                         ; so combined, these mean:
-                        \
+                        ;
                         ;   (A P+1 P) = K(3 2 1)
                         ;             = K2(3 2 1)
 
  JSR MULT3              ; Set K(3 2 1 0) = (A P+1 P) * Q
-                        \
+                        ;
                         ; which also means:
-                        \
+                        ;
                         ;   K(3 2 1) = (A P+1 P) * Q / 256
                         ;            = K2(3 2 1) * beta / 256
                         ;            = beta * K2 / 256
@@ -6587,12 +6587,12 @@ ENDMACRO
  STA INWK+7             ; Set z_hi = K+2
 
  LDA K+3                ; Set A = z_sign = K+3, so now we have:
- STA INWK+8             \
+ STA INWK+8             ;
                         ;   (z_sign z_hi z_lo) = K(3 2 1)
                         ;                      = z + beta * K2 / 256
 
                         ; So we now have result 2 above:
-                        \
+                        ;
                         ;   z = z + beta * K2
 
  EOR #%10000000         ; Flip the sign bit of A to give A = -z_sign
@@ -6614,11 +6614,11 @@ ENDMACRO
                         ; then set the sign afterwards
 
  LDA K                  ; We now do the following sum:
-;CLC                    \
+;CLC                    ;
  ADC K2                 ;   (A y_hi y_lo -) = K(3 2 1 0) + K2(3 2 1 0)
-                        \
+                        ;
                         ; starting with the low bytes (which we don't keep)
-                        \
+                        ;
                         ; The CLC instruction is commented out in the original
                         ; source. It isn't needed because MULT3 clears the C
                         ; flag, so this is an example of the authors finding
@@ -6634,7 +6634,7 @@ ENDMACRO
 
  LDA K+3                ; And then the sign bytes into A, so overall we have the
  ADC K2+3               ; following, if we drop the low bytes from the result:
-                        \
+                        ;
                         ;   (A y_hi y_lo) = (K + K2) / 256
 
  JMP MV2                ; Jump to MV2 to skip the calculation for when K and K2
@@ -6645,9 +6645,9 @@ ENDMACRO
  LDA K                  ; If we get here then K2 and K have different signs, so
  SEC                    ; instead of adding, we need to subtract to get the
  SBC K2                 ; result we want, like this:
-                        \
+                        ;
                         ;   (A y_hi y_lo -) = K(3 2 1 0) - K2(3 2 1 0)
-                        \
+                        ;
                         ; starting with the low bytes (which we don't keep)
 
  LDA K+1                ; We then do the middle bytes, which go into y_lo
@@ -6670,9 +6670,9 @@ ENDMACRO
 
                         ; By now we have the following, if we drop the low bytes
                         ; from the result:
-                        \
+                        ;
                         ;   (A y_hi y_lo) = (K - K2) / 256
-                        \
+                        ;
                         ; so now we just need to make sure the sign of the
                         ; result is correct
 
@@ -6684,15 +6684,15 @@ ENDMACRO
  SBC INWK+3             ; the dominant part of the subtraction, so we need to
  STA INWK+3             ; negate the result using two's complement, starting
                         ; with the low bytes:
-                        \
+                        ;
                         ;   y_lo = 1 - y_lo
 
  LDA #0                 ; And then the high bytes:
- SBC INWK+4             \
+ SBC INWK+4             ;
  STA INWK+4             ;   y_hi = 0 - y_hi
 
  LDA #0                 ; And finally the sign bytes:
- SBC P                  \
+ SBC P                  ;
                         ;   A = 0 - P
 
  ORA #%10000000         ; We now force the sign bit to be negative, so that the
@@ -6707,7 +6707,7 @@ ENDMACRO
  STA INWK+5             ; Store A in y_sign
 
                         ; So we now have result 3 above:
-                        \
+                        ;
                         ;   y = K2 + K
                         ;     = K2 - beta * z
 
@@ -6736,7 +6736,7 @@ ENDMACRO
  STA INWK+2
 
                         ; So we now have result 4 above:
-                        \
+                        ;
                         ;   x = x + y * alpha
 
  JMP MV45               ; We have now finished rotating the planet or sun by
@@ -6750,14 +6750,14 @@ ENDMACRO
 ; ******************************************************************************
 
  PRINT "ELITE A"
- PRINT "Assembled at ", ~CODE%
- PRINT "Ends at ", ~P%
- PRINT "Code size is ", ~(P% - CODE%)
- PRINT "Execute at ", ~LOAD%
- PRINT "Reload at ", ~LOAD_A%
+ PRINT "Assembled at ", CODE%
+ PRINT "Ends at ", *
+ PRINT "Code size is ", (* - CODE%)
+ PRINT "Execute at ", LOAD%
+ PRINT "Reload at ", LOAD_A%
 
- PRINT "S.ELTA ", ~CODE%, " ", ~P%, " ", ~LOAD%, " ", ~LOAD_A%
- SAVE "3-assembled-output/ELTA.bin", CODE%, P%, LOAD%
+ PRINT "S.ELTA ", ~CODE%, " ", ~*, " ", LOAD%, " ", LOAD_A%
+ SAVE "3-assembled-output/ELTA.bin", CODE%, *, LOAD%
 
 ; ******************************************************************************
 ;
@@ -6767,8 +6767,8 @@ ENDMACRO
 ;
 ; ******************************************************************************
 
- CODE_B% = P%
- LOAD_B% = LOAD% + P% - CODE%
+ CODE_B% = *
+ LOAD_B% = LOAD% + * - CODE%
 
 ; ******************************************************************************
 ;
@@ -6801,13 +6801,13 @@ ENDMACRO
 .NA%
 
  EQUS "JAMESON"         ; The current commander name, which defaults to JAMESON
- EQUB 13                \
+ EQUB 13                ;
                         ; The commander name can be up to 7 characters (the DFS
                         ; limit for filenames), and is terminated by a carriage
                         ; return
 
                         ; NA%+8 is the start of the commander data block
-                        \
+                        ;
                         ; This block contains the last saved commander data
                         ; block. As the game is played it uses an identical
                         ; block at location TP to store the current commander
@@ -6815,7 +6815,7 @@ ENDMACRO
                         ; saved. Conversely, when the game starts up, the block
                         ; here is copied to TP, which restores the last saved
                         ; commander when we die
-                        \
+                        ;
                         ; The initial state of this block defines the default
                         ; commander. Q% can be set to TRUE to give the default
                         ; commander lots of credits and equipment
@@ -7114,8 +7114,8 @@ ENDIF
 
 .LL30
 
-   .ds 0                 ; LL30 is a synonym for LOIN
-                        \
+  .ds 0                 ; LL30 is a synonym for LOIN
+                        ;
                         ; In the cassette and disc versions of Elite, LL30 and
                         ; LOIN are synonyms for the same routine, presumably
                         ; because the two developers each had their own line
@@ -7135,7 +7135,7 @@ ENDIF
 
  LDA X2                 ; Set A = X2 - X1
  SBC X1                 ;       = delta_x
-                        \
+                        ;
                         ; This subtraction works as the ASL A above sets the C
                         ; flag
 
@@ -7154,7 +7154,7 @@ ENDIF
 
  LDA Y2                 ; Set A = Y2 - Y1
  SBC Y1                 ;       = delta_y
-                        \
+                        ;
                         ; This subtraction works as we either set the C flag
                         ; above, or we skipped that SEC instruction with a BCS
 
@@ -7261,10 +7261,10 @@ ENDIF
  STA R                  ; and store it in R
 
                         ; The following calculates:
-                        \
+                        ;
                         ;   Q = Q / P
                         ;     = |delta_y| / |delta_x|
-                        \
+                        ;
                         ; using the same shift-and-subtract algorithm that's
                         ; documented in TIS2
 
@@ -7301,15 +7301,15 @@ ENDIF
                         ; do the next iteration of 7
 
                         ; We now have:
-                        \
+                        ;
                         ;   Q = A / P
                         ;     = |delta_y| / |delta_x|
-                        \
+                        ;
                         ; and the C flag is clear
 
  LDX P                  ; Set X = P + 1
  INX                    ;       = |delta_x| + 1
-                        \
+                        ;
                         ; We add 1 so we can skip the first pixel plot if the
                         ; line is being drawn with swapped coordinates
 
@@ -7343,17 +7343,17 @@ ENDIF
 
  LDA SWAP               ; If SWAP > 0 then we swapped the coordinates above, so
  BNE LI6                ; jump down to LI6 to skip plotting the first pixel
-                        \
+                        ;
                         ; This appears to be a bug that omits the last pixel
                         ; of this type of shallow line, rather than the first
                         ; pixel, which makes the treatment of this kind of line
                         ; different to the other kinds of slope (they all have a
                         ; BEQ instruction at this point, rather than a BNE)
-                        \
+                        ;
                         ; The result is a rather messy line join when a shallow
                         ; line that goes right and up or left and down joins a
                         ; line with any of the other three types of slope
-                        \
+                        ;
                         ; This bug was fixed in the advanced versions of Elite,
                         ; where the BNE is replaced by a BEQ to bring it in line
                         ; with the other three slopes
@@ -7595,10 +7595,10 @@ ENDIF
  TAY                    ; our line (as each character block has 8 rows)
 
                         ; The following calculates:
-                        \
+                        ;
                         ;   P = P / Q
                         ;     = |delta_x| / |delta_y|
-                        \
+                        ;
                         ; using the same shift-and-subtract algorithm
                         ; documented in TIS2
 
@@ -7635,15 +7635,15 @@ ENDIF
                         ; do the next iteration of 7
 
                         ; We now have:
-                        \
+                        ;
                         ;   P = A / Q
                         ;     = |delta_x| / |delta_y|
-                        \
+                        ;
                         ; and the C flag is set
 
  LDX Q                  ; Set X = Q + 1
  INX                    ;       = |delta_y| + 1
-                        \
+                        ;
                         ; We add 1 so we can skip the first pixel plot if the
                         ; line is being drawn with swapped coordinates
 
@@ -8181,11 +8181,11 @@ ENDIF
                         ; together. For example, if we want to draw a line from
                         ; point 2 to point 5 (within the row of 8 pixels
                         ; numbered from 0 to 7), we would have this:
-                        \
+                        ;
                         ;   T       = %00111111
                         ;   A       = %11111100
                         ;   T AND A = %00111100
-                        \
+                        ;
                         ; So we can stick T AND A in screen memory to get the
                         ; line we want, which is what we do here by setting
                         ; A = A AND T
@@ -8377,7 +8377,7 @@ ENDIF
 .PX1
 
  EOR #%10000000         ; Set X = X1 + 128
- TAX                    \
+ TAX                    ;
                         ; So X is now the offset converted to an x-coordinate,
                         ; centred on x-coordinate 128
 
@@ -8400,7 +8400,7 @@ ENDIF
 .PX2
 
  STA T                  ; Set A = 97 - Y1
- LDA #97                \
+ LDA #97                ;
  SBC T                  ; So if Y is positive we display the point up from the
                         ; centre at y-coordinate 97, while a negative Y means
                         ; down from the centre
@@ -8576,7 +8576,7 @@ ENDIF
 
  TXA                    ; Set K6(3 2) = (T X) + K4(1 0)
  ADC K4                 ;             = y-coord of centre + y-coord of new point
- STA K6+2               \
+ STA K6+2               ;
  LDA K4+1               ; so K6(3 2) now contains the y-coordinate of the new
  ADC T                  ; point on the circle but as a screen coordinate, to go
  STA K6+3               ; along with the screen y-coordinate in K6(1 0)
@@ -8709,11 +8709,11 @@ ENDIF
 
  LDA K6                 ; Copy the data for this step point from K6(3 2 1 0)
  STA K5                 ; into K5(3 2 1 0), for use in the next call to BLINE:
- LDA K6+1               \
+ LDA K6+1               ;
  STA K5+1               ;   * K5(1 0) = screen x-coordinate of this point
- LDA K6+2               \
+ LDA K6+2               ;
  STA K5+2               ;   * K5(3 2) = screen y-coordinate of this point
- LDA K6+3               \
+ LDA K6+3               ;
  STA K5+3               ; They now become the "previous point" in the next call
 
  LDA CNT                ; Set CNT = CNT + STP
@@ -8804,7 +8804,7 @@ ENDIF
                         ; the screen? Who knows...
 
  LDX VIEW               ; Load the current view into X:
-                        \
+                        ;
                         ;   0 = front
                         ;   1 = rear
                         ;   2 = left
@@ -8866,117 +8866,117 @@ ENDIF
                         ; In the following, we're going to refer to the 16-bit
                         ; space coordinates of the current particle of stardust
                         ; (i.e. the Y-th particle) like this:
-                        \
+                        ;
                         ;   x = (x_hi x_lo)
                         ;   y = (y_hi y_lo)
                         ;   z = (z_hi z_lo)
-                        \
+                        ;
                         ; These values are stored in (SX+Y SXL+Y), (SY+Y SYL+Y)
                         ; and (SZ+Y SZL+Y) respectively
 
 .STL1
 
  JSR DV42               ; Call DV42 to set the following:
-                        \
+                        ;
                         ;   (P R) = 256 * DELTA / z_hi
                         ;         = 256 * speed / z_hi
-                        \
+                        ;
                         ; The maximum value returned is P = 2 and R = 128 (see
                         ; DV42 for an explanation)
 
  LDA R                  ; Set A = R, so now:
-                        \
+                        ;
                         ;   (P A) = 256 * speed / z_hi
 
  LSR P                  ; Rotate (P A) right by 2 places, which sets P = 0 (as P
  ROR A                  ; has a maximum value of 2) and leaves:
- LSR P                  \
+ LSR P                  ;
  ROR A                  ;   A = 64 * speed / z_hi
 
  ORA #1                 ; Make sure A is at least 1, and store it in Q, so we
  STA Q                  ; now have result 1 above:
-                        \
+                        ;
                         ;   Q = 64 * speed / z_hi
 
  LDA SZL,Y              ; We now calculate the following:
- SBC DELT4              \
+ SBC DELT4              ;
  STA SZL,Y              ;  (z_hi z_lo) = (z_hi z_lo) - DELT4(1 0)
-                        \
+                        ;
                         ; starting with the low bytes
 
  LDA SZ,Y               ; And then we do the high bytes
- STA ZZ                 \
+ STA ZZ                 ;
  SBC DELT4+1            ; We also set ZZ to the original value of z_hi, which we
  STA SZ,Y               ; use below to remove the existing particle
-                        \
+                        ;
                         ; So now we have result 2 above:
-                        \
+                        ;
                         ;   z = z - DELT4(1 0)
                         ;     = z - speed * 64
 
  JSR MLU1               ; Call MLU1 to set:
-                        \
+                        ;
                         ;   Y1 = y_hi
-                        \
+                        ;
                         ;   (A P) = |y_hi| * Q
-                        \
+                        ;
                         ; So Y1 contains the original value of y_hi, which we
                         ; use below to remove the existing particle
 
                         ; We now calculate:
-                        \
+                        ;
                         ;   (S R) = YY(1 0) = (A P) + y
 
  STA YY+1               ; First we do the low bytes with:
- LDA P                  \
+ LDA P                  ;
  ADC SYL,Y              ;   YY+1 = A
  STA YY                 ;   R = YY = P + y_lo
- STA R                  \
+ STA R                  ;
                         ; so we get this:
-                        \
+                        ;
                         ;   (? R) = YY(1 0) = (A P) + y_lo
 
  LDA Y1                 ; And then we do the high bytes with:
- ADC YY+1               \
+ ADC YY+1               ;
  STA YY+1               ;   S = YY+1 = y_hi + YY+1
- STA S                  \
+ STA S                  ;
                         ; so we get our result:
-                        \
+                        ;
                         ;   (S R) = YY(1 0) = (A P) + (y_hi y_lo)
                         ;                   = |y_hi| * Q + y
-                        \
+                        ;
                         ; which is result 3 above, and (S R) is set to the new
                         ; value of y
 
  LDA SX,Y               ; Set X1 = A = x_hi
- STA X1                 \
+ STA X1                 ;
                         ; So X1 contains the original value of x_hi, which we
                         ; use below to remove the existing particle
 
  JSR MLU2               ; Set (A P) = |x_hi| * Q
 
                         ; We now calculate:
-                        \
+                        ;
                         ;   XX(1 0) = (A P) + x
 
  STA XX+1               ; First we do the low bytes:
- LDA P                  \
+ LDA P                  ;
  ADC SXL,Y              ;   XX(1 0) = (A P) + x_lo
  STA XX
 
  LDA X1                 ; And then we do the high bytes:
- ADC XX+1               \
+ ADC XX+1               ;
  STA XX+1               ;   XX(1 0) = XX(1 0) + (x_hi 0)
-                        \
+                        ;
                         ; so we get our result:
-                        \
+                        ;
                         ;   XX(1 0) = (A P) + x
                         ;           = |x_hi| * Q + x
-                        \
+                        ;
                         ; which is result 4 above, and we also have:
-                        \
+                        ;
                         ;   A = XX+1 = (|x_hi| * Q + x) / 256
-                        \
+                        ;
                         ; i.e. A is the new value of x, divided by 256
 
  EOR ALP2+1             ; EOR with the flipped sign of the roll angle alpha, so
@@ -8984,44 +8984,44 @@ ENDIF
                         ; alpha, i.e. it gets the same sign as alpha
 
  JSR MLS1               ; Call MLS1 to calculate:
-                        \
+                        ;
                         ;   (A P) = A * ALP1
                         ;         = (x / 256) * alpha
 
  JSR ADD                ; Call ADD to calculate:
-                        \
+                        ;
                         ;   (A X) = (A P) + (S R)
                         ;         = (x / 256) * alpha + y
                         ;         = y + alpha * x / 256
 
  STA YY+1               ; Set YY(1 0) = (A X) to give:
- STX YY                 \
+ STX YY                 ;
                         ;   YY(1 0) = y + alpha * x / 256
-                        \
+                        ;
                         ; which is result 5 above, and we also have:
-                        \
+                        ;
                         ;   A = YY+1 = y + alpha * x / 256
-                        \
+                        ;
                         ; i.e. A is the new value of y, divided by 256
 
  EOR ALP2               ; EOR A with the correct sign of the roll angle alpha,
                         ; so A has the opposite sign to the roll angle alpha
 
  JSR MLS2               ; Call MLS2 to calculate:
-                        \
+                        ;
                         ;   (S R) = XX(1 0)
                         ;         = x
-                        \
+                        ;
                         ;   (A P) = A * ALP1
                         ;         = -y / 256 * alpha
 
  JSR ADD                ; Call ADD to calculate:
-                        \
+                        ;
                         ;   (A X) = (A P) + (S R)
                         ;         = -y / 256 * alpha + x
 
  STA XX+1               ; Set XX(1 0) = (A X), which gives us result 6 above:
- STX XX                 \
+ STX XX                 ;
                         ;   x = x - alpha * y / 256
 
  LDX BET1               ; Fetch the pitch magnitude into X
@@ -9030,38 +9030,38 @@ ENDIF
  EOR BET2+1
 
  JSR MULTS-2            ; Call MULTS-2 to calculate:
-                        \
+                        ;
                         ;   (A P) = X * A
                         ;         = -beta * y_hi
 
  STA Q                  ; Store the high byte of the result in Q, so:
-                        \
+                        ;
                         ;   Q = -beta * y_hi / 256
 
  JSR MUT2               ; Call MUT2 to calculate:
-                        \
+                        ;
                         ;   (S R) = XX(1 0) = x
-                        \
+                        ;
                         ;   (A P) = Q * A
                         ;         = (-beta * y_hi / 256) * (-beta * y_hi / 256)
                         ;         = (beta * y / 256) ^ 2
 
  ASL P                  ; Double (A P), store the top byte in A and set the C
  ROL A                  ; flag to bit 7 of the original A, so this does:
- STA T                  \
+ STA T                  ;
                         ;   (T P) = (A P) << 1
                         ;         = 2 * (beta * y / 256) ^ 2
 
  LDA #0                 ; Set bit 7 in A to the sign bit from the A in the
  ROR A                  ; calculation above and apply it to T, so we now have:
- ORA T                  \
+ ORA T                  ;
                         ;   (A P) = (A P) * 2
                         ;         = 2 * (beta * y / 256) ^ 2
-                        \
+                        ;
                         ; with the doubling retaining the sign of (A P)
 
  JSR ADD                ; Call ADD to calculate:
-                        \
+                        ;
                         ;   (A X) = (A P) + (S R)
                         ;         = 2 * (beta * y / 256) ^ 2 + x
 
@@ -9071,9 +9071,9 @@ ENDIF
  STA SXL,Y
 
                         ; So (XX+1 x_lo) now contains:
-                        \
+                        ;
                         ;   x = x + 2 * (beta * y / 256) ^ 2
-                        \
+                        ;
                         ; which is result 7 above
 
  LDA YY                 ; Set (S R) = YY(1 0) = y
@@ -9088,17 +9088,17 @@ ENDIF
  STA P
 
  LDA BETA               ; Set A = -beta, so:
- EOR #%10000000         \
+ EOR #%10000000         ;
                         ;   (A P) = (-beta 0)
                         ;         = -beta * 256
 
  JSR PIX1               ; Call PIX1 to calculate the following:
-                        \
+                        ;
                         ;   (YY+1 y_lo) = (A P) + (S R)
                         ;               = -beta * 256 + y
-                        \
+                        ;
                         ; i.e. y = y - beta * 256, which is result 8 above
-                        \
+                        ;
                         ; PIX1 also draws a particle at (X1, Y1) with distance
                         ; ZZ, which will remove the old stardust particle, as we
                         ; set X1, Y1 and ZZ to the original values for this
@@ -9141,7 +9141,7 @@ ENDIF
  DEY                    ; Decrement the loop counter to point to the next
                         ; stardust particle
 
- BEQ P%+5               ; If we have just done the last particle, skip the next
+ BEQ *+5               ; If we have just done the last particle, skip the next
                         ; instruction to return from the subroutine
 
  JMP STL1               ; We have more stardust to process, so jump back up to
@@ -9222,101 +9222,101 @@ ENDIF
 .STL6
 
  JSR DV42               ; Call DV42 to set the following:
-                        \
+                        ;
                         ;   (P R) = 256 * DELTA / z_hi
                         ;         = 256 * speed / z_hi
-                        \
+                        ;
                         ; The maximum value returned is P = 2 and R = 128 (see
                         ; DV42 for an explanation)
 
  LDA R                  ; Set A = R, so now:
-                        \
+                        ;
                         ;   (P A) = 256 * speed / z_hi
 
  LSR P                  ; Rotate (P A) right by 2 places, which sets P = 0 (as P
  ROR A                  ; has a maximum value of 2) and leaves:
- LSR P                  \
+ LSR P                  ;
  ROR A                  ;   A = 64 * speed / z_hi
 
  ORA #1                 ; Make sure A is at least 1, and store it in Q, so we
  STA Q                  ; now have result 1 above:
-                        \
+                        ;
                         ;   Q = 64 * speed / z_hi
 
  LDA SX,Y               ; Set X1 = A = x_hi
- STA X1                 \
+ STA X1                 ;
                         ; So X1 contains the original value of x_hi, which we
                         ; use below to remove the existing particle
 
  JSR MLU2               ; Set (A P) = |x_hi| * Q
 
                         ; We now calculate:
-                        \
+                        ;
                         ;   XX(1 0) = x - (A P)
 
  STA XX+1               ; First we do the low bytes:
- LDA SXL,Y              \
+ LDA SXL,Y              ;
  SBC P                  ;   XX(1 0) = x_lo - (A P)
  STA XX
 
  LDA X1                 ; And then we do the high bytes:
- SBC XX+1               \
+ SBC XX+1               ;
  STA XX+1               ;   XX(1 0) = (x_hi 0) - XX(1 0)
-                        \
+                        ;
                         ; so we get our result:
-                        \
+                        ;
                         ;   XX(1 0) = x - (A P)
                         ;           = x - |x_hi| * Q
-                        \
+                        ;
                         ; which is result 2 above, and we also have:
 
  JSR MLU1               ; Call MLU1 to set:
-                        \
+                        ;
                         ;   Y1 = y_hi
-                        \
+                        ;
                         ;   (A P) = |y_hi| * Q
-                        \
+                        ;
                         ; So Y1 contains the original value of y_hi, which we
                         ; use below to remove the existing particle
 
                         ; We now calculate:
-                        \
+                        ;
                         ;   (S R) = YY(1 0) = y - (A P)
 
  STA YY+1               ; First we do the low bytes with:
- LDA SYL,Y              \
+ LDA SYL,Y              ;
  SBC P                  ;   YY+1 = A
  STA YY                 ;   R = YY = y_lo - P
- STA R                  \
+ STA R                  ;
                         ; so we get this:
-                        \
+                        ;
                         ;   (? R) = YY(1 0) = y_lo - (A P)
 
  LDA Y1                 ; And then we do the high bytes with:
- SBC YY+1               \
+ SBC YY+1               ;
  STA YY+1               ;   S = YY+1 = y_hi - YY+1
- STA S                  \
+ STA S                  ;
                         ; so we get our result:
-                        \
+                        ;
                         ;   (S R) = YY(1 0) = (y_hi y_lo) - (A P)
                         ;                   = y - |y_hi| * Q
-                        \
+                        ;
                         ; which is result 3 above, and (S R) is set to the new
                         ; value of y
 
  LDA SZL,Y              ; We now calculate the following:
- ADC DELT4              \
+ ADC DELT4              ;
  STA SZL,Y              ;  (z_hi z_lo) = (z_hi z_lo) + DELT4(1 0)
-                        \
+                        ;
                         ; starting with the low bytes
 
  LDA SZ,Y               ; And then we do the high bytes
- STA ZZ                 \
+ STA ZZ                 ;
  ADC DELT4+1            ; We also set ZZ to the original value of z_hi, which we
  STA SZ,Y               ; use below to remove the existing particle
-                        \
+                        ;
                         ; So now we have result 4 above:
-                        \
+                        ;
                         ;   z = z + DELT4(1 0)
                         ;     = z + speed * 64
 
@@ -9324,24 +9324,24 @@ ENDIF
  EOR ALP2               ; so A has the opposite sign to the roll angle alpha
 
  JSR MLS1               ; Call MLS1 to calculate:
-                        \
+                        ;
                         ;   (A P) = A * ALP1
                         ;         = (-x / 256) * alpha
 
  JSR ADD                ; Call ADD to calculate:
-                        \
+                        ;
                         ;   (A X) = (A P) + (S R)
                         ;         = (-x / 256) * alpha + y
                         ;         = y - alpha * x / 256
 
  STA YY+1               ; Set YY(1 0) = (A X) to give:
- STX YY                 \
+ STX YY                 ;
                         ;   YY(1 0) = y - alpha * x / 256
-                        \
+                        ;
                         ; which is result 5 above, and we also have:
-                        \
+                        ;
                         ;   A = YY+1 = y - alpha * x / 256
-                        \
+                        ;
                         ; i.e. A is the new value of y, divided by 256
 
  EOR ALP2+1             ; EOR with the flipped sign of the roll angle alpha, so
@@ -9349,20 +9349,20 @@ ENDIF
                         ; alpha, i.e. it gets the same sign as alpha
 
  JSR MLS2               ; Call MLS2 to calculate:
-                        \
+                        ;
                         ;   (S R) = XX(1 0)
                         ;         = x
-                        \
+                        ;
                         ;   (A P) = A * ALP1
                         ;         = y / 256 * alpha
 
  JSR ADD                ; Call ADD to calculate:
-                        \
+                        ;
                         ;   (A X) = (A P) + (S R)
                         ;         = y / 256 * alpha + x
 
  STA XX+1               ; Set XX(1 0) = (A X), which gives us result 6 above:
- STX XX                 \
+ STX XX                 ;
                         ;   x = x + alpha * y / 256
 
  LDA YY+1               ; Set A to y_hi and set it to the flipped sign of beta
@@ -9371,12 +9371,12 @@ ENDIF
  LDX BET1               ; Fetch the pitch magnitude into X
 
  JSR MULTS-2            ; Call MULTS-2 to calculate:
-                        \
+                        ;
                         ;   (A P) = X * A
                         ;         = beta * y_hi
 
  STA Q                  ; Store the high byte of the result in Q, so:
-                        \
+                        ;
                         ;   Q = beta * y_hi / 256
 
  LDA XX+1               ; Set S = x_hi
@@ -9385,28 +9385,28 @@ ENDIF
  EOR #%10000000         ; Flip the sign of A, so A now contains -x
 
  JSR MUT1               ; Call MUT1 to calculate:
-                        \
+                        ;
                         ;   R = XX = x_lo
-                        \
+                        ;
                         ;   (A P) = Q * A
                         ;         = (beta * y_hi / 256) * (-beta * y_hi / 256)
                         ;         = (-beta * y / 256) ^ 2
 
  ASL P                  ; Double (A P), store the top byte in A and set the C
  ROL A                  ; flag to bit 7 of the original A, so this does:
- STA T                  \
+ STA T                  ;
                         ;   (T P) = (A P) << 1
                         ;         = 2 * (-beta * y / 256) ^ 2
 
  LDA #0                 ; Set bit 7 in A to the sign bit from the A in the
  ROR A                  ; calculation above and apply it to T, so we now have:
- ORA T                  \
+ ORA T                  ;
                         ;   (A P) = -2 * (beta * y / 256) ^ 2
-                        \
+                        ;
                         ; with the doubling retaining the sign of (A P)
 
  JSR ADD                ; Call ADD to calculate:
-                        \
+                        ;
                         ;   (A X) = (A P) + (S R)
                         ;         = -2 * (beta * y / 256) ^ 2 + x
 
@@ -9416,9 +9416,9 @@ ENDIF
  STA SXL,Y
 
                         ; So (XX+1 x_lo) now contains:
-                        \
+                        ;
                         ;   x = x - 2 * (beta * y / 256) ^ 2
-                        \
+                        ;
                         ; which is result 7 above
 
  LDA YY                 ; Set (S R) = YY(1 0) = y
@@ -9437,12 +9437,12 @@ ENDIF
  LDA BETA               ; Set A = beta, so (A P) = (beta 0) = beta * 256
 
  JSR PIX1               ; Call PIX1 to calculate the following:
-                        \
+                        ;
                         ;   (YY+1 y_lo) = (A P) + (S R)
                         ;               = beta * 256 + y
-                        \
+                        ;
                         ; i.e. y = y + beta * 256, which is result 8 above
-                        \
+                        ;
                         ; PIX1 also draws a particle at (X1, Y1) with distance
                         ; ZZ, which will remove the old stardust particle, as we
                         ; set X1, Y1 and ZZ to the original values for this
@@ -9584,15 +9584,15 @@ ENDIF
                         ; We call this from st5 below with the high byte of the
                         ; kill tally in A, which is non-zero, and want to return
                         ; with the following in X, depending on our rating:
-                        \
+                        ;
                         ;   Competent = 6
                         ;   Dangerous = 7
                         ;   Deadly    = 8
                         ;   Elite     = 9
-                        \
+                        ;
                         ; The high bytes of the top tier ratings are as follows,
                         ; so this a relatively simple calculation:
-                        \
+                        ;
                         ;   Competent       = 1 to 2
                         ;   Dangerous       = 2 to 9
                         ;   Deadly          = 10 to 24
@@ -9633,14 +9633,14 @@ ENDIF
 
  LDA #126               ; Print recursive token 126, which prints the top
  JSR NLIN3              ; four lines of the Status Mode screen:
-                        \
+                        ;
                         ;         COMMANDER {commander name}
-                        \
-                        \
+                        ;
+                        ;
                         ;   Present System      : {current system name}
                         ;   Hyperspace System   : {selected system name}
                         ;   Condition           :
-                        \
+                        ;
                         ; and draw a horizontal line at pixel row 19 to box
                         ; in the title
 
@@ -9683,11 +9683,11 @@ ENDIF
 
  LDA #125               ; Print recursive token 125, which prints the next
  JSR spc                ; three lines of the Status Mode screen:
-                        \
+                        ;
                         ;   Fuel: {fuel level} Light Years
                         ;   Cash: {cash} Cr
                         ;   Legal Status:
-                        \
+                        ;
                         ; followed by a space
 
  LDA #19                ; Set A to token 133 ("CLEAN")
@@ -9734,16 +9734,16 @@ ENDIF
                         ; incrementing X for each shift, so at the end of the
                         ; process, X contains the position of the leftmost 1 in
                         ; A. Looking at the rank values in TALLY:
-                        \
+                        ;
                         ;   Harmless        = %00000000 to %00000011
                         ;   Mostly Harmless = %00000100 to %00000111
                         ;   Poor            = %00001000 to %00001111
                         ;   Average         = %00010000 to %00011111
                         ;   Above Average   = %00100000 to %11111111
-                        \
+                        ;
                         ; we can see that the values returned by this process
                         ; are:
-                        \
+                        ;
                         ;   Harmless        = 1
                         ;   Mostly Harmless = 2
                         ;   Poor            = 3
@@ -9768,28 +9768,28 @@ ENDIF
 
  LDA #18                ; Print recursive token 132, which prints the next bit
  JSR plf2               ; of the Status Mode screen:
-                        \
+                        ;
                         ;   EQUIPMENT:
-                        \
+                        ;
                         ; followed by a newline and an indent of 6 characters
 
  LDA CRGO               ; If our ship's cargo capacity is < 26 (i.e. we do not
  CMP #26                ; have a cargo bay extension), skip the following two
- BCC P%+7               ; instructions
+ BCC *+7               ; instructions
 
  LDA #107               ; We do have a cargo bay extension, so print recursive
  JSR plf2               ; token 107 ("LARGE CARGO{sentence case} BAY"), followed
                         ; by a newline and an indent of 6 characters
 
  LDA BST                ; If we don't have fuel scoops fitted, skip the
- BEQ P%+7               ; following two instructions
+ BEQ *+7               ; following two instructions
 
  LDA #111               ; We do have fuel scoops fitted, so print recursive
  JSR plf2               ; token 111 ("FUEL SCOOPS"), followed by a newline and
                         ; an indent of 6 characters
 
  LDA ECM                ; If we don't have an E.C.M. fitted, skip the following
- BEQ P%+7               ; two instructions
+ BEQ *+7               ; two instructions
 
  LDA #108               ; We do have an E.C.M. fitted, so print recursive token
  JSR plf2               ; 108 ("E.C.M.SYSTEM"), followed by a newline and an
@@ -9798,12 +9798,12 @@ ENDIF
  LDA #113               ; We now cover the four pieces of equipment whose flags
  STA XX4                ; are stored in BOMB through BOMB+3, and whose names
                         ; correspond with text tokens 113 through 116:
-                        \
+                        ;
                         ;   BOMB+0 = BOMB  = token 113 = Energy bomb
                         ;   BOMB+1 = ENGY  = token 114 = Energy unit
                         ;   BOMB+2 = DKCMP = token 115 = Docking computer
                         ;   BOMB+3 = GHYP  = token 116 = Galactic hyperdrive
-                        \
+                        ;
                         ; We can print these out using a loop, so we set XX4 to
                         ; 113 as a counter (and we also set A as well, to pass
                         ; through to plf2)
@@ -9813,7 +9813,7 @@ ENDIF
  TAY                    ; Fetch byte BOMB+0 through BOMB+4 for values of XX4
  LDX BOMB-113,Y         ; from 113 through 117
 
- BEQ P%+5               ; If it is zero then we do not own that piece of
+ BEQ *+5               ; If it is zero then we do not own that piece of
                         ; equipment, so skip the next instruction
 
  JSR plf2               ; Print the recursive token in A from 113 ("ENERGY
@@ -9847,7 +9847,7 @@ ENDIF
 
  LDX CNT                ; If the laser power for view X has bit 7 clear, then it
  LDY LASER,X            ; is a pulse laser, so skip the following instruction
- BPL P%+4
+ BPL *+4
 
  LDA #104               ; Set A to token 104 ("BEAM LASER")
 
@@ -10129,11 +10129,11 @@ ENDIF
  ASL K+3                ; Now to calculate the (K * 2 * 2 * 2) part. We still
  ROL K+2                ; have (K * 2) in K(S 0 1 2 3), so we just need to shift
  ROL K+1                ; it twice. This is the first one, so we do this:
- ROL K                  \
+ ROL K                  ;
  ROL S                  ;   K(S 0 1 2 3) = K(S 0 1 2 3) * 2 = K * 4
 
  ASL K+3                ; And then we do it again, so that means:
- ROL K+2                \
+ ROL K+2                ;
  ROL K+1                ;   K(S 0 1 2 3) = K(S 0 1 2 3) * 2 = K * 8
  ROL K
  ROL S
@@ -10169,7 +10169,7 @@ ENDIF
 
  STA S                  ; And store the result in the overflow byte from
                         ; K(S 0 1 2 3), so now we have our desired result, i.e.
-                        \
+                        ;
                         ;   K(S 0 1 2 3) = K(S 0 1 2 3) * 10
 
  LDY #0                 ; In the main loop below, we use Y to count the number
@@ -10193,7 +10193,7 @@ ENDIF
 .tt37
 
                         ; We now loop through each byte in turn to do this:
-                        \
+                        ;
                         ;   XX15(4 0 1 2 3) = K(S 0 1 2 3) - 100,000,000,000
 
  LDA K,X                ; Subtract the X-th byte of TENS (i.e. 10 billion) from
@@ -10254,15 +10254,15 @@ ENDIF
                         ; then we probably don't, as we don't want to print
                         ; leading zeroes unless this is the only digit before
                         ; the decimal point
-                        \
+                        ;
                         ; To help with this, we are going to use T as a flag
                         ; that tells us whether we have already started
                         ; printing digits:
-                        \
+                        ;
                         ;   * If T <> 0 we haven't printed anything yet
-                        \
+                        ;
                         ;   * If T = 0 then we have started printing digits
-                        \
+                        ;
                         ; We initially set T above to the maximum number of
                         ; characters allowed, less 1 if we are printing a
                         ; decimal point, so the first time we enter the digit
@@ -10302,7 +10302,7 @@ ENDIF
 .TT34
 
  DEC T                  ; Decrement T but keep T >= 0 (by incrementing it
- BPL P%+4               ; again if the above decrement made T negative)
+ BPL *+4               ; again if the above decrement made T negative)
  INC T
 
  DEC XX17               ; Decrement the total number of characters left to
@@ -10313,7 +10313,7 @@ ENDIF
                         ; contains an ORA #$60 instruction, so RR3+1 is $60,
                         ; which is the opcode for an RTS)
 
- BNE P%+10              ; If the result is positive (> 0) then we still have
+ BNE *+10              ; If the result is positive (> 0) then we still have
                         ; characters left to print, so loop back to TT35 (via
                         ; the JMP TT35 instruction below) to print the next
                         ; digit
@@ -10322,7 +10322,7 @@ ENDIF
                         ; of digits that we wanted to, so restore the C flag
                         ; that we stored at the start of the routine
 
- BCC P%+7               ; If the C flag is clear, we don't want a decimal point,
+ BCC *+7               ; If the C flag is clear, we don't want a decimal point,
                         ; so loop back to TT35 (via the JMP TT35 instruction
                         ; below) to print the next digit
 
@@ -10463,7 +10463,7 @@ ENDIF
                         ; to display text on-screen is to poke the character
                         ; pixel by pixel, directly into screen memory, so
                         ; that's what the rest of this routine does
-                        \
+                        ;
                         ; The first step, then, is to get hold of the bitmap
                         ; definition for the character we want to draw on the
                         ; screen (i.e. we need the pixel shape of this
@@ -10471,21 +10471,21 @@ ENDIF
                         ; of the system's ASCII characters, starting from $C000
                         ; for space (ASCII 32) and ending with the £ symbol
                         ; (ASCII 126)
-                        \
+                        ;
                         ; There are definitions for 32 characters in each of the
                         ; three pages of MOS memory, as each definition takes up
                         ; 8 bytes (8 rows of 8 pixels) and 32 * 8 = 256 bytes =
                         ; 1 page. So:
-                        \
+                        ;
                         ;   ASCII 32-63  are defined in $C000-$C0FF (page 0)
                         ;   ASCII 64-95  are defined in $C100-$C1FF (page 1)
                         ;   ASCII 96-126 are defined in $C200-$C2F0 (page 2)
-                        \
+                        ;
                         ; The following code reads the relevant character
                         ; bitmap from the above locations in ROM and pokes
                         ; those values into the correct position in screen
                         ; memory, thus printing the character on-screen
-                        \
+                        ;
                         ; It's a long way from 10 PRINT "Hello world!":GOTO 10
 
 ;LDX #LO(K3)            ; These instructions are commented out in the original
@@ -10500,7 +10500,7 @@ ENDIF
                         ; (which ends with STA P+1 and SYX P+2) is 17 bytes.
                         ; Every efficiency saving helps, especially as this
                         ; routine is run each time the game prints a character
-                        \
+                        ;
                         ; If you want to switch this code back on, uncomment
                         ; the above block, and comment out the code below from
                         ; TAY to STX P+2. You will also need to uncomment the
@@ -10518,18 +10518,18 @@ ENDIF
 
                         ; The following logic is easier to follow if we look
                         ; at the three character number ranges in binary:
-                        \
+                        ;
                         ;   Bit #  76543210
-                        \
+                        ;
                         ;   32  = %00100000     Page 0 of bitmap definitions
                         ;   63  = %00111111
-                        \
+                        ;
                         ;   64  = %01000000     Page 1 of bitmap definitions
                         ;   95  = %01011111
-                        \
+                        ;
                         ;   96  = %01100000     Page 2 of bitmap definitions
                         ;   125 = %01111101
-                        \
+                        ;
                         ; We'll refer to this below
 
  LDX #$BF               ; Set X to point to the first font page in ROM minus 1,
@@ -10537,22 +10537,22 @@ ENDIF
 
  ASL A                  ; If bit 6 of the character is clear (A is 32-63)
  ASL A                  ; then skip the following instruction
- BCC P%+4
+ BCC *+4
 
  LDX #$C1               ; A is 64-126, so set X to point to page $C1
 
  ASL A                  ; If bit 5 of the character is clear (A is 64-95)
- BCC P%+3               ; then skip the following instruction
+ BCC *+3               ; then skip the following instruction
 
  INX                    ; Increment X
-                        \
+                        ;
                         ; By this point, we started with X = $BF, and then
                         ; we did the following:
-                        \
+                        ;
                         ;   If A = 32-63:   skip    then INX  so X = $C0
                         ;   If A = 64-95:   X = $C1 then skip so X = $C1
                         ;   If A = 96-126:  X = $C1 then INX  so X = $C2
-                        \
+                        ;
                         ; In other words, X points to the relevant page. But
                         ; what about the value of A? That gets shifted to the
                         ; left three times during the above code, which
@@ -10565,7 +10565,7 @@ ENDIF
                         ; the start of the character's definition within its
                         ; page (because there are 8 bytes per character
                         ; definition)
-                        \
+                        ;
                         ; Or, to put it another way, X contains the high byte
                         ; (the page) of the address of the definition that we
                         ; want, while A contains the low byte (the offset into
@@ -10588,11 +10588,11 @@ ENDIF
                         ; to one page. To put this more explicitly, the screen
                         ; starts at $6000, so the text rows are stored in screen
                         ; memory like this:
-                        \
+                        ;
                         ;   Row 1: $6000 - $60FF    YC = 1, XC = 0 to 31
                         ;   Row 2: $6100 - $61FF    YC = 2, XC = 0 to 31
                         ;   Row 3: $6200 - $62FF    YC = 3, XC = 0 to 31
-                        \
+                        ;
                         ; and so on
 
  LDA YC                 ; Fetch YC, the y-coordinate (row) of the text cursor
@@ -10610,7 +10610,7 @@ ENDIF
 
  ADC #$5E               ; A contains YC (from above) and the C flag is set (from
  TAX                    ; the CPY #127 above), so these instructions do this:
-                        \
+                        ;
                         ;   X = YC + $5E + 1
                         ;     = YC + $5F
 
@@ -10654,7 +10654,7 @@ ENDIF
                         ; LDA YC before jumping to RR2, so this is presumably
                         ; an example of the authors squeezing the code to save
                         ; 2 bytes and 3 cycles
-                        \
+                        ;
                         ; If you want to re-enable the commented block near the
                         ; start of this routine, you should uncomment this
                         ; instruction as well
@@ -10687,11 +10687,11 @@ ENDIF
                         ; the page for character (XC, YC) by OR'ing with $60.
                         ; To see this in action, consider that our two values
                         ; are, in binary:
-                        \
+                        ;
                         ;   YC is between:  %00000000
                         ;             and:  %00010111
                         ;          $60 is:  %01100000
-                        \
+                        ;
                         ; so YC OR $60 effectively adds $60 to YC, giving us
                         ; the page number that we want
 
@@ -10822,9 +10822,9 @@ ENDIF
                         ; 15, which we can pass to DIL2 to draw the vertical
                         ; bar on the indicator at this position. We use the ADD
                         ; routine like this:
-                        \
+                        ;
                         ; (A X) = (A 0) + (S 0)
-                        \
+                        ;
                         ; and just take the high byte of the result. We use ADD
                         ; rather than a normal ADC because ADD separates out the
                         ; sign bit and does the arithmetic using absolute values
@@ -10839,7 +10839,7 @@ ENDIF
                         ; +8
 
  LDX BET1               ; Fetch the magnitude of the pitch angle beta, and if it
- BEQ P%+4               ; is 0 (i.e. we are not pitching), skip the next
+ BEQ *+4               ; is 0 (i.e. we are not pitching), skip the next
                         ; instruction
 
  SBC #1                 ; The pitch angle beta is non-zero, so set A = A - 1
@@ -11097,7 +11097,7 @@ ENDIF
 
  AND FLH                ; A will be zeroed if flashing colours are disabled
 
- BEQ P%+4               ; If A is zero, skip to the LDA instruction below
+ BEQ *+4               ; If A is zero, skip to the LDA instruction below
 
  TXA                    ; Otherwise flashing colours are enabled and it's the
                         ; main loop iteration where we flash them, so set A to
@@ -11486,18 +11486,18 @@ ENDIF
  EQUB $D4, $C4          ; This block of palette data is used to create two
  EQUB $94, $84          ; palettes used in three different places, all of them
  EQUB $F5, $E5          ; redefining four colours in mode 5:
- EQUB $B5, $A5          \
+ EQUB $B5, $A5          ;
                         ; 12 bytes from TVT1 (i.e. the first 6 rows): applied
  EQUB $76, $66          ; when the T1 timer runs down at the switch from the
  EQUB $36, $26          ; space view to the dashboard, so this is the standard
                         ; dashboard palette
- EQUB $E1, $F1          \
+ EQUB $E1, $F1          ;
  EQUB $B1, $A1          ; 8 bytes from TVT1+8 (i.e. the last 4 rows): applied
                         ; when the T1 timer runs down at the switch from the
                         ; space view to the dashboard, and we have an escape
                         ; pod fitted, so this is the escape pod dashboard
                         ; palette
-                        \
+                        ;
                         ; 8 bytes from TVT1+8 (i.e. the last 4 rows): applied
                         ; at vertical sync in LINSCN when HFX is non-zero, to
                         ; create the hyperspace effect in LINSCN (where the
@@ -11567,7 +11567,7 @@ ENDIF
                         ; palette bytes
 
  LDA LASCT              ; Decrement the value of LASCT, but if we go too far
- BEQ P%+5               ; and it becomes negative, bump it back up again (this
+ BEQ *+5               ; and it becomes negative, bump it back up again (this
  DEC LASCT              ; controls the pulsing of pulse lasers)
 
  LDA SVN                ; If SVN is non-zero, we are in the process of saving
@@ -11629,7 +11629,7 @@ ENDIF
 
  DEY                    ; Decrement the palette byte counter
 
- BPL P%-7               ; Loop back to the LDA TVT1,Y instruction until we have
+ BPL *-7               ; Loop back to the LDA TVT1,Y instruction until we have
                         ; copied all the palette bytes
 
 .jvec
@@ -11715,7 +11715,7 @@ ENDIF
  JSR RESET              ; Call RESET to reset our ship and various controls
 
  PLA                    ; Restore the witchspace flag from before the escape pod
- BEQ P%+5               ; launch, and if we were in normal space, skip the
+ BEQ *+5               ; launch, and if we were in normal space, skip the
                         ; following instruction
 
  JMP DEATH              ; Launching an escape pod in witchspace is fatal, so
@@ -11758,14 +11758,14 @@ ENDIF
 ; ******************************************************************************
 
  PRINT "ELITE B"
- PRINT "Assembled at ", ~CODE_B%
- PRINT "Ends at ", ~P%
- PRINT "Code size is ", ~(P% - CODE_B%)
- PRINT "Execute at ", ~LOAD%
- PRINT "Reload at ", ~LOAD_B%
+ PRINT "Assembled at ", CODE_B%
+ PRINT "Ends at ", *
+ PRINT "Code size is ", (* - CODE_B%)
+ PRINT "Execute at ", LOAD%
+ PRINT "Reload at ", LOAD_B%
 
- PRINT "S.ELTB ", ~CODE_B%, " ", ~P%, " ", ~LOAD%, " ", ~LOAD_B%
- SAVE "3-assembled-output/ELTB.bin", CODE_B%, P%, LOAD%
+ PRINT "S.ELTB ", ~CODE_B%, " ", ~*, " ", LOAD%, " ", LOAD_B%
+ SAVE "3-assembled-output/ELTB.bin", CODE_B%, *, LOAD%
 
 ; ******************************************************************************
 ;
@@ -11775,8 +11775,8 @@ ENDIF
 ;
 ; ******************************************************************************
 
- CODE_C% = P%
- LOAD_C% = LOAD% +P% - CODE%
+ CODE_C% = *
+ LOAD_C% = LOAD% +* - CODE%
 
 ; ******************************************************************************
 ;
@@ -11817,7 +11817,7 @@ ENDIF
  LDA #0                 ; Set A to x_hi OR y_hi OR z_hi
  JSR MAS4
 
- BEQ P%+5               ; If A = 0 then the missile is very close to our ship,
+ BEQ *+5               ; If A = 0 then the missile is very close to our ship,
                         ; so skip the following instruction
 
  JMP TA21               ; Jump down to part 3 to set up the vectors and skip
@@ -11996,7 +11996,7 @@ ENDIF
  BEQ TA18               ; missile tactics
 
  CPX #ESC               ; If this is not an escape pod, skip the following two
- BNE P%+8               ; instructions
+ BNE *+8               ; instructions
 
  JSR SPS1               ; This is an escape pod, so call SPS1 to calculate the
                         ; vector to the planet and store it in XX15
@@ -12157,7 +12157,7 @@ ENDIF
 
  LDA TYPE               ; If this is not a missile, skip the following
  CMP #MSL               ; instruction
- BNE P%+5
+ BNE *+5
 
  JMP TA20               ; This is a missile, so jump down to TA20 to get
                         ; straight into some aggressive manoeuvring
@@ -12314,14 +12314,14 @@ ENDIF
                         ; have a maximum magnitude of 36, which would mean we
                         ; were facing each other square on, so in the following
                         ; code we check X like this:
-                        \
+                        ;
                         ;   X = 0 to -31, we are not in the enemy ship's line
                         ;       of fire, so they can't shoot at us
-                        \
+                        ;
                         ;   X = -32 to -34, we are in the enemy ship's line
                         ;       of fire, so they can shoot at us, but they can't
                         ;       hit us as we're not dead in their crosshairs
-                        \
+                        ;
                         ;   X = -35 to -36, we are bang in the middle of the
                         ;       enemy ship's crosshairs, so they can not only
                         ;       shoot us, they can hit us
@@ -12412,13 +12412,13 @@ ENDIF
                         ; We get here if A < byte #32, and the chances of this
                         ; being true are greater with high values of byte #32,
                         ; as long as they are at least 128
-                        \
+                        ;
                         ; In other words, higher byte #32 values increase the
                         ; chances of a ship changing direction to head towards
                         ; us - or, to put it another way, ships with higher
                         ; byte #32 values of 128 or more are spoiling for a
                         ; fight
-                        \
+                        ;
                         ; Thargoids have byte #32 set to 255, which explains
                         ; an awful lot
 
@@ -12447,22 +12447,22 @@ ENDIF
 .TA15
 
                         ; If we get here, then one of the following is true:
-                        \
+                        ;
                         ;   * This is an escape pod and XX15 is pointing towards
                         ;     the planet
-                        \
+                        ;
                         ;   * The ship is pretty close to us, or it's just not
                         ;     very aggressive (though there is a random factor
                         ;     at play here too). XX15 is still pointing from our
                         ;     ship towards the enemy ship
-                        \
+                        ;
                         ;   * The ship is aggressive (though again, there's an
                         ;     element of randomness here). XX15 is pointing from
                         ;     the enemy ship towards our ship
-                        \
+                        ;
                         ;   * This is a missile heading for a target. XX15 is
                         ;     pointing from the missile towards the target
-                        \
+                        ;
                         ; We now want to move the ship in the direction of XX15,
                         ; which will make aggressive ships head towards us, and
                         ; ships that are too close turn away. Escape pods,
@@ -12470,7 +12470,7 @@ ENDIF
                         ; space station, and missiles home in on their targets
 
  LDY #16                ; Set (A X) = roofv . XX15
- JSR TAS3               \
+ JSR TAS3               ;
                         ; This will be positive if XX15 is pointing in the same
                         ; direction as an arrow out of the top of the ship, in
                         ; other words if the ship should pull up to head in the
@@ -12488,7 +12488,7 @@ ENDIF
  BCS TA6                ; in the process of rolling
 
  LDY #22                ; Set (A X) = sidev . XX15
- JSR TAS3               \
+ JSR TAS3               ;
                         ; This will be positive if XX15 is pointing in the same
                         ; direction as an arrow out of the right side of the
                         ; ship, in other words if the ship should roll right to
@@ -12528,7 +12528,7 @@ ENDIF
 
  LDX TYPE               ; If this is not a missile then skip the ASL instruction
  CPX #MSL
- BNE P%+3
+ BNE *+3
 
  ASL A                  ; This is a missile, so set A = -2, as missiles are more
                         ; nimble and can brake more quickly
@@ -12590,7 +12590,7 @@ ENDIF
 
  DEY                    ; Copy the high byte of the V(1 0) coordinate into K+1,
  LDA (V),Y              ; so now:
- STA K+1                \
+ STA K+1                ;
                         ;   K(3 2 1) = - coordinate in V(1 0)
 
  STY U                  ; Copy the index (now 0, 3 or 6) into U and X
@@ -12599,7 +12599,7 @@ ENDIF
  JSR MVT3               ; Call MVT3 to add the same coordinates, but this time
                         ; from INWK, so this would look like this for the
                         ; x-axis:
-                        \
+                        ;
                         ;   K(3 2 1) = (x_sign x_hi x_lo) + K(3 2 1)
                         ;            = (x_sign x_hi x_lo) - coordinate in V(1 0)
 
@@ -12687,12 +12687,12 @@ ENDIF
  TAX                    ; Store the high byte in X
 
  LDA P                  ; Add the two low bytes, so:
- ADC R                  \
+ ADC R                  ;
  STA R                  ;   R = P + R
 
  TXA                    ; Restore the high byte into A and add S to give the
  ADC S                  ; following:
-                        \
+                        ;
                         ;   (A R) = (S R) + (A P) = x_lo^2 + y_lo^2
 
  BCS FR1-2              ; If the addition just overflowed then there is no way
@@ -12707,9 +12707,9 @@ ENDIF
 
  CMP S                  ; We now compare the high bytes of the targetable area
                         ; and the calculation in (S R):
-                        \
+                        ;
                         ;   * If A >= S then then the C flag will be set
-                        \
+                        ;
                         ;   * If A < S then the C flag will be C clear
 
  BNE HI1                ; If A <> S we have just set the C flag correctly, so
@@ -12720,9 +12720,9 @@ ENDIF
 
  CMP R                  ; We now compare the low bytes of the targetable area
                         ; and the calculation in (S R):
-                        \
+                        ;
                         ;   * If A >= R then the C flag will be set
-                        \
+                        ;
                         ;   * If A < R then the C flag will be C clear
 
 .HI1
@@ -12893,7 +12893,7 @@ ENDIF
                         ; contains an RTS)
 
  CMP #CYL               ; If this is not a Cobra Mk III trader, skip the
- BNE P%+5               ; following instruction
+ BNE *+5               ; following instruction
 
  JSR AN2                ; Call AN2 to make the space station hostile
 
@@ -13424,11 +13424,11 @@ ENDIF
 
  ROR A                  ; Roll the C flag into the sign bit of A and store in
  STA RAT                ; RAT, so:
-                        \
+                        ;
                         ;   * Left view, C is clear so RAT = 0 (positive)
-                        \
+                        ;
                         ;   * Right view, C is set so RAT = 128 (negative)
-                        \
+                        ;
                         ; RAT represents the end of the x-axis where we want new
                         ; stardust particles to come from: positive for the left
                         ; view where new particles come in from the right,
@@ -13436,11 +13436,11 @@ ENDIF
                         ; in from the left
 
  EOR #%10000000         ; Set RAT2 to the opposite sign, so:
- STA RAT2               \
+ STA RAT2               ;
                         ;   * Left view, RAT2 = 128 (negative)
-                        \
+                        ;
                         ;   * Right view, RAT2 = 0 (positive)
-                        \
+                        ;
                         ; RAT2 represents the direction in which stardust
                         ; particles should move along the x-axis: negative for
                         ; the left view where particles go from right to left,
@@ -13465,20 +13465,20 @@ ENDIF
  LSR A
 
  JSR DV41               ; Call DV41 to set the following:
-                        \
+                        ;
                         ;   (P R) = 256 * DELTA / A
                         ;         = 256 * speed / (z_hi / 8)
                         ;         = 8 * 256 * speed / z_hi
-                        \
+                        ;
                         ; This represents the distance we should move this
                         ; particle along the x-axis, let's call it delta_x
 
  LDA P                  ; Set S = P but with the sign from RAT2, so we now have
  EOR RAT2               ; the distance delta_x with the correct sign in (S R):
- STA S                  \
+ STA S                  ;
                         ;   (S R) = delta_x
                         ;         = 8 * 256 * speed / z_hi
-                        \
+                        ;
                         ; So (S R) is the delta, signed to match the direction
                         ; the stardust should move in, which is result 1 above
 
@@ -13490,7 +13490,7 @@ ENDIF
                         ; which we use below to remove the existing particle
 
  JSR ADD                ; Call ADD to calculate:
-                        \
+                        ;
                         ;   (A X) = (A P) + (S R)
                         ;         = x + delta_x
 
@@ -13507,18 +13507,18 @@ ENDIF
  LDX BET1               ; Fetch |beta| from BET1, the pitch angle
 
  JSR MULTS-2            ; Call MULTS-2 to calculate:
-                        \
+                        ;
                         ;   (A P) = X * A
                         ;         = beta * y_hi
 
  JSR ADD                ; Call ADD to calculate:
-                        \
+                        ;
                         ;   (A X) = (A P) + (S R)
                         ;         = beta * y + x + delta_x
 
  STX XX                 ; Set XX(1 0) = (A X), which gives us results 2 and 3
  STA XX+1               ; above, done at the same time:
-                        \
+                        ;
                         ;   x = x + delta_x + beta * y
 
  LDX SYL,Y              ; Set (S R) = (y_hi y_lo)
@@ -13531,17 +13531,17 @@ ENDIF
  EOR BET2+1             ; Give A the opposite sign to x * beta
 
  JSR MULTS-2            ; Call MULTS-2 to calculate:
-                        \
+                        ;
                         ;   (A P) = X * A
                         ;         = -beta * x
 
  JSR ADD                ; Call ADD to calculate:
-                        \
+                        ;
                         ;   (A X) = (A P) + (S R)
                         ;         = -beta * x + y
 
  STX YY                 ; Set YY(1 0) = (A X), which gives us result 4 above:
- STA YY+1               \
+ STA YY+1               ;
                         ;   y = y - beta * x
 
  LDX ALP1               ; Set X = |alpha| from ALP2, the roll angle
@@ -13550,7 +13550,7 @@ ENDIF
                         ; alpha
 
  JSR MULTS-2            ; Call MULTS-2 to calculate:
-                        \
+                        ;
                         ;   (A P) = X * A
                         ;         = alpha * y
 
@@ -13558,13 +13558,13 @@ ENDIF
 
  LDA XX                 ; Set (S R) = XX(1 0)
  STA R                  ;           = x
- LDA XX+1               \
+ LDA XX+1               ;
  STA S                  ; and set A = y_hi at the same time
 
  EOR #%10000000         ; Flip the sign of A = -x_hi
 
  JSR MAD                ; Call MAD to calculate:
-                        \
+                        ;
                         ;   (A X) = Q * A + (S R)
                         ;         = alpha * y * -x + x
 
@@ -13574,16 +13574,16 @@ ENDIF
  STA SXL,Y
 
                         ; So (XX+1 x_lo) now contains result 5 above:
-                        \
+                        ;
                         ;   x = x - alpha * x * y
 
  LDA YY                 ; Set (S R) = YY(1 0)
  STA R                  ;           = y
- LDA YY+1               \
+ LDA YY+1               ;
  STA S                  ; and set A = y_hi at the same time
 
  JSR MAD                ; Call MAD to calculate:
-                        \
+                        ;
                         ;   (A X) = Q * A + (S R)
                         ;         = alpha * y * y_hi + y
 
@@ -13594,18 +13594,18 @@ ENDIF
  STA P
 
  LDA ALPHA              ; Set A = alpha, so:
-                        \
+                        ;
                         ;   (A P) = (alpha 0)
                         ;         = alpha / 256
 
  JSR PIX1               ; Call PIX1 to calculate the following:
-                        \
+                        ;
                         ;   (YY+1 y_lo) = (A P) + (S R)
                         ;               = alpha * 256 + y + alpha * y * y
-                        \
+                        ;
                         ; i.e. y = y + alpha / 256 + alpha * y^2, which is
                         ; result 6 above
-                        \
+                        ;
                         ; PIX1 also draws a particle at (X1, Y1) with distance
                         ; ZZ, which will remove the old stardust particle, as we
                         ; set X1, Y1 and ZZ to the original values for this
@@ -13844,9 +13844,9 @@ ENDIF
 
                         ; We now use the same shift-and-add algorithm as MULT1
                         ; to calculate the following:
-                        \
+                        ;
                         ; K(2 1 0) = K(2 1 0) * |Q|
-                        \
+                        ;
                         ; so we start with the first shift right, in which we
                         ; take (K+2 P+1 P) and shift it right, storing the
                         ; result in K(2 1 0), ready for the multiplication loop
@@ -13867,7 +13867,7 @@ ENDIF
 
                         ; We now use the same shift-and-add algorithm as MULT1
                         ; to calculate the following:
-                        \
+                        ;
                         ; K(2 1 0) = K(2 1 0) * |Q|
 
  LDA #0                 ; Set A = 0 so we can start building the answer in A
@@ -13876,9 +13876,9 @@ ENDIF
 
 .MUL2
 
- BCC P%+4               ; If C (i.e. the next bit from K) is set, do the
+ BCC *+4               ; If C (i.e. the next bit from K) is set, do the
  ADC T                  ; addition for this bit of K:
-                        \
+                        ;
                         ;   A = A + T + C
                         ;     = A + |Q| - 1 + 1
                         ;     = A + |Q|
@@ -13887,7 +13887,7 @@ ENDIF
  ROR K+2                ; next digit of our result in the left end of K(2 1 0),
  ROR K+1                ; while also shifting K(2 1 0) right to fetch the next
  ROR K                  ; bit for the calculation into the C flag
-                        \
+                        ;
                         ; On the last iteration of this loop, the bit falling
                         ; off the end of K will be bit 0 of the original A, as
                         ; we did one shift before the loop and we are doing 24
@@ -14004,7 +14004,7 @@ ENDIF
                         ; from the subroutine using a tail call
 
  TAX                    ; Set T1 = X - 1
- DEX                    \
+ DEX                    ;
  STX T1                 ; We subtract 1 as the C flag will be set when we want
                         ; to do an addition in the loop below
 
@@ -14018,9 +14018,9 @@ ENDIF
                         ; keeping the running total in A, but instead of using a
                         ; loop like MU11, we just unroll it, starting with bit 0
 
- BCC P%+4               ; If C (i.e. the next bit from P) is set, do the
+ BCC *+4               ; If C (i.e. the next bit from P) is set, do the
  ADC T1                 ; addition for this bit of P:
-                        \
+                        ;
                         ;   A = A + T1 + C
                         ;     = A + X - 1 + 1
                         ;     = A + X
@@ -14033,22 +14033,22 @@ ENDIF
                         ; the start of P, and shift P right to fetch the next
                         ; bit for the calculation into the C flag
 
- BCC P%+4               ; Repeat the shift-and-add loop for bit 1
+ BCC *+4               ; Repeat the shift-and-add loop for bit 1
  ADC T1
  ROR A
  ROR P
 
- BCC P%+4               ; Repeat the shift-and-add loop for bit 2
+ BCC *+4               ; Repeat the shift-and-add loop for bit 2
  ADC T1
  ROR A
  ROR P
 
- BCC P%+4               ; Repeat the shift-and-add loop for bit 3
+ BCC *+4               ; Repeat the shift-and-add loop for bit 3
  ADC T1
  ROR A
  ROR P
 
- BCC P%+4               ; Repeat the shift-and-add loop for bit 4
+ BCC *+4               ; Repeat the shift-and-add loop for bit 4
  ADC T1
  ROR A
  ROR P
@@ -14157,7 +14157,7 @@ ENDIF
  STA Y1
 
                         ; Fall through into MLU2 to calculate:
-                        \
+                        ;
                         ;   (A P) = |A| * Q
 
 ; ******************************************************************************
@@ -14182,7 +14182,7 @@ ENDIF
  STA P
 
                         ; Fall through into MULTU to calculate:
-                        \
+                        ;
                         ;   (A P) = P * Q
                         ;         = |A| * Q
 
@@ -14234,7 +14234,7 @@ ENDIF
 .MU11
 
  DEX                    ; Set T = X - 1
- STX T                  \
+ STX T                  ;
                         ; We subtract 1 as the C flag will be set when we want
                         ; to do an addition in the loop below
 
@@ -14253,9 +14253,9 @@ ENDIF
 
 .MUL6
 
- BCC P%+4               ; If C (i.e. the next bit from P) is set, do the
+ BCC *+4               ; If C (i.e. the next bit from P) is set, do the
  ADC T                  ; addition for this bit of P:
-                        \
+                        ;
                         ;   A = A + T + C
                         ;     = A + X - 1 + 1
                         ;     = A + X
@@ -14332,12 +14332,12 @@ ENDIF
  LDA K                  ; Set A to the radius in K
 
                         ; Fall through into FMLTU to do the following:
-                        \
+                        ;
                         ;   (A ?) = A * Q
                         ;         = K * sin(A) * 256
-                        \
+                        ;
                         ; which is equivalent to:
-                        \
+                        ;
                         ;   A = K * sin(A)
 
 ; ******************************************************************************
@@ -14384,7 +14384,7 @@ ENDIF
                         ; to just do the shifts
 
  ADC Q                  ; Do the addition for this bit of P:
-                        \
+                        ;
                         ;   A = A + Q + C
                         ;     = A + Q
 
@@ -14450,7 +14450,7 @@ ENDIF
 
 .MUL6
 
- BCC P%+4
+ BCC *+4
  ADC T
  ROR A
  ROR P
@@ -14526,7 +14526,7 @@ ENDIF
                         ; to just do the shifts
 
  ADC Q                  ; Do the addition for this bit of P:
-                        \
+                        ;
                         ;   A = A + Q + C
                         ;     = A + Q
 
@@ -14574,7 +14574,7 @@ ENDIF
  STX P                  ; following, so this has no effect
 
                         ; Fall through into MUT2 to do the following:
-                        \
+                        ;
                         ;   (S R) = XX(1 0)
                         ;   (A P) = Q * A
 
@@ -14600,7 +14600,7 @@ ENDIF
  STX S
 
                         ; Fall through into MUT1 to do the following:
-                        \
+                        ;
                         ;   R = XX
                         ;   (A P) = Q * A
 
@@ -14626,7 +14626,7 @@ ENDIF
  STX R
 
                         ; Fall through into MULT1 to do the following:
-                        \
+                        ;
                         ;   (A P) = Q * A
 
 ; ******************************************************************************
@@ -14665,7 +14665,7 @@ ENDIF
  BEQ mu10               ; If |Q| = 0 jump to mu10 (with A set to 0)
 
  TAX                    ; Set T1 = |Q| - 1
- DEX                    \
+ DEX                    ;
  STX T1                 ; We subtract 1 as the C flag will be set when we want
                         ; to do an addition in the loop below
 
@@ -14683,9 +14683,9 @@ ENDIF
 
 .MUL4
 
- BCC P%+4               ; If C (i.e. the next bit from P) is set, do the
+ BCC *+4               ; If C (i.e. the next bit from P) is set, do the
  ADC T1                 ; addition for this bit of P:
-                        \
+                        ;
                         ;   A = A + T1 + C
                         ;     = A + |Q| - 1 + 1
                         ;     = A + |Q|
@@ -14807,7 +14807,7 @@ ENDIF
  LDA XX15+2             ; Set A = XX15+2
 
                         ; Fall through into MAD to set:
-                        \
+                        ;
                         ;   (A X) = Q * A + (S R)
                         ;           = vect_z * XX15+2 + vect_y * XX15+1 +
                         ;             vect_x * XX15
@@ -14832,7 +14832,7 @@ ENDIF
  JSR MULT1              ; Call MULT1 to set (A P) = Q * A
 
                         ; Fall through into ADD to do:
-                        \
+                        ;
                         ;   (A X) = (A P) + (S R)
                         ;         = Q * A + (S R)
 
@@ -14869,14 +14869,14 @@ ENDIF
                         ; we can add them and set the sign to get the result
 
  LDA R                  ; Add the least significant bytes together into X:
- CLC                    \
+ CLC                    ;
  ADC P                  ;   X = P + R
  TAX
 
  LDA S                  ; Add the most significant bytes together into A. We
  ADC T1                 ; stored the original argument A in T1 earlier, so we
                         ; can do this with:
-                        \
+                        ;
                         ;   A = A  + S + C
                         ;     = T1 + S + C
 
@@ -14898,7 +14898,7 @@ ENDIF
  STA U
 
  LDA P                  ; Subtract the least significant bytes into X:
- SEC                    \
+ SEC                    ;
  SBC R                  ;   X = P - R
  TAX
 
@@ -15011,7 +15011,7 @@ ENDIF
  BCC DV4
 
  SBC #96                ; Set A = A - 96
-                        \
+                        ;
                         ; Going into this subtraction we know the C flag is
                         ; set as we passed through the BCC above, and we also
                         ; know that A >= 96, so the C flag will still be set
@@ -15077,7 +15077,7 @@ ENDIF
  LDA SZ,Y               ; Fetch the Y-th dust particle's z_hi coordinate into A
 
                         ; Fall through into DV41 to do:
-                        \
+                        ;
                         ;   (P R) = 256 * DELTA / A
                         ;         = 256 * DELTA / Y-th stardust particle's z_hi
 
@@ -15118,7 +15118,7 @@ ENDIF
  LDA DELTA              ; Fetch the speed from DELTA into A
 
                         ; Fall through into DVID4 to do:
-                        \
+                        ;
                         ;   (P R) = 256 * A / Q
                         ;         = 256 * DELTA / A
 
@@ -15247,7 +15247,7 @@ ENDIF
 
                         ; Given the above assignments, we now want to calculate
                         ; the following to get the result we want:
-                        \
+                        ;
                         ;   K(3 2 1 0) = P(2 1 0) / (S R Q)
 
  LDA P                  ; Make sure P(2 1 0) is at least 1
@@ -15264,7 +15264,7 @@ ENDIF
  LDA P+2                ; Clear the sign bit of P+2, so the division can be done
  AND #%01111111         ; with positive numbers and we'll set the correct sign
                         ; below, once all the maths is done
-                        \
+                        ;
                         ; This also leaves A = P+2, which we use below
 
 .DVL9
@@ -15315,7 +15315,7 @@ ENDIF
                         ; return the final result, we shift the result by the
                         ; total number of places in Y, and in the correct
                         ; direction, to give us the correct result
-                        \
+                        ;
                         ; We set A to |S| above, so the following actually
                         ; shifts (A R Q)
 
@@ -15344,7 +15344,7 @@ ENDIF
  LDA P+2                ; Set A to the highest byte of the numerator
 
  JSR LL31               ; Call LL31 to calculate:
-                        \
+                        ;
                         ;   R = 256 * A / Q
                         ;     = 256 * numerator / denominator
 
@@ -15648,7 +15648,7 @@ ENDIF
 .ARCTAN
 
  LDA P                  ; Set T1 = P EOR Q, which will have the sign of P * Q
- EOR Q                  \
+ EOR Q                  ;
 ;AND #%10000000         ; The AND is commented out in the original source
  STA T1
 
@@ -15667,7 +15667,7 @@ ENDIF
  BCS AR1                ; and Q around, so we can still use the lookup table
 
  JSR ARS1               ; Call ARS1 to set the following from the lookup table:
-                        \
+                        ;
                         ;   A = arctan(A / Q)
                         ;     = arctan(|P / Q|)
 
@@ -15690,12 +15690,12 @@ ENDIF
 
  LDX Q                  ; Swap the values in Q and P, using the fact that we
  STA Q                  ; called AR1 with A = P
- STX P                  \
+ STX P                  ;
  TXA                    ; This also sets A = P (which now contains the original
                         ; argument |Q|)
 
  JSR ARS1               ; Call ARS1 to set the following from the lookup table:
-                        \
+                        ;
                         ;   A = arctan(A / Q)
                         ;     = arctan(|Q / P|)
                         ;     = arctan(1 / |P / Q|)
@@ -15727,7 +15727,7 @@ ENDIF
                         ; ACT table, i.e. 128 - A
 
  STA T                  ; Set A = 128 - A
- LDA #128               \
+ LDA #128               ;
 ;SEC                    ; The SEC instruction is commented out in the original
  SBC T                  ; source, and isn't required as we did a SEC before
                         ; calling AR3
@@ -15742,17 +15742,17 @@ ENDIF
                         ; PI / 4 radians)
 
  JSR LL28               ; Call LL28 to calculate:
-                        \
+                        ;
                         ;   R = 256 * A / Q
 
  LDA R                  ; Set X = R / 8
  LSR A                  ;       = 32 * A / Q
- LSR A                  \
+ LSR A                  ;
  LSR A                  ; so X has the value t * 32 where t = A / Q, which is
  TAX                    ; what we need to look up values in the ACT table
 
  LDA ACT,X              ; Fetch ACT+X from the ACT table into A, so now:
-                        \
+                        ;
                         ;   A = value in ACT + X
                         ;     = value in ACT + (32 * A / Q)
                         ;     = arctan(A / Q)
@@ -15851,7 +15851,7 @@ ELIF _TEXT_SOURCES
 
  LDA MANY+AST           ; Set X to the total number of asteroids, escape pods
  CLC                    ; and cargo canisters in the vicinity
- ADC MANY+ESC           \
+ ADC MANY+ESC           ;
  ADC MANY+OIL           ; This code saves one byte of memory over the code in
  TAX                    ; the source disc version. The second CLC is not needed
                         ; as there is no way that adding the number of asteroids
@@ -15902,7 +15902,7 @@ ELIF _TEXT_SOURCES
  LSR A                  ; If A < 2 then jump to WA1 to abort the in-system jump
  BEQ WA1                ; with a low beep, as we are facing the planet and are
                         ; too close to jump in that direction
-                        \
+                        ;
                         ; These instructions between them save one byte of
                         ; memory over the CMP-based code in the source disc
                         ; version, as LSR A is a one-byte opcode, while CMP #2
@@ -15940,7 +15940,7 @@ ELIF _TEXT_SOURCES
  LSR A                  ; If A < 2 then jump to WA1 to abort the in-system jump
  BEQ WA1                ; with a low beep, as we are facing the planet and are
                         ; too close to jump in that direction
-                        \
+                        ;
                         ; These instructions between them save one byte of
                         ; memory over the CMP-based code in the source disc
                         ; version, as LSR A is a one-byte opcode, while CMP #2
@@ -15956,7 +15956,7 @@ ENDIF
                         ; vicinity, we are not in witchspace, and if we are
                         ; facing the planet or the sun, we aren't too close to
                         ; jump towards it
-                        \
+                        ;
                         ; We do an in-system jump by moving the sun and planet,
                         ; rather than moving our own local bubble (this is why
                         ; in-system jumps drag asteroids, cargo canisters and
@@ -15975,20 +15975,20 @@ ENDIF
  JSR ADD                ; Set (A X) = (A P) + (S R)
                         ;           = (z_sign $81) + $8181
                         ;           = (z_sign $81) - $0181
-                        \
+                        ;
                         ; This moves the planet against the direction of travel
                         ; by reducing z_sign by 1, as the above maths is:
-                        \
+                        ;
                         ;         z_sign 00000000
                         ;   +   00000000 10000001
                         ;   -   00000001 10000001
-                        \
+                        ;
                         ; or:
-                        \
+                        ;
                         ;         z_sign 00000000
                         ;   +   00000000 00000000
                         ;   -   00000001 00000000
-                        \
+                        ;
                         ; i.e. the high byte is z_sign - 1, making sure the sign
                         ; is preserved
 
@@ -15999,7 +15999,7 @@ ENDIF
  JSR ADD                ; Set (A X) = (A P) + (S R)
                         ;           = (z_sign $81) + $8181
                         ;           = (z_sign $81) - $0181
-                        \
+                        ;
                         ; which moves the sun against the direction of travel
                         ; by reducing z_sign by 1
 
@@ -16153,7 +16153,7 @@ ENDIF
 .PLUT
 
  LDX VIEW               ; Load the current view into X:
-                        \
+                        ;
                         ;   0 = front
                         ;   1 = rear
                         ;   2 = left
@@ -16165,7 +16165,7 @@ ENDIF
 .PU1
 
  DEX                    ; Decrement the view, so now:
-                        \
+                        ;
                         ;   0 = rear
                         ;   1 = left
                         ;   2 = right
@@ -16210,7 +16210,7 @@ ENDIF
 .PU2
 
                         ; We enter this with X set to the view, as follows:
-                        \
+                        ;
                         ;   1 = left
                         ;   2 = right
 
@@ -16258,13 +16258,13 @@ ENDIF
 .PUS1
 
  LDA INWK,Y             ; Swap the low x and z bytes for the vector in Y:
- LDX INWK+4,Y           \
+ LDX INWK+4,Y           ;
  STA INWK+4,Y           ;   * For Y =  9 swap nosev_x_lo and nosev_z_lo
  STX INWK,Y             ;   * For Y = 15 swap roofv_x_lo and roofv_z_lo
                         ;   * For Y = 21 swap sidev_x_lo and sidev_z_lo
 
  LDA INWK+1,Y           ; Swap the high x and z bytes for the offset in Y:
- EOR RAT                \
+ EOR RAT                ;
  TAX                    ;   * If left view, flip sign of new z-coordinate
  LDA INWK+5,Y           ;   * If right view, flip sign of new x-coordinate
  EOR RAT2
@@ -16508,7 +16508,7 @@ ENDIF
  STY XC
 
  LDA VIEW               ; Load the current view into A:
-                        \
+                        ;
                         ;   0 = front
                         ;   1 = rear
                         ;   2 = left
@@ -16548,12 +16548,12 @@ ENDIF
                         ; BOS1 four times, decrementing X1 and X2 each time
                         ; before calling LOIN, so this whole loop-within-a-loop
                         ; mind-bender ends up drawing these four lines:
-                        \
+                        ;
                         ;   (1, 0)   to (1, 191)
                         ;   (0, 0)   to (0, 191)
                         ;   (255, 0) to (255, 191)
                         ;   (254, 0) to (254, 191)
-                        \
+                        ;
                         ; So that's a 2-pixel wide vertical border along the
                         ; left edge of the upper part of the screen, and a
                         ; 2-pixel wide vertical border along the right edge
@@ -16821,12 +16821,12 @@ ENDIF
                         ; ellipse and took this code out for release
 
  CMP #MSL               ; If this is not a missile, skip the following
- BNE P%+4               ; instruction
+ BNE *+4               ; instruction
 
  LDX #$F0               ; This is a missile, so set X to colour 2 (yellow/white)
 
 ;CMP #AST               ; These instructions are commented out in the original
-;BCC P%+4               ; source. See above for an explanation of what they do
+;BCC *+4               ; source. See above for an explanation of what they do
 ;LDX #$0F
 ;.SC49
 
@@ -16846,7 +16846,7 @@ ENDIF
                         ; the screen x-coordinate of the dot on the scanner,
                         ; using the following (see the deep dive on "The 3D
                         ; scanner" for an explanation):
-                        \
+                        ;
                         ;   X1 = 123 + (x_sign x_hi)
 
  LDA INWK+1             ; Set A = x_hi
@@ -16872,15 +16872,15 @@ ENDIF
                         ; the y-coordinate of the base of the ship's stick,
                         ; like this (see the deep dive on "The 3D scanner" for
                         ; an explanation):
-                        \
+                        ;
                         ;   SC = 220 - (z_sign z_hi) / 4
-                        \
+                        ;
                         ; though the following code actually does it like this:
-                        \
+                        ;
                         ;   SC = 255 - (35 + z_hi / 4)
 
  LDA INWK+7             ; Set A = z_hi / 4
- LSR A                  \
+ LSR A                  ;
  LSR A                  ; So A is in the range 0-15
 
  CLC                    ; Clear the C flag for the addition below
@@ -16905,7 +16905,7 @@ ENDIF
                         ; Now for the stick height, which we calculate using the
                         ; following (see the deep dive on "The 3D scanner" for
                         ; an explanation):
-                        \
+                        ;
                         ; A = - (y_sign y_hi) / 2
 
  LDA INWK+4             ; Set A = y_hi / 2
@@ -16928,16 +16928,16 @@ ENDIF
 
                         ; We now have all the information we need to draw this
                         ; ship on the scanner, namely:
-                        \
+                        ;
                         ;   X1 = the screen x-coordinate of the ship's dot
-                        \
+                        ;
                         ;   SC = the screen y-coordinate of the base of the
                         ;        stick
-                        \
+                        ;
                         ;   A = the screen height of the ship's stick, with the
                         ;       correct sign for adding to the base of the stick
                         ;       to get the dot's y-coordinate
-                        \
+                        ;
                         ; First, though, we have to make sure the dot is inside
                         ; the dashboard, by moving it if necessary
 
@@ -16952,13 +16952,13 @@ ENDIF
                         ; and minimum below, but it might save a few cycles)
 
  CMP #194               ; If A >= 194, skip the following instruction, as 194 is
- BCS P%+4               ; the minimum allowed value of A
+ BCS *+4               ; the minimum allowed value of A
 
  LDA #194               ; A < 194, so set A to 194, the minimum allowed value
                         ; for the y-coordinate of our ship's dot
 
  CMP #247               ; If A < 247, skip the following instruction, as 246 is
- BCC P%+4               ; the maximum allowed value of A
+ BCC *+4               ; the maximum allowed value of A
 
 .ld246
 
@@ -16976,22 +16976,22 @@ ENDIF
                         ; length is negative)
 
                         ; So now we have the following:
-                        \
+                        ;
                         ;   X1 = the screen x-coordinate of the ship's dot,
                         ;        clipped to fit into the dashboard
-                        \
+                        ;
                         ;   Y1 = the screen y-coordinate of the ship's dot,
                         ;        clipped to fit into the dashboard
-                        \
+                        ;
                         ;   SC = the screen y-coordinate of the base of the
                         ;        stick
-                        \
+                        ;
                         ;   A = the screen height of the ship's stick, with the
                         ;       correct sign for adding to the base of the stick
                         ;       to get the dot's y-coordinate
-                        \
+                        ;
                         ;   C = 0 if A is negative, 1 if A is positive
-                        \
+                        ;
                         ; and we can get on with drawing the dot and stick
 
  PHP                    ; Store the flags (specifically the C flag) from the
@@ -17012,14 +17012,14 @@ ENDIF
                         ; the following variables set up for the dot's top-right
                         ; pixel, the last pixel to be drawn (as the dot gets
                         ; drawn from the bottom up):
-                        \
+                        ;
                         ;   SC(1 0) = screen address of the pixel's character
                         ;             block
-                        \
+                        ;
                         ;   Y = number of the character row containing the pixel
-                        \
+                        ;
                         ;   X = the pixel's number (0-3) in that row
-                        \
+                        ;
                         ; We can use there as the starting point for drawing the
                         ; stick, if there is one
 
@@ -17093,7 +17093,7 @@ ENDIF
                         ; right pixel that the call to CPIX4 finished on)
 
  CPY #8                 ; If the row number in Y is less than 8, then it
- BNE P%+6               ; correctly points at the next line down, so jump to
+ BNE *+6               ; correctly points at the next line down, so jump to
                         ; VLL2 to skip the following
 
  LDY #0                 ; We just incremented Y down through the bottom of the
@@ -17159,7 +17159,7 @@ ENDIF
  STA DL
 
  LDA DL                 ; Loop round these two instructions until DL is no
- BEQ P%-2               ; longer 0 (DL gets set to 30 in the LINSCN routine,
+ BEQ *-2               ; longer 0 (DL gets set to 30 in the LINSCN routine,
                         ; which is run when vertical sync has occurred on the
                         ; video system, so DL will change to a non-zero value
                         ; at the start of each screen refresh)
@@ -17173,14 +17173,14 @@ ENDIF
 ; ******************************************************************************
 
  PRINT "ELITE C"
- PRINT "Assembled at ", ~CODE_C%
- PRINT "Ends at ", ~P%
- PRINT "Code size is ", ~(P% - CODE_C%)
- PRINT "Execute at ", ~LOAD%
- PRINT "Reload at ", ~LOAD_C%
+ PRINT "Assembled at ", CODE_C%
+ PRINT "Ends at ", *
+ PRINT "Code size is ", (* - CODE_C%)
+ PRINT "Execute at ", LOAD%
+ PRINT "Reload at ", LOAD_C%
 
- PRINT "S.ELTC ", ~CODE_C%, " ", ~P%, " ", ~LOAD%, " ", ~LOAD_C%
- SAVE "3-assembled-output/ELTC.bin", CODE_C%, P%, LOAD%
+ PRINT "S.ELTC ", ~CODE_C%, " ", ~*, " ", LOAD%, " ", LOAD_C%
+ SAVE "3-assembled-output/ELTC.bin", CODE_C%, *, LOAD%
 
 ; ******************************************************************************
 ;
@@ -17190,8 +17190,8 @@ ENDIF
 ;
 ; ******************************************************************************
 
- CODE_D% = P%
- LOAD_D% = LOAD% + P% - CODE%
+ CODE_D% = *
+ LOAD_D% = LOAD% + * - CODE%
 
 ; ******************************************************************************
 ;
@@ -17266,19 +17266,19 @@ ENDIF
 
  CMP CRGO               ; If A < CRGO then the C flag will be clear (we have
                         ; room in the hold)
-                        \
+                        ;
                         ; If A >= CRGO then the C flag will be set (we do not
                         ; have room in the hold)
-                        \
+                        ;
                         ; This works because A contains the number of canisters
                         ; plus 1, while CRGO contains our cargo capacity plus 2,
                         ; so if we actually have "a" canisters and a capacity
                         ; of "c", then:
-                        \
+                        ;
                         ; A < CRGO means: a+1 <  c+2
                         ;                 a   <  c+1
                         ;                 a   <= c
-                        \
+                        ;
                         ; So this is why the value in CRGO is 2 higher than the
                         ; actual cargo bay size, i.e. it's 22 for the standard
                         ; 20-tonne bay, and 37 for the large 35-tonne bay
@@ -17301,9 +17301,9 @@ ENDIF
  CMP #200               ; Is the result greater than 200 (the limit on
                         ; individual stocks of gold, platinum, gem-stones and
                         ; alien items)?
-                        \
+                        ;
                         ; If so, this sets the C flag (no room)
-                        \
+                        ;
                         ; Otherwise it is clear (we have room)
 
  PLA                    ; Restore A from the stack
@@ -17328,14 +17328,14 @@ ENDIF
 
 .TT20
 
- JSR P%+3               ; This line calls the line below as a subroutine, which
+ JSR *+3               ; This line calls the line below as a subroutine, which
                         ; does two twists before returning here, and then we
                         ; fall through to the line below for another two
                         ; twists, so the net effect of these two consecutive
                         ; JSR calls is four twists, not counting the ones
                         ; inside your head as you try to follow this process
 
- JSR P%+3               ; This line calls TT54 as a subroutine to do a twist,
+ JSR *+3               ; This line calls TT54 as a subroutine to do a twist,
                         ; and then falls through into TT54 to do another twist
                         ; before returning from the subroutine
 
@@ -17626,7 +17626,7 @@ ENDIF
  LDA QQ3                ; The system economy is determined by the value in QQ3,
                         ; so fetch it into A. First we work out the system's
                         ; prosperity as follows:
-                        \
+                        ;
                         ;   QQ3 = 0 or 5 = %000 or %101 = Rich
                         ;   QQ3 = 1 or 6 = %001 or %110 = Average
                         ;   QQ3 = 2 or 7 = %010 or %111 = Poor
@@ -17650,7 +17650,7 @@ ENDIF
 
  ADC #170               ; A is now 0, 1 or 2, so print recursive token 10 + A.
  JSR TT27               ; This means that:
-                        \
+                        ;
                         ;   QQ3 = 0 or 5 prints token 10 ("RICH ")
                         ;   QQ3 = 1 or 6 prints token 11 ("AVERAGE ")
                         ;   QQ3 = 2 or 7 prints token 12 ("POOR ")
@@ -17659,17 +17659,17 @@ ENDIF
 
  LDA QQ3                ; Now to work out the type of economy, which is
  LSR A                  ; determined by bit 2 of QQ3, as follows:
- LSR A                  \
+ LSR A                  ;
                         ;   QQ3 bit 2 = 0 = Industrial
                         ;   QQ3 bit 2 = 1 = Agricultural
-                        \
+                        ;
                         ; So we fetch QQ3 into A and set A = bit 2 of QQ3 using
                         ; two right shifts (which will work as QQ3 is only a
                         ; 3-bit number)
 
  CLC                    ; Print recursive token 8 + A, followed by a paragraph
  ADC #168               ; break and Sentence Case, so:
- JSR TT60               \
+ JSR TT60               ;
                         ;   QQ3 bit 2 = 0 prints token 8 ("INDUSTRIAL")
                         ;   QQ3 bit 2 = 1 prints token 9 ("AGRICULTURAL")
 
@@ -17681,7 +17681,7 @@ ENDIF
 
  CLC                    ; Print recursive token 17 + A, followed by a paragraph
  ADC #177               ; break and Sentence Case, so:
- JSR TT60               \
+ JSR TT60               ;
                         ;   QQ4 = 0 prints token 17 ("ANARCHY")
                         ;   QQ4 = 1 prints token 18 ("FEUDAL")
                         ;   QQ4 = 2 prints token 19 ("MULTI-GOVERNMENT")
@@ -17741,7 +17741,7 @@ ENDIF
 
  ADC #227               ; Otherwise A = 0, 1 or 2, so print recursive token
  JSR spc                ; 67 + A, followed by a space, so:
-                        \
+                        ;
                         ;   A = 0 prints token 67 ("LARGE") and a space
                         ;   A = 1 prints token 67 ("FIERCE") and a space
                         ;   A = 2 prints token 67 ("SMALL") and a space
@@ -17758,7 +17758,7 @@ ENDIF
 
  ADC #230               ; Otherwise A = 0 to 5, so print recursive token
  JSR spc                ; 70 + A, followed by a space, so:
-                        \
+                        ;
                         ;   A = 0 prints token 70 ("GREEN") and a space
                         ;   A = 1 prints token 71 ("RED") and a space
                         ;   A = 2 prints token 72 ("YELLOW") and a space
@@ -17770,9 +17770,9 @@ ENDIF
 
  LDA QQ15+3             ; Now for the third adjective, so EOR the high bytes of
  EOR QQ15+1             ; s0 and s1 and extract bits 0-2 of the result:
- AND #%00000111         \
+ AND #%00000111         ;
  STA QQ19               ;   A = (s0_hi EOR s1_hi) AND %111
-                        \
+                        ;
                         ; storing the result in QQ19 so we can use it later
 
  CMP #6                 ; If A >= 6, jump to TT207 to skip the third adjective
@@ -17780,7 +17780,7 @@ ENDIF
 
  ADC #236               ; Otherwise A = 0 to 5, so print recursive token
  JSR spc                ; 76 + A, followed by a space, so:
-                        \
+                        ;
                         ;   A = 0 prints token 76 ("SLIMY") and a space
                         ;   A = 1 prints token 77 ("BUG-EYED") and a space
                         ;   A = 2 prints token 78 ("HORNED") and a space
@@ -17797,7 +17797,7 @@ ENDIF
  AND #%00000111
 
  ADC #242               ; A = 0 to 7, so print recursive token 82 + A, so:
- JSR TT27               \
+ JSR TT27               ;
                         ;   A = 0 prints token 76 ("RODENT")
                         ;   A = 1 prints token 76 ("FROG")
                         ;   A = 2 prints token 76 ("LIZARD")
@@ -17839,22 +17839,22 @@ ENDIF
  JSR TT68               ; by a colon
 
                         ; The average radius is calculated like this:
-                        \
+                        ;
                         ;   ((s2_hi AND %1111) + 11) * 256 + s1_hi
-                        \
+                        ;
                         ; or, in terms of memory locations:
-                        \
+                        ;
                         ;   ((QQ15+5 AND %1111) + 11) * 256 + QQ15+3
-                        \
+                        ;
                         ; Because the multiplication is by 256, this is the
                         ; same as saying a 16-bit number, with high byte:
-                        \
+                        ;
                         ;   (QQ15+5 AND %1111) + 11
-                        \
+                        ;
                         ; and low byte:
-                        \
+                        ;
                         ;   QQ15+3
-                        \
+                        ;
                         ; so we can set this up in (Y X) and call the pr5
                         ; routine to print it out
 
@@ -17928,13 +17928,13 @@ ENDIF
 .TT77
 
  LDA QQ3                ; Now to work out the tech level, which we do like this:
- EOR #%00000111         \
+ EOR #%00000111         ;
  CLC                    ;   flipped_economy + (s1_hi AND %11) + (government / 2)
- STA QQ5                \
+ STA QQ5                ;
                         ; or, in terms of memory locations:
-                        \
+                        ;
                         ;   QQ5 = (QQ3 EOR %111) + (QQ15+3 AND %11) + (QQ4 / 2)
-                        \
+                        ;
                         ; We start by setting QQ5 = QQ3 EOR %111
 
  LDA QQ15+3             ; We then take the first 2 bits of s1_hi (QQ15+3) and
@@ -17948,30 +17948,30 @@ ENDIF
  STA QQ5
 
  ASL A                  ; Now to work out the population, like so:
- ASL A                  \
+ ASL A                  ;
  ADC QQ3                ;   (tech level * 4) + economy + government + 1
- ADC QQ4                \
+ ADC QQ4                ;
  ADC #1                 ; or, in terms of memory locations:
- STA QQ6                \
+ STA QQ6                ;
                         ;   QQ6 = (QQ5 * 4) + QQ3 + QQ4 + 1
 
  LDA QQ3                ; Finally, we work out productivity, like this:
- EOR #%00000111         \
+ EOR #%00000111         ;
  ADC #3                 ;  (flipped_economy + 3) * (government + 4)
  STA P                  ;                        * population
  LDA QQ4                ;                        * 8
- ADC #4                 \
+ ADC #4                 ;
  STA Q                  ; or, in terms of memory locations:
- JSR MULTU              \
+ JSR MULTU              ;
                         ;   QQ7 = (QQ3 EOR %111 + 3) * (QQ4 + 4) * QQ6 * 8
-                        \
+                        ;
                         ; We do the first step by setting P to the first
                         ; expression in brackets and Q to the second, and
                         ; calling MULTU, so now (A P) = P * Q. The highest this
                         ; can be is 10 * 11 (as the maximum values of economy
                         ; and government are 7), so the high byte of the result
                         ; will always be 0, so we actually have:
-                        \
+                        ;
                         ;   P = P * Q
                         ;     = (flipped_economy + 3) * (government + 4)
 
@@ -17979,7 +17979,7 @@ ENDIF
  STA Q                  ; population to get the productivity, by setting Q to
  JSR MULTU              ; the population from QQ6 and calling MULTU again, so
                         ; now we have:
-                        \
+                        ;
                         ;   (A P) = P * population
 
  ASL P                  ; Next we multiply the result by 8, as a 16-bit number,
@@ -18121,7 +18121,7 @@ ENDIF
                         ; distance from the top-left corner of the screen)
 
  LDX QQ11               ; If the current view is not the Short-range Chart,
- BPL P%+4               ; which is the only view with bit 7 set, then skip the
+ BPL *+4               ; which is the only view with bit 7 set, then skip the
                         ; following instruction
 
  LDA #0                 ; This is the Short-range Chart, so set A to 0, so the
@@ -18146,12 +18146,12 @@ ENDIF
                         ; temporary storage. XX15 shares location with X1, Y1,
                         ; X2 and Y2, so in the following, you can consider
                         ; the variables like this:
-                        \
+                        ;
                         ;   XX15   is the same as X1
                         ;   XX15+1 is the same as Y1
                         ;   XX15+2 is the same as X2
                         ;   XX15+3 is the same as Y2
-                        \
+                        ;
                         ; Presumably this routine was written at a different
                         ; time to the line-drawing routine, before the two
                         ; workspaces were merged to save space
@@ -18163,7 +18163,7 @@ ENDIF
  CLC                    ; to get the x-coordinate of the right edge of the
  ADC QQ19+2             ; crosshairs
 
- BCC P%+4               ; If the above addition didn't overflow, then A is
+ BCC *+4               ; If the above addition didn't overflow, then A is
                         ; correct, so skip the next instruction
 
  LDA #255               ; The addition overflowed, so set A to 255 so the
@@ -18496,9 +18496,9 @@ ENDIF
                         ; to TT151 above and store it in Q
 
  JSR GCASH              ; Call GCASH to calculate:
-                        \
+                        ;
                         ;   (Y X) = P * Q * 4
-                        \
+                        ;
                         ; which will be the total price of this transaction
                         ; (as P contains the purchase quantity and Q contains
                         ; the item's price / 4)
@@ -18801,9 +18801,9 @@ ENDIF
  STA Q
 
  JSR GCASH              ; Call GCASH to calculate
-                        \
+                        ;
                         ;   (Y X) = P * Q * 4
-                        \
+                        ;
                         ; which will be the total price we make from this sale
                         ; (as P contains the quantity we're selling and Q
                         ; contains the item's price / 4)
@@ -18822,14 +18822,14 @@ ENDIF
  INY                    ; Y to point to the next item
 
  CPY #17                ; If Y >= 17 then skip the next instruction as we have
- BCS P%+5               ; done the last item
+ BCS *+5               ; done the last item
 
  JMP TT211              ; Otherwise loop back to TT211 to print the next item
                         ; in the hold
 
  LDA QQ11               ; If the current view type in QQ11 is not 4 (Sell Cargo
  CMP #4                 ; screen), skip the next two instructions and just
- BNE P%+8               ; return from the subroutine
+ BNE *+8               ; return from the subroutine
 
  JSR dn2                ; This is the Sell Cargo screen, so call dn2 to make a
                         ; short, high beep and delay for 1 second
@@ -18870,7 +18870,7 @@ ENDIF
 
  LDA CRGO               ; If our ship's cargo capacity is < 26 (i.e. we do not
  CMP #26                ; have a cargo bay extension), skip the following two
- BCC P%+7               ; instructions
+ BCC *+7               ; instructions
 
  LDA #107               ; We do have a cargo bay extension, so print recursive
  JSR TT27               ; token 107 ("LARGE CARGO{sentence case} BAY")
@@ -19144,7 +19144,7 @@ ENDIF
 .TT179
 
  ASL A                  ; Set QQ19 = 104 + A * 4
- ASL A                  \
+ ASL A                  ;
  CLC                    ; 104 is the x-coordinate of the centre of the chart,
  ADC #104               ; so this sets QQ19 to the screen pixel x-coordinate
  STA QQ19               ; of the crosshairs
@@ -19154,7 +19154,7 @@ ENDIF
  SBC QQ1
 
  CMP #38                ; If the vertical distance in A is < 38, then the
- BCC P%+6               ; crosshairs are close enough to the current system to
+ BCC *+6               ; crosshairs are close enough to the current system to
                         ; appear in the Short-range Chart, so skip the next two
                         ; instructions
 
@@ -19164,7 +19164,7 @@ ENDIF
                         ; return from the subroutine (as TT180 contains an RTS)
 
  ASL A                  ; Set QQ19+1 = 90 + A * 2
- CLC                    \
+ CLC                    ;
  ADC #90                ; 90 is the y-coordinate of the centre of the chart,
  STA QQ19+1             ; so this sets QQ19+1 to the screen pixel x-coordinate
                         ; of the crosshairs
@@ -19232,10 +19232,10 @@ ENDIF
                         ; coordinates are in (QQ0, QQ1). We get the galactic
                         ; coordinates of each system from the system's seeds,
                         ; like this:
-                        \
+                        ;
                         ;   x = s1_hi (which is stored in QQ15+3)
                         ;   y = s0_hi (which is stored in QQ15+1)
-                        \
+                        ;
                         ; so the following loops through each system in the
                         ; galaxy in turn and calculates the distance between
                         ; (QQ0, QQ1) and (s1_hi, s0_hi) to find the closest one
@@ -19293,7 +19293,7 @@ ENDIF
                         ; right)
 
  ASL A                  ; Set XX12 = 104 + x-delta * 4
- ASL A                  \
+ ASL A                  ;
  ADC #104               ; 104 is the x-coordinate of the centre of the chart,
  STA XX12               ; so this sets XX12 to the centre 104 +/- 76, the pixel
                         ; x-coordinate of this system
@@ -19313,7 +19313,7 @@ ENDIF
                         ; chart's centre, or positive if it's below)
 
  ASL A                  ; Set K4 = 90 + y-delta * 2
- ADC #90                \
+ ADC #90                ;
  STA K4                 ; 90 is the y-coordinate of the centre of the chart,
                         ; so this sets K4 to the centre 90 +/- 74, the pixel
                         ; y-coordinate of this system
@@ -19390,13 +19390,13 @@ ENDIF
                         ; doesn't mean the two sizes affect each other
 
                         ; We now have the following:
-                        \
+                        ;
                         ;   K(1 0)  = radius of star (2, 3 or 4)
-                        \
+                        ;
                         ;   K3(1 0) = pixel x-coordinate of system
-                        \
+                        ;
                         ;   K4(1 0) = pixel y-coordinate of system
-                        \
+                        ;
                         ; which we can now pass to the SUN routine to draw a
                         ; small "sun" on the Short-range Chart for this system
 
@@ -19503,10 +19503,10 @@ ENDIF
                         ; and check the distance from (QQ9, QQ10). We get the
                         ; galactic coordinates of each system from the system's
                         ; seeds, like this:
-                        \
+                        ;
                         ;   x = s1_hi (which is stored in QQ15+3)
                         ;   y = s0_hi (which is stored in QQ15+1)
-                        \
+                        ;
                         ; so the following loops through each system in the
                         ; galaxy in turn and calculates the distance between
                         ; (QQ9, QQ10) and (s1_hi, s0_hi) to find the closest one
@@ -19553,7 +19553,7 @@ ENDIF
 
  LSR A                  ; Set A = S + A / 2
  CLC                    ;       = |s1_hi - QQ9| / 2 + |s0_hi - QQ10| / 2
- ADC S                  \
+ ADC S                  ;
                         ; So A now contains the sum of the horizontal and
                         ; vertical distances, both divided by 2 so the result
                         ; fits into one byte, and although this doesn't contain
@@ -19684,10 +19684,10 @@ ENDIF
                         ;           = y_delta ^ 2
 
                         ; By this point we have the following results:
-                        \
+                        ;
                         ;   K(1 0) = x_delta ^ 2
                         ;    (A P) = y_delta ^ 2
-                        \
+                        ;
                         ; so to find the distance between the two points, we
                         ; can use Pythagoras - so first we need to add the two
                         ; results together, and then take the square root
@@ -19705,7 +19705,7 @@ ENDIF
 
  ADC K+1                ; Set R = A + K+1, which adds the high bytes of the two
  STA R                  ; calculated values, so we now have:
-                        \
+                        ;
                         ;   (R Q) = K(1 0) + (A P)
                         ;         = (x_delta ^ 2) + (y_delta ^ 2)
 
@@ -19931,7 +19931,7 @@ IF _TEXT_SOURCES
  JSR TT111              ; Call TT111 to set the current system to the nearest
                         ; system to (QQ9, QQ10), and put the seeds of the
                         ; nearest system into QQ15 to QQ15+5
-                        \
+                        ;
                         ; This appears to be a failed attempt to fix a bug in
                         ; the cassette version, where the galactic hyperdrive
                         ; will take us to coordinates (96, 96) in the new
@@ -19939,13 +19939,13 @@ IF _TEXT_SOURCES
                         ; so if we jump when you are low on fuel, it is
                         ; possible to get stuck in the middle of nowhere when
                         ; changing galaxy
-                        \
+                        ;
                         ; All the other versions contain a fix for this bug that
                         ; involves adding an extra JSR TT111 instruction after
                         ; the coordinates are set to (96, 96) below, which finds
                         ; the nearest system to those coordinates  and sets that
                         ; as the current system
-                        \
+                        ;
                         ; The cassette version on the original source disc
                         ; doesn't contain this instruction, and although the
                         ; text sources do, it's in the wrong place at the start
@@ -20237,12 +20237,12 @@ ENDIF
  LDA QQ26               ; Fetch the random number for this system visit and
  AND QQ23+3,X           ; AND with byte #3 from the market prices table (mask)
                         ; to give:
-                        \
+                        ;
                         ;   A = random AND mask
 
  CLC                    ; Add byte #0 from the market prices table (base_price),
  ADC QQ23,X             ; so we now have:
- STA QQ24               \
+ STA QQ24               ;
                         ;   A = base_price + (random AND mask)
 
  JSR TT152              ; Call TT152 to print the item's unit ("t", "kg" or
@@ -20256,10 +20256,10 @@ ENDIF
                         ; is negative)
 
  LDA QQ24               ; Set A = QQ24 + QQ19+3
- ADC QQ19+3             \
+ ADC QQ19+3             ;
                         ;       = base_price + (random AND mask)
                         ;         + (economy * |economic_factor|)
-                        \
+                        ;
                         ; which is the result we want, as the economic_factor
                         ; is positive
 
@@ -20268,10 +20268,10 @@ ENDIF
 .TT155
 
  LDA QQ24               ; Set A = QQ24 - QQ19+3
- SEC                    \
+ SEC                    ;
  SBC QQ19+3             ;       = base_price + (random AND mask)
                         ;         - (economy * |economic_factor|)
-                        \
+                        ;
                         ; which is the result we want, as economic_factor
                         ; is negative
 
@@ -20538,7 +20538,7 @@ ENDIF
 
  LDA QQ19+1             ; Extract bits 0-5 from QQ19+1 into A, to get the
  AND #31                ; economic_factor without its sign, in other words:
-                        \
+                        ;
                         ;   A = |economic_factor|
 
  LDY QQ28               ; Set Y to the economy byte of the current system
@@ -20557,7 +20557,7 @@ ENDIF
                         ; loop adds QQ19+2 (|economic_factor|) to A, and it
                         ; loops the number of times given by the economy byte;
                         ; in other words, because A starts at 0, this sets:
-                        \
+                        ;
                         ;   A = economy * |economic_factor|
 
  DEY                    ; Decrement the economy in Y, exiting the loop when it
@@ -20703,12 +20703,12 @@ ENDIF
  LDA QQ23+3,X           ; Fetch byte #3 from the market prices table (mask) and
  AND QQ26               ; AND with the random number for this system visit
                         ; to give:
-                        \
+                        ;
                         ;   A = random AND mask
 
  CLC                    ; Add byte #2 from the market prices table
  ADC QQ23+2,X           ; (base_quantity) so we now have:
-                        \
+                        ;
                         ;   A = base_quantity + (random AND mask)
 
  LDY QQ19+1             ; Fetch the byte #1 that we stored above and jump to
@@ -20716,10 +20716,10 @@ ENDIF
                         ; is negative)
 
  SEC                    ; Set A = A - QQ19+3
- SBC QQ19+3             \
+ SBC QQ19+3             ;
                         ;       = base_quantity + (random AND mask)
                         ;         - (economy * |economic_factor|)
-                        \
+                        ;
                         ; which is the result we want, as the economic_factor
                         ; is positive
 
@@ -20728,10 +20728,10 @@ ENDIF
 .TT157
 
  CLC                    ; Set A = A + QQ19+3
- ADC QQ19+3             \
+ ADC QQ19+3             ;
                         ;       = base_quantity + (random AND mask)
                         ;         + (economy * |economic_factor|)
-                        \
+                        ;
                         ; which is the result we want, as the economic_factor
                         ; is negative
 
@@ -20776,7 +20776,7 @@ ENDIF
 .GTHG
 
  JSR Ze                 ; Call Ze to initialise INWK
-                        \
+                        ;
                         ; Note that because Ze uses the value of X returned by
                         ; DORND, and X contains the value of A returned by the
                         ; previous call to DORND, this does not set the new ship
@@ -21087,22 +21087,22 @@ ENDIF
 .LCASH
 
  STX T1                 ; Subtract the least significant bytes:
- LDA CASH+3             \
+ LDA CASH+3             ;
  SEC                    ;   CASH+3 = CASH+3 - X
  SBC T1
  STA CASH+3
 
  STY T1                 ; Then the second most significant bytes:
- LDA CASH+2             \
+ LDA CASH+2             ;
  SBC T1                 ;   CASH+2 = CASH+2 - Y
  STA CASH+2
 
  LDA CASH+1             ; Then the third most significant bytes (which are 0):
- SBC #0                 \
+ SBC #0                 ;
  STA CASH+1             ;   CASH+1 = CASH+1 - 0
 
  LDA CASH               ; And finally the most significant bytes (which are 0):
- SBC #0                 \
+ SBC #0                 ;
  STA CASH               ;   CASH = CASH - 0
 
  BCS TT113              ; If the C flag is set then the subtraction didn't
@@ -21141,20 +21141,20 @@ ENDIF
 .MCASH
 
  TXA                    ; Add the least significant bytes:
- CLC                    \
+ CLC                    ;
  ADC CASH+3             ;   CASH+3 = CASH+3 + X
  STA CASH+3
 
  TYA                    ; Then the second most significant bytes:
- ADC CASH+2             \
+ ADC CASH+2             ;
  STA CASH+2             ;   CASH+2 = CASH+2 + Y
 
  LDA CASH+1             ; Then the third most significant bytes (which are 0):
- ADC #0                 \
+ ADC #0                 ;
  STA CASH+1             ;   CASH+1 = CASH+1 + 0
 
  LDA CASH               ; And finally the most significant bytes (which are 0):
- ADC #0                 \
+ ADC #0                 ;
  STA CASH               ;   CASH = CASH + 0
 
  CLC                    ; Clear the C flag, so if the above was done following
@@ -21265,14 +21265,14 @@ ENDIF
  ADC #3                 ; now set to between 3 and 17)
 
  CMP #12                ; If A >= 12 then set A = 12, so A is now set to between
- BCC P%+4               ; 3 and 12
+ BCC *+4               ; 3 and 12
  LDA #12
 
  STA Q                  ; Set QQ25 = A (so QQ25 is in the range 3-12 and
  STA QQ25               ; represents number of the most advanced item available
  INC Q                  ; in this system, which we can pass to gnum below when
                         ; asking which item we want to buy)
-                        \
+                        ;
                         ; Set Q = A + 1 (so Q is in the range 4-13 and contains
                         ; QQ25 + 1, i.e. the highest item number on sale + 1)
 
@@ -21486,7 +21486,7 @@ ENDIF
  BEQ ed5                ; LASER+X, which contains the laser power for view X,
                         ; is zero), jump to ed5 to buy a beam laser
 
-;BPL P%+4               ; This instruction is commented out in the original
+;BPL *+4               ; This instruction is commented out in the original
                         ; source, though it would have no effect (it would
                         ; simply skip the BMI if A is positive, which is what
                         ; BMI does anyway)
@@ -21868,14 +21868,14 @@ ENDIF
 ; ******************************************************************************
 
  PRINT "ELITE D"
- PRINT "Assembled at ", ~CODE_D%
- PRINT "Ends at ", ~P%
- PRINT "Code size is ", ~(P% - CODE_D%)
- PRINT "Execute at ", ~LOAD%
- PRINT "Reload at ", ~LOAD_D%
+ PRINT "Assembled at ", CODE_D%
+ PRINT "Ends at ", *
+ PRINT "Code size is ", (* - CODE_D%)
+ PRINT "Execute at ", LOAD%
+ PRINT "Reload at ", LOAD_D%
 
- PRINT "S.ELTD ", ~CODE_D%, " ", ~P%, " ", ~LOAD%, " ", ~LOAD_D%
- SAVE "3-assembled-output/ELTD.bin", CODE_D%, P%, LOAD%
+ PRINT "S.ELTD ", ~CODE_D%, " ", ~*, " ", LOAD%, " ", LOAD_D%
+ SAVE "3-assembled-output/ELTD.bin", CODE_D%, *, LOAD%
 
 ; ******************************************************************************
 ;
@@ -21885,8 +21885,8 @@ ENDIF
 ;
 ; ******************************************************************************
 
- CODE_E% = P%
- LOAD_E% = LOAD% + P% - CODE%
+ CODE_E% = *
+ LOAD_E% = LOAD% + * - CODE%
 
 ; ******************************************************************************
 ;
@@ -21965,7 +21965,7 @@ ENDIF
 
  BIT QQ15               ; Check bit 6 of s0_lo, which is stored in QQ15
 
- BVS P%+3               ; If bit 6 is set then skip over the next instruction
+ BVS *+3               ; If bit 6 is set then skip over the next instruction
 
  DEY                    ; Bit 6 is clear, so we only want to loop three times,
                         ; so decrement the loop counter in Y
@@ -21977,7 +21977,7 @@ ENDIF
  LDA QQ15+5             ; Step 2: Load s2_hi, which is stored in QQ15+5, and
  AND #%00011111         ; extract bits 0-4 by AND'ing with %11111
 
- BEQ P%+7               ; If all those bits are zero, then skip the following
+ BEQ *+7               ; If all those bits are zero, then skip the following
                         ; two instructions to go to step 3
 
  ORA #%10000000         ; We now have a number in the range 1-31, which we can
@@ -22321,7 +22321,7 @@ ENDIF
                         ; and return from the subroutine using a tail call
 
  DEX                    ; If token > 3, skip the following instruction
- BNE P%+5
+ BNE *+5
 
  JMP cpl                ; This token is control code 3 (selected system name)
                         ; so jump to cpl to print the selected system name
@@ -22336,7 +22336,7 @@ ENDIF
                         ; and return from the subroutine using a tail call
 
  DEX                    ; If token > 6, skip the following three instructions
- BNE P%+7
+ BNE *+7
 
  LDA #%10000000         ; This token is control code 6 (switch to Sentence
  STA QQ17               ; Case), so set bit 7 of QQ17 to switch to Sentence Case
@@ -22344,7 +22344,7 @@ ENDIF
 
  DEX                    ; If token > 8, skip the following two instructions
  DEX
- BNE P%+5
+ BNE *+5
 
  STX QQ17               ; This token is control code 8 (switch to ALL CAPS), so
  RTS                    ; set QQ17 to 0 to switch to ALL CAPS and return from
@@ -22361,7 +22361,7 @@ ENDIF
                         ; correct and doesn't need correcting)
 
  CMP #14                ; If token < 14, skip the following two instructions
- BCC P%+6
+ BCC *+6
 
  CMP #32                ; If token < 32, then this means token is in 14-31, so
  BCC qw                 ; this is a recursive token that needs 114 adding to it
@@ -22868,7 +22868,7 @@ ENDIF
  INY                    ; Increment Y to point to the next character in the
                         ; token we are printing
 
- BNE P%+4               ; If Y is zero then we have just crossed into a new
+ BNE *+4               ; If Y is zero then we have just crossed into a new
  INC V+1                ; page, so increment V+1 so that V points to the start
                         ; of the new page
 
@@ -22905,7 +22905,7 @@ ENDIF
 
  LDA INWK+31            ; If bit 6 of the ship's byte #31 is clear, then the
  AND #%01000000         ; ship is not already exploding so there is no existing
- BEQ P%+5               ; explosion cloud to remove, so skip the following
+ BEQ *+5               ; explosion cloud to remove, so skip the following
                         ; instruction
 
  JSR PTCLS              ; Call PTCLS to remove the existing cloud by drawing it
@@ -22917,7 +22917,7 @@ ENDIF
  LDA INWK+7             ; Set A = z_hi, so (A T) = z
 
  CMP #32                ; If z_hi < 32, skip the next two instructions
- BCC P%+6
+ BCC *+6
 
  LDA #$FE               ; Set A = 254 and jump to yy (this BNE is effectively a
  BNE yy                 ; JMP, as A is never zero)
@@ -22953,20 +22953,20 @@ ENDIF
                         ; line heap
 
  JSR DVID4              ; Calculate the following:
-                        \
+                        ;
                         ;   (P R) = 256 * A / Q
                         ;         = 256 * cloud counter / distance
-                        \
+                        ;
                         ; We are going to use this as our cloud size, so the
                         ; further away the cloud, the smaller it is, and as the
                         ; cloud counter ticks onward, the cloud expands
 
  LDA P                  ; Set A = P, so we now have:
-                        \
+                        ;
                         ;   (A R) = 256 * cloud counter / distance
 
  CMP #$1C               ; If A < 28, skip the next two instructions
- BCC P%+6
+ BCC *+6
 
  LDA #$FE               ; Set A = 254 and skip the following (this BNE is
  BNE LABEL_1            ; effectively a JMP as A is never zero)
@@ -22980,7 +22980,7 @@ ENDIF
 
                         ; Overall, the above multiplies (A R) by 8 to leave a
                         ; one-byte cloud size in A, given by the following:
-                        \
+                        ;
                         ;   A = 8 * cloud counter / distance
 
 .LABEL_1
@@ -23002,7 +23002,7 @@ ENDIF
  TAY                    ; set to the explosion count for this ship (i.e. the
                         ; number of vertices used as origins for explosion
                         ; clouds)
-                        \
+                        ;
                         ; The explosion count is stored as 4 * n + 6, where n is
                         ; the number of vertices, so the following loop copies
                         ; the coordinates of the first n vertices from the heap
@@ -23042,7 +23042,7 @@ ENDIF
                         ; the cloud counter. We are now going to process this
                         ; into the number of particles in each vertex's cloud
 
- BPL P%+4               ; If the cloud counter < 128, then we are in the first
+ BPL *+4               ; If the cloud counter < 128, then we are in the first
                         ; half of the cloud's existence, so skip the next
                         ; instruction
 
@@ -23092,7 +23092,7 @@ ENDIF
                         ; The above loop copies the vertex coordinates from the
                         ; ship line heap to K3, reversing them as we go, so it
                         ; sets the following:
-                        \
+                        ;
                         ;   K3+3 = x_lo
                         ;   K3+2 = x_hi
                         ;   K3+1 = y_lo
@@ -23111,7 +23111,7 @@ ENDIF
                         ; generate random numbers for drawing each vertex that
                         ; are random but repeatable, which we need when we
                         ; redraw the cloud to remove it
-                        \
+                        ;
                         ; Note that we haven't actually set the values of bytes
                         ; #3 to #6 in the ship line heap, so we have no idea
                         ; what they are, we just use what's already there. But
@@ -23219,9 +23219,9 @@ ENDIF
 .EXS1
 
                         ; This routine calculates the following:
-                        \
+                        ;
                         ;   (A X) = (A R) +/- random * cloud size
-                        \
+                        ;
                         ; returning with the flags set for the high byte in A
 
  STA S                  ; Store A in S so we can use it later
@@ -23238,7 +23238,7 @@ ENDIF
 
  ADC R                  ; Set (A X) = (S R) + A
  TAX                    ;           = (S R) + random * projected cloud size
-                        \
+                        ;
                         ; where S contains the argument A, starting with the low
                         ; bytes
 
@@ -23253,7 +23253,7 @@ ENDIF
  STA T                  ;       = random << 1 * projected cloud size / 256
 
  LDA R                  ; Set (A X) = (S R) - T
- SBC T                  \
+ SBC T                  ;
  TAX                    ; where S contains the argument A, starting with the low
                         ; bytes
 
@@ -23665,7 +23665,7 @@ ENDIF
 
  PHP                    ; Save the flags on the stack
 
- BNE P%+5               ; If the energy levels are not yet zero, skip the
+ BNE *+5               ; If the energy levels are not yet zero, skip the
                         ; following instruction
 
  INC ENERGY             ; The minimum allowed energy level is 1, and we just
@@ -23737,7 +23737,7 @@ ENDIF
  TXA                    ; Copy X into A, so A now contains the argument A * 2
 
  JSR DVID4              ; Calculate the following:
-                        \
+                        ;
                         ;   P = A / Q
                         ;     = |argument A| * 2 / 20
                         ;     = |argument A| / 10
@@ -23863,7 +23863,7 @@ ENDIF
                         ; vector is therefore positive, we want to show the dot
                         ; higher up on the compass, which has a smaller pixel
                         ; y-coordinate). So this calculation does this:
-                        \
+                        ;
                         ;   COMY = 204 - X - (1 - 0) = 203 - X
 
  LDA #$F0               ; Set A to a 4-pixel mode 5 byte row in colour 2
@@ -23871,7 +23871,7 @@ ENDIF
                         ; station in the compass is in front of us
 
  LDX XX15+2             ; If the z-coordinate of the XX15 vector is positive,
- BPL P%+4               ; skip the following instruction
+ BPL *+4               ; skip the following instruction
 
  LDA #$FF               ; The z-coordinate of XX15 is negative, so the planet or
                         ; station is behind us and the compass dot should be in
@@ -24155,10 +24155,10 @@ ENDIF
                         ; appear to drain away four times faster than the
                         ; shields did)
 
- BEQ P%+4               ; If we have just run out of energy, skip the next
+ BEQ *+4               ; If we have just run out of energy, skip the next
                         ; instruction to jump straight to our death
 
- BCS P%+5               ; If the C flag is set, then subtracting the damage from
+ BCS *+5               ; If the C flag is set, then subtracting the damage from
                         ; the energy banks didn't underflow, so we had enough
                         ; energy to survive, and we can skip the next
                         ; instruction to make a sound and take some damage
@@ -24441,7 +24441,7 @@ ENDIF
                         ; for both this new line heap and the new data block
                         ; for our ship. In memory, this is the layout of the
                         ; ship data blocks and ship line heaps:
-                        \
+                        ;
                         ;   +-----------------------------------+   $0F34
                         ;   |                                   |
                         ;   | WP workspace                      |
@@ -24471,20 +24471,20 @@ ENDIF
                         ;   | Existing ship data blocks         |
                         ;   |                                   |
                         ;   +-----------------------------------+   $0900 = K%
-                        \
+                        ;
                         ; So, to work out if we have enough space, we have to
                         ; make sure there is room between the end of our new
                         ; ship data block at INF + NI%, and the start of the
                         ; proposed heap for our new ship at the address we
                         ; stored in INWK(34 33). Or, to put it another way, we
                         ; and to make sure that:
-                        \
+                        ;
                         ;   INWK(34 33) > INF + NI%
-                        \
+                        ;
                         ; which is the same as saying:
-                        \
+                        ;
                         ;   INWK+33 - INF > NI%
-                        \
+                        ;
                         ; because INWK is in zero page, so INWK+34 = 0
 
  LDA INWK+33            ; Calculate INWK+33 - INF, again using 16-bit
@@ -24539,7 +24539,7 @@ ENDIF
 
  TAX                    ; Copy the ship type into X
 
- BMI P%+5               ; If the ship type is negative (planet or sun), then
+ BMI *+5               ; If the ship type is negative (planet or sun), then
                         ; skip the following instruction
 
  INC MANY,X             ; Increment the total number of ships of type X
@@ -24888,13 +24888,13 @@ ENDIF
                         ; So the low byte of SC(1 0) contains the row address
                         ; for the rightmost missile indicator, made up as
                         ; follows:
-                        \
+                        ;
                         ;   * 48 (character block 7, as byte #7 * 8 = 48), the
                         ;     character block of the rightmost missile
-                        \
+                        ;
                         ;   * 1 (so we start drawing on the second row of the
                         ;     character block)
-                        \
+                        ;
                         ;   * Move left one character (8 bytes) for each count
                         ;     of X, so when X = 0 we are drawing the rightmost
                         ;     missile, for X = 1 we hop to the left by one
@@ -24987,7 +24987,7 @@ ENDIF
  LDA INWK+2             ; Set A = x_sign
 
  JSR PLS6               ; Call PLS6 to calculate:
-                        \
+                        ;
                         ;   (X K) = (A P) / (z_sign z_hi z_lo)
                         ;         = (x_sign x_hi x_lo) / (z_sign z_hi z_lo)
                         ;         = x / z
@@ -24999,7 +24999,7 @@ ENDIF
 
  LDA K                  ; Set K3(1 0) = (X K) + #X
  ADC #X                 ;             = #X + x / z
- STA K3                 \
+ STA K3                 ;
                         ; first doing the low bytes
 
  TXA                    ; And then the high bytes. #X is the x-coordinate of
@@ -25015,7 +25015,7 @@ ENDIF
  EOR #%10000000
 
  JSR PLS6               ; Call PLS6 to calculate:
-                        \
+                        ;
                         ;   (X K) = (A P) / (z_sign z_hi z_lo)
                         ;         = -(y_sign y_hi y_lo) / (z_sign z_hi z_lo)
                         ;         = -y / z
@@ -25027,7 +25027,7 @@ ENDIF
 
  LDA K                  ; Set K4(1 0) = (X K) + #Y
  ADC #Y                 ;             = #Y - y / z
- STA K4                 \
+ STA K4                 ;
                         ; first doing the low bytes
 
  TXA                    ; And then the high bytes. #Y is the y-coordinate of
@@ -25058,7 +25058,7 @@ ENDIF
  LDA TYPE               ; Shift bit 0 of the planet/sun's type into the C flag
  LSR A
 
- BCS P%+5               ; If the planet/sun's type has bit 0 clear, then it's
+ BCS *+5               ; If the planet/sun's type has bit 0 clear, then it's
                         ; either 128 or 130, which is a planet; meanwhile, the
                         ; sun has type 129, which has bit 0 set. So if this is
                         ; the sun, skip the following instruction
@@ -25115,16 +25115,16 @@ ENDIF
                         ; a tail call
 
  LDA #96                ; Set (A P+1 P) = (0 96 0) = 24576
- STA P+1                \
+ STA P+1                ;
  LDA #0                 ; This represents the planet/sun's radius at a distance
  STA P                  ; of z = 1
 
  JSR DVID3B2            ; Call DVID3B2 to calculate:
-                        \
+                        ;
                         ;   K(3 2 1 0) = (A P+1 P) / (z_sign z_hi z_lo)
                         ;              = (0 96 0) / z
                         ;              = 24576 / z
-                        \
+                        ;
                         ; so K now contains the planet/sun's radius, reduced by
                         ; the actual distance to the planet/sun. We know that
                         ; K+3 and K+2 will be 0, as the number we are dividing,
@@ -25242,32 +25242,32 @@ ENDIF
  LDA INWK+20            ; Set A = roofv_z_hi
 
  JSR PLS4               ; Call PLS4 to calculate the following:
-                        \
+                        ;
                         ;   CNT2 = arctan(P / A) / 4
                         ;        = arctan(-nosev_z_hi / roofv_z_hi) / 4
-                        \
+                        ;
                         ; and do the following if nosev_z_hi >= 0:
-                        \
+                        ;
                         ;   CNT2 = CNT2 + PI
 
  LDX #9                 ; Set X to 9 so the call to PLS1 divides nosev_x
 
  JSR PLS1               ; Call PLS1 to calculate the following:
- STA K2                 \
+ STA K2                 ;
  STY XX16               ;   (XX16 K2) = nosev_x / z
-                        \
+                        ;
                         ; and increment X to point to nosev_y for the next call
 
  JSR PLS1               ; Call PLS1 to calculate the following:
- STA K2+1               \
+ STA K2+1               ;
  STY XX16+1             ;   (XX16+1 K2+1) = nosev_y / z
 
  LDX #15                ; Set X to 15 so the call to PLS5 divides roofv_x
 
  JSR PLS5               ; Call PLS5 to calculate the following:
-                        \
+                        ;
                         ;   (XX16+2 K2+2) = roofv_x / z
-                        \
+                        ;
                         ;   (XX16+3 K2+3) = roofv_y / z
 
  JSR PLS2               ; Call PLS2 to draw the first meridian
@@ -25280,20 +25280,20 @@ ENDIF
                         ; 90 degrees to the first
 
  JSR PLS4               ; Call PLS4 to calculate the following:
-                        \
+                        ;
                         ;   CNT2 = arctan(P / A) / 4
                         ;        = arctan(-nosev_z_hi / sidev_z_hi) / 4
-                        \
+                        ;
                         ; and do the following if nosev_z_hi >= 0:
-                        \
+                        ;
                         ;   CNT2 = CNT2 + PI
 
  LDX #21                ; Set X to 21 so the call to PLS5 divides sidev_x
 
  JSR PLS5               ; Call PLS5 to calculate the following:
-                        \
+                        ;
                         ;   (XX16+2 K2+2) = sidev_x / z
-                        \
+                        ;
                         ;   (XX16+3 K2+3) = sidev_y / z
 
  JMP PLS2               ; Jump to PLS2 to draw the second meridian, returning
@@ -25337,18 +25337,18 @@ ENDIF
                         ; roofv
 
  JSR PLS3               ; Call PLS3 to calculate:
-                        \
+                        ;
                         ;   (Y A P) = 222 * roofv_x / z
-                        \
+                        ;
                         ; to give the x-coordinate of the crater offset and
                         ; increment X to point to roofv_y for the next call
 
  CLC                    ; Calculate:
- ADC K3                 \
+ ADC K3                 ;
  STA K3                 ;   K3(1 0) = (Y A) + K3(1 0)
                         ;           = 222 * roofv_x / z + x-coordinate of planet
                         ;             centre
-                        \
+                        ;
                         ; starting with the high bytes
 
  TYA                    ; And then doing the low bytes, so now K3(1 0) contains
@@ -25356,17 +25356,17 @@ ENDIF
  STA K3+1               ; centre to give the x-coordinate of the crater's centre
 
  JSR PLS3               ; Call PLS3 to calculate:
-                        \
+                        ;
                         ;   (Y A P) = 222 * roofv_y / z
-                        \
+                        ;
                         ; to give the y-coordinate of the crater offset
 
  STA P                  ; Calculate:
- LDA K4                 \
+ LDA K4                 ;
  SEC                    ;   K4(1 0) = K4(1 0) - (Y A)
  SBC P                  ;           = 222 * roofv_y / z - y-coordinate of planet
  STA K4                 ;             centre
-                        \
+                        ;
                         ; starting with the low bytes
 
  STY P                  ; And then doing the low bytes, so now K4(1 0) contains
@@ -25378,9 +25378,9 @@ ENDIF
                         ; nosev
 
  JSR PLS1               ; Call PLS1 to calculate the following:
-                        \
+                        ;
                         ;   (Y A) = nosev_x / z
-                        \
+                        ;
                         ; and increment X to point to nosev_y for the next call
 
  LSR A                  ; Set (XX16 K2) = (Y A) / 2
@@ -25388,9 +25388,9 @@ ENDIF
  STY XX16
 
  JSR PLS1               ; Call PLS1 to calculate the following:
-                        \
+                        ;
                         ;   (Y A) = nosev_y / z
-                        \
+                        ;
                         ; and increment X to point to nosev_z for the next call
 
  LSR A                  ; Set (XX16+1 K2+1) = (Y A) / 2
@@ -25401,9 +25401,9 @@ ENDIF
                         ; sidev
 
  JSR PLS1               ; Call PLS1 to calculate the following:
-                        \
+                        ;
                         ;   (Y A) = sidev_x / z
-                        \
+                        ;
                         ; and increment X to point to sidev_y for the next call
 
  LSR A                  ; Set (XX16+2 K2+2) = (Y A) / 2
@@ -25411,9 +25411,9 @@ ENDIF
  STY XX16+2
 
  JSR PLS1               ; Call PLS1 to calculate the following:
-                        \
+                        ;
                         ;   (Y A) = sidev_y / z
-                        \
+                        ;
                         ; and increment X to point to sidev_z for the next call
 
  LSR A                  ; Set (XX16+3 K2+3) = (Y A) / 2
@@ -25491,14 +25491,14 @@ ENDIF
  AND #%10000000
 
  JSR DVID3B2            ; Call DVID3B2 to calculate:
-                        \
+                        ;
                         ;   K(3 2 1 0) = (A P+1 P) / (z_sign z_hi z_lo)
 
  LDA K                  ; Fetch the lowest byte of the result into A
 
  LDY K+1                ; Fetch the second byte of the result into Y
 
- BEQ P%+4               ; If the second byte is 0, skip the next instruction
+ BEQ *+4               ; If the second byte is 0, skip the next instruction
 
  LDA #254               ; The second byte is non-zero, so the result won't fit
                         ; into one byte, so set A = 254 as our maximum one-byte
@@ -25617,17 +25617,17 @@ ENDIF
 .PLL4
 
  LDA CNT2               ; Set X = CNT2 mod 32
- AND #31                \
+ AND #31                ;
  TAX                    ; So X is the starting segment, reduced to the range 0
                         ; to 32, so as there are 64 segments in the circle, this
                         ; reduces the starting angle to 0 to 180 degrees, so we
                         ; can use X as an index into the sine table (which only
                         ; contains values for segments 0 to 31)
-                        \
+                        ;
                         ; Also, because CNT2 mod 32 is in the range 0 to 180
                         ; degrees, we know that sin(CNT2 mod 32) is always
                         ; positive, or to put it another way:
-                        \
+                        ;
                         ;   sin(CNT2 mod 32) = |sin(CNT2)|
 
  LDA SNE,X              ; Set Q = sin(X)
@@ -25648,41 +25648,41 @@ ENDIF
 
  LDX CNT2               ; If CNT2 >= 33 then this sets the C flag, otherwise
  CPX #33                ; it's clear, so this means that:
-                        \
+                        ;
                         ;   * C is clear if the segment starts in the first half
                         ;     of the circle, 0 to 180 degrees
-                        \
+                        ;
                         ;   * C is set if the segment starts in the second half
                         ;     of the circle, 180 to 360 degrees
-                        \
+                        ;
                         ; In other words, the C flag contains the sign bit for
                         ; sin(CNT2), which is positive for 0 to 180 degrees
                         ; and negative for 180 to 360 degrees
 
  LDA #0                 ; Shift the C flag into the sign bit of XX16+5, so
  ROR A                  ; XX16+5 has the correct sign for sin(CNT2)
- STA XX16+5             \
+ STA XX16+5             ;
                         ; Because we set the following above:
-                        \
+                        ;
                         ;   K = |v_y| * |sin(CNT2)|
                         ;   R = |v_x| * |sin(CNT2)|
-                        \
+                        ;
                         ; we can add XX16+5 as the high byte to give us the
                         ; following:
-                        \
+                        ;
                         ;   (XX16+5 K) = |v_y| * sin(CNT2)
                         ;   (XX16+5 R) = |v_x| * sin(CNT2)
 
  LDA CNT2               ; Set X = (CNT2 + 16) mod 32
- CLC                    \
+ CLC                    ;
  ADC #16                ; So we can use X as a lookup index into the SNE table
  AND #31                ; to get the cosine (as there are 16 segments in a
  TAX                    ; quarter-circle)
-                        \
+                        ;
                         ; Also, because the sine table only contains positive
                         ; values, we know that sin((CNT2 + 16) mod 32) will
                         ; always be positive, or to put it another way:
-                        \
+                        ;
                         ;   sin((CNT2 + 16) mod 32) = |cos(CNT2)|
 
  LDA SNE,X              ; Set Q = sin(X)
@@ -25700,65 +25700,65 @@ ENDIF
 
  JSR FMLTU              ; Set P = A * Q / 256
  STA P                  ;       = |u_x| * |cos(CNT2)|
-                        \
+                        ;
                         ; The call to FMLTU also sets the C flag, so in the
                         ; following, ADC #15 adds 16 rather than 15
 
  LDA CNT2               ; If (CNT2 + 16) mod 64 >= 33 then this sets the C flag,
  ADC #15                ; otherwise it's clear, so this means that:
- AND #63                \
+ AND #63                ;
  CMP #33                ;   * C is clear if the segment starts in the first or
                         ;     last quarter of the circle, 0 to 90 degrees or 270
                         ;     to 360 degrees
-                        \
+                        ;
                         ;   * C is set if the segment starts in the second or
                         ;     third quarter of the circle, 90 to 270 degrees
-                        \
+                        ;
                         ; In other words, the C flag contains the sign bit for
                         ; cos(CNT2), which is positive for 0 to 90 degrees or
                         ; 270 to 360 degrees, and negative for 90 to 270 degrees
 
  LDA #0                 ; Shift the C flag into the sign bit of XX16+4, so:
  ROR A                  ; XX16+4 has the correct sign for cos(CNT2)
- STA XX16+4             \
+ STA XX16+4             ;
                         ; Because we set the following above:
-                        \
+                        ;
                         ;   K+2 = |u_y| * |cos(CNT2)|
                         ;   P   = |u_x| * |cos(CNT2)|
-                        \
+                        ;
                         ; we can add XX16+4 as the high byte to give us the
                         ; following:
-                        \
+                        ;
                         ;   (XX16+4 K+2) = |u_y| * cos(CNT2)
                         ;   (XX16+4 P)   = |u_x| * cos(CNT2)
 
  LDA XX16+5             ; Set S = the sign of XX16+2 * XX16+5
  EOR XX16+2             ;       = the sign of v_x * XX16+5
- STA S                  \
+ STA S                  ;
                         ; So because we set this above:
-                        \
+                        ;
                         ;   (XX16+5 R) = |v_x| * sin(CNT2)
-                        \
+                        ;
                         ; we now have this:
-                        \
+                        ;
                         ;   (S R) = v_x * sin(CNT2)
 
  LDA XX16+4             ; Set A = the sign of XX16 * XX16+4
  EOR XX16               ;       = the sign of u_x * XX16+4
-                        \
+                        ;
                         ; So because we set this above:
-                        \
+                        ;
                         ;   (XX16+4 P)   = |u_x| * cos(CNT2)
-                        \
+                        ;
                         ; we now have this:
-                        \
+                        ;
                         ;   (A P) = u_x * cos(CNT2)
 
  JSR ADD                ; Set (A X) = (A P) + (S R)
                         ;           = u_x * cos(CNT2) + v_x * sin(CNT2)
 
  STA T                  ; Store the high byte in T, so the result is now:
-                        \
+                        ;
                         ;   (T X) = u_x * cos(CNT2) + v_x * sin(CNT2)
 
  BPL PL42               ; If the result is positive, jump down to PL42
@@ -25777,15 +25777,15 @@ ENDIF
 .PL42
 
  TXA                    ; Set K6(1 0) = K3(1 0) + (T X)
- ADC K3                 \
+ ADC K3                 ;
  STA K6                 ; starting with the low bytes
 
  LDA T                  ; And then doing the high bytes, so we now get:
- ADC K3+1               \
+ ADC K3+1               ;
  STA K6+1               ;   K6(1 0) = K3(1 0) + (T X)
                         ;           = K3(1 0) + u_x * cos(CNT2)
                         ;                     + v_x * sin(CNT2)
-                        \
+                        ;
                         ; K3(1 0) is the x-coordinate of the centre of the
                         ; ellipse, so we now have the correct x-coordinate for
                         ; our ellipse segment that we can pass to BLINE below
@@ -25795,13 +25795,13 @@ ENDIF
 
  LDA XX16+5             ; Set S = the sign of XX16+3 * XX16+5
  EOR XX16+3             ;       = the sign of v_y * XX16+5
- STA S                  \
+ STA S                  ;
                         ; So because we set this above:
-                        \
+                        ;
                         ;   (XX16+5 K) = |v_y| * sin(CNT2)
-                        \
+                        ;
                         ; and we just set R = K, we now have this:
-                        \
+                        ;
                         ;   (S R) = v_y * sin(CNT2)
 
  LDA K+2                ; Set P = K+2 = |u_y| * cos(CNT2)
@@ -25809,13 +25809,13 @@ ENDIF
 
  LDA XX16+4             ; Set A = the sign of XX16+1 * XX16+4
  EOR XX16+1             ;       = the sign of u_y * XX16+4
-                        \
+                        ;
                         ; So because we set this above:
-                        \
+                        ;
                         ;   (XX16+4 K+2) = |u_y| * cos(CNT2)
-                        \
+                        ;
                         ; and we just set P = K+2, we now have this:
-                        \
+                        ;
                         ;   (A P) = u_y * cos(CNT2)
 
  JSR ADD                ; Set (A X) = (A P) + (S R)
@@ -25823,9 +25823,9 @@ ENDIF
 
  EOR #%10000000         ; Store the negated high byte in T, so the result is
  STA T                  ; now:
-                        \
+                        ;
                         ;   (T X) = - u_y * cos(CNT2) - v_y * sin(CNT2)
-                        \
+                        ;
                         ; This negation is necessary because BLINE expects us
                         ; to pass pixel coordinates, where y-coordinates get
                         ; larger as we go down the screen; u_y and v_y, on the
@@ -25851,16 +25851,16 @@ ENDIF
 .PL43
 
                         ; We now call BLINE to draw the ellipse line segment
-                        \
+                        ;
                         ; The first few instructions of BLINE do the following:
-                        \
+                        ;
                         ;   K6(3 2) = K4(1 0) + (T X)
-                        \
+                        ;
                         ; which gives:
-                        \
+                        ;
                         ;   K6(3 2) = K4(1 0) - u_y * cos(CNT2)
                         ;                     - v_y * sin(CNT2)
-                        \
+                        ;
                         ; K4(1 0) is the pixel y-coordinate of the centre of the
                         ; ellipse, so this gives us the correct y-coordinate for
                         ; our ellipse segment (we already calculated the
@@ -25870,7 +25870,7 @@ ENDIF
                         ; the updated value of CNT in A
 
  CMP TGT                ; If CNT > TGT then jump to PL40 to stop drawing the
- BEQ P%+4               ; ellipse (which is how we draw half-ellipses)
+ BEQ *+4               ; ellipse (which is how we draw half-ellipses)
  BCS PL40
 
  LDA CNT2               ; Set CNT2 = (CNT2 + STP) mod 64
@@ -25926,7 +25926,7 @@ ENDIF
                         ; $FF, for when the new sun's centre is off the bottom
                         ; of the screen (so we don't need to draw its bottom
                         ; half)
-                        \
+                        ;
                         ; This happens when the y-coordinate of the centre of
                         ; the sun is bigger than the y-coordinate of the bottom
                         ; of the space view
@@ -25976,15 +25976,15 @@ ENDIF
  ROL A                  ; of A, otherwise rotate a 0 into bit 0
 
                         ; By now, A contains the following:
-                        \
+                        ;
                         ;   * If radius is 96-255 then A = %111 = 7
-                        \
+                        ;
                         ;   * If radius is 40-95  then A = %11  = 3
-                        \
+                        ;
                         ;   * If radius is 16-39  then A = %1   = 1
-                        \
+                        ;
                         ;   * If radius is 0-15   then A = %0   = 0
-                        \
+                        ;
                         ; The value of A determines the size of the new sun's
                         ; ragged fringes - the bigger the sun, the bigger the
                         ; fringes
@@ -26027,7 +26027,7 @@ ENDIF
                         ; from the centre of the new sun
 
  LDA #2*Y-1             ; Set (A X) = y-coordinate of bottom of screen - K4(1 0)
- SEC                    \
+ SEC                    ;
  SBC K4                 ; Starting with the low bytes
  TAX
 
@@ -26185,7 +26185,7 @@ ENDIF
  STA T
 
  LDA K2                 ; Set (R Q) = K^2 - V^2
- SEC                    \
+ SEC                    ;
  SBC P                  ; First calculating the low bytes
  STA Q
 
@@ -26198,7 +26198,7 @@ ENDIF
 
  JSR LL5                ; Set Q = SQRT(R Q)
                         ;       = SQRT(K^2 - V^2)
-                        \
+                        ;
                         ; So Q contains the half-width of the new sun's line at
                         ; height V from the sun's centre - in other words, it
                         ; contains the half-width of the sun's line on the
@@ -26212,7 +26212,7 @@ ENDIF
                         ; where CNT is the fringe size of the new sun
 
  CLC                    ; Set A = A + Q
- ADC Q                  \
+ ADC Q                  ;
                         ; So A now contains the half-width of the sun on row
                         ; V, plus a random variation based on the fringe size
 
@@ -26281,24 +26281,24 @@ ENDIF
                         ; X2 to XX+1 using EOR logic. The six possible
                         ; permutations are as follows, along with the result of
                         ; drawing X1 to XX and then X2 to XX+1:
-                        \
+                        ;
                         ;   X1    X2    XX____XX+1      ->      +__+  +  +
-                        \
+                        ;
                         ;   X1    XX____X2____XX+1      ->      +__+__+  +
-                        \
+                        ;
                         ;   X1    XX____XX+1  X2        ->      +__+__+__+
-                        \
+                        ;
                         ;   XX____X1____XX+1  X2        ->      +  +__+__+
-                        \
+                        ;
                         ;   XX____XX+1  X1    X2        ->      +  +  +__+
-                        \
+                        ;
                         ;   XX____X1____X2____XX+1      ->      +  +__+  +
-                        \
+                        ;
                         ; They all end up with a line between X1 and X2, which
                         ; is what we want. There's probably a mathematical proof
                         ; of why this works somewhere, but the above is probably
                         ; easier to follow.
-                        \
+                        ;
                         ; We can draw from X1 to XX and X2 to XX+1 by swapping
                         ; XX and X2 and drawing from X1 to X2, and then drawing
                         ; from XX to XX+1, so let's do this now
@@ -26556,14 +26556,14 @@ ENDIF
  LDA CNT                ; Set A = CNT
 
  JSR FMLTU2             ; Call FMLTU2 to calculate:
-                        \
+                        ;
                         ;   A = K * sin(A)
                         ;     = K * sin(CNT)
 
  LDX #0                 ; Set T = 0, so we have the following:
- STX T                  \
+ STX T                  ;
                         ;   (T A) = K * sin(CNT)
-                        \
+                        ;
                         ; which is the x-coordinate of the circle for this count
 
  LDX CNT                ; If CNT < 33 then jump to PL37, as this is the right
@@ -26587,16 +26587,16 @@ ENDIF
 .PL37
 
  ADC K3                 ; We now calculate the following:
- STA K6                 \
+ STA K6                 ;
                         ;   K6(1 0) = (T A) + K3(1 0)
-                        \
+                        ;
                         ; to add the coordinates of the centre to our circle
                         ; point, starting with the low bytes
 
  LDA K3+1               ; And then doing the high bytes, so we now have:
- ADC T                  \
+ ADC T                  ;
  STA K6+1               ;   K6(1 0) = K * sin(CNT) + K3(1 0)
-                        \
+                        ;
                         ; which is the result we want for the x-coordinate
 
  LDA CNT                ; Set A = CNT + 16
@@ -26604,7 +26604,7 @@ ENDIF
  ADC #16
 
  JSR FMLTU2             ; Call FMLTU2 to calculate:
-                        \
+                        ;
                         ;   A = K * sin(A)
                         ;     = K * sin(CNT + 16)
                         ;     = K * cos(CNT)
@@ -26613,9 +26613,9 @@ ENDIF
                         ;       = K * cos(CNT)
 
  LDA #0                 ; Set T = 0, so we have the following:
- STA T                  \
+ STA T                  ;
                         ;   (T X) = K * cos(CNT)
-                        \
+                        ;
                         ; which is the y-coordinate of the circle for this count
 
  LDA CNT                ; Set A = (CNT + 15) mod 64
@@ -26643,7 +26643,7 @@ ENDIF
                         ; CNT by STP, the step size
 
  CMP #65                ; If CNT >= 65 then skip the next instruction
- BCS P%+5
+ BCS *+5
 
  JMP PLL3               ; Jump back for the next segment
 
@@ -26790,7 +26790,7 @@ ENDIF
                         ; gives us the half-width of the sun's line on this line
                         ; of the screen
 
- BEQ P%+5               ; If A = 0, skip the following call to HLOIN2 as there
+ BEQ *+5               ; If A = 0, skip the following call to HLOIN2 as there
                         ; is no sun line on this line of the screen
 
  JSR HLOIN2             ; Call HLOIN2 to draw a horizontal line on pixel line Y,
@@ -26856,9 +26856,9 @@ ENDIF
  STA T                  ; Set T to the line's half-length in argument A
 
  CLC                    ; We now calculate:
- ADC YY                 \
+ ADC YY                 ;
  STA X2                 ;  (A X2) = YY(1 0) + A
-                        \
+                        ;
                         ; to set X2 to the x-coordinate of the right end of the
                         ; line, starting with the low bytes
 
@@ -26868,7 +26868,7 @@ ENDIF
  BMI ED1                ; If the addition is negative then the calculation has
                         ; overflowed, so jump to ED1 to return a failure
 
- BEQ P%+6               ; If the high byte A from the result is 0, skip the
+ BEQ *+6               ; If the high byte A from the result is 0, skip the
                         ; next two instructions, as the result already fits on
                         ; the screen
 
@@ -26877,9 +26877,9 @@ ENDIF
                         ; x-coordinate of the right edge of the screen
 
  LDA YY                 ; We now calculate:
- SEC                    \
+ SEC                    ;
  SBC T                  ;   (A X1) = YY(1 0) - argument A
- STA X1                 \
+ STA X1                 ;
                         ; to set X1 to the x-coordinate of the left end of the
                         ; line, starting with the low bytes
 
@@ -26959,9 +26959,9 @@ ENDIF
 
  LDA K3+1               ; Set A = K3+1 + 0 + any carry from above, so this
  ADC #0                 ; effectively sets A to the high byte of K3(1 0) + K:
-                        \
+                        ;
                         ;   (A ?) = K3(1 0) + K
-                        \
+                        ;
                         ; so A is the high byte of the x-coordinate of the right
                         ; edge of the circle
 
@@ -26976,9 +26976,9 @@ ENDIF
 
  LDA K3+1               ; Set A = K3+1 - 0 - any carry from above, so this
  SBC #0                 ; effectively sets A to the high byte of K3(1 0) - K:
-                        \
+                        ;
                         ;   (A ?) = K3(1 0) - K
-                        \
+                        ;
                         ; so A is the high byte of the x-coordinate of the left
                         ; edge of the circle
 
@@ -27003,9 +27003,9 @@ ENDIF
 
  LDA K4+1               ; Set A = K4+1 + 0 + any carry from above, so this
  ADC #0                 ; does the following:
-                        \
+                        ;
                         ;   (A P+1) = K4(1 0) + K
-                        \
+                        ;
                         ; so A is the high byte of the y-coordinate of the
                         ; bottom edge of the circle
 
@@ -27015,9 +27015,9 @@ ENDIF
                         ; whole circle is off-screen to the top
 
  STA P+2                ; Store the high byte in P+2, so now we have:
-                        \
+                        ;
                         ;   P(2 1) = K4(1 0) + K
-                        \
+                        ;
                         ; i.e. the maximum y-coordinate of the circle on-screen
                         ; (which we return)
 
@@ -27028,9 +27028,9 @@ ENDIF
 
  LDA K4+1               ; Set A = K4+1 - 0 - any carry from above, so this
  SBC #0                 ; does the following:
-                        \
+                        ;
                         ;   (A X) = K4(1 0) - K
-                        \
+                        ;
                         ; so A is the high byte of the y-coordinate of the top
                         ; edge of the circle
 
@@ -27058,11 +27058,11 @@ ENDIF
                         ; mid-point of the space view, so 2 * #Y - 1, the
                         ; y-coordinate of the bottom pixel row of the space
                         ; view. So this does the following:
-                        \
+                        ;
                         ;   * The C flag is set if coordinate (A X) is below the
                         ;     bottom row of the space view, i.e. the top edge of
                         ;     the circle is hidden by the dashboard
-                        \
+                        ;
                         ;   * The C flag is clear if coordinate (A X) is above
                         ;     the bottom row of the space view, i.e. the top
                         ;     edge of the circle is on-screen
@@ -27135,10 +27135,10 @@ ENDIF
 .PLS3
 
  JSR PLS1               ; Call PLS1 to calculate the following:
- STA P                  \
+ STA P                  ;
                         ;   P = |roofv_x / z|
                         ;   K+3 = sign of roofv_x / z
-                        \
+                        ;
                         ; and increment X to point to roofv_y for the next call
 
  LDA #222               ; Set Q = 222, the offset to the crater
@@ -27148,7 +27148,7 @@ ENDIF
                         ; call to MULTU
 
  JSR MULTU              ; Call MULTU to calculate
-                        \
+                        ;
                         ;   (A P) = P * Q
                         ;         = 222 * |roofv_x / z|
 
@@ -27210,16 +27210,16 @@ ENDIF
  STA Q                  ; Set Q = A
 
  JSR ARCTAN             ; Call ARCTAN to calculate:
-                        \
+                        ;
                         ;   A = arctan(P / Q)
                         ;       arctan(P / A)
-                        \
+                        ;
                         ; The result in A will be in the range 0 to 128, which
                         ; represents an angle of 0 to 180 degrees (or 0 to PI
                         ; radians)
 
  LDX INWK+14            ; If nosev_z_hi is negative, skip the following
- BMI P%+4               ; instruction to leave the angle in A as a positive
+ BMI *+4               ; instruction to leave the angle in A as a positive
                         ; integer in the range 0 to 128 (so when we calculate
                         ; CNT2 below, it will be in the right half of the
                         ; anti-clockwise arc that we describe when drawing
@@ -27275,21 +27275,21 @@ ENDIF
 .PLS5
 
  JSR PLS1               ; Call PLS1 to calculate the following:
- STA K2+2               \
+ STA K2+2               ;
  STY XX16+2             ;   K+2    = |roofv_x / z|
                         ;   XX16+2 = sign of roofv_x / z
-                        \
+                        ;
                         ; i.e. (XX16+2 K2+2) = roofv_x / z
-                        \
+                        ;
                         ; and increment X to point to roofv_y for the next call
 
  JSR PLS1               ; Call PLS1 to calculate the following:
- STA K2+3               \
+ STA K2+3               ;
  STY XX16+3             ;   K+3    = |roofv_y / z|
                         ;   XX16+3 = sign of roofv_y / z
-                        \
+                        ;
                         ; i.e. (XX16+3 K2+3) = roofv_y / z
-                        \
+                        ;
                         ; and increment X to point to roofv_z for the next call
 
  RTS                    ; Return from the subroutine
@@ -27332,7 +27332,7 @@ ENDIF
 .PLS6
 
  JSR DVID3B2            ; Call DVID3B2 to calculate:
-                        \
+                        ;
                         ;   K(3 2 1 0) = (A P+1 P) / (z_sign z_hi z_lo)
 
  LDA K+3                ; Set A = |K+3| OR K+2
@@ -27368,11 +27368,11 @@ ENDIF
 
  LDA K                  ; Otherwise we need to negate the result, which we do
  EOR #%11111111         ; using two's complement, starting with the low byte:
- ADC #1                 \
+ ADC #1                 ;
  STA K                  ;   K = ~K + 1
 
  TXA                    ; And then the high byte:
- EOR #%11111111         \
+ EOR #%11111111         ;
  ADC #0                 ;   X = ~X
  TAX
 
@@ -27487,19 +27487,19 @@ ENDIF
  LDY #0                 ; which we now increase or decrease appropriately
 
  CMP #$19               ; If left arrow was pressed, set X = X - 1
- BNE P%+3
+ BNE *+3
  DEX
 
  CMP #$79               ; If right arrow was pressed, set X = X + 1
- BNE P%+3
+ BNE *+3
  INX
 
  CMP #$39               ; If up arrow was pressed, set Y = Y + 1
- BNE P%+3
+ BNE *+3
  INY
 
  CMP #$29               ; If down arrow was pressed, set Y = Y - 1
- BNE P%+3
+ BNE *+3
  DEY
 
  RTS                    ; Return from the subroutine
@@ -27539,14 +27539,14 @@ ENDIF
 ; ******************************************************************************
 
  PRINT "ELITE E"
- PRINT "Assembled at ", ~CODE_E%
- PRINT "Ends at ", ~P%
- PRINT "Code size is ", ~(P% - CODE_E%)
- PRINT "Execute at ", ~LOAD%
- PRINT "Reload at ", ~LOAD_E%
+ PRINT "Assembled at ", CODE_E%
+ PRINT "Ends at ", *
+ PRINT "Code size is ", (* - CODE_E%)
+ PRINT "Execute at ", LOAD%
+ PRINT "Reload at ", LOAD_E%
 
- PRINT "S.ELTE ", ~CODE_E%, " ", ~P%, " ", ~LOAD%, " ", ~LOAD_E%
- SAVE "3-assembled-output/ELTE.bin", CODE_E%, P%, LOAD%
+ PRINT "S.ELTE ", ~CODE_E%, " ", ~*, " ", LOAD%, " ", LOAD_E%
+ SAVE "3-assembled-output/ELTE.bin", CODE_E%, *, LOAD%
 
 ; ******************************************************************************
 ;
@@ -27556,8 +27556,8 @@ ENDIF
 ;
 ; ******************************************************************************
 
- CODE_F% = P%
- LOAD_F% = LOAD% + P% - CODE%
+ CODE_F% = *
+ LOAD_F% = LOAD% + * - CODE%
 
 ; ******************************************************************************
 ;
@@ -27809,7 +27809,7 @@ ELIF _TEXT_SOURCES
 
  CPX MSTG               ; Check whether this slot matches the slot number in
                         ; MSTG, which is the target of our missile lock
-                        \
+                        ;
                         ; This instructions saves two bytes of memory over the
                         ; LDA and CMP-based code in the source disc version, as
                         ; CPX MSTG is a two-byte opcode, while LDA MSTG and
@@ -27846,13 +27846,13 @@ ENDIF
                         ; We now want to remove this ship and reclaim all the
                         ; memory that it uses. Removing the ship will leave a
                         ; gap in three places, which we need to close up:
-                        \
+                        ;
                         ;   * The ship slots in FRIN
-                        \
+                        ;
                         ;   * The ship data blocks in K%
-                        \
+                        ;
                         ;   * The descending ship line heap at WP down
-                        \
+                        ;
                         ; The rest of this routine closes up these gaps by
                         ; looping through all the occupied ship slots after the
                         ; slot we are removing, one by one, and shuffling each
@@ -27861,12 +27861,12 @@ ENDIF
                         ; we have to make sure we update any address pointers
                         ; so they point to the newly shuffled data blocks and
                         ; line heaps
-                        \
+                        ;
                         ; In the following, when shuffling a ship's data down
                         ; into the preceding empty slot, we call the ship that
                         ; we are shuffling down the "source", and we call the
                         ; empty slot we are shuffling it into the "destination"
-                        \
+                        ;
                         ; Before we start looping through the ships we need to
                         ; shuffle down, we need to set up some variables to
                         ; point to the source and destination line heaps
@@ -27899,7 +27899,7 @@ ENDIF
                         ; and INF (which currently points to the removed ship's
                         ; data that we can now overwrite) points to the
                         ; destination
-                        \
+                        ;
                         ; So P(1 0) now points to the top of the line heap for
                         ; the destination
 
@@ -27961,13 +27961,13 @@ ENDIF
  STA SC+1
 
                         ; We have now set up our variables as follows:
-                        \
+                        ;
                         ;   SC(1 0) points to the source's ship data block
-                        \
+                        ;
                         ;   INF(1 0) points to the destination's ship data block
-                        \
+                        ;
                         ;   P(1 0) points to the destination's line heap
-                        \
+                        ;
                         ; so let's start copying data from the source to the
                         ; destination
 
@@ -27992,7 +27992,7 @@ ENDIF
  DEY                    ; Fetch byte #33 of the source ship, which is the
  LDA (SC),Y             ; low byte of the source ship's heap, and store in K
  STA K                  ; so now we have the following:
-                        \
+                        ;
                         ;   K(1 0) points to the source's line heap
 
  LDA P                  ; Set the low byte of the destination's heap pointer
@@ -28029,13 +28029,13 @@ ENDIF
                         ; we set a counter in Y that is initially set to T
                         ; (which we set above to the maximum heap size for the
                         ; source ship)
-                        \
+                        ;
                         ; As a reminder, we have already set the following:
-                        \
+                        ;
                         ;   K(1 0) points to the source's line heap
-                        \
+                        ;
                         ;   P(1 0) points to the destination's line heap
-                        \
+                        ;
                         ; so we can move the heap data by simply copying the
                         ; correct number of bytes from K(1 0) to P(1 0)
 .KSL3
@@ -28249,7 +28249,7 @@ ENDIF
  STA ALP1               ; Reset ALP1 (magnitude of roll angle alpha) to 3
 
  LDA SSPR               ; Fetch the "space station present" flag, and if we are
- BEQ P%+5               ; not inside the safe zone, skip the next instruction
+ BEQ *+5               ; not inside the safe zone, skip the next instruction
 
  JSR SPBLB              ; Light up the space station bulb on the dashboard
 
@@ -28316,11 +28316,11 @@ ENDIF
                         ; with a value of $FF
 
                         ; Finally, we reset the orientation vectors as follows:
-                        \
+                        ;
                         ;   sidev = (1,  0,  0)
                         ;   roofv = (0,  1,  0)
                         ;   nosev = (0,  0, -1)
-                        \
+                        ;
                         ; 96 * 256 ($6000) represents 1 in the orientation
                         ; vectors, while -96 * 256 ($E000) represents -1. We
                         ; already set the vectors to zero above, so we just
@@ -28509,13 +28509,13 @@ ENDIF
 
  LDA RAND               ; Calculate the next two values f2 and f3 in the feeder
  ROL A                  ; sequence:
- TAX                    \
+ TAX                    ;
  ADC RAND+2             ;   * f2 = (f1 << 1) mod 256 + C flag on entry
  STA RAND               ;   * f3 = f0 + f2 + (1 if bit 7 of f1 is set)
  STX RAND+2             ;   * C flag is set according to the f3 calculation
 
  LDA RAND+1             ; Calculate the next value m2 in the main sequence:
- TAX                    \
+ TAX                    ;
  ADC RAND+3             ;   * A = m2 = m0 + m1 + C flag from feeder calculation
  STA RAND+1             ;   * X = m1
  STX RAND+3             ;   * C and V flags set according to the m2 calculation
@@ -28624,7 +28624,7 @@ ENDIF
 
  DEC MCNT               ; Decrement the main loop counter in MCNT
 
- BEQ P%+5               ; If the counter has reached zero, which it will do
+ BEQ *+5               ; If the counter has reached zero, which it will do
                         ; every 256 main loops, skip the next JMP instruction
                         ; (or to put it another way, if the counter hasn't
                         ; reached zero, jump down to MLOOP, skipping all the
@@ -28642,7 +28642,7 @@ ENDIF
                         ; something benign (the other 87% of the time we jump
                         ; down to consider spawning cops, pirates and bounty
                         ; hunters)
-                        \
+                        ;
                         ; If we are in that 13%, then 50% of the time this will
                         ; be a Cobra Mk III trader, and the other 50% of the
                         ; time it will either be an asteroid (98.5% chance) or,
@@ -28671,7 +28671,7 @@ ENDIF
  STA INWK               ; Set x_lo = random
 
  STX INWK+3             ; Set y_lo = random
-                        \
+                        ;
                         ; Note that because we use the value of X returned by
                         ; DORND, and X contains the value of A returned by the
                         ; previous call to DORND, this does not set the new ship
@@ -28731,7 +28731,7 @@ ENDIF
 
  CMP #5                 ; Set A to the ship number of an asteroid, and keep
  LDA #AST               ; this value for 98.5% of the time (i.e. if random
- BCS P%+4               ; A >= 5 then skip the following instruction)
+ BCS *+4               ; A >= 5 then skip the following instruction)
 
  LDA #OIL               ; Set A to the ship number of a cargo canister
 
@@ -28770,7 +28770,7 @@ ENDIF
  ASL A                  ; Double A to a maximum of 80 or 140
 
  LDX MANY+COPS          ; If there are no cops in the local bubble, skip the
- BEQ P%+5               ; next instruction
+ BEQ *+5               ; next instruction
 
  ORA FIST               ; There are cops in the vicinity and we've got a hold
                         ; full of jail time, so OR the value in A with FIST to
@@ -28782,7 +28782,7 @@ ENDIF
 
  JSR Ze                 ; Call Ze to initialise INWK to a potentially hostile
                         ; ship, and set A and X to random values
-                        \
+                        ;
                         ; Note that because Ze uses the value of X returned by
                         ; DORND, and X contains the value of A returned by the
                         ; previous call to DORND, this does not set the new ship
@@ -28790,7 +28790,7 @@ ENDIF
                         ; "Fixing ship positions" for details
 
  CMP T                  ; If the random value in A >= our badness level, which
- BCS P%+7               ; will be the case unless we have been really, really
+ BCS *+7               ; will be the case unless we have been really, really
                         ; bad, then skip the following two instructions (so
                         ; if we are really bad, there's a higher chance of
                         ; spawning a cop, otherwise we got away with it, for
@@ -28856,7 +28856,7 @@ ENDIF
 
  JSR Ze                 ; Call Ze to initialise INWK to a potentially hostile
                         ; ship, and set A and X to random values
-                        \
+                        ;
                         ; Note that because Ze uses the value of X returned by
                         ; DORND, and X contains the value of A returned by the
                         ; previous call to DORND, this does not set the new ship
@@ -28976,11 +28976,11 @@ ENDIF
  JSR DIALS              ; Call DIALS to update the dashboard
 
  LDA QQ11               ; If this is a space view, skip the following four
- BEQ P%+11              ; instructions (i.e. jump to JSR TT17 below)
+ BEQ *+11              ; instructions (i.e. jump to JSR TT17 below)
 
  AND PATG               ; If PATG = $FF (author names are shown on start-up)
  LSR A                  ; and bit 0 of QQ11 is 1 (the current view is type 1),
- BCS P%+5               ; then skip the following instruction
+ BCS *+5               ; then skip the following instruction
 
  JSR DELAY-5            ; Delay for 8 vertical syncs (8/50 = 0.16 seconds), to
                         ; slow the main loop down a bit
@@ -29041,7 +29041,7 @@ ENDIF
  JSR DORND              ; Set A and X to random numbers
 
  CMP #200               ; If A < 200 (78% chance), skip the next instruction
- BCC P%+5
+ BCC *+5
 
  JSR GTHG               ; Call GTHG to spawn a Thargoid ship and a Thargon
                         ; companion
@@ -29088,15 +29088,15 @@ ENDIF
 .TT102
 
  CMP #f8                ; If red key f8 was pressed, jump to STATUS to show the
- BNE P%+5               ; Status Mode screen, returning from the subroutine
+ BNE *+5               ; Status Mode screen, returning from the subroutine
  JMP STATUS             ; using a tail call
 
  CMP #f4                ; If red key f4 was pressed, jump to TT22 to show the
- BNE P%+5               ; Long-range Chart, returning from the subroutine using
+ BNE *+5               ; Long-range Chart, returning from the subroutine using
  JMP TT22               ; a tail call
 
  CMP #f5                ; If red key f5 was pressed, jump to TT23 to show the
- BNE P%+5               ; Short-range Chart, returning from the subroutine using
+ BNE *+5               ; Short-range Chart, returning from the subroutine using
  JMP TT23               ; a tail call
 
  CMP #f6                ; If red key f6 was pressed, call TT111 to select the
@@ -29108,11 +29108,11 @@ ENDIF
 .TT92
 
  CMP #f9                ; If red key f9 was pressed, jump to TT213 to show the
- BNE P%+5               ; Inventory screen, returning from the subroutine
+ BNE *+5               ; Inventory screen, returning from the subroutine
  JMP TT213              ; using a tail call
 
  CMP #f7                ; If red key f7 was pressed, jump to TT167 to show the
- BNE P%+5               ; Market Price screen, returning from the subroutine
+ BNE *+5               ; Market Price screen, returning from the subroutine
  JMP TT167              ; using a tail call
 
  CMP #f0                ; If red key f0 was pressed, jump to TT110 to launch our
@@ -29126,15 +29126,15 @@ ENDIF
                         ; for f1-f3 and "@" (save commander file) key presses
 
  CMP #f3                ; If red key f3 was pressed, jump to EQSHP to show the
- BNE P%+5               ; Equip Ship screen, returning from the subroutine using
+ BNE *+5               ; Equip Ship screen, returning from the subroutine using
  JMP EQSHP              ; a tail call
 
  CMP #f1                ; If red key f1 was pressed, jump to TT219 to show the
- BNE P%+5               ; Buy Cargo screen, returning from the subroutine using
+ BNE *+5               ; Buy Cargo screen, returning from the subroutine using
  JMP TT219              ; a tail call
 
  CMP #$47               ; If "@" was pressed, jump to SVE to save the commander
- BNE P%+5               ; file, returning from the subroutine using a tail call
+ BNE *+5               ; file, returning from the subroutine using a tail call
  JMP SVE
 
  CMP #f2                ; If red key f2 was pressed, jump to TT208 to show the
@@ -29152,7 +29152,7 @@ ENDIF
  TAX                    ; docked and none of f1-f3 were pressed, so we can now
  JMP LOOK1              ; process f1-f3 with their in-flight functions, i.e.
                         ; switching space views
-                        \
+                        ;
                         ; A will contain $71, $72 or $73 (for f1, f2 or f3), so
                         ; set X to the last digit (1, 2 or 3) and jump to LOOK1
                         ; to switch to view X (rear, left or right), returning
@@ -29161,7 +29161,7 @@ ENDIF
 .LABEL_3
 
  CMP #$54               ; If "H" was pressed, jump to hyp to do a hyperspace
- BNE P%+5               ; jump (if we are in space), returning from the
+ BNE *+5               ; jump (if we are in space), returning from the
  JMP hyp                ; subroutine using a tail call
 
  CMP #$32               ; If "D" was pressed, jump to T95 to print the distance
@@ -29657,14 +29657,14 @@ ENDIF
                         ; By the time we get here, the correct commander name
                         ; is at NA% and the correct commander data is at NA%+8.
                         ; Specifically:
-                        \
+                        ;
                         ;   * If we loaded a commander file, then the name and
                         ;     data from that file will be at NA% and NA%+8
-                        \
+                        ;
                         ;   * If this is a brand new game, then NA% will contain
                         ;     the default starting commander name ("JAMESON")
                         ;     and NA%+8 will contain the default commander data
-                        \
+                        ;
                         ;   * If this is not a new game (because they died or
                         ;     quit) and we didn't want to load a commander file,
                         ;     then NA% will contain the last saved commander
@@ -29712,7 +29712,7 @@ IF _REMOVE_CHECKSUMS
 
 ELSE
 
- BNE P%-6               ; If the calculated checksum does not match CHK, then
+ BNE *-6               ; If the calculated checksum does not match CHK, then
                         ; loop back to repeat the check - in other words, we
                         ; enter an infinite loop here, as the checksum routine
                         ; will keep returning the same incorrect value
@@ -30306,7 +30306,7 @@ ENDIF
                         ; from location TP to the last saved commander block at
                         ; NA%+8, so set a counter in X to copy the NT% bytes in
                         ; the commander data block
-                        \
+                        ;
                         ; We also want to copy the data block to another
                         ; location $0B00, which is normally used for the ship
                         ; lines heap
@@ -30367,11 +30367,11 @@ ENDIF
                         ; last saved block)
 
  LDY #$B                ; Set up an OSFILE block at $0C00, containing:
- STY $0C0B              \
+ STY $0C0B              ;
  INY                    ; Start address for save = $00000B00 in $0C0A to $0C0D
- STY $0C0F              \
+ STY $0C0F              ;
                         ; End address for save = $00000C00 in $0C0E to $0C11
-                        \
+                        ;
                         ; Y is left containing $C which we use below
 
  LDA #%10000001         ; Clear 6522 System VIA interrupt enable register IER
@@ -30467,9 +30467,9 @@ ENDIF
                         ; flight and ship status variables
 
  LDY #$B                ; Set up an OSFILE block at $0C00, containing:
- STY $0C03              \
+ STY $0C03              ;
  INC $0C0B              ; Load address = $00000B00 in $0C02 to $0C05
-                        \
+                        ;
                         ; Length of file = $00000100 in $0C0A to $0C0D
 
  INY                    ; Increment Y to $C, which we use next
@@ -30752,7 +30752,7 @@ ENDIF
  STA T                  ; Set (T P) = (A P) = y^2
 
  LDA P                  ; Set (R Q) = (R Q) + (T P) = x^2 + y^2
- ADC Q                  \
+ ADC Q                  ;
  STA Q                  ; First, doing the low bytes, Q = Q + P
 
  LDA T                  ; And then the high bytes, R = R + T
@@ -30766,7 +30766,7 @@ ENDIF
  STA T                  ; Set (T P) = (A P) = z^2
 
  LDA P                  ; Set (R Q) = (R Q) + (T P) = x^2 + y^2 + z^2
- ADC Q                  \
+ ADC Q                  ;
  STA Q                  ; First, doing the low bytes, Q = Q + P
 
  LDA T                  ; And then the high bytes, R = R + T
@@ -30774,14 +30774,14 @@ ENDIF
  STA R
 
  JSR LL5                ; We now have the following:
-                        \
+                        ;
                         ; (R Q) = x^2 + y^2 + z^2
-                        \
+                        ;
                         ; so we can call LL5 to use Pythagoras to get:
-                        \
+                        ;
                         ; Q = SQRT(R Q)
                         ;   = SQRT(x^2 + y^2 + z^2)
-                        \
+                        ;
                         ; So Q now contains the length of the vector (x, y, z),
                         ; and we can normalise the vector by dividing each of
                         ; the coordinates by this value, which we do by calling
@@ -31213,7 +31213,7 @@ ENDIF
 ;
 ; ******************************************************************************
 
- KYTB = P% - 1          ; Point KYTB to the byte before the start of the table
+ KYTB = * - 1          ; Point KYTB to the byte before the start of the table
 
                         ; These are the primary flight controls (pitch, roll,
                         ; speed and lasers):
@@ -31345,9 +31345,9 @@ ENDIF
  LDA #%01111111         ; Set 6522 System VIA data direction register DDRA
  STA VIA+$43            ; (SHEILA $43) to %01111111. This sets the A registers
                         ; (IRA and ORA) so that:
-                        \
+                        ;
                         ;   * Bits 0-6 of ORA will be sent to the keyboard
-                        \
+                        ;
                         ;   * Bit 7 of IRA will be read from the keyboard
 
  STX VIA+$4F            ; Set 6522 System VIA output register ORA (SHEILA $4F)
@@ -31413,9 +31413,9 @@ ENDIF
  LDA #128               ; Call OSBYTE with A = 128 to fetch the 16-bit value
  JSR OSBYTE             ; from ADC channel X, returning (Y X), i.e. the high
                         ; byte in Y and the low byte in X
-                        \
+                        ;
                         ;   * Channel 1 is the x-axis: 0 = right, 65520 = left
-                        \
+                        ;
                         ;   * Channel 2 is the y-axis: 0 = down,  65520 = up
 
  TYA                    ; Copy Y to A, so the result is now in (A X)
@@ -31664,11 +31664,11 @@ ENDIF
                         ; roll rate by if the roll keys are being pressed
 
  LDY KL+3               ; If the "<" key is being pressed, then call the BUMP2
- BEQ P%+5               ; routine to increase the roll rate in X by A
+ BEQ *+5               ; routine to increase the roll rate in X by A
  JSR BUMP2
 
  LDY KL+4               ; If the ">" key is being pressed, then call the REDU2
- BEQ P%+5               ; routine to decrease the roll rate in X by A, taking
+ BEQ *+5               ; routine to decrease the roll rate in X by A, taking
  JSR REDU2              ; the keyboard auto re-centre setting into account
 
  STX JSTX               ; Store the updated roll rate in JSTX
@@ -31679,11 +31679,11 @@ ENDIF
                         ; DC indicator on the dashboard)
 
  LDY KL+5               ; If the "X" key is being pressed, then call the REDU2
- BEQ P%+5               ; routine to decrease the pitch rate in X by A, taking
+ BEQ *+5               ; routine to decrease the pitch rate in X by A, taking
  JSR REDU2              ; the keyboard auto re-centre setting into account
 
  LDY KL+6               ; If the "S" key is being pressed, then call the BUMP2
- BEQ P%+5               ; routine to increase the pitch rate in X by A
+ BEQ *+5               ; routine to increase the pitch rate in X by A
  JSR BUMP2
 
  STX JSTY               ; Store the updated roll rate in JSTY
@@ -31774,7 +31774,7 @@ ENDIF
 .DK7
 
  CPX #$70               ; If ESCAPE is not being pressed, skip over the next
- BNE P%+5               ; instruction
+ BNE *+5               ; instruction
 
  JMP DEATH2             ; ESCAPE is being pressed, so jump to DEATH2 to end
                         ; the game
@@ -32094,7 +32094,7 @@ ENDIF
  TXA                    ; Otherwise X is in the range 19 to 21 and the C flag is
  ADC #113-20            ; set (as we got here via a BCS to ou1), so we set A as
                         ; follows:
-                        \
+                        ;
                         ;   A = 113 - 20 + X + C
                         ;     = 113 - 19 + X
                         ;     = 113 to 115
@@ -32380,7 +32380,7 @@ ENDMACRO
 
  JSR TIS1               ; Set (A ?) = (-X * A + (S R)) / 96
                         ;        = (-nosev_z * roofv_y + nosev_y * roofv_z) / 96
-                        \
+                        ;
                         ; This also sets Q = nosev_z
 
  EOR #%10000000         ; Set sidev_x = -A
@@ -32396,7 +32396,7 @@ ENDMACRO
 
  JSR TIS1               ; Set (A ?) = (-X * A + (S R)) / 96
                         ;        = (-nosev_x * roofv_z + nosev_z * roofv_x) / 96
-                        \
+                        ;
                         ; This also sets Q = nosev_x
 
  EOR #%10000000         ; Set sidev_y = -A
@@ -32475,10 +32475,10 @@ ENDMACRO
  ASL A                  ; Shift A to the left
 
  CMP Q                  ; If A < Q skip the following subtraction
- BCC P%+4
+ BCC *+4
 
  SBC Q                  ; A >= Q, so set A = A - Q
-                        \
+                        ;
                         ; Going into this subtraction we know the C flag is
                         ; set as we passed through the BCC above, and we also
                         ; know that A >= Q, so the C flag will still be set once
@@ -32589,9 +32589,9 @@ ENDMACRO
  EOR #%10000000         ; Flip the sign of A
 
                         ; Fall through into DIVDT to do:
-                        \
+                        ;
                         ;   (P+1 A) = (A P) / Q
-                        \
+                        ;
                         ;     = -((nosev_x,X * roofv_x,X) +
                         ;         (nosev_x,Y * roofv_x,Y))
                         ;       / nosev_x,A
@@ -32636,10 +32636,10 @@ ENDMACRO
  ROL A                  ; Shift A to the left
 
  CMP Q                  ; If A < Q skip the following subtraction
- BCC P%+4
+ BCC *+4
 
  SBC Q                  ; Set A = A - Q
-                        \
+                        ;
                         ; Going into this subtraction we know the C flag is
                         ; set as we passed through the BCC above, and we also
                         ; know that A >= Q, so the C flag will still be set once
@@ -32667,14 +32667,14 @@ ENDMACRO
 ; ******************************************************************************
 
  PRINT "ELITE F"
- PRINT "Assembled at ", ~CODE_F%
- PRINT "Ends at ", ~P%
- PRINT "Code size is ", ~(P% - CODE_F%)
- PRINT "Execute at ", ~LOAD%
- PRINT "Reload at ", ~LOAD_F%
+ PRINT "Assembled at ", CODE_F%
+ PRINT "Ends at ", *
+ PRINT "Code size is ", (* - CODE_F%)
+ PRINT "Execute at ", LOAD%
+ PRINT "Reload at ", LOAD_F%
 
- PRINT "S.ELTF ", ~CODE_F%, " ", ~P%, " ", ~LOAD%, " ", ~LOAD_F%
- SAVE "3-assembled-output/ELTF.bin", CODE_F%, P%, LOAD%
+ PRINT "S.ELTF ", ~CODE_F%, " ", ~*, " ", LOAD%, " ", LOAD_F%
+ SAVE "3-assembled-output/ELTF.bin", CODE_F%, *, LOAD%
 
 ; ******************************************************************************
 ;
@@ -32684,8 +32684,8 @@ ENDMACRO
 ;
 ; ******************************************************************************
 
- CODE_G% = P%
- LOAD_G% = LOAD% + P% - CODE%
+ CODE_G% = *
+ LOAD_G% = LOAD% + * - CODE%
 
 ; ******************************************************************************
 ;
@@ -32702,7 +32702,7 @@ ENDMACRO
                         ; screen, if there is one
 
  JSR PROJ               ; Project the ship onto the screen, returning:
-                        \
+                        ;
                         ;   * K3(1 0) = the screen x-coordinate
                         ;   * K4(1 0) = the screen y-coordinate
                         ;   * A = K4+1
@@ -32838,7 +32838,7 @@ ENDMACRO
 .LL8
 
  TYA                    ; Set Y = Y - 64
- SBC #64                \
+ SBC #64                ;
  TAY                    ; This subtraction will work as we know C is set from
                         ; the BCC above, and the result will not underflow as we
                         ; already checked that Y >= 64, so the C flag is also
@@ -32942,7 +32942,7 @@ ENDMACRO
                         ; subtraction
 
  CMP Q                  ; If A < Q, skip the following subtraction
- BCC P%+4
+ BCC *+4
 
  SBC Q                  ; A >= Q, so set A = A - Q
 
@@ -33018,7 +33018,7 @@ ENDMACRO
  SEC
  SBC Q
 
- BCC P%+4               ; If the subtraction underflowed, skip the next two
+ BCC *+4               ; If the subtraction underflowed, skip the next two
                         ; instructions so we can negate the result
 
  CLC                    ; Otherwise the result is correct, and S contains the
@@ -33516,15 +33516,15 @@ ENDMACRO
 
  BPL LL15               ; Loop back to copy the next byte of each vector, until
                         ; we have the following:
-                        \
+                        ;
                         ;   * XX16(1 0) = sidev_x
                         ;   * XX16(3 2) = sidev_y
                         ;   * XX16(5 4) = sidev_z
-                        \
+                        ;
                         ;   * XX16(7 6) = roofv_x
                         ;   * XX16(9 8) = roofv_y
                         ;   * XX16(11 10) = roofv_z
-                        \
+                        ;
                         ;   * XX16(13 12) = nosev_x
                         ;   * XX16(15 14) = nosev_y
                         ;   * XX16(17 16) = nosev_z
@@ -33552,11 +33552,11 @@ ENDMACRO
                         ; a sign bit, e.g. A = |nosev_z_hi| * 2
 
  JSR LL28               ; Call LL28 to calculate:
-                        \
+                        ;
                         ;   R = 256 * A / Q
-                        \
+                        ;
                         ; so, for nosev, this would be:
-                        \
+                        ;
                         ;   R = 256 * |nosev_z_hi| * 2 / 197
                         ;     = 2.6 * |nosev_z_hi|
 
@@ -33571,15 +33571,15 @@ ENDMACRO
 
                         ; By this point, the vectors have been turned into
                         ; scaled magnitudes, so we have the following:
-                        \
+                        ;
                         ;   * XX16   = scaled |sidev_x|
                         ;   * XX16+2 = scaled |sidev_y|
                         ;   * XX16+4 = scaled |sidev_z|
-                        \
+                        ;
                         ;   * XX16+6  = scaled |roofv_x|
                         ;   * XX16+8  = scaled |roofv_y|
                         ;   * XX16+10 = scaled |roofv_z|
-                        \
+                        ;
                         ;   * XX16+12 = scaled |nosev_x|
                         ;   * XX16+14 = scaled |nosev_y|
                         ;   * XX16+16 = scaled |nosev_z|
@@ -33598,11 +33598,11 @@ ENDMACRO
                         ; three coordinates
 
                         ; So we now have the following:
-                        \
+                        ;
                         ;   * XX18(2 1 0) = (x_sign x_hi x_lo)
-                        \
+                        ;
                         ;   * XX18(5 4 3) = (y_sign y_hi y_lo)
-                        \
+                        ;
                         ;   * XX18(8 7 6) = (z_sign z_hi z_lo)
 
  LDA #255               ; Set the 15th byte of XX2 to 255, so that face 15 is
@@ -33751,15 +33751,15 @@ ENDMACRO
  JSR LL51               ; Call LL51 to set XX12 to the dot products of XX15 and
                         ; XX16, which we'll call dot_sidev, dot_roofv and
                         ; dot_nosev:
-                        \
+                        ;
                         ;   XX12(1 0) = [x y z] . sidev
                         ;             = (dot_sidev_sign dot_sidev_lo)
                         ;             = dot_sidev
-                        \
+                        ;
                         ;   XX12(3 2) = [x y z] . roofv
                         ;             = (dot_roofv_sign dot_roofv_lo)
                         ;             = dot_roofv
-                        \
+                        ;
                         ;   XX12(5 4) = [x y z] . nosev
                         ;             = (dot_nosev_sign dot_nosev_lo)
                         ;             = dot_nosev
@@ -33790,7 +33790,7 @@ ENDMACRO
  LDA (XX0),Y            ; the high byte of the offset to the faces data
 
  ADC XX0+1              ; Set V+1 = high byte faces offset + XX0+1
- STA V+1                \
+ STA V+1                ;
                         ; So V(1 0) now points to the start of the faces data
                         ; for this ship
 
@@ -33802,12 +33802,12 @@ ENDMACRO
 .LL86
 
  LDA (V),Y              ; Fetch byte #0 for this face into A, so:
-                        \
+                        ;
                         ;   A = %xyz vvvvv, where:
-                        \
+                        ;
                         ;     * Bits 0-4 = visibility distance, beyond which the
                         ;       face is always shown
-                        \
+                        ;
                         ;     * Bits 7-5 = the sign bits of normal_x, normal_y
                         ;       and normal_z
 
@@ -33866,11 +33866,11 @@ ENDMACRO
  STA XX12+4             ; XX12+4 = normal_z
 
                         ; So we now have:
-                        \
+                        ;
                         ;   XX12(1 0) = (normal_x_sign normal_x)
-                        \
+                        ;
                         ;   XX12(3 2) = (normal_y_sign normal_y)
-                        \
+                        ;
                         ;   XX12(5 4) = (normal_z_sign normal_z)
 
  LDX XX17               ; If XX17 < 4 then jump to LL92, otherwise we stored a
@@ -33959,7 +33959,7 @@ ENDMACRO
 
  JSR LL38               ; Set (S A) = (S R) + (A Q)
                         ;           = normal_z + dot_nosev
-                        \
+                        ;
                         ; setting the sign of the result in S
 
  BCS ovflw              ; If the addition overflowed, jump up to ovflw to divide
@@ -33983,7 +33983,7 @@ ENDMACRO
 
  JSR LL38               ; Set (S A) = (S R) + (A Q)
                         ;           = normal_x + dot_sidev
-                        \
+                        ;
                         ; setting the sign of the result in S
 
  BCS ovflw              ; If the addition overflowed, jump up to ovflw to divide
@@ -34019,24 +34019,24 @@ ENDMACRO
 .LL89
 
                         ; When we get here, we have set up the following:
-                        \
+                        ;
                         ;   XX15(1 0) = normal_x + dot_sidev
                         ;             = normal_x + [x y z] . sidev
-                        \
+                        ;
                         ;   XX15(3 2) = normal_y + dot_roofv
                         ;             = normal_y + [x y z] . roofv
-                        \
+                        ;
                         ;   XX15(5 4) = normal_z + dot_nosev
                         ;             = normal_z + [x y z] . nosev
-                        \
+                        ;
                         ; and:
-                        \
+                        ;
                         ;   XX12(1 0) = (normal_x_sign normal_x)
-                        \
+                        ;
                         ;   XX12(3 2) = (normal_y_sign normal_y)
-                        \
+                        ;
                         ;   XX12(5 4) = (normal_z_sign normal_z)
-                        \
+                        ;
                         ; We now calculate the dot product XX12 . XX15 to tell
                         ; us whether or not this face is visible
 
@@ -34049,7 +34049,7 @@ ENDMACRO
  STA T                  ;       = XX15 * XX12 / 256
 
  LDA XX12+1             ; Set S = sign of XX15(1 0) * XX12(1 0), so:
- EOR XX15+1             \
+ EOR XX15+1             ;
  STA S                  ;   (S T) = XX15(1 0) * XX12(1 0) / 256
 
  LDA XX12+2             ; Set Q = XX12+2
@@ -34061,11 +34061,11 @@ ENDMACRO
  STA Q                  ;       = XX15+2 * XX12+2 / 256
 
  LDA T                  ; Set T = R, so now:
- STA R                  \
+ STA R                  ;
                         ;   (S R) = XX15(1 0) * XX12(1 0) / 256
 
  LDA XX12+3             ; Set A = sign of XX15+3 * XX12+3, so:
- EOR XX15+3             \
+ EOR XX15+3             ;
                         ;   (A Q) = XX15(3 2) * XX12(3 2) / 256
 
  JSR LL38               ; Set (S T) = (S R) + (A Q)
@@ -34081,12 +34081,12 @@ ENDMACRO
  STA Q                  ;       = XX15+4 * XX12+4 / 256
 
  LDA T                  ; Set T = R, so now:
- STA R                  \
+ STA R                  ;
                         ;   (S R) =   XX15(1 0) * XX12(1 0) / 256
                         ;           + XX15(3 2) * XX12(3 2) / 256
 
  LDA XX15+5             ; Set A = sign of XX15+5 * XX12+5, so:
- EOR XX12+5             \
+ EOR XX12+5             ;
                         ;   (A Q) = XX15(5 4) * XX12(5 4) / 256
 
  JSR LL38               ; Set (S A) = (S R) + (A Q)
@@ -34105,7 +34105,7 @@ ENDMACRO
  PLA                    ; Pull the dot product off the stack into A
 
  BIT S                  ; If bit 7 of S is set, i.e. the dot product is
- BMI P%+4               ; negative, then this face is visible as its normal is
+ BMI *+4               ; negative, then this face is visible as its normal is
                         ; pointing towards us, so skip the following instruction
 
  LDA #0                 ; Otherwise the face is not visible, so set A = 0 so we
@@ -34147,33 +34147,33 @@ ENDMACRO
                         ; The first task is to set up the inverse matrix, ready
                         ; for us to send to the dot product routine at LL51.
                         ; Back up in part 3, we set up the following variables:
-                        \
+                        ;
                         ;   * XX16(1 0) = sidev_x
                         ;   * XX16(3 2) = sidev_y
                         ;   * XX16(5 4) = sidev_z
-                        \
+                        ;
                         ;   * XX16(7 6) = roofv_x
                         ;   * XX16(9 8) = roofv_y
                         ;   * XX16(11 10) = roofv_z
-                        \
+                        ;
                         ;   * XX16(13 12) = nosev_x
                         ;   * XX16(15 14) = nosev_y
                         ;   * XX16(17 16) = nosev_z
-                        \
+                        ;
                         ; and we then scaled the vectors to give the following:
-                        \
+                        ;
                         ;   * XX16   = scaled |sidev_x|
                         ;   * XX16+2 = scaled |sidev_y|
                         ;   * XX16+4 = scaled |sidev_z|
-                        \
+                        ;
                         ;   * XX16+6  = scaled |roofv_x|
                         ;   * XX16+8  = scaled |roofv_y|
                         ;   * XX16+10 = scaled |roofv_z|
-                        \
+                        ;
                         ;   * XX16+12 = scaled |nosev_x|
                         ;   * XX16+14 = scaled |nosev_y|
                         ;   * XX16+16 = scaled |nosev_z|
-                        \
+                        ;
                         ; We now need to rearrange these locations so they
                         ; effectively transpose the matrix into its inverse
 
@@ -34206,19 +34206,19 @@ ENDMACRO
 
                         ; So now we have the following sign-magnitude variables
                         ; containing parts of the scaled orientation vectors:
-                        \
+                        ;
                         ;   XX16(1 0)   = scaled sidev_x
                         ;   XX16(3 2)   = scaled roofv_x
                         ;   XX16(5 4)   = scaled nosev_x
-                        \
+                        ;
                         ;   XX16(7 6)   = scaled sidev_y
                         ;   XX16(9 8)   = scaled roofv_y
                         ;   XX16(11 10) = scaled nosev_y
-                        \
+                        ;
                         ;   XX16(13 12) = scaled sidev_z
                         ;   XX16(15 14) = scaled roofv_z
                         ;   XX16(17 16) = scaled nosev_z
-                        \
+                        ;
                         ; which is what we want, as the various vectors are now
                         ; arranged so we can use LL51 to multiply by the
                         ; transpose (i.e. the inverse of the matrix)
@@ -34257,30 +34257,30 @@ ENDMACRO
                         ; current vertex's data
 
  LDA (V),Y              ; Fetch byte #0 for this vertex into XX15, so:
- STA XX15               \
+ STA XX15               ;
                         ;   XX15 = magnitude of the vertex's x-coordinate
 
  INY                    ; Increment Y to point to byte #1
 
  LDA (V),Y              ; Fetch byte #1 for this vertex into XX15+2, so:
- STA XX15+2             \
+ STA XX15+2             ;
                         ;   XX15+2 = magnitude of the vertex's y-coordinate
 
  INY                    ; Increment Y to point to byte #2
 
  LDA (V),Y              ; Fetch byte #2 for this vertex into XX15+4, so:
- STA XX15+4             \
+ STA XX15+4             ;
                         ;   XX15+4 = magnitude of the vertex's z-coordinate
 
  INY                    ; Increment Y to point to byte #3
 
  LDA (V),Y              ; Fetch byte #3 for this vertex into T, so:
- STA T                  \
+ STA T                  ;
                         ;   T = %xyz vvvvv, where:
-                        \
+                        ;
                         ;     * Bits 0-4 = visibility distance, beyond which the
                         ;                  vertex is not shown
-                        \
+                        ;
                         ;     * Bits 7-5 = the sign bits of x, y and z
 
  AND #%00011111         ; Extract bits 0-4 to get the visibility distance
@@ -34294,11 +34294,11 @@ ENDMACRO
  INY                    ; Increment Y to point to byte #4
 
  LDA (V),Y              ; Fetch byte #4 for this vertex into P, so:
- STA P                  \
+ STA P                  ;
                         ;  P = %ffff ffff, where:
-                        \
+                        ;
                         ;    * Bits 0-3 = the number of face 1
-                        \
+                        ;
                         ;    * Bits 4-7 = the number of face 2
 
  AND #%00001111         ; Extract the number of face 1 into X
@@ -34321,11 +34321,11 @@ ENDMACRO
  INY                    ; Increment Y to point to byte #5
 
  LDA (V),Y              ; Fetch byte #5 for this vertex into P, so:
- STA P                  \
+ STA P                  ;
                         ;  P = %ffff ffff, where:
-                        \
+                        ;
                         ;    * Bits 0-3 = the number of face 3
-                        \
+                        ;
                         ;    * Bits 4-7 = the number of face 4
 
  AND #%00001111         ; Extract the number of face 1 into X
@@ -34362,48 +34362,48 @@ ENDMACRO
  STA XX15+5             ; of the vertex's z-coordinate
 
                         ; By this point we have the following:
-                        \
+                        ;
                         ;   XX15(1 0) = vertex x-coordinate
                         ;   XX15(3 2) = vertex y-coordinate
                         ;   XX15(5 4) = vertex z-coordinate
-                        \
+                        ;
                         ;   XX16(1 0)   = scaled sidev_x
                         ;   XX16(3 2)   = scaled roofv_x
                         ;   XX16(5 4)   = scaled nosev_x
-                        \
+                        ;
                         ;   XX16(7 6)   = scaled sidev_y
                         ;   XX16(9 8)   = scaled roofv_y
                         ;   XX16(11 10) = scaled nosev_y
-                        \
+                        ;
                         ;   XX16(13 12) = scaled sidev_z
                         ;   XX16(15 14) = scaled roofv_z
                         ;   XX16(17 16) = scaled nosev_z
 
  JSR LL51               ; Call LL51 to set XX12 to the dot products of XX15 and
                         ; XX16, as follows:
-                        \
+                        ;
                         ;   XX12(1 0) = [ x y z ] . [ sidev_x roofv_x nosev_x ]
-                        \
+                        ;
                         ;   XX12(3 2) = [ x y z ] . [ sidev_y roofv_y nosev_y ]
-                        \
+                        ;
                         ;   XX12(5 4) = [ x y z ] . [ sidev_z roofv_z nosev_z ]
-                        \
+                        ;
                         ; XX12 contains the vector from the ship's centre to
                         ; the vertex, transformed from the orientation vector
                         ; space to the universe orientated around our ship. So
                         ; we can refer to this vector below, let's call it
                         ; vertv, so:
-                        \
+                        ;
                         ;   vertv_x = [ x y z ] . [ sidev_x roofv_x nosev_x ]
-                        \
+                        ;
                         ;   vertv_y = [ x y z ] . [ sidev_y roofv_y nosev_y ]
-                        \
+                        ;
                         ;   vertv_z = [ x y z ] . [ sidev_z roofv_z nosev_z ]
-                        \
+                        ;
                         ; To finish the calculation, we now want to calculate:
-                        \
+                        ;
                         ;   vertv + [ x y z ]
-                        \
+                        ;
                         ; So let's start with the vertv_x + x
 
  LDA XX1+2              ; Set A = x_sign of the ship's location
@@ -34416,7 +34416,7 @@ ENDMACRO
 
  CLC                    ; Set XX15(2 1 0) = XX1(2 1 0) + XX12(1 0)
  LDA XX12               ;                 = (x_sign x_hi x_lo) + vertv_x
- ADC XX1                \
+ ADC XX1                ;
  STA XX15               ; Starting with the low bytes
 
  LDA XX1+1              ; And then doing the high bytes (we can add 0 here as
@@ -34433,7 +34433,7 @@ ENDMACRO
 
  LDA XX1                ; Set XX15(2 1 0) = XX1(2 1 0) - XX12(1 0)
  SEC                    ;                 = (x_sign x_hi x_lo) - vertv_x
- SBC XX12               \
+ SBC XX12               ;
  STA XX15               ; Starting with the low bytes
 
  LDA XX1+1              ; And then doing the high bytes (we can subtract 0 here
@@ -34452,7 +34452,7 @@ ENDMACRO
  SBC XX15
  STA XX15
 
- BCC P%+4               ; If the above subtraction underflowed then we need to
+ BCC *+4               ; If the above subtraction underflowed then we need to
  INC XX15+1             ; bump the high byte of the result up by 1
 
  LDA XX15+2             ; And now we flip the sign of the result to get the
@@ -34473,7 +34473,7 @@ ENDMACRO
 
  CLC                    ; Set XX15(5 4 3) = XX1(5 4 3) + XX12(3 2)
  LDA XX12+2             ;                 = (y_sign y_hi y_lo) + vertv_y
- ADC XX1+3              \
+ ADC XX1+3              ;
  STA XX15+3             ; Starting with the low bytes
 
  LDA XX1+4              ; And then doing the high bytes (we can add 0 here as
@@ -34490,7 +34490,7 @@ ENDMACRO
 
  LDA XX1+3              ; Set XX15(5 4 3) = XX1(5 4 3) - XX12(3 2)
  SEC                    ;                 = (y_sign y_hi y_lo) - vertv_y
- SBC XX12+2             \
+ SBC XX12+2             ;
  STA XX15+3             ; Starting with the low bytes
 
  LDA XX1+4              ; And then doing the high bytes (we can subtract 0 here
@@ -34526,7 +34526,7 @@ ENDMACRO
 
  LDA XX12+4             ; Set (U T) = XX1(7 6) + XX12(5 4)
  CLC                    ;           = (z_hi z_lo) + vertv_z
- ADC XX1+6              \
+ ADC XX1+6              ;
  STA T                  ; Starting with the low bytes
 
  LDA XX1+7              ; And then doing the high bytes (we can add 0 here as
@@ -34580,9 +34580,9 @@ ENDMACRO
  STX S                  ; Otherwise store the number of times we halved A in S
 
  JSR LL28               ; Call LL28 to calculate:
-                        \
+                        ;
                         ;   R = 256 * A / Q
-                        \
+                        ;
                         ; which we can do now as A < Q
 
  LDX S                  ; Otherwise restore the number of times we halved A
@@ -34704,7 +34704,7 @@ ENDMACRO
 
  LDA XX1+6              ; Set (U T) = XX1(7 6) - XX12(5 4)
  SEC                    ;           = (z_hi z_lo) - vertv_z
- SBC XX12+4             \
+ SBC XX12+4             ;
  STA T                  ; Starting with the low bytes
 
  LDA XX1+7              ; And then doing the high bytes (we can subtract 0 here
@@ -34799,10 +34799,10 @@ ENDMACRO
  BCC LL69
 
  JSR LL61               ; Call LL61 to calculate:
-                        \
+                        ;
                         ;   (U R) = 256 * A / Q
                         ;         = 256 * x / z
-                        \
+                        ;
                         ; which we can do as x >= z
 
  JMP LL65               ; Jump to LL65 to skip the division for x_lo < z_lo
@@ -34810,10 +34810,10 @@ ENDMACRO
 .LL69
 
  JSR LL28               ; Call LL28 to calculate:
-                        \
+                        ;
                         ;   R = 256 * A / Q
                         ;     = 256 * x / z
-                        \
+                        ;
                         ; Because x < z, the result fits into one byte, and we
                         ; also know that U = 0, so (U R) also contains the
                         ; result
@@ -34821,15 +34821,15 @@ ENDMACRO
 .LL65
 
                         ; At this point we have:
-                        \
+                        ;
                         ;   (U R) = x / z
-                        \
+                        ;
                         ; so (U R) contains the vertex's x-coordinate projected
                         ; on screen
-                        \
+                        ;
                         ; The next task is to convert (U R) to a pixel screen
                         ; coordinate and stick it on the XX3 heap.
-                        \
+                        ;
                         ; We start with the x-coordinate. To convert the
                         ; x-coordinate to a screen pixel we add 128, the
                         ; x-coordinate of the centre of the screen, because the
@@ -34881,10 +34881,10 @@ ENDMACRO
  BCC LL67
 
  JSR LL61               ; Call LL61 to calculate:
-                        \
+                        ;
                         ;   (U R) = 256 * A / Q
                         ;         = 256 * y / z
-                        \
+                        ;
                         ; which we can do as y >= z
 
  JMP LL68               ; Jump to LL68 to skip the division for y_lo < z_lo
@@ -34914,10 +34914,10 @@ ENDMACRO
 .LL67
 
  JSR LL28               ; Call LL28 to calculate:
-                        \
+                        ;
                         ;   R = 256 * A / Q
                         ;     = 256 * y / z
-                        \
+                        ;
                         ; Because y < z, the result fits into one byte, and we
                         ; also know that U = 0, so (U R) also contains the
                         ; result
@@ -34925,12 +34925,12 @@ ENDMACRO
 .LL68
 
                         ; At this point we have:
-                        \
+                        ;
                         ;   (U R) = y / z
-                        \
+                        ;
                         ; so (U R) contains the vertex's y-coordinate projected
                         ; on screen
-                        \
+                        ;
                         ; We now want to convert this to a screen y-coordinate
                         ; and stick it on the XX3 heap, much like we did with
                         ; the x-coordinate above. Again, we convert the
@@ -35092,15 +35092,15 @@ ENDMACRO
 
                         ; We now build a laser beam from the ship's laser vertex
                         ; towards our ship, as follows:
-                        \
+                        ;
                         ;   XX15(1 0) = laser vertex x-coordinate
-                        \
+                        ;
                         ;   XX15(3 2) = laser vertex y-coordinate
-                        \
+                        ;
                         ;   XX15(5 4) = x-coordinate of the end of the beam
-                        \
+                        ;
                         ;   XX12(1 0) = y-coordinate of the end of the beam
-                        \
+                        ;
                         ; The end of the laser beam will be positioned to look
                         ; good, rather than being directly aimed at us, as
                         ; otherwise we would only see a flashing point of light
@@ -35129,7 +35129,7 @@ ENDMACRO
  STA XX12               ; the laser beam move around as the ship moves in space
 
  LDA XX1+2              ; If the ship's x_sign is positive, skip the next
- BPL P%+4               ; instruction
+ BPL *+4               ; instruction
 
  DEC XX15+4             ; The ship's x_sign is negative (i.e. it's on the left
                         ; side of the screen), so switch the laser beam so it
@@ -35200,7 +35200,7 @@ ENDMACRO
  LDA (XX0),Y            ; the high byte of the offset to the edges data
 
  ADC XX0+1              ; Set V+1 = high byte edges offset + XX0+1
- STA V+1                \
+ STA V+1                ;
                         ; So V(1 0) now points to the start of the edges data
                         ; for this ship
 
@@ -35225,11 +35225,11 @@ ENDMACRO
  INY                    ; Increment Y to point to byte #1
 
  LDA (V),Y              ; Fetch byte #1 for this edge into A, so:
-                        \
+                        ;
                         ;   A = %ffff ffff, where:
-                        \
+                        ;
                         ;     * Bits 0-3 = the number of face 1
-                        \
+                        ;
                         ;     * Bits 4-7 = the number of face 2
 
  INY                    ; Increment Y to point to byte #2
@@ -35257,15 +35257,15 @@ ENDMACRO
 
                         ; We now build the screen line for this edge, as
                         ; follows:
-                        \
+                        ;
                         ;   XX15(1 0) = start x-coordinate
-                        \
+                        ;
                         ;   XX15(3 2) = start y-coordinate
-                        \
+                        ;
                         ;   XX15(5 4) = end x-coordinate
-                        \
+                        ;
                         ;   XX12(1 0) = end y-coordinate
-                        \
+                        ;
                         ; We can then pass this to the line clipping routine
                         ; before storing the resulting line in the ship line
                         ; heap
@@ -35526,18 +35526,18 @@ ENDMACRO
                         ; screen, so set S = x1_hi
 
  JSR LL120              ; Call LL120 to calculate:
-                        \
+                        ;
                         ;   (Y X) = (S x1_lo) * XX12+2      if T = 0
                         ;         = x1 * gradient
-                        \
+                        ;
                         ;   (Y X) = (S x1_lo) / XX12+2      if T <> 0
                         ;         = x1 / gradient
-                        \
+                        ;
                         ; with the sign of (Y X) set to the opposite of the
                         ; line's direction of slope
 
  TXA                    ; Set y1 = y1 + (Y X)
- CLC                    \
+ CLC                    ;
  ADC XX15+2             ; starting with the low bytes
  STA XX15+2
 
@@ -35561,18 +35561,18 @@ ENDMACRO
  DEC S                  ; the right side of the screen, so set S = x1_hi - 1
 
  JSR LL120              ; Call LL120 to calculate:
-                        \
+                        ;
                         ;   (Y X) = (S x1_lo) * XX12+2      if T = 0
                         ;         = (x1 - 256) * gradient
-                        \
+                        ;
                         ;   (Y X) = (S x1_lo) / XX12+2      if T <> 0
                         ;         = (x1 - 256) / gradient
-                        \
+                        ;
                         ; with the sign of (Y X) set to the opposite of the
                         ; line's direction of slope
 
  TXA                    ; Set y1 = y1 + (Y X)
- CLC                    \
+ CLC                    ;
  ADC XX15+2             ; starting with the low bytes
  STA XX15+2
 
@@ -35601,18 +35601,18 @@ ENDMACRO
  STA R
 
  JSR LL123              ; Call LL123 to calculate:
-                        \
+                        ;
                         ;   (Y X) = (S R) / XX12+2      if T = 0
                         ;         = y1 / gradient
-                        \
+                        ;
                         ;   (Y X) = (S R) * XX12+2      if T <> 0
                         ;         = y1 * gradient
-                        \
+                        ;
                         ; with the sign of (Y X) set to the opposite of the
                         ; line's direction of slope
 
  TXA                    ; Set x1 = x1 + (Y X)
- CLC                    \
+ CLC                    ;
  ADC XX15               ; starting with the low bytes
  STA XX15
 
@@ -35630,7 +35630,7 @@ ENDMACRO
                         ; source
 
  LDA XX15+2             ; Set (S R) = (y1_hi y1_lo) - screen height
- SEC                    \
+ SEC                    ;
  SBC #Y*2               ; starting with the low bytes
  STA R
 
@@ -35648,18 +35648,18 @@ ENDMACRO
                         ; bottom of the screen
 
  JSR LL123              ; Call LL123 to calculate:
-                        \
+                        ;
                         ;   (Y X) = (S R) / XX12+2      if T = 0
                         ;         = (y1 - screen height) / gradient
-                        \
+                        ;
                         ;   (Y X) = (S R) * XX12+2      if T <> 0
                         ;         = (y1 - screen height) * gradient
-                        \
+                        ;
                         ; with the sign of (Y X) set to the opposite of the
                         ; line's direction of slope
 
  TXA                    ; Set x1 = x1 + (Y X)
- CLC                    \
+ CLC                    ;
  ADC XX15               ; starting with the low bytes
  STA XX15
 
@@ -35720,30 +35720,30 @@ ENDMACRO
 ;.LL120                 ; This label is commented out in the original source
 
  JSR LL129              ; Call LL129 to do the following:
-                        \
+                        ;
                         ;   Q = XX12+2
                         ;     = line gradient
-                        \
+                        ;
                         ;   A = S EOR XX12+3
                         ;     = S EOR slope direction
-                        \
+                        ;
                         ;   (S R) = |S R|
-                        \
+                        ;
                         ; So A contains the sign of S * slope direction
 
  PHA                    ; Store A on the stack so we can use it later
 
  LDX T                  ; If T is non-zero, then it's a steep slope, so jump
  BNE LL121              ; down to LL121 to calculate this instead:
-                        \
+                        ;
                         ;   (Y X) = (S R) / Q
 
 .LL122
 
                         ; The following calculates:
-                        \
+                        ;
                         ;   (Y X) = (S R) * Q
-                        \
+                        ;
                         ; using the same shift-and-add algorithm that's
                         ; documented in MULT1
 
@@ -35764,7 +35764,7 @@ ENDMACRO
 .LL125
 
  TXA                    ; Set (Y X) = (Y X) + (S R)
- CLC                    \
+ CLC                    ;
  ADC R                  ; starting with the low bytes
  TAX
 
@@ -35845,30 +35845,30 @@ ENDMACRO
 .LL123
 
  JSR LL129              ; Call LL129 to do the following:
-                        \
+                        ;
                         ;   Q = XX12+2
                         ;     = line gradient
-                        \
+                        ;
                         ;   A = S EOR XX12+3
                         ;     = S EOR slope direction
-                        \
+                        ;
                         ;   (S R) = |S R|
-                        \
+                        ;
                         ; So A contains the sign of S * slope direction
 
  PHA                    ; Store A on the stack so we can use it later
 
  LDX T                  ; If T is non-zero, then it's a steep slope, so jump up
  BNE LL122              ; to LL122 to calculate this instead:
-                        \
+                        ;
                         ;   (Y X) = (S R) * Q
 
 .LL121
 
                         ; The following calculates:
-                        \
+                        ;
                         ;   (Y X) = (S R) / Q
-                        \
+                        ;
                         ; using the same shift-and-subtract algorithm that's
                         ; documented in TIS2
 
@@ -35900,10 +35900,10 @@ ENDMACRO
 .LL131
 
  SBC Q                  ; A >= Q (i.e. S >= Q) so set:
- STA S                  \
+ STA S                  ;
                         ;   S = (A R) - Q
                         ;     = (S R) - Q
-                        \
+                        ;
                         ; starting with the low bytes (we know the C flag is
                         ; set so the subtraction will be correct)
 
@@ -35935,7 +35935,7 @@ ENDMACRO
 
  TXA                    ; Otherwise negate (Y X) using two's complement by first
  EOR #%11111111         ; setting the low byte to ~X + 1
-;CLC                    \
+;CLC                    ;
  ADC #1                 ; The CLC instruction is commented out in the original
  TAX                    ; source. It would have no effect as we know the C flag
                         ; is clear from when we passed through the BCS above
@@ -36095,12 +36095,12 @@ ENDMACRO
 .LL107
 
  STX XX13               ; Set XX13 = X, so we have:
-                        \
+                        ;
                         ;   * XX13 = 0 if x2_hi = y2_hi = 0, y2_lo is on-screen
-                        \
+                        ;
                         ;   * XX13 = 191 if x2_hi or y2_hi are non-zero or y2_lo
                         ;            is off the bottom of the screen
-                        \
+                        ;
                         ; In other words, XX13 is 191 if (x2, y2) is off-screen,
                         ; otherwise it is 0
 
@@ -36132,12 +36132,12 @@ ENDMACRO
                         ; bytes from (x1, y1) and (x2, y2) into (X1, Y1) and
                         ; (X2, Y2), remembering that they share locations with
                         ; XX15:
-                        \
+                        ;
                         ;   X1 = XX15
                         ;   Y1 = XX15+1
                         ;   X2 = XX15+2
                         ;   Y2 = XX15+3
-                        \
+                        ;
                         ; X1 already contains x1_lo, so now we do the rest
 
  LDA XX15+2             ; Set Y1 (aka XX15+1) = y1_lo
@@ -36226,10 +36226,10 @@ ENDMACRO
  CMP #Y*2               ; flag, otherwise set it
 
  LDA XX15+3             ; Set XX12+2 = y1_hi - (1 - C), so:
- SBC #0                 \
+ SBC #0                 ;
  STA XX12+2             ;  * Set XX12+2 = y1_hi - 1 if y1_lo is on-screen
                         ;  * Set XX12+2 = y1_hi     otherwise
-                        \
+                        ;
                         ; We do this subtraction because we are only interested
                         ; in trying to move the points up by a screen if that
                         ; might move the point into the space view portion of
@@ -36239,10 +36239,10 @@ ENDMACRO
  CMP #Y*2               ; flag, otherwise set it
 
  LDA XX12+1             ; Set XX12+2 = y2_hi - (1 - C), so:
- SBC #0                 \
+ SBC #0                 ;
                         ;  * Set XX12+1 = y2_hi - 1 if y2_lo is on-screen
                         ;  * Set XX12+1 = y2_hi     otherwise
-                        \
+                        ;
                         ; We do this subtraction because we are only interested
                         ; in trying to move the points up by a screen if that
                         ; might move the point into the space view portion of
@@ -36287,10 +36287,10 @@ ENDMACRO
  STA XX12+5
 
                         ; So we now have:
-                        \
+                        ;
                         ;   delta_x in XX12(3 2)
                         ;   delta_y in XX12(5 4)
-                        \
+                        ;
                         ; where the delta is (x1, y1) - (x2, y2))
 
  EOR XX12+3             ; Set S = the sign of delta_x * the sign of delta_y, so
@@ -36305,7 +36305,7 @@ ENDMACRO
  STA XX12+4
 
  LDA #0                 ; And then doing the high bytes, so now:
- SBC XX12+5             \
+ SBC XX12+5             ;
  STA XX12+5             ;   XX12(5 4) = |delta_y|
 
 .LL110
@@ -36319,7 +36319,7 @@ ENDMACRO
  STA XX12+2
 
  LDA #0                 ; And then doing the high bytes, so now:
- SBC XX12+3             \
+ SBC XX12+3             ;
                         ;   (A XX12+2) = |delta_x|
 
 .LL111
@@ -36363,7 +36363,7 @@ ENDMACRO
  LDA XX12+4             ; Set A = delta_y_lo
 
  JSR LL28               ; Call LL28 to calculate:
-                        \
+                        ;
                         ;   R = 256 * A / Q
                         ;     = 256 * delta_y_lo / delta_x_lo
 
@@ -36379,7 +36379,7 @@ ENDMACRO
  LDA XX12+2             ; Set A = delta_x_lo
 
  JSR LL28               ; Call LL28 to calculate:
-                        \
+                        ;
                         ;   R = 256 * A / Q
                         ;     = 256 * delta_x_lo / delta_y_lo
 
@@ -36522,14 +36522,14 @@ ENDMACRO
 ; ******************************************************************************
 
  PRINT "ELITE G"
- PRINT "Assembled at ", ~CODE_G%
- PRINT "Ends at ", ~P%
- PRINT "Code size is ", ~(P% - CODE_G%)
- PRINT "Execute at ", ~LOAD%
- PRINT "Reload at ", ~LOAD_G%
+ PRINT "Assembled at ", CODE_G%
+ PRINT "Ends at ", *
+ PRINT "Code size is ", (* - CODE_G%)
+ PRINT "Execute at ", LOAD%
+ PRINT "Reload at ", LOAD_G%
 
- PRINT "S.ELTG ", ~CODE_G%, " ", ~P%, " ", ~LOAD%, " ", ~LOAD_G%
- SAVE "3-assembled-output/ELTG.bin", CODE_G%, P%, LOAD%
+ PRINT "S.ELTG ", ~CODE_G%, " ", ~*, " ", LOAD%, " ", LOAD_G%
+ SAVE "3-assembled-output/ELTG.bin", CODE_G%, *, LOAD%
 
 ; ******************************************************************************
 ;
@@ -36548,7 +36548,7 @@ ENDMACRO
 
 .checksum0
 
-   .ds 1                 ; This value is checked against the calculated checksum
+  .ds 1                 ; This value is checked against the calculated checksum
                         ; in part 6 of the loader in elite-loader.asm
 
 ; ******************************************************************************
@@ -36559,8 +36559,8 @@ ENDMACRO
 ;
 ; ******************************************************************************
 
- CODE_SHIPS% = P%
- LOAD_SHIPS% = LOAD% + P% - CODE%
+ CODE_SHIPS% = *
+ LOAD_SHIPS% = LOAD% + * - CODE%
 
 ; ******************************************************************************
 ;
@@ -37782,14 +37782,14 @@ ENDMACRO
 ; ******************************************************************************
 
  PRINT "SHIPS"
- PRINT "Assembled at ", ~CODE_SHIPS%
- PRINT "Ends at ", ~P%
- PRINT "Code size is ", ~(P% - CODE_SHIPS%)
- PRINT "Execute at ", ~LOAD%
- PRINT "Reload at ", ~LOAD_SHIPS%
+ PRINT "Assembled at ", CODE_SHIPS%
+ PRINT "Ends at ", *
+ PRINT "Code size is ", (* - CODE_SHIPS%)
+ PRINT "Execute at ", LOAD%
+ PRINT "Reload at ", LOAD_SHIPS%
 
- PRINT "S.SHIPS ", ~CODE_SHIPS%, " ", ~P%, " ", ~LOAD%, " ", ~LOAD_SHIPS%
- SAVE "3-assembled-output/SHIPS.bin", CODE_SHIPS%, P%, LOAD%
+ PRINT "S.SHIPS ", ~CODE_SHIPS%, " ", ~*, " ", LOAD%, " ", LOAD_SHIPS%
+ SAVE "3-assembled-output/SHIPS.bin", CODE_SHIPS%, *, LOAD%
 
 ; ******************************************************************************
 ;
@@ -37904,7 +37904,7 @@ ENDMACRO
  FACE      -25,      -37,      -11,         30    ; Face 11
  FACE        0,        0,     -112,         30    ; Face 12
 
-   .ds 11                ; This space appears to be unused
+  .ds 11                ; This space appears to be unused
 
 ; ******************************************************************************
 ;
@@ -37917,10 +37917,10 @@ ENDMACRO
 
 .SVN
 
-   .ds 1                 ; "Saving in progress" flag
-                        \
+  .ds 1                 ; "Saving in progress" flag
+                        ;
                         ;   * Non-zero while we are saving a commander
-                        \
+                        ;
                         ;   * 0 otherwise
 
 ; ******************************************************************************
@@ -37934,8 +37934,8 @@ ENDMACRO
 
 .VEC
 
-   .ds 2                 ; VEC = $7FFE
-                        \
+  .ds 2                 ; VEC = $7FFE
+                        ;
                         ; This gets set to the value of the original IRQ1 vector
                         ; by the loading process
 
@@ -37946,14 +37946,14 @@ ENDMACRO
 ; ******************************************************************************
 
  PRINT "PYTHON"
- PRINT "Assembled at ", ~CODE_PYTHON%
- PRINT "Ends at ", ~P%
- PRINT "Code size is ", ~(P% - CODE_PYTHON%)
- PRINT "Execute at ", ~LOAD%
- PRINT "Reload at ", ~LOAD_PYTHON%
+ PRINT "Assembled at ", CODE_PYTHON%
+ PRINT "Ends at ", *
+ PRINT "Code size is ", (* - CODE_PYTHON%)
+ PRINT "Execute at ", LOAD%
+ PRINT "Reload at ", LOAD_PYTHON%
 
- PRINT "S.PYTHON ", ~CODE_B%, " ", ~P%, " ", ~LOAD%, " ", ~LOAD_PYTHON%
- SAVE "3-assembled-output/PYTHON.bin", CODE_PYTHON%, P%, LOAD%
+ PRINT "S.PYTHON ", ~CODE_B%, " ", ~*, " ", LOAD%, " ", LOAD_PYTHON%
+ SAVE "3-assembled-output/PYTHON.bin", CODE_PYTHON%, *, LOAD%
 
 ; ******************************************************************************
 ;
@@ -37961,6 +37961,6 @@ ENDMACRO
 ;
 ; ******************************************************************************
 
- PRINT "ELITE game code ", ~($6000-P%), " bytes free"
- PRINT "Ends at ", ~P%
+ PRINT "ELITE game code ", ($6000-*), " bytes free"
+ PRINT "Ends at ", *
 
