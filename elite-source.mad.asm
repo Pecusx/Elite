@@ -1,4 +1,4 @@
- ******************************************************************************
+ /******************************************************************************
 
  ELITE GAME SOURCE
 
@@ -32,20 +32,20 @@
    * SHIPS.bin
    * WORDS9.bin
 
- ******************************************************************************
+ ******************************************************************************/
 
-INCLUDE "1-source-files/main-sources/elite-build-options.asm"
+ ICL "1-source-files/main-sources/elite-build-options.asm"
 
 _SOURCE_DISC           = (_VARIANT = 1)
 _TEXT_SOURCES          = (_VARIANT = 2)
 
 GUARD $6000            ; Guard against assembling over screen memory
 
- ******************************************************************************
+ /******************************************************************************
 
  Configuration variables
 
- ******************************************************************************
+ ******************************************************************************/
 
 Q__ = _MAX_COMMANDER    ; Set Q__ to TRUE to max out the default commander, FALSE
                        ; for the standard default commander
@@ -105,7 +105,7 @@ OSWORD = $FFF1         ; The address for the OSWORD routine, which is used
 OSFILE = $FFDD         ; The address for the OSFILE routine, which is used
                        ; once in the main game code
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ZP
        Type: Workspace
@@ -114,7 +114,7 @@ OSFILE = $FFDD         ; The address for the OSFILE routine, which is used
     Summary: Lots of important variables are stored in the zero page workspace
              as it is quicker and more space-efficient to access memory here
 
- ******************************************************************************
+ ******************************************************************************/
 
 ORG $0000
 
@@ -847,7 +847,7 @@ K4
 
 PRINT "Zero page variables from ", ZP, " to ", *
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: XX3
        Type: Workspace
@@ -860,7 +860,7 @@ PRINT "Zero page variables from ", ZP, " to ", *
  Used as heap space for storing temporary data during calculations. Shared with
  the descending 6502 stack, which works down from $01FF.
 
- ******************************************************************************
+ ******************************************************************************/
 
 ORG $0100
 
@@ -869,7 +869,7 @@ XX3
  .ds 256               ; Temporary storage, typically used for storing tables
                        ; of values such as screen coordinates or ship data
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: T__
        Type: Workspace
@@ -882,7 +882,7 @@ XX3
  Contains the current commander data (NT__ bytes at location TP), and the
  stardust data blocks (NOST bytes at location SX)
 
- ******************************************************************************
+ ******************************************************************************/
 
 ORG $0300
 
@@ -1181,7 +1181,7 @@ SKIP NOST + 1          ; This is where we store the x_lo coordinates for all
 
 PRINT "T__ workspace from  ", T__, " to ", *
 
- ******************************************************************************
+ /******************************************************************************
 
  ELITE RECURSIVE TEXT TOKEN FILE
 
@@ -1190,14 +1190,14 @@ PRINT "T__ workspace from  ", T__, " to ", *
  The recursive token table is loaded at $1100 and is moved down to $0400 as
  part of elite-loader.asm, so it ends up at $0400 to $07FF.
 
- ******************************************************************************
+ ******************************************************************************/
 
 CODE_WORDS__ = $0400
 LOAD_WORDS__ = $1100
 
 ORG CODE_WORDS__
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: CHAR
        Type: Macro
@@ -1222,7 +1222,7 @@ ORG CODE_WORDS__
 
    'x'                 The character to insert into the table
 
- ******************************************************************************
+ ******************************************************************************/
 
 ACRO  .by x
 
@@ -1234,7 +1234,7 @@ ENDIF
 
 NDMACRO
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TWOK
        Type: Macro
@@ -1261,7 +1261,7 @@ NDMACRO
    'y'                 The second letter of the two-letter token to insert into
                        the table
 
- ******************************************************************************
+ ******************************************************************************/
 
 ACRO TWOK t, k
 
@@ -1300,7 +1300,7 @@ IF t = 'O' AND k = 'N' :  .by 159 EOR RE : ENDIF
 
 NDMACRO
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: CONT
        Type: Macro
@@ -1323,7 +1323,7 @@ NDMACRO
 
    n                   The control code to insert into the table
 
- ******************************************************************************
+ ******************************************************************************/
 
 ACRO CONT n
 
@@ -1331,7 +1331,7 @@ ACRO CONT n
 
 NDMACRO
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: RTOK
        Type: Macro
@@ -1361,7 +1361,7 @@ NDMACRO
    n                   The number of the recursive token to insert into the
                        table, in the range 0 to 145
 
- ******************************************************************************
+ ******************************************************************************/
 
 ACRO RTOK n
 
@@ -1377,7 +1377,7 @@ ENDIF
 
 NDMACRO
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: QQ18
        Type: Variable
@@ -1385,7 +1385,7 @@ NDMACRO
     Summary: The recursive token table for tokens 0-148
   Deep dive: Printing text tokens
 
- ******************************************************************************
+ ******************************************************************************/
 
 QQ18
 
@@ -2564,11 +2564,11 @@ TWOK 'S', 'O'
  .by '4'
  .by 0
 
- ******************************************************************************
+ /******************************************************************************
 
  Save WORDS9.bin
 
- ******************************************************************************
+ ******************************************************************************/
 
 PRINT "WORDS9"
 PRINT "Assembled at ", CODE_WORDS__
@@ -2580,7 +2580,7 @@ PRINT "Reload at ", LOAD_WORDS__
 PRINT "S.WORDS9 ",~CODE_WORDS__," ",~*," ",LOAD_WORDS__," ",LOAD_WORDS__
 SAVE "3-assembled-output/WORDS9.bin", CODE_WORDS__, *, LOAD_WORDS__
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: K__
        Type: Workspace
@@ -2604,7 +2604,7 @@ SAVE "3-assembled-output/WORDS9.bin", CODE_WORDS__, *, LOAD_WORDS__
  the deep dive on "The local bubble of universe" for details of how Elite
  stores the local universe in K__, FRIN and UNIV.
 
- ******************************************************************************
+ ******************************************************************************/
 
 ORG $0900
 
@@ -2612,7 +2612,7 @@ K__
 
 SKIP NOSH * NI__        ; Ship data blocks and ship line heap
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: WP
        Type: Workspace
@@ -2620,7 +2620,7 @@ SKIP NOSH * NI__        ; Ship data blocks and ship line heap
    Category: Workspaces
     Summary: Ship slots, variables
 
- ******************************************************************************
+ ******************************************************************************/
 
 ORG $0D40
 
@@ -3088,7 +3088,7 @@ NOSTM
 
 PRINT "WP workspace from  ", WP," to ", *
 
- ******************************************************************************
+ /******************************************************************************
 
  ELITE A FILE
 
@@ -3097,7 +3097,7 @@ PRINT "WP workspace from  ", WP," to ", *
  The main game code (ELITE A through G, plus the ship data) is loaded at $1128
  and is moved down to $0F40 as part of elite-loader.asm.
 
- ******************************************************************************
+ ******************************************************************************/
 
 CODE__ = $0F40
 LOAD__ = $1128
@@ -3106,7 +3106,7 @@ ORG CODE__
 
 LOAD_A__ = LOAD__
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: S__
        Type: Workspace
@@ -3119,7 +3119,7 @@ LOAD_A__ = LOAD__
  Contains addresses that are used by the loader to set up vectors, the current
  compass colour, and the game's configuration settings.
 
- ******************************************************************************
+ ******************************************************************************/
 
 S__
 
@@ -3241,7 +3241,7 @@ JSTK
                        ; Toggled by pressing "K" when paused, see the DKS3
                        ; routine for details
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main flight loop (Part 1 of 16)
        Type: Subroutine
@@ -3263,7 +3263,7 @@ JSTK
 
    M__                  The entry point for the main flight loop
 
- ******************************************************************************
+ ******************************************************************************/
 
 M__
 
@@ -3276,7 +3276,7 @@ LDA K__                 ; We want to seed the random number generator with a
 STA RAND               ; Store the seed in the first byte of the four-byte
                        ; random number seed that's stored in RAND
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main flight loop (Part 2 of 16)
        Type: Subroutine
@@ -3302,7 +3302,7 @@ STA RAND               ; Store the seed in the first byte of the four-byte
  on this). Also, the signs of the two angles are stored separately, in both
  the sign and the flipped sign, as this makes calculations easier.
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDX JSTX               ; Set X to the current rate of roll in JSTX
 
@@ -3424,7 +3424,7 @@ STA BET1               ; Store A in BET1, so we now have:
 ORA BET2               ; Store A in BETA, but with the sign set to BET2 (so
 STA BETA               ; BETA has the same sign as the actual pitch rate)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main flight loop (Part 3 of 16)
        Type: Subroutine
@@ -3455,7 +3455,7 @@ STA BETA               ; BETA has the same sign as the actual pitch rate)
    * "C" to use the docking computer
    * "A" to fire lasers
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA KY2                ; If Space is being pressed, keep going, otherwise jump
 BEQ MA17               ; down to MA17 to skip the following
@@ -3675,7 +3675,7 @@ STA LASCT              ; laser power AND %11111010 for pulse lasers, which
                        ; comes to 10 (as pulse lasers have a power of 15). See
                        ; MA23 below for more on laser pulsing and LASCT
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main flight loop (Part 4 of 16)
        Type: Subroutine
@@ -3707,7 +3707,7 @@ STA LASCT              ; laser power AND %11111010 for pulse lasers, which
                        We also jump back here when a ship is removed from the
                        bubble, so we can continue processing from the next ship
 
- ******************************************************************************
+ ******************************************************************************/
 
 MA3
 
@@ -3767,7 +3767,7 @@ STA XX0                ; table that points to the individual ship blueprints,
 LDA XX21-1,Y           ; Fetch the high byte of this particular ship type's
 STA XX0+1              ; blueprint and store it in XX0+1
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main flight loop (Part 5 of 16)
        Type: Subroutine
@@ -3787,7 +3787,7 @@ STA XX0+1              ; blueprint and store it in XX0+1
      * If an energy bomb has been set off and this ship can be killed, kill it
        and increase the kill tally
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA BOMB               ; If we set off our energy bomb (see MA24 above), then
 BPL MA21               ; BOMB is now negative, so this skips to MA21 if our
@@ -3808,7 +3808,7 @@ JSR EXNO2              ; Call EXNO2 to process the fact that we have killed a
                        ; ship (so increase the kill tally, make an explosion
                        ; sound and possibly display "RIGHT ON COMMANDER!")
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main flight loop (Part 6 of 16)
        Type: Subroutine
@@ -3831,7 +3831,7 @@ JSR EXNO2              ; Call EXNO2 to process the fact that we have killed a
 
      * Copy the updated ship's data block from INWK back to K__
 
- ******************************************************************************
+ ******************************************************************************/
 
 MA21
 
@@ -3857,7 +3857,7 @@ DEY                    ; Decrement the loop counter
 BPL MAL3               ; Loop back for the next byte, until we have copied the
                        ; last byte from INWK back to INF
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main flight loop (Part 7 of 16)
        Type: Subroutine
@@ -3877,7 +3877,7 @@ BPL MAL3               ; Loop back for the next byte, until we have copied the
      * Check how close we are to this ship and work out if we are docking,
        scooping or colliding with it
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA INWK+31            ; Fetch the status of this ship from bits 5 (is ship
 AND #%10100000         ; exploding?) and bit 7 (has ship been killed?) from
@@ -3935,7 +3935,7 @@ BPL MA58               ; If the result is positive, then we either have no
                        ; this means we can't scoop the item, so jump to MA58
                        ; to process a collision
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main flight loop (Part 8 of 16)
        Type: Subroutine
@@ -3953,7 +3953,7 @@ BPL MA58               ; If the result is positive, then we either have no
 
      * Process us potentially scooping this item
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA #3                 ; Set A to 3 to denote we may be scooping an escape pod
 
@@ -4021,7 +4021,7 @@ JMP MA26               ; If we get here, then the ship we are processing was
                        ; so jump to MA26 to skip over the collision routines
                        ; and move on to missile targeting
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main flight loop (Part 9 of 16)
        Type: Subroutine
@@ -4048,7 +4048,7 @@ JMP MA26               ; If we get here, then the ship we are processing was
    GOIN                We jump here from part 3 of the main flight loop if the
                        docking computer is activated by pressing "C"
 
- ******************************************************************************
+ ******************************************************************************/
 
 ISDK
 
@@ -4109,7 +4109,7 @@ BCC MA67
 JMP DEATH              ; Otherwise we have just crashed into the station, so
                        ; process our death
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main flight loop (Part 10 of 16)
        Type: Subroutine
@@ -4129,7 +4129,7 @@ JMP DEATH              ; Otherwise we have just crashed into the station, so
 
      * Process collisions
 
- ******************************************************************************
+ ******************************************************************************/
 
 MA59
 
@@ -4189,7 +4189,7 @@ JSR OOPS               ; The amount of damage is in A, so call OOPS to reduce
 JSR EXNO3              ; Make the sound of colliding with the other ship and
                        ; fall through into MA26 to try targeting a missile
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main flight loop (Part 11 of 16)
        Type: Subroutine
@@ -4213,7 +4213,7 @@ JSR EXNO3              ; Make the sound of colliding with the other ship and
 
      * Process our laser firing
 
- ******************************************************************************
+ ******************************************************************************/
 
 MA26
 
@@ -4314,7 +4314,7 @@ STA INWK+35            ; Store the hit ship's updated energy in ship byte #35
 LDA TYPE               ; Call ANGRY to make this ship hostile, now that we
 JSR ANGRY              ; have hit it
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main flight loop (Part 12 of 16)
        Type: Subroutine
@@ -4337,7 +4337,7 @@ JSR ANGRY              ; have hit it
 
    * Loop back up to MAL1 to move onto the next ship in the local bubble
 
- ******************************************************************************
+ ******************************************************************************/
 
 MA8
 
@@ -4421,7 +4421,7 @@ INX                    ; Increment the slot number to move on to the next slot
 JMP MAL1               ; And jump back up to the beginning of the loop to get
                        ; the next ship in the local bubble for processing
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main flight loop (Part 13 of 16)
        Type: Subroutine
@@ -4439,7 +4439,7 @@ JMP MAL1               ; And jump back up to the beginning of the loop to get
 
    * Charge shields and energy banks (every 7 iterations of the main loop)
 
- ******************************************************************************
+ ******************************************************************************/
 
 MA18
 
@@ -4494,7 +4494,7 @@ ADC ENERGY             ; otherwise it goes up by 1
 BCS *+5               ; If the value of A did not overflow (the maximum
 STA ENERGY             ; energy level is $FF), then store A in ENERGY
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main flight loop (Part 14 of 16)
        Type: Subroutine
@@ -4513,7 +4513,7 @@ STA ENERGY             ; energy level is $FF), then store A in ENERGY
    * Spawn a space station if we are close enough to the planet (every 32
      iterations of the main loop)
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA MJ                 ; If we are in witchspace, jump down to MA23S to skip
 BNE MA23S              ; the following, as there are no space stations in
@@ -4638,7 +4638,7 @@ MA23S
 JMP MA23               ; Jump to MA23 to skip the following planet and sun
                        ; altitude checks
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main flight loop (Part 15 of 16)
        Type: Subroutine
@@ -4659,7 +4659,7 @@ JMP MA23               ; Jump to MA23 to skip the following planet and sun
    * Perform an altitude check with the sun and process fuel scooping (every
      32 iterations of the main loop, on iteration 20 of each 32)
 
- ******************************************************************************
+ ******************************************************************************/
 
 MA22
 
@@ -4817,7 +4817,7 @@ STA QQ14               ; Store the updated fuel level in QQ14
 LDA #160               ; Print recursive token 0 ("FUEL SCOOPS ON") as an
 JSR MESS               ; in-flight message
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main flight loop (Part 16 of 16)
        Type: Subroutine
@@ -4838,7 +4838,7 @@ JSR MESS               ; in-flight message
 
    * Return from the main flight loop
 
- ******************************************************************************
+ ******************************************************************************/
 
 MA23
 
@@ -4905,7 +4905,7 @@ JMP STARS              ; This is a space view, so jump to the STARS routine to
                        ; process the stardust, and return from the main flight
                        ; loop using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MAS1
        Type: Subroutine
@@ -4957,7 +4957,7 @@ JMP STARS              ; This is a space view, so jump to the STARS routine to
 
    MA9                 Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 MAS1
 
@@ -4988,7 +4988,7 @@ MA9
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MAS2
        Type: Subroutine
@@ -5033,7 +5033,7 @@ RTS                    ; Return from the subroutine
 
    m                   Do not include A in the calculation
 
- ******************************************************************************
+ ******************************************************************************/
 
 m
 
@@ -5050,7 +5050,7 @@ AND #%01111111         ; Clear bit 7 in A
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MAS3
        Type: Subroutine
@@ -5081,7 +5081,7 @@ RTS                    ; Return from the subroutine
 
                        A = $FF if the calculation overflows a one-byte result
 
- ******************************************************************************
+ ******************************************************************************/
 
 MAS3
 
@@ -5115,7 +5115,7 @@ LDA #$FF               ; The calculation has overflowed, so set A = $FF
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MVEIT (Part 1 of 9)
        Type: Subroutine
@@ -5140,7 +5140,7 @@ RTS                    ; Return from the subroutine
 
    TYPE                The type of the current ship/planet/sun
 
- ******************************************************************************
+ ******************************************************************************/
 
 MVEIT
 
@@ -5176,7 +5176,7 @@ JSR TIDY               ; Call TIDY to tidy up the orientation vectors, to
                        ; shape due to the imprecise nature of trigonometry
                        ; in assembly language
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MVEIT (Part 2 of 9)
        Type: Subroutine
@@ -5192,7 +5192,7 @@ JSR TIDY               ; Call TIDY to tidy up the orientation vectors, to
 
    * Remove the ship from the scanner, so we can move it
 
- ******************************************************************************
+ ******************************************************************************/
 
 MV3
 
@@ -5248,7 +5248,7 @@ JSR SCAN               ; Draw the ship on the scanner, which has the effect of
                        ; removing it, as it's already at this point and hasn't
                        ; yet moved
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MVEIT (Part 3 of 9)
        Type: Subroutine
@@ -5264,7 +5264,7 @@ JSR SCAN               ; Draw the ship on the scanner, which has the effect of
 
      (x, y, z) += nosev_hi * speed / 64
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA INWK+27            ; Set Q = the ship's speed byte #27 * 4
 ASL A
@@ -5325,7 +5325,7 @@ JSR MVT1-2             ;   (z_sign z_hi z_lo) = (z_sign z_hi z_lo) + R
                        ;
                        ;   (z_sign z_hi z_lo) += nosev_z_hi * speed / 64
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MVEIT (Part 4 of 9)
        Type: Subroutine
@@ -5339,7 +5339,7 @@ JSR MVT1-2             ;   (z_sign z_hi z_lo) = (z_sign z_hi z_lo) + R
    * Apply acceleration to the ship's speed (if acceleration is non-zero),
      and then zero the acceleration as it's a one-off change
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA INWK+27            ; Set A = the ship's speed in byte #24 + the ship's
 CLC                    ; acceleration in byte #28
@@ -5366,7 +5366,7 @@ STA INWK+27            ; We have now calculated the new ship's speed after
 LDA #0                 ; We have added the ship's acceleration, so we now set
 STA INWK+28            ; it back to 0 in byte #28, as it's a one-off change
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MVEIT (Part 5 of 9)
        Type: Subroutine
@@ -5381,7 +5381,7 @@ STA INWK+28            ; it back to 0 in byte #28, as it's a one-off change
    * Rotate the ship's location in space by the amount of pitch and roll of
      our ship. See below for a deeper explanation of this routine
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDX ALP1               ; Fetch the magnitude of the current roll into X, so
                        ; if the roll angle is alpha, X contains |alpha|
@@ -5575,7 +5575,7 @@ STA INWK
                        ;
                        ; and the rotation of (x, y, z) is done
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MVEIT (Part 6 of 9)
        Type: Subroutine
@@ -5602,7 +5602,7 @@ STA INWK
    MV45                Rejoin the MVEIT routine after the rotation, tactics and
                        scanner code
 
- ******************************************************************************
+ ******************************************************************************/
 
 MV45
 
@@ -5627,7 +5627,7 @@ BNE *+3               ; Having both the AND and the CMP is a little odd, as
 RTS                    ; Return from the subroutine, as the ship we are moving
                        ; is the sun and doesn't need any of the following
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MVEIT (Part 7 of 9)
        Type: Subroutine
@@ -5648,7 +5648,7 @@ RTS                    ; Return from the subroutine, as the ship we are moving
  by the angles we are "moving" the rest of the sky through (alpha and beta, our
  roll and pitch), so the ship appears to us to be stationary while we rotate.
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDY #9                 ; Apply our pitch and roll rotations to the current
 JSR MVS4               ; ship's nosev vector
@@ -5659,7 +5659,7 @@ JSR MVS4               ; ship's roofv vector
 LDY #21                ; Apply our pitch and roll rotations to the current
 JSR MVS4               ; ship's sidev vector
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MVEIT (Part 8 of 9)
        Type: Subroutine
@@ -5675,7 +5675,7 @@ JSR MVS4               ; ship's sidev vector
    * If the ship we are processing is rolling or pitching itself, rotate it and
      apply damping if required
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA INWK+30            ; Fetch the ship's pitch counter and extract the sign
 AND #%10000000         ; into RAT2
@@ -5747,7 +5747,7 @@ LDX #19                ; Rotate (roofv_z, sidev_z) by a small angle (roll)
 LDY #25
 JSR MVS5
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MVEIT (Part 9 of 9)
        Type: Subroutine
@@ -5762,7 +5762,7 @@ JSR MVS5
 
    * Otherwise redraw the ship on the scanner, now that it's been moved
 
- ******************************************************************************
+ ******************************************************************************/
 
 MV5
 
@@ -5786,7 +5786,7 @@ STA INWK+31
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MVT1
        Type: Subroutine
@@ -5831,7 +5831,7 @@ RTS                    ; Return from the subroutine
 
    MVT1-2              Clear bits 0-6 of A before entering MVT1
 
- ******************************************************************************
+ ******************************************************************************/
 
 AND #%10000000         ; Clear bits 0-6 of A
 
@@ -5944,7 +5944,7 @@ MV11
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MVT3
        Type: Subroutine
@@ -5979,7 +5979,7 @@ RTS                    ; Return from the subroutine
 
    X                   X is preserved
 
- ******************************************************************************
+ ******************************************************************************/
 
 MVT3
 
@@ -6061,7 +6061,7 @@ MV14
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MVS4
        Type: Subroutine
@@ -6096,7 +6096,7 @@ RTS                    ; Return from the subroutine
 
                          * Y = 21 rotates sidev: (sidev_x, sidev_y, sidev_z)
 
- ******************************************************************************
+ ******************************************************************************/
 
 MVS4
 
@@ -6182,7 +6182,7 @@ STX INWK+4,Y           ;
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MVS5
        Type: Subroutine
@@ -6249,7 +6249,7 @@ RTS                    ; Return from the subroutine
                        or negative (i.e. the sign of the roll or pitch counter
                        in bit 7)
 
- ******************************************************************************
+ ******************************************************************************/
 
 MVS5
 
@@ -6380,7 +6380,7 @@ STA INWK+1,X
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MVT6
        Type: Subroutine
@@ -6419,7 +6419,7 @@ RTS                    ; Return from the subroutine
 
    A                   The sign of the result (in bit 7)
 
- ******************************************************************************
+ ******************************************************************************/
 
 MVT6
 
@@ -6490,7 +6490,7 @@ TYA                    ; Restore the original A argument that we stored earlier
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MV40
        Type: Subroutine
@@ -6511,7 +6511,7 @@ RTS                    ; Return from the subroutine
 
  See the deep dive on "Rotating the universe" for more details on the above.
 
- ******************************************************************************
+ ******************************************************************************/
 
 MV40
 
@@ -6743,11 +6743,11 @@ JMP MV45               ; We have now finished rotating the planet or sun by
                        ; our pitch and roll, so jump back into the MVEIT
                        ; routine at MV45 to apply all the other movements
 
- ******************************************************************************
+ /******************************************************************************
 
  Save ELTA.bin
 
- ******************************************************************************
+ ******************************************************************************/
 
 PRINT "ELITE A"
 PRINT "Assembled at ", CODE__
@@ -6759,18 +6759,18 @@ PRINT "Reload at ", LOAD_A__
 PRINT "S.ELTA ", ~CODE__, " ", ~*, " ", LOAD__, " ", LOAD_A__
 SAVE "3-assembled-output/ELTA.bin", CODE__, *, LOAD__
 
- ******************************************************************************
+ /******************************************************************************
 
  ELITE B FILE
 
  Produces the binary file ELTB.bin that gets loaded by elite-bcfs.asm.
 
- ******************************************************************************
+ ******************************************************************************/
 
 CODE_B__ = *
 LOAD_B__ = LOAD__ + * - CODE__
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: NA__
        Type: Variable
@@ -6796,7 +6796,7 @@ LOAD_B__ = LOAD__ + * - CODE__
  saved file. The related variable name from the current commander block is
  also shown.
 
- ******************************************************************************
+ ******************************************************************************/
 
 NA__
 
@@ -6918,7 +6918,7 @@ EQUD 0                 ; These four bytes appear to be unused, #47-50
 
  .by 128               ; SVC = Save count, #73
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: CHK2
        Type: Variable
@@ -6935,7 +6935,7 @@ EQUD 0                 ; These four bytes appear to be unused, #47-50
  The offset of this byte within a saved commander file is also shown (it's at
  byte #74).
 
- ******************************************************************************
+ ******************************************************************************/
 
 CHK2
 
@@ -6943,7 +6943,7 @@ CHK2
                        ; with $A9 to make it harder to tamper with the checksum
                        ; byte, #74
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: CHK
        Type: Variable
@@ -6960,13 +6960,13 @@ CHK2
  The offset of this byte within a saved commander file is also shown (it's at
  byte #75).
 
- ******************************************************************************
+ ******************************************************************************/
 
 CHK
 
  .by $03               ; The checksum value for the default commander, #75
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: UNIV
        Type: Variable
@@ -6980,7 +6980,7 @@ CHK
  the deep dive on "The local bubble of universe" for details of how Elite
  stores the local universe in K__, FRIN and UNIV.
 
- ******************************************************************************
+ ******************************************************************************/
 
 UNIV
 
@@ -6990,7 +6990,7 @@ FOR I__, 0, NOSH
 
 NEXT
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TWOS
        Type: Variable
@@ -7003,7 +7003,7 @@ NEXT
  Ready-made bytes for plotting one-pixel points in mode 4 (the top part of the
  split screen). See the PIXEL routine for details.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TWOS
 
@@ -7016,7 +7016,7 @@ TWOS
  .by %00000010
  .by %00000001
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TWOS2
        Type: Variable
@@ -7029,7 +7029,7 @@ TWOS
  Ready-made bytes for plotting two-pixel dashes in mode 4 (the top part of the
  split screen). See the PIXEL routine for details.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TWOS2
 
@@ -7042,7 +7042,7 @@ TWOS2
  .by %00000011
  .by %00000011
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: CTWOS
        Type: Variable
@@ -7062,7 +7062,7 @@ TWOS2
  two-pixel dash that crosses from one character block into another. See CPIX2
  for more details.
 
- ******************************************************************************
+ ******************************************************************************/
 
 CTWOS
 
@@ -7072,7 +7072,7 @@ CTWOS
  .by %00010001
  .by %10001000
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LOIN (Part 1 of 7)
        Type: Subroutine
@@ -7110,7 +7110,7 @@ CTWOS
    LL30                LL30 is a synonym for LOIN and draws a line from
                        (X1, Y1) to (X2, Y2)
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL30
 
@@ -7176,7 +7176,7 @@ JMP STPY               ; Otherwise Q >= P so jump to STPY to step along the
                        ; y-axis, as the line is closer to being vertical than
                        ; horizontal
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LOIN (Part 2 of 7)
        Type: Subroutine
@@ -7197,7 +7197,7 @@ JMP STPY               ; Otherwise Q >= P so jump to STPY to step along the
 
    * We potentially swap coordinates to make sure X1 < X2
 
- ******************************************************************************
+ ******************************************************************************/
 
 STPX
 
@@ -7319,7 +7319,7 @@ SBC Y1                 ; the above division)
 BCS DOWN               ; If Y2 >= Y1 - 1 then jump to DOWN, as we need to draw
                        ; the line to the right and down
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LOIN (Part 3 of 7)
        Type: Subroutine
@@ -7339,7 +7339,7 @@ BCS DOWN               ; If Y2 >= Y1 - 1 then jump to DOWN, as we need to draw
    * Draw from (X1, Y1) at bottom left to (X2, Y2) at top right, omitting the
      first pixel
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA SWAP               ; If SWAP > 0 then we swapped the coordinates above, so
 BNE LI6                ; jump down to LI6 to skip plotting the first pixel
@@ -7419,7 +7419,7 @@ LDY YSAV               ; Restore Y from YSAV, so that it's preserved
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LOIN (Part 4 of 7)
        Type: Subroutine
@@ -7439,7 +7439,7 @@ RTS                    ; Return from the subroutine
    * Draw from (X1, Y1) at top left to (X2, Y2) at bottom right, omitting the
      first pixel
 
- ******************************************************************************
+ ******************************************************************************/
 
 DOWN
 
@@ -7507,7 +7507,7 @@ LDY YSAV               ; Restore Y from YSAV, so that it's preserved
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LOIN (Part 5 of 7)
        Type: Subroutine
@@ -7528,7 +7528,7 @@ RTS                    ; Return from the subroutine
 
    * We potentially swap coordinates to make sure Y1 >= Y2
 
- ******************************************************************************
+ ******************************************************************************/
 
 STPY
 
@@ -7653,7 +7653,7 @@ SBC X1                 ; the above BCC)
 BCC LFT                ; If X2 < X1 then jump to LFT, as we need to draw the
                        ; line to the left and down
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LOIN (Part 6 of 7)
        Type: Subroutine
@@ -7673,7 +7673,7 @@ BCC LFT                ; If X2 < X1 then jump to LFT, as we need to draw the
    * Draw from (X1, Y1) at top left to (X2, Y2) at bottom right, omitting the
      first pixel
 
- ******************************************************************************
+ ******************************************************************************/
 
 CLC                    ; Clear the C flag
 
@@ -7740,7 +7740,7 @@ LDY YSAV               ; Restore Y from YSAV, so that it's preserved
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LOIN (Part 7 of 7)
        Type: Subroutine
@@ -7766,7 +7766,7 @@ RTS                    ; Return from the subroutine
 
    HL6                 Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 LFT
 
@@ -7834,7 +7834,7 @@ HL6
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: NLIN3
        Type: Subroutine
@@ -7847,7 +7847,7 @@ RTS                    ; Return from the subroutine
  line at pixel row 19. It is used for the Status Mode screen, the Short-range
  Chart, the Market Price screen and the Equip Ship screen.
 
- ******************************************************************************
+ ******************************************************************************/
 
 NLIN3
 
@@ -7856,7 +7856,7 @@ JSR TT27               ; Print the text token in A
                        ; Fall through into NLIN4 to draw a horizontal line at
                        ; pixel row 19
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: NLIN4
        Type: Subroutine
@@ -7868,7 +7868,7 @@ JSR TT27               ; Print the text token in A
  This routine is used on the Inventory screen to draw a horizontal line at
  pixel row 19 to box in the title.
 
- ******************************************************************************
+ ******************************************************************************/
 
 NLIN4
 
@@ -7877,7 +7877,7 @@ BNE NLIN2              ; 19, returning from the subroutine with using a tail
                        ; call (this BNE is effectively a JMP as A will never
                        ; be zero)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: NLIN
        Type: Subroutine
@@ -7889,7 +7889,7 @@ BNE NLIN2              ; 19, returning from the subroutine with using a tail
  Draw a horizontal line at pixel row 23 and move the text cursor down one
  line.
 
- ******************************************************************************
+ ******************************************************************************/
 
 NLIN
 
@@ -7901,7 +7901,7 @@ INC YC                 ; Move the text cursor down one line
                        ; Fall through into NLIN2 to draw the horizontal line
                        ; at row 23
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: NLIN2
        Type: Subroutine
@@ -7919,7 +7919,7 @@ INC YC                 ; Move the text cursor down one line
 
    A                   The pixel row on which to draw the horizontal line
 
- ******************************************************************************
+ ******************************************************************************/
 
 NLIN2
 
@@ -7935,7 +7935,7 @@ BNE HLOIN              ; Call HLOIN to draw a horizontal line from (2, A) to
                        ; (254, A) and return from the subroutine (this BNE is
                        ; effectively a JMP as A will never be zero)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: HLOIN2
        Type: Subroutine
@@ -7972,7 +7972,7 @@ BNE HLOIN              ; Call HLOIN to draw a horizontal line from (2, A) to
 
    Y                   Y is preserved
 
- ******************************************************************************
+ ******************************************************************************/
 
 HLOIN2
 
@@ -7987,7 +7987,7 @@ STA LSO,Y
                        ; Fall through into HLOIN to draw a horizontal line from
                        ; (X1, Y) to (X2, Y)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: HLOIN
        Type: Subroutine
@@ -8008,7 +8008,7 @@ STA LSO,Y
 
    Y                   Y is preserved
 
- ******************************************************************************
+ ******************************************************************************/
 
 HLOIN
 
@@ -8198,7 +8198,7 @@ LDY YSAV               ; Restore Y from YSAV, so that it's preserved
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TWFL
        Type: Variable
@@ -8214,7 +8214,7 @@ RTS                    ; Return from the subroutine
 
  See the HLOIN routine for details.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TWFL
 
@@ -8226,7 +8226,7 @@ TWFL
  .by %11111100
  .by %11111110
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TWFR
        Type: Variable
@@ -8242,7 +8242,7 @@ TWFL
 
  See the HLOIN routine for details.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TWFR
 
@@ -8255,7 +8255,7 @@ TWFR
  .by %00000011
  .by %00000001
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PX3
        Type: Subroutine
@@ -8281,7 +8281,7 @@ TWFR
    T1                  The value of Y to restore on exit, so Y is preserved by
                        the call to PIXEL
 
- ******************************************************************************
+ ******************************************************************************/
 
 PX3
 
@@ -8293,7 +8293,7 @@ LDY T1                 ; Restore Y from T1, so Y is preserved by the routine
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PIX1
        Type: Subroutine
@@ -8324,7 +8324,7 @@ RTS                    ; Return from the subroutine
 
    ZZ                  The distance of the point (further away = smaller point)
 
- ******************************************************************************
+ ******************************************************************************/
 
 PIX1
 
@@ -8338,7 +8338,7 @@ STA SYL,Y
                        ; Fall through into PIX1 to draw the stardust particle
                        ; at (X1,Y1)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PIXEL2
        Type: Subroutine
@@ -8361,7 +8361,7 @@ STA SYL,Y
 
    ZZ                  The distance of the point (further away = smaller point)
 
- ******************************************************************************
+ ******************************************************************************/
 
 PIXEL2
 
@@ -8408,7 +8408,7 @@ SBC T                  ; So if Y is positive we display the point up from the
                        ; Fall through into PIXEL to draw the stardust at the
                        ; screen coordinates in (X, A)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PIXEL
        Type: Subroutine
@@ -8444,7 +8444,7 @@ SBC T                  ; So if Y is positive we display the point up from the
 
    PX4                 Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 PIXEL
 
@@ -8508,7 +8508,7 @@ PX4
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: BLINE
        Type: Subroutine
@@ -8570,7 +8570,7 @@ RTS                    ; Return from the subroutine
 
    FLAG                Set to 0
 
- ******************************************************************************
+ ******************************************************************************/
 
 BLINE
 
@@ -8723,7 +8723,7 @@ STA CNT
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: FLIP
        Type: Subroutine
@@ -8744,7 +8744,7 @@ RTS                    ; Return from the subroutine
  the origin is in the middle of the screen, and positive x and y are right and
  up, which is the coordinate system we use for stardust).
 
- ******************************************************************************
+ ******************************************************************************/
 
 FLIP
 
@@ -8781,7 +8781,7 @@ BNE FLL1               ; Loop back to FLL1 until we have moved all the stardust
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: STARS
        Type: Subroutine
@@ -8792,7 +8792,7 @@ RTS                    ; Return from the subroutine
 
  Called at the very end of the main flight loop.
 
- ******************************************************************************
+ ******************************************************************************/
 
 STARS
 
@@ -8824,7 +8824,7 @@ ST11
 JMP STARS2             ; Jump to STARS2 for the left or right views, as it's
                        ; too far for the branch instruction above
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: STARS1
        Type: Subroutine
@@ -8856,7 +8856,7 @@ JMP STARS2             ; Jump to STARS2 for the left or right views, as it's
 
  For more information see the deep dive on "Stardust in the front view".
 
- ******************************************************************************
+ ******************************************************************************/
 
 STARS1
 
@@ -9179,7 +9179,7 @@ LDA Y1                 ; Set A to the new value of y_hi. This has no effect as
 
 JMP STC1               ; Jump up to STC1 to draw this new particle
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: STARS6
        Type: Subroutine
@@ -9212,7 +9212,7 @@ JMP STC1               ; Jump up to STC1 to draw this new particle
 
  For more information see the deep dive on "Stardust in the front view".
 
- ******************************************************************************
+ ******************************************************************************/
 
 STARS6
 
@@ -9540,7 +9540,7 @@ STA SY,Y               ; along either the top or bottom edge of the screen
 BNE STC6               ; Jump up to STC6 to draw this new particle (this BNE is
                        ; effectively a JMP as A will never be zero)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PRXS
        Type: Variable
@@ -9552,7 +9552,7 @@ BNE STC6               ; Jump up to STC6 to draw this new particle (this BNE is
  Equipment prices are stored as 10 * the actual value, so we can support prices
  with fractions of credits (0.1 Cr). This is used for the price of fuel only.
 
- ******************************************************************************
+ ******************************************************************************/
 
 PRXS
 
@@ -9569,7 +9569,7 @@ PRXS
  .wo 10000             ; 10 Docking Computer          1000.0 Cr
  .wo 50000             ; 11 Galactic Hyperspace       5000.0 Cr
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: STATUS
        Type: Subroutine
@@ -9577,7 +9577,7 @@ PRXS
     Summary: Show the Status Mode screen (red key f8)
   Deep dive: Combat rank
 
- ******************************************************************************
+ ******************************************************************************/
 
 st4
 
@@ -9865,7 +9865,7 @@ BCC st                 ; to st to print out the next one
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: plf2
        Type: Subroutine
@@ -9883,7 +9883,7 @@ RTS                    ; Return from the subroutine
 
    A                   The text token to be printed
 
- ******************************************************************************
+ ******************************************************************************/
 
 plf2
 
@@ -9894,7 +9894,7 @@ STX XC
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TENS
        Type: Variable
@@ -9917,13 +9917,13 @@ RTS                    ; Return from the subroutine
  BPRNT routine when working out which decimal digits to print when printing a
  number.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TENS
 
 EQUD $00E87648
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: pr2
        Type: Subroutine
@@ -9950,7 +9950,7 @@ EQUD $00E87648
 
    pr2+2               Print the 8-bit number in X to the number of digits in A
 
- ******************************************************************************
+ ******************************************************************************/
 
 pr2
 
@@ -9961,7 +9961,7 @@ LDY #0                 ; Zero the Y register, so we can fall through into TT11
                        ; effectively prints X to 3 digits as the high byte is
                        ; zero
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT11
        Type: Subroutine
@@ -9986,7 +9986,7 @@ LDY #0                 ; Zero the Y register, so we can fall through into TT11
 
    C flag              If set, include a decimal point
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT11
 
@@ -10006,7 +10006,7 @@ STX K+3                ; (K+2 and K+3), so we are going to print the 32-bit
                        ; digits (as U = 3), using the same C flag as when pr2
                        ; was called to control the decimal point
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: BPRNT
        Type: Subroutine
@@ -10045,7 +10045,7 @@ STX K+3                ; (K+2 and K+3), so we are going to print the 32-bit
                        we would pass 1234 in K(0 1 2 3) and would set the C
                        flag to include the decimal point
 
- ******************************************************************************
+ ******************************************************************************/
 
 BPRNT
 
@@ -10331,7 +10331,7 @@ JSR TT26               ; point
 
 JMP TT35               ; Loop back to TT35 to print the next digit
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: BELL
        Type: Subroutine
@@ -10342,7 +10342,7 @@ JMP TT35               ; Loop back to TT35 to print the next digit
 
  This is the standard system beep, as made by the ASCII 7 "BELL" control code.
 
- ******************************************************************************
+ ******************************************************************************/
 
 BELL
 
@@ -10351,7 +10351,7 @@ LDA #7                 ; Control code 7 makes a beep, so load this into A
                        ; Fall through into the TT26 print routine to
                        ; actually make the sound
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT26
        Type: Subroutine
@@ -10411,7 +10411,7 @@ LDA #7                 ; Control code 7 makes a beep, so load this into A
 
    rT9                 Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT26
 
@@ -10744,7 +10744,7 @@ JSR BEEP               ; Call the BEEP subroutine to make a short, high beep
 JMP RR4                ; Jump to RR4 to restore the registers and return from
                        ; the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DIALS (Part 1 of 4)
        Type: Subroutine
@@ -10761,7 +10761,7 @@ JMP RR4                ; Jump to RR4 to restore the registers and return from
 
  This first section starts us off with the speedometer in the top right.
 
- ******************************************************************************
+ ******************************************************************************/
 
 DIALS
 
@@ -10793,7 +10793,7 @@ JSR DIL-1              ; increment SC to point to the next indicator (the roll
                        ; required with a call to DIL-1, so perhaps this was
                        ; originally a call to DIL that got optimised
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DIALS (Part 2 of 4)
        Type: Subroutine
@@ -10801,7 +10801,7 @@ JSR DIL-1              ; increment SC to point to the next indicator (the roll
     Summary: Update the dashboard: pitch and roll indicators
   Deep dive: The dashboard indicators
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA #0                 ; Set R = P = 0 for the low bytes in the call to the ADD
 STA R                  ; routine below
@@ -10858,7 +10858,7 @@ JSR DIL2               ; Draw a vertical bar on the pitch indicator at offset A
                        ; and increment SC to point to the next indicator (the
                        ; four energy banks)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DIALS (Part 3 of 4)
        Type: Subroutine
@@ -10872,7 +10872,7 @@ JSR DIL2               ; Draw a vertical bar on the pitch indicator at offset A
  loop, so while the speed, pitch and roll indicators update every iteration,
  the other indicators update less often.
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA MCNT               ; Fetch the main loop counter and calculate MCNT mod 4,
 AND #3                 ; jumping to rT9 if it is non-zero. rT9 contains an RTS,
@@ -10982,7 +10982,7 @@ CPY #4                 ; Check to see if we have drawn the last energy bank
 BNE DLL9               ; Loop back to DLL9 if we have more banks to draw,
                        ; otherwise we are done
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DIALS (Part 4 of 4)
        Type: Subroutine
@@ -10990,7 +10990,7 @@ BNE DLL9               ; Loop back to DLL9 if we have more banks to draw,
     Summary: Update the dashboard: shields, fuel, laser & cabin temp, altitude
   Deep dive: The dashboard indicators
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA #$78               ; Set SC(1 0) = $7810, which is the screen address for
 STA SC+1               ; the character block containing the left end of the
@@ -11051,7 +11051,7 @@ JMP COMPAS             ; We have now drawn all the indicators, so jump to
                        ; COMPAS to draw the compass, returning from the
                        ; subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PZW
        Type: Subroutine
@@ -11085,7 +11085,7 @@ JMP COMPAS             ; We have now drawn all the indicators, so jump to
 
    X                   The colour to use for indicators with safe values
 
- ******************************************************************************
+ ******************************************************************************/
 
 PZW
 
@@ -11112,7 +11112,7 @@ LDA #$0F               ; Set A to dashboard colour 1 (red)
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DILX
        Type: Subroutine
@@ -11160,7 +11160,7 @@ RTS                    ; Return from the subroutine
    DIL                 The range of the indicator is 0-16 (for the energy
                        banks)
 
- ******************************************************************************
+ ******************************************************************************/
 
 DILX
 
@@ -11312,7 +11312,7 @@ DL9
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DIL2
        Type: Subroutine
@@ -11343,7 +11343,7 @@ RTS                    ; Return from the subroutine
 
    C flag              The C flag is set
 
- ******************************************************************************
+ ******************************************************************************/
 
 DIL2
 
@@ -11442,7 +11442,7 @@ INC SC+1               ; Increment the high byte of SC to point to the next
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TVT1
        Type: Variable
@@ -11479,7 +11479,7 @@ RTS                    ; Return from the subroutine
    Colour 2      Yellow            White
    Colour 3      Green             Cyan
 
- ******************************************************************************
+ ******************************************************************************/
 
 TVT1
 
@@ -11510,7 +11510,7 @@ TVT1
  .by $77, $67
  .by $37, $27
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: IRQ1
        Type: Subroutine
@@ -11525,7 +11525,7 @@ TVT1
 
  IRQ1V is set to point to IRQ1 by the loading process.
 
- ******************************************************************************
+ ******************************************************************************/
 
 LINSCN
 
@@ -11659,7 +11659,7 @@ BMI jvec               ; Jump up to jvec to pass control to the next interrupt
                        ; handler (this BMI is effectively a JMP as we didn't
                        ; loop back with the BPL above, so BMI is always true)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ESCAPE
        Type: Subroutine
@@ -11672,7 +11672,7 @@ BMI jvec               ; Jump up to jvec to pass control to the next interrupt
  before arranging our replacement ship. Called when we press ESCAPE during
  flight and have an escape pod fitted.
 
- ******************************************************************************
+ ******************************************************************************/
 
 ESCAPE
 
@@ -11751,11 +11751,11 @@ JMP BAY                ; Go to the docking bay (i.e. show the Status Mode
                        ; screen) and return from the subroutine with a tail
                        ; call
 
- ******************************************************************************
+ /******************************************************************************
 
  Save ELTB.bin
 
- ******************************************************************************
+ ******************************************************************************/
 
 PRINT "ELITE B"
 PRINT "Assembled at ", CODE_B__
@@ -11767,18 +11767,18 @@ PRINT "Reload at ", LOAD_B__
 PRINT "S.ELTB ", ~CODE_B__, " ", ~*, " ", LOAD__, " ", LOAD_B__
 SAVE "3-assembled-output/ELTB.bin", CODE_B__, *, LOAD__
 
- ******************************************************************************
+ /******************************************************************************
 
  ELITE C FILE
 
  Produces the binary file ELTC.bin that gets loaded by elite-bcfs.asm.
 
- ******************************************************************************
+ ******************************************************************************/
 
 CODE_C__ = *
 LOAD_C__ = LOAD__ +* - CODE__
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TACTICS (Part 1 of 7)
        Type: Subroutine
@@ -11808,7 +11808,7 @@ LOAD_C__ = LOAD__ +* - CODE__
    * If it has reached its target and the target is a ship, destroy the missile
      and the ship, potentially damaging us if we are nearby
 
- ******************************************************************************
+ ******************************************************************************/
 
 TA34
 
@@ -11952,7 +11952,7 @@ BCC TA19               ; If the C flag is clear then the target does not have
 JMP ECBLB2             ; The target has E.C.M., so jump to ECBLB2 to set it
                        ; off, returning from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TACTICS (Part 2 of 7)
        Type: Subroutine
@@ -11988,7 +11988,7 @@ JMP ECBLB2             ; The target has E.C.M., so jump to ECBLB2 to set it
 
    X                   The ship type
 
- ******************************************************************************
+ ******************************************************************************/
 
 TACTICS
 
@@ -12073,7 +12073,7 @@ BCS TA21
 INC INWK+35            ; The ship's energy is not at maximum, so recharge the
                        ; energy banks by 1
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TACTICS (Part 3 of 7)
        Type: Subroutine
@@ -12090,7 +12090,7 @@ INC INWK+35            ; The ship's energy is not at maximum, so recharge the
      us work out later on whether the enemy ship is pointing towards us, and
      therefore whether it can hit us with its lasers.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TA21
 
@@ -12130,7 +12130,7 @@ STA CNT                ; Store the high byte of the dot product in CNT. The
                        ; direction, if it's negative they are facing in
                        ; opposite directions
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TACTICS (Part 4 of 7)
        Type: Subroutine
@@ -12153,7 +12153,7 @@ STA CNT                ; Store the high byte of the dot product in CNT. The
    * If the ship is into the last 1/8th of its energy, then rarely (10% chance)
      the ship launches an escape pod and is left drifting in space
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA TYPE               ; If this is not a missile, skip the following
 CMP #MSL               ; instruction
@@ -12205,7 +12205,7 @@ STA INWK+32            ; E.C.M., so the ship's a sitting duck
 JMP SESCP              ; Jump to SESCP to spawn an escape pod from the ship,
                        ; returning from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TACTICS (Part 5 of 7)
        Type: Subroutine
@@ -12224,7 +12224,7 @@ JMP SESCP              ; Jump to SESCP to spawn an escape pod from the ship,
    * Randomly decide whether to fire a missile (or, in the case of Thargoids,
      release a Thargon), and if we do, we're done
 
- ******************************************************************************
+ ******************************************************************************/
 
 ta3
 
@@ -12270,7 +12270,7 @@ JMP SFRMIS             ; Jump to SFRMIS to spawn a missile as a child of the
                        ; of incoming missiles, and return from the subroutine
                        ; using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TACTICS (Part 6 of 7)
        Type: Subroutine
@@ -12291,7 +12291,7 @@ JMP SFRMIS             ; Jump to SFRMIS to spawn a missile as a child of the
      down the attacking ship, make the noise of us being hit by laser fire, and
      we're done
 
- ******************************************************************************
+ ******************************************************************************/
 
 TA3
 
@@ -12363,7 +12363,7 @@ LDA #8                 ; Call the NOISE routine with A = 8 to make the sound
 JMP NOISE              ; of us being hit by lasers, returning from the
                        ; subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TACTICS (Part 7 of 7)
        Type: Subroutine
@@ -12383,7 +12383,7 @@ JMP NOISE              ; of us being hit by lasers, returning from the
 
    * Speed up or slow down, depending on where the ship is in relation to us
 
- ******************************************************************************
+ ******************************************************************************/
 
 TA4
 
@@ -12539,7 +12539,7 @@ TA10
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TAS1
        Type: Subroutine
@@ -12576,7 +12576,7 @@ RTS                    ; Return from the subroutine
                          * If Y = 8, subtract the z-coordinate and store the
                            result in K3(8 7 6)
 
- ******************************************************************************
+ ******************************************************************************/
 
 TAS1
 
@@ -12618,7 +12618,7 @@ STA K3,X
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: HITCH
        Type: Subroutine
@@ -12643,7 +12643,7 @@ RTS                    ; Return from the subroutine
 
    HI1                 Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 HITCH
 
@@ -12729,7 +12729,7 @@ HI1
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: FRS1
        Type: Subroutine
@@ -12768,7 +12768,7 @@ RTS                    ; Return from the subroutine
 
    fq1                 Used to add a cargo canister to the universe
 
- ******************************************************************************
+ ******************************************************************************/
 
 FRS1
 
@@ -12816,7 +12816,7 @@ TXA                    ; Add a new ship of type X to our local bubble of
 JMP NWSHP              ; universe and return from the subroutine using a tail
                        ; call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: FRMIS
        Type: Subroutine
@@ -12828,7 +12828,7 @@ JMP NWSHP              ; universe and return from the subroutine using a tail
  We fired a missile, so send it streaking away from us to unleash mayhem and
  destruction on our sworn enemies.
 
- ******************************************************************************
+ ******************************************************************************/
 
 FRMIS
 
@@ -12858,7 +12858,7 @@ LDA #48                ; Call the NOISE routine with A = 48 to make the sound
 JMP NOISE              ; of a missile launch, returning from the subroutine
                        ; using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ANGRY
        Type: Subroutine
@@ -12880,7 +12880,7 @@ JMP NOISE              ; of a missile launch, returning from the subroutine
    INF                 The address of the data block for the ship we're going
                        to infuriate
 
- ******************************************************************************
+ ******************************************************************************/
 
 ANGRY
 
@@ -12930,7 +12930,7 @@ CLC                    ; Clear the C flag, which isn't used by calls to this
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: FR1
        Type: Subroutine
@@ -12948,7 +12948,7 @@ RTS                    ; Return from the subroutine
 
    FR1-2               Clear the C flag and return from the subroutine
 
- ******************************************************************************
+ ******************************************************************************/
 
 FR1
 
@@ -12956,7 +12956,7 @@ LDA #201               ; Print recursive token 41 ("MISSILE JAMMED") as an
 JMP MESS               ; in-flight message and return from the subroutine using
                        ; a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SESCP
        Type: Subroutine
@@ -12968,7 +12968,7 @@ JMP MESS               ; in-flight message and return from the subroutine using
  This is called when an enemy ship has run out of both energy and luck, so it's
  time to bail.
 
- ******************************************************************************
+ ******************************************************************************/
 
 SESCP
 
@@ -12979,7 +12979,7 @@ LDA #%11111110         ; Set A to an AI flag that has AI enabled, is hostile,
 
                        ; Fall through into SFS1 to spawn the escape pod
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SFS1
        Type: Subroutine
@@ -13026,7 +13026,7 @@ LDA #%11111110         ; Set A to an AI flag that has AI enabled, is hostile,
    SFS1-2              Add a missile to the local bubble that has AI enabled,
                        is hostile, but has no E.C.M.
 
- ******************************************************************************
+ ******************************************************************************/
 
 SFS1
 
@@ -13172,7 +13172,7 @@ STA XX0
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SFS2
        Type: Subroutine
@@ -13199,7 +13199,7 @@ RTS                    ; Return from the subroutine
 
                          * X = 6 moves the ship along the z-axis
 
- ******************************************************************************
+ ******************************************************************************/
 
 SFS2
 
@@ -13213,7 +13213,7 @@ JMP MVT1               ; Add the delta R with sign A to (x_lo, x_hi, x_sign)
                        ; (or y or z, depending on the value in X) and return
                        ; from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL164
        Type: Subroutine
@@ -13224,7 +13224,7 @@ JMP MVT1               ; Add the delta R with sign A to (x_lo, x_hi, x_sign)
 
  See the IRQ1 routine for details on the multi-coloured effect that's used.
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL164
 
@@ -13248,7 +13248,7 @@ DEC HFX                ; Set HFX back to 0, so we switch back to the normal
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LAUN
        Type: Subroutine
@@ -13259,7 +13259,7 @@ RTS                    ; Return from the subroutine
 
  This is shown when launching from or docking with the space station.
 
- ******************************************************************************
+ ******************************************************************************/
 
 LAUN
 
@@ -13273,7 +13273,7 @@ LDA #8                 ; Set the step size for the launch tunnel rings to 8, so
 
                        ; Fall through into HFS2 to draw the launch tunnel rings
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: HFS2
        Type: Subroutine
@@ -13303,7 +13303,7 @@ LDA #8                 ; Set the step size for the launch tunnel rings to 8, so
    A                   The step size of the straight lines making up the rings
                        (4 for launch, 8 for hyperspace)
 
- ******************************************************************************
+ ******************************************************************************/
 
 HFS2
 
@@ -13377,7 +13377,7 @@ HF8
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: STARS2
        Type: Subroutine
@@ -13414,7 +13414,7 @@ RTS                    ; Return from the subroutine
 
                          * X = 2 for right view
 
- ******************************************************************************
+ ******************************************************************************/
 
 STARS2
 
@@ -13715,7 +13715,7 @@ STA SZ,Y               ; us, but not too close
 BNE STC2               ; Jump up to STC2 to draw this new particle (this BNE is
                        ; effectively a JMP as A will never be zero)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SNE
        Type: Variable
@@ -13754,7 +13754,7 @@ BNE STC2               ; Jump up to STC2 to draw this new particle (this BNE is
 
  Theta must be between 0 and 3.1 radians, so theta * 10 is between 0 and 31.
 
- ******************************************************************************
+ ******************************************************************************/
 
 SNE
 
@@ -13772,7 +13772,7 @@ FOR I__, 0, 31
 
 NEXT
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MU5
        Type: Subroutine
@@ -13786,7 +13786,7 @@ NEXT
 
    K(3 2 1 0) = 0
 
- ******************************************************************************
+ ******************************************************************************/
 
 MU5
 
@@ -13799,7 +13799,7 @@ CLC                    ; Clear the C flag
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MULT3
        Type: Subroutine
@@ -13823,7 +13823,7 @@ RTS                    ; Return from the subroutine
 
    C flag              The C flag is cleared
 
- ******************************************************************************
+ ******************************************************************************/
 
 MULT3
 
@@ -13922,7 +13922,7 @@ STA K+3                ; Store A in K+3, so K(3 2 1 0) now contains the result
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MLS2
        Type: Subroutine
@@ -13940,7 +13940,7 @@ RTS                    ; Return from the subroutine
  where ALP1 is the magnitude of the current roll angle alpha, in the range
  0-31.
 
- ******************************************************************************
+ ******************************************************************************/
 
 MLS2
 
@@ -13952,7 +13952,7 @@ STX S
 
                        ; Fall through into MLS1 to calculate (A P) = A * ALP1
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MLS1
        Type: Subroutine
@@ -13980,7 +13980,7 @@ STX S
 
    MULTS-2             Calculate (A P) = X * A
 
- ******************************************************************************
+ ******************************************************************************/
 
 MLS1
 
@@ -14067,7 +14067,7 @@ ORA T                  ; Give A the sign bit of the original argument A that
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SQUA
        Type: Subroutine
@@ -14081,14 +14081,14 @@ RTS                    ; Return from the subroutine
 
    (A P) = A * A
 
- ******************************************************************************
+ ******************************************************************************/
 
 SQUA
 
 AND #%01111111         ; Clear bit 7 of A and fall through into SQUA2 to set
                        ; (A P) = A * A
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SQUA2
        Type: Subroutine
@@ -14101,7 +14101,7 @@ AND #%01111111         ; Clear bit 7 of A and fall through into SQUA2 to set
 
    (A P) = A * A
 
- ******************************************************************************
+ ******************************************************************************/
 
 SQUA2
 
@@ -14111,7 +14111,7 @@ TAX
 BNE MU11               ; If X = 0 fall through into MU1 to return a 0,
                        ; otherwise jump to MU11 to return P * X
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MU1
        Type: Subroutine
@@ -14122,7 +14122,7 @@ BNE MU11               ; If X = 0 fall through into MU1 to return a 0,
 
  Used to return a 0 result quickly from MULTU below.
 
- ******************************************************************************
+ ******************************************************************************/
 
 MU1
 
@@ -14133,7 +14133,7 @@ TXA
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MLU1
        Type: Subroutine
@@ -14149,7 +14149,7 @@ RTS                    ; Return from the subroutine
 
    (A P) = |y_hi| * Q
 
- ******************************************************************************
+ ******************************************************************************/
 
 MLU1
 
@@ -14160,7 +14160,7 @@ STA Y1
                        ;
                        ;   (A P) = |A| * Q
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MLU2
        Type: Subroutine
@@ -14174,7 +14174,7 @@ STA Y1
 
    (A P) = |A| * Q
 
- ******************************************************************************
+ ******************************************************************************/
 
 MLU2
 
@@ -14186,7 +14186,7 @@ STA P
                        ;   (A P) = P * Q
                        ;         = |A| * Q
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MULTU
        Type: Subroutine
@@ -14199,7 +14199,7 @@ STA P
 
    (A P) = P * Q
 
- ******************************************************************************
+ ******************************************************************************/
 
 MULTU
 
@@ -14211,7 +14211,7 @@ BEQ MU1                ; If X = Q = 0, jump to MU1 to copy X into P and A,
 
                        ; Otherwise fall through into MU11 to set (A P) = P * X
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MU11
        Type: Subroutine
@@ -14229,7 +14229,7 @@ BEQ MU1                ; If X = Q = 0, jump to MU1 to copy X into P and A,
  are dealing with unsigned numbers in P and X. See the deep dive on
  "Shift-and-add multiplication" for a discussion of how this algorithm works.
 
- ******************************************************************************
+ ******************************************************************************/
 
 MU11
 
@@ -14275,7 +14275,7 @@ BNE MUL6               ; Loop back for the next bit until P has been rotated
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MU6
        Type: Subroutine
@@ -14289,7 +14289,7 @@ RTS                    ; Return from the subroutine
 
    P(1 0) = 0
 
- ******************************************************************************
+ ******************************************************************************/
 
 MU6
 
@@ -14298,7 +14298,7 @@ STA P
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: FMLTU2
        Type: Subroutine
@@ -14319,7 +14319,7 @@ RTS                    ; Return from the subroutine
 
  call this routine with B + 16 in the accumulator, as sin(B + 16) = cos(B).
 
- ******************************************************************************
+ ******************************************************************************/
 
 FMLTU2
 
@@ -14340,7 +14340,7 @@ LDA K                  ; Set A to the radius in K
                        ;
                        ;   A = K * sin(A)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: FMLTU
        Type: Subroutine
@@ -14364,7 +14364,7 @@ LDA K                  ; Set A to the radius in K
 
    C flag              The C flag is set
 
- ******************************************************************************
+ ******************************************************************************/
 
 FMLTU
 
@@ -14423,7 +14423,7 @@ BNE MUL3               ; Loop back to MUL3 if P still contains some set bits
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Unused duplicate of MULTU
        Type: Subroutine
@@ -14437,7 +14437,7 @@ RTS                    ; Return from the subroutine
  bytes (24 to be precise), but it's still here, unnamed, unloved and unvisited,
  through no fault of its own.
 
- ******************************************************************************
+ ******************************************************************************/
 
 
 LDX Q
@@ -14459,7 +14459,7 @@ BNE MUL6
 RTS
 
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MLTU2
        Type: Subroutine
@@ -14502,7 +14502,7 @@ RTS
 
    MLTU2-2             Set Q to X, so this calculates (A P+1 P) = (A ~P) * X
 
- ******************************************************************************
+ ******************************************************************************/
 
 STX Q                  ; Store X in Q
 
@@ -14554,7 +14554,7 @@ BNE MUL7               ; Loop back for the next bit until P has been rotated
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MUT3
        Type: Subroutine
@@ -14566,7 +14566,7 @@ RTS                    ; Return from the subroutine
  This routine is never actually called, but it is identical to MUT2, as the
  extra instructions have no effect.
 
- ******************************************************************************
+ ******************************************************************************/
 
 MUT3
 
@@ -14578,7 +14578,7 @@ STX P                  ; following, so this has no effect
                        ;   (S R) = XX(1 0)
                        ;   (A P) = Q * A
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MUT2
        Type: Subroutine
@@ -14592,7 +14592,7 @@ STX P                  ; following, so this has no effect
    (S R) = XX(1 0)
    (A P) = Q * A
 
- ******************************************************************************
+ ******************************************************************************/
 
 MUT2
 
@@ -14604,7 +14604,7 @@ STX S
                        ;   R = XX
                        ;   (A P) = Q * A
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MUT1
        Type: Subroutine
@@ -14618,7 +14618,7 @@ STX S
    R = XX
    (A P) = Q * A
 
- ******************************************************************************
+ ******************************************************************************/
 
 MUT1
 
@@ -14629,7 +14629,7 @@ STX R
                        ;
                        ;   (A P) = Q * A
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MULT1
        Type: Subroutine
@@ -14643,7 +14643,7 @@ STX R
 
    (A P) = Q * A
 
- ******************************************************************************
+ ******************************************************************************/
 
 MULT1
 
@@ -14719,7 +14719,7 @@ STA P                  ; If we get here, the result is 0 and A = 0, so set
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MULT12
        Type: Subroutine
@@ -14732,7 +14732,7 @@ RTS                    ; Return from the subroutine
 
    (S R) = Q * A
 
- ******************************************************************************
+ ******************************************************************************/
 
 MULT12
 
@@ -14744,7 +14744,7 @@ STA R
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TAS3
        Type: Subroutine
@@ -14778,7 +14778,7 @@ RTS                    ; Return from the subroutine
 
    (A X)               The result of the dot product
 
- ******************************************************************************
+ ******************************************************************************/
 
 TAS3
 
@@ -14812,7 +14812,7 @@ LDA XX15+2             ; Set A = XX15+2
                        ;           = vect_z * XX15+2 + vect_y * XX15+1 +
                        ;             vect_x * XX15
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MAD
        Type: Subroutine
@@ -14825,7 +14825,7 @@ LDA XX15+2             ; Set A = XX15+2
 
    (A X) = Q * A + (S R)
 
- ******************************************************************************
+ ******************************************************************************/
 
 MAD
 
@@ -14836,7 +14836,7 @@ JSR MULT1              ; Call MULT1 to set (A P) = Q * A
                        ;   (A X) = (A P) + (S R)
                        ;         = Q * A + (S R)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ADD
        Type: Subroutine
@@ -14850,7 +14850,7 @@ JSR MULT1              ; Call MULT1 to set (A P) = Q * A
 
    (A X) = (A P) + (S R)
 
- ******************************************************************************
+ ******************************************************************************/
 
 ADD
 
@@ -14951,7 +14951,7 @@ EOR T                  ; If we get here from the BCS above, then |A| >= |S|,
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TIS1
        Type: Subroutine
@@ -14975,7 +14975,7 @@ RTS                    ; Return from the subroutine
 
    Q                   Gets set to the value of argument X
 
- ******************************************************************************
+ ******************************************************************************/
 
 TIS1
 
@@ -15032,7 +15032,7 @@ ORA T                  ; Give A the sign of the result that we stored above
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DV42
        Type: Subroutine
@@ -15070,7 +15070,7 @@ RTS                    ; Return from the subroutine
 
    C flag              The C flag is cleared
 
- ******************************************************************************
+ ******************************************************************************/
 
 DV42
 
@@ -15081,7 +15081,7 @@ LDA SZ,Y               ; Fetch the Y-th dust particle's z_hi coordinate into A
                        ;   (P R) = 256 * DELTA / A
                        ;         = 256 * DELTA / Y-th stardust particle's z_hi
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DV41
        Type: Subroutine
@@ -15109,7 +15109,7 @@ LDA SZ,Y               ; Fetch the Y-th dust particle's z_hi coordinate into A
 
    C flag              The C flag is cleared
 
- ******************************************************************************
+ ******************************************************************************/
 
 DV41
 
@@ -15122,7 +15122,7 @@ LDA DELTA              ; Fetch the speed from DELTA into A
                        ;   (P R) = 256 * A / Q
                        ;         = 256 * DELTA / A
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DVID4
        Type: Subroutine
@@ -15151,7 +15151,7 @@ LDA DELTA              ; Fetch the speed from DELTA into A
 
    C flag              The C flag is cleared
 
- ******************************************************************************
+ ******************************************************************************/
 
 DVID4
 
@@ -15193,7 +15193,7 @@ JMP LL28+4             ; Jump to LL28+4 to convert the remainder in A into an
                        ; C flag cleared, and we return from the subroutine
                        ; using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DVID3B2
        Type: Subroutine
@@ -15228,7 +15228,7 @@ JMP LL28+4             ; Jump to LL28+4 to convert the remainder in A into an
 
    X                   X is preserved
 
- ******************************************************************************
+ ******************************************************************************/
 
 DVID3B2
 
@@ -15430,7 +15430,7 @@ STA K+3                ; correct sign for the result
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: cntr
        Type: Subroutine
@@ -15446,7 +15446,7 @@ RTS                    ; Return from the subroutine
  if it's in the right-hand side, it reduces it by 1, also moving it towards the
  centre.
 
- ******************************************************************************
+ ******************************************************************************/
 
 cntr
 
@@ -15480,7 +15480,7 @@ RE1
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: BUMP2
        Type: Subroutine
@@ -15512,7 +15512,7 @@ RTS                    ; Return from the subroutine
 
    RE2+2               Restore A from T and return from the subroutine
 
- ******************************************************************************
+ ******************************************************************************/
 
 BUMP2
 
@@ -15545,7 +15545,7 @@ LDA T                  ; Restore the original argument A from T into A
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: REDU2
        Type: Subroutine
@@ -15578,7 +15578,7 @@ RTS                    ; Return from the subroutine
    RE3+2               Auto-recentre the value in X, if keyboard auto-recentre
                        is configured
 
- ******************************************************************************
+ ******************************************************************************/
 
 REDU2
 
@@ -15619,7 +15619,7 @@ BMI RE2+2              ; so set X to 128 (the middle of our range) and jump to
                        ; (this BMI is effectively a JMP as bit 7 of X is always
                        ; set)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ARCTAN
        Type: Subroutine
@@ -15643,7 +15643,7 @@ BMI RE2+2              ; so set X to 128 (the middle of our range) and jump to
  returns values in the range 0 to 128, which covers 0 to 180 degrees (or 0 to
  PI radians).
 
- ******************************************************************************
+ ******************************************************************************/
 
 ARCTAN
 
@@ -15759,7 +15759,7 @@ LDA ACT,X              ; Fetch ACT+X from the ACT table into A, so now:
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ACT
        Type: Variable
@@ -15799,7 +15799,7 @@ RTS                    ; Return from the subroutine
  Finally, if t < -1, we can do the first calculation to get arctan(|t|), and
  the second to get arctan(-|t|).
 
- ******************************************************************************
+ ******************************************************************************/
 
 ACT
 
@@ -15809,7 +15809,7 @@ FOR I__, 0, 31
 
 NEXT
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: WARP
        Type: Subroutine
@@ -15834,7 +15834,7 @@ NEXT
  in space. This means that any asteroids, cargo canisters or escape pods get
  dragged along for the ride.
 
- ******************************************************************************
+ ******************************************************************************/
 
 WARP
 
@@ -16027,7 +16027,7 @@ LDA #40                ; If we get here then we can't do an in-system jump, so
 JMP NOISE              ; call the NOISE routine with A = 40 to make a long, low
                        ; beep and return from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LASLI
        Type: Subroutine
@@ -16050,7 +16050,7 @@ JMP NOISE              ; call the NOISE routine with A = 40 to make a long, low
 
    LASLI-1             Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 LASLI
 
@@ -16129,7 +16129,7 @@ JMP LOIN               ; Draw a line from (X1, Y1) to (X2, Y2), so that's from
                        ; the centre point to (Y, 191), and return from
                        ; the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PLUT
        Type: Subroutine
@@ -16148,7 +16148,7 @@ JMP LOIN               ; Draw a line from (X1, Y1) to (X2, Y2), so that's from
 
    PU1-1               Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 PLUT
 
@@ -16273,7 +16273,7 @@ STX INWK+5,Y
 
                        ; Fall through into LOOK1 to return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LOOK1
        Type: Subroutine
@@ -16304,7 +16304,7 @@ STX INWK+5,Y
 
    LO2                 Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 LO2
 
@@ -16348,14 +16348,14 @@ JSR WPSHPS             ; Wipe all the ships from the scanner and mark them all
                        ; And fall through into SIGHT to draw the laser
                        ; crosshairs
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SIGHT
        Type: Subroutine
    Category: Flight
     Summary: Draw the laser crosshairs
 
- ******************************************************************************
+ ******************************************************************************/
 
 SIGHT
 
@@ -16387,7 +16387,7 @@ JMP TT15               ; Call TT15 to draw crosshairs of size 10 at the same
                        ; laser crosshairs, leaving a gap in the middle, and
                        ; return from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT66
        Type: Subroutine
@@ -16412,7 +16412,7 @@ JMP TT15               ; Call TT15 to draw crosshairs of size 10 at the same
 
    TT66-2              Call TT66 with A = 1
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA #1                 ; Set the view type to 1 when this is called via the
                        ; TT66-2 entry point
@@ -16424,7 +16424,7 @@ STA QQ11               ; Set the current view type in QQ11 to A
                        ; Fall through into TTX66 to clear the screen and draw a
                        ; white border
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TTX66
        Type: Subroutine
@@ -16444,7 +16444,7 @@ STA QQ11               ; Set the current view type in QQ11 to A
                        view name. This can be used to remove the border and
                        view name, as it is drawn using EOR logic
 
- ******************************************************************************
+ ******************************************************************************/
 
 TTX66
 
@@ -16581,7 +16581,7 @@ DEC X2
 JMP LOIN               ; Draw a line from (X1, Y1) to (X2, Y2), and return from
                        ; the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DELAY
        Type: Subroutine
@@ -16607,7 +16607,7 @@ JMP LOIN               ; Draw a line from (X1, Y1) to (X2, Y2), and return from
 
    DELAY-5             Wait for 2/50 of a second (0.04 seconds)
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDY #2                 ; Set Y to 2 vertical syncs
 
@@ -16632,7 +16632,7 @@ BNE DELAY              ; If Y isn't yet at zero, jump back to DELAY to wait
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: hm
        Type: Subroutine
@@ -16646,7 +16646,7 @@ RTS                    ; Return from the subroutine
  shown), and, if this is not a space view, clear the bottom three text rows of
  the screen.
 
- ******************************************************************************
+ ******************************************************************************/
 
 hm
 
@@ -16666,7 +16666,7 @@ BEQ SC5                ; (as SC5 contains an RTS)
                        ; Otherwise fall through into CLYNS to clear space at
                        ; the bottom of the screen
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: CLYNS
        Type: Subroutine
@@ -16696,7 +16696,7 @@ BEQ SC5                ; (as SC5 contains an RTS)
 
    Y                   Y is set to 0
 
- ******************************************************************************
+ ******************************************************************************/
 
 CLYNS
 
@@ -16726,7 +16726,7 @@ STY XC
                        ; Fall through into LYN to clear the pixels from $7707
                        ; to $77F0
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LYN
        Type: Subroutine
@@ -16756,7 +16756,7 @@ STY XC
 
    SC5                 Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 LYN
 
@@ -16775,7 +16775,7 @@ SC5
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SCAN
        Type: Subroutine
@@ -16793,7 +16793,7 @@ RTS                    ; Return from the subroutine
 
    INWK                The ship's data block
 
- ******************************************************************************
+ ******************************************************************************/
 
 SCAN
 
@@ -17138,7 +17138,7 @@ BNE VLL2               ; If we still have more stick to draw, jump up to VLL2
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: WSCAN
        Type: Subroutine
@@ -17151,7 +17151,7 @@ RTS                    ; Return from the subroutine
  for the screen to start its refresh cycle, which it does 50 times a second
  (50Hz).
 
- ******************************************************************************
+ ******************************************************************************/
 
 WSCAN
 
@@ -17166,11 +17166,11 @@ BEQ *-2               ; longer 0 (DL gets set to 30 in the LINSCN routine,
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
  Save ELTC.bin
 
- ******************************************************************************
+ ******************************************************************************/
 
 PRINT "ELITE C"
 PRINT "Assembled at ", CODE_C__
@@ -17182,18 +17182,18 @@ PRINT "Reload at ", LOAD_C__
 PRINT "S.ELTC ", ~CODE_C__, " ", ~*, " ", LOAD__, " ", LOAD_C__
 SAVE "3-assembled-output/ELTC.bin", CODE_C__, *, LOAD__
 
- ******************************************************************************
+ /******************************************************************************
 
  ELITE D FILE
 
  Produces the binary file ELTD.bin that gets loaded by elite-bcfs.asm.
 
- ******************************************************************************
+ ******************************************************************************/
 
 CODE_D__ = *
 LOAD_D__ = LOAD__ + * - CODE__
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: tnpr
        Type: Subroutine
@@ -17233,7 +17233,7 @@ LOAD_D__ = LOAD__ + * - CODE__
 
                          * Clear if there is room for this item
 
- ******************************************************************************
+ ******************************************************************************/
 
 tnpr
 
@@ -17310,7 +17310,7 @@ PLA                    ; Restore A from the stack
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT20
        Type: Subroutine
@@ -17324,7 +17324,7 @@ RTS                    ; Return from the subroutine
  Twist the three 16-bit seeds in QQ15 (selected system) four times, to
  generate the next system.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT20
 
@@ -17339,7 +17339,7 @@ JSR *+3               ; This line calls TT54 as a subroutine to do a twist,
                        ; and then falls through into TT54 to do another twist
                        ; before returning from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT54
        Type: Subroutine
@@ -17371,7 +17371,7 @@ JSR *+3               ; This line calls TT54 as a subroutine to do a twist,
 
  So this is what we do in this routine, where each seed is a 16-bit number.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT54
 
@@ -17407,7 +17407,7 @@ STA QQ15+5
 
 RTS                    ; The twist is complete so return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT146
        Type: Subroutine
@@ -17423,7 +17423,7 @@ RTS                    ; The twist is complete so return from the subroutine
  then a colon, then the distance to one decimal place, then token 35 ("LIGHT
  YEARS"). If the distance is zero, move the cursor down one line.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT146
 
@@ -17452,7 +17452,7 @@ LDA #195               ; Set A to the recursive token 35 (" LIGHT YEARS") and
                        ; fall through into TT60 to print the token followed
                        ; by a paragraph break
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT60
        Type: Subroutine
@@ -17472,14 +17472,14 @@ LDA #195               ; Set A to the recursive token 35 (" LIGHT YEARS") and
 
    A                   The text token to be printed
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT60
 
 JSR TT27               ; Print the text token in A and fall through into TTX69
                        ; to print the paragraph break
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TTX69
        Type: Subroutine
@@ -17491,7 +17491,7 @@ JSR TT27               ; Print the text token in A and fall through into TTX69
  Print a paragraph break (a blank line between paragraphs) by moving the cursor
  down a line, setting Sentence Case, and then printing a newline.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TTX69
 
@@ -17500,14 +17500,14 @@ INC YC                 ; Move the text cursor down a line
                        ; Fall through into TT69 to set Sentence Case and print
                        ; a newline
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT69
        Type: Subroutine
    Category: Text
     Summary: Set Sentence Case and print a newline
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT69
 
@@ -17516,14 +17516,14 @@ STA QQ17
 
                        ; Fall through into TT67 to print a newline
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT67
        Type: Subroutine
    Category: Text
     Summary: Print a newline
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT67
 
@@ -17532,7 +17532,7 @@ LDA #13                ; Load a newline character into A
 JMP TT27               ; Print the text token in A and return from the
                        ; subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT70
        Type: Subroutine
@@ -17543,7 +17543,7 @@ JMP TT27               ; Print the text token in A and return from the
 
  This subroutine is called by TT25 when displaying a system's economy.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT70
 
@@ -17553,7 +17553,7 @@ JSR TT27
 JMP TT72               ; Jump to TT72 to continue printing system data as part
                        ; of routine TT25
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: spc
        Type: Subroutine
@@ -17571,7 +17571,7 @@ JMP TT72               ; Jump to TT72 to continue printing system data as part
 
    A                   The text token to be printed
 
- ******************************************************************************
+ ******************************************************************************/
 
 spc
 
@@ -17580,7 +17580,7 @@ JSR TT27               ; Print the text token in A
 JMP TT162              ; Print a space and return from the subroutine using a
                        ; tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT25
        Type: Subroutine
@@ -17596,7 +17596,7 @@ JMP TT162              ; Print a space and return from the subroutine using a
    TT72                Used by TT70 to re-enter the routine after displaying
                        "MAINLY" for the economy type
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT25
 
@@ -17877,7 +17877,7 @@ JSR TT26               ; tail call
 LDA #'m'
 JMP TT26
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT24
        Type: Subroutine
@@ -17902,7 +17902,7 @@ JMP TT26
  and type of inhabitant are calculated on-the-fly in the TT25 routine when
  the system data gets displayed, so they aren't calculated here.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT24
 
@@ -17995,14 +17995,14 @@ STA QQ7
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT22
        Type: Subroutine
    Category: Charts
     Summary: Show the Long-range Chart (red key f4)
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT22
 
@@ -18090,7 +18090,7 @@ STA QQ19+2
                        ; Fall through into TT15 to draw crosshairs of size 4 at
                        ; the selected system's coordinates
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT15
        Type: Subroutine
@@ -18112,7 +18112,7 @@ STA QQ19+2
 
    QQ19+2              The size of the crosshairs
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT15
 
@@ -18233,7 +18233,7 @@ JMP LL30               ; Draw a vertical line (X1, Y1) to (X2, Y2), which will
                        ; edge, through the centre of the crosshairs, returning
                        ; from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT14
        Type: Subroutine
@@ -18244,7 +18244,7 @@ JMP LL30               ; Draw a vertical line (X1, Y1) to (X2, Y2), which will
 
  Draw a circle with crosshairs at the current system's galactic coordinates.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT126
 
@@ -18307,7 +18307,7 @@ STA QQ19+1
                        ; (QQ19, QQ19+1), and radius K that reflects the
                        ; current fuel levels
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT128
        Type: Subroutine
@@ -18329,7 +18329,7 @@ STA QQ19+1
 
    K                   The radius of the circle
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT128
 
@@ -18360,7 +18360,7 @@ STA LSX                ; source
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT219
        Type: Subroutine
@@ -18375,7 +18375,7 @@ RTS                    ; Return from the subroutine
                        "pressed" to red key f9 (so we show the Inventory
                        screen)
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT219
 
@@ -18561,7 +18561,7 @@ LDA #f9                ; Jump into the main loop at FRCE, setting the key
 JMP FRCE               ; "pressed" to red key f9 (so we show the Inventory
                        ; screen)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: gnum
        Type: Subroutine
@@ -18594,7 +18594,7 @@ JMP FRCE               ; "pressed" to red key f9 (so we show the Inventory
 
    C flag              Set if the number is too large (> QQ25), clear otherwise
 
- ******************************************************************************
+ ******************************************************************************/
 
 gnum
 
@@ -18664,14 +18664,14 @@ LDA R                  ; Set A to the result we have been building in R
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT208
        Type: Subroutine
    Category: Market
     Summary: Show the Sell Cargo screen (red key f2)
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT208
 
@@ -18697,7 +18697,7 @@ JSR TT68               ; followed by a colon
                        ; Fall through into TT210 to show the Inventory screen
                        ; with the option to sell
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT210
        Type: Subroutine
@@ -18720,7 +18720,7 @@ JSR TT68               ; followed by a colon
 
                            * 8 = Inventory
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT210
 
@@ -18839,14 +18839,14 @@ JMP BAY2               ; And then jump to BAY2 to display the Inventory
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT213
        Type: Subroutine
    Category: Market
     Summary: Show the Inventory screen (red key f9)
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT213
 
@@ -18878,7 +18878,7 @@ JSR TT27               ; token 107 ("LARGE CARGO{sentence case} BAY")
 JMP TT210              ; Jump to TT210 to print the contents of our cargo bay
                        ; and return from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT214
        Type: Subroutine
@@ -18897,7 +18897,7 @@ JMP TT210              ; Jump to TT210 to print the contents of our cargo bay
 
    C flag              Set if the response was "yes", clear otherwise
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT214
 
@@ -18933,7 +18933,7 @@ SEC                    ; Set the C flag to indicate a "yes" response
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT16
        Type: Subroutine
@@ -18952,7 +18952,7 @@ RTS                    ; Return from the subroutine
 
    Y                   The amount to move the crosshairs in the y-axis
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT16
 
@@ -19003,7 +19003,7 @@ STA QQ19               ; This instruction has no effect, as QQ19 is overwritten
                        ; fall through into TT103 to redraw them at their new
                        ; location
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT103
        Type: Subroutine
@@ -19015,7 +19015,7 @@ STA QQ19               ; This instruction has no effect, as QQ19 is overwritten
  Draw a small set of crosshairs on a galactic chart at the coordinates in
  (QQ9, QQ10).
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT103
 
@@ -19041,7 +19041,7 @@ JMP TT15               ; Jump to TT15 to draw crosshairs of size 4 at the
                        ; crosshairs coordinates, returning from the subroutine
                        ; using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT123
        Type: Subroutine
@@ -19076,7 +19076,7 @@ JMP TT15               ; Jump to TT15 to draw crosshairs of size 4 at the
 
    TT180               Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT123
 
@@ -19111,7 +19111,7 @@ TT180
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT105
        Type: Subroutine
@@ -19123,7 +19123,7 @@ RTS                    ; Return from the subroutine
  Check whether the crosshairs are close enough to the current system to appear
  on the Short-range Chart, and if so, draw them.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT105
 
@@ -19176,14 +19176,14 @@ JMP TT15               ; Jump to TT15 to draw crosshairs of size 8 at the
                        ; crosshairs coordinates, returning from the subroutine
                        ; using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT23
        Type: Subroutine
    Category: Charts
     Summary: Show the Short-range Chart (red key f5)
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT23
 
@@ -19420,7 +19420,7 @@ BEQ TT111-1            ; If X = 0 then we have done all 256 systems, so return
 JMP TT182              ; Otherwise jump back up to TT182 to process the next
                        ; system
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT81
        Type: Subroutine
@@ -19433,7 +19433,7 @@ JMP TT182              ; Otherwise jump back up to TT182 to process the next
  seeds for the selected system (QQ15) - in other words, set the selected
  system's seeds to those of system 0.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT81
 
@@ -19450,7 +19450,7 @@ BPL TT81+2             ; Loop back up to the LDA instruction if we still have
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT111
        Type: Subroutine
@@ -19492,7 +19492,7 @@ RTS                    ; Return from the subroutine
 
    TT111-1             Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT111
 
@@ -19736,7 +19736,7 @@ JMP TT24               ; Call TT24 to calculate system data from the seeds in
                        ; new selected system is fully set up, and return from
                        ; the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: hy6
        Type: Subroutine
@@ -19749,7 +19749,7 @@ JMP TT24               ; Call TT24 to calculate system data from the seeds in
  Print "Docked" at the bottom of the screen to indicate we can't hyperspace
  when docked.
 
- ******************************************************************************
+ ******************************************************************************/
 
 hy6
 
@@ -19764,7 +19764,7 @@ STA XC                 ; screen), setting A to 15 at the same time for the
 JMP TT27               ; Print recursive token 129 ("{sentence case}DOCKED")
                        ; and return from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: hyp
        Type: Subroutine
@@ -19789,7 +19789,7 @@ JMP TT27               ; Print recursive token 129 ("{sentence case}DOCKED")
  and if all the pre-jump checks are passed, we print the destination on-screen
  and start the countdown.
 
- ******************************************************************************
+ ******************************************************************************/
 
 hyp
 
@@ -19849,7 +19849,7 @@ JSR cpl                ; Call cpl to print the name of the selected system
 
                        ; Fall through into wW to start the hyperspace countdown
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: wW
        Type: Subroutine
@@ -19861,7 +19861,7 @@ JSR cpl                ; Call cpl to print the name of the selected system
  Start the hyperspace countdown (for both inter-system hyperspace and the
  galactic hyperdrive).
 
- ******************************************************************************
+ ******************************************************************************/
 
 wW
 
@@ -19890,7 +19890,7 @@ RTS                    ; in the original - they can actually be found at the
                        ; could save a byte by using a tail call instead of an
                        ; RTS?
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Ghy
        Type: Subroutine
@@ -19922,7 +19922,7 @@ RTS                    ; in the original - they can actually be found at the
 
    zZ+1                Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 Ghy
 
@@ -20014,7 +20014,7 @@ JSR MESS               ; as an in-flight message
                        ; Fall through into jmp to set the system to the
                        ; current system and return from the subroutine there
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: jmp
        Type: Subroutine
@@ -20033,7 +20033,7 @@ JSR MESS               ; as an in-flight message
 
    hy5                 Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 jmp
 
@@ -20047,7 +20047,7 @@ hy5
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ee3
        Type: Subroutine
@@ -20066,7 +20066,7 @@ RTS                    ; Return from the subroutine
 
    X                   The number to print
 
- ******************************************************************************
+ ******************************************************************************/
 
 ee3
 
@@ -20080,7 +20080,7 @@ STY XC                 ; Move the text cursor to column 0
                        ; Fall through into pr6 to print X to 5 digits, as the
                        ; high byte in Y is 0
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: pr6
        Type: Subroutine
@@ -20101,7 +20101,7 @@ STY XC                 ; Move the text cursor to column 0
 
    Y                   The high byte of the number to print
 
- ******************************************************************************
+ ******************************************************************************/
 
 pr6
 
@@ -20109,7 +20109,7 @@ CLC                    ; Do not display a decimal point when printing
 
                        ; Fall through into pr5 to print X to 5 digits
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: pr5
        Type: Subroutine
@@ -20132,7 +20132,7 @@ CLC                    ; Do not display a decimal point when printing
 
    C flag              If set, include a decimal point
 
- ******************************************************************************
+ ******************************************************************************/
 
 pr5
 
@@ -20141,7 +20141,7 @@ LDA #5                 ; Set the number of digits to print to 5
 JMP TT11               ; Call TT11 to print (Y X) to 5 digits and return from
                        ; the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT147
        Type: Subroutine
@@ -20152,14 +20152,14 @@ JMP TT11               ; Call TT11 to print (Y X) to 5 digits and return from
 
  Print "RANGE?" for when the hyperspace distance is too far
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT147
 
 LDA #202               ; Load A with token 42 ("RANGE") and fall through into
                        ; prq to print it, followed by a question mark
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: prq
        Type: Subroutine
@@ -20172,7 +20172,7 @@ LDA #202               ; Load A with token 42 ("RANGE") and fall through into
 
    A                   The text token to be printed
 
- ******************************************************************************
+ ******************************************************************************/
 
 prq
 
@@ -20181,7 +20181,7 @@ JSR TT27               ; Print the text token in A
 LDA #'?'               ; Print a question mark and return from the
 JMP TT27               ; subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT151
        Type: Subroutine
@@ -20207,7 +20207,7 @@ JMP TT27               ; subroutine using a tail call
 
    QQ25                The item's availability
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT151
 
@@ -20325,7 +20325,7 @@ BNE TT162+2            ; contains JMP TT27 (this BNE is effectively a JMP as A
                        ; will never be zero), and return from the subroutine
                        ; using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT152
        Type: Subroutine
@@ -20338,7 +20338,7 @@ BNE TT162+2            ; contains JMP TT27 (this BNE is effectively a JMP as A
  market prices table is in QQ19+1, right-padded with spaces to a width of two
  characters (so that's "t ", "kg" or "g ").
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT152
 
@@ -20356,7 +20356,7 @@ JSR TT16a              ; Otherwise call TT16a to print "g" for grams, and fall
                        ; through into TT162 to print a space and return from
                        ; the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT162
        Type: Subroutine
@@ -20369,7 +20369,7 @@ JSR TT16a              ; Otherwise call TT16a to print "g" for grams, and fall
 
    TT162+2             Jump to TT27 to print the text token in A
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT162
 
@@ -20378,14 +20378,14 @@ LDA #' '               ; Load a space character into A
 JMP TT27               ; Print the text token in A and return from the
                        ; subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT160
        Type: Subroutine
    Category: Market
     Summary: Print "t" (for tonne) and a space
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT160
 
@@ -20398,14 +20398,14 @@ BCC TT162              ; Jump to TT162 to print a space and return from the
                        ; subroutine using a tail call (this BCC is effectively
                        ; a JMP as the C flag is cleared by TT26)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT161
        Type: Subroutine
    Category: Market
     Summary: Print "kg" (for kilograms)
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT161
 
@@ -20415,14 +20415,14 @@ JSR TT26               ; Print the character, using TT216 so that it doesn't
                        ; change the character case, and fall through into
                        ; TT16a to print a "g" character
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT16a
        Type: Subroutine
    Category: Market
     Summary: Print "g" (for grams)
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT16a
 
@@ -20432,7 +20432,7 @@ JMP TT26               ; Print the character, using TT216 so that it doesn't
                        ; change the character case, and return from the
                        ; subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT163
        Type: Subroutine
@@ -20444,7 +20444,7 @@ JMP TT26               ; Print the character, using TT216 so that it doesn't
  Print the column headers for the prices table in the Buy Cargo and Market
  Price screens.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT163
 
@@ -20457,14 +20457,14 @@ BNE TT162+2            ; {crlf} PRODUCT   UNIT PRICE FOR SALE{crlf}{lf}") by
                        ; is effectively a JMP as A will never be zero), and
                        ; return from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT167
        Type: Subroutine
    Category: Market
     Summary: Show the Market Price screen (red key f7)
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT167
 
@@ -20509,7 +20509,7 @@ BCC TT168
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: var
        Type: Subroutine
@@ -20532,7 +20532,7 @@ RTS                    ; Return from the subroutine
                        (which contains the economic_factor in bits 0-5, and the
                        sign of the economic_factor in bit 7)
 
- ******************************************************************************
+ ******************************************************************************/
 
 var
 
@@ -20573,7 +20573,7 @@ STA QQ19+3             ; Store the result in QQ19+3
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: hyp1
        Type: Subroutine
@@ -20609,7 +20609,7 @@ RTS                    ; Return from the subroutine
                        first calculating which system is closest. We do this
                        if we already know that (QQ9, QQ10) points to a system
 
- ******************************************************************************
+ ******************************************************************************/
 
 hyp1
 
@@ -20658,7 +20658,7 @@ STA gov                ; selected system's government from QQ4
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: GVL
        Type: Subroutine
@@ -20678,7 +20678,7 @@ RTS                    ; Return from the subroutine
 
    hyR                 Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 GVL
 
@@ -20763,7 +20763,7 @@ hyR
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: GTHG
        Type: Subroutine
@@ -20771,7 +20771,7 @@ RTS                    ; Return from the subroutine
     Summary: Spawn a Thargoid ship and a Thargon companion
   Deep dive: Fixing ship positions
 
- ******************************************************************************
+ ******************************************************************************/
 
 GTHG
 
@@ -20793,7 +20793,7 @@ LDA #TGL               ; Call NWSHP to add a new Thargon ship to our local
 JMP NWSHP              ; bubble of universe, and return from the subroutine
                        ; using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MJP
        Type: Subroutine
@@ -20818,7 +20818,7 @@ JMP NWSHP              ; bubble of universe, and return from the subroutine
 
    ptg                 Called when the user manually forces a mis-jump
 
- ******************************************************************************
+ ******************************************************************************/
 
 ptg
 
@@ -20871,7 +20871,7 @@ STA QQ1                ; vicinity of our original destination, but above or
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT18
        Type: Subroutine
@@ -20883,7 +20883,7 @@ RTS                    ; Return from the subroutine
  Try to go through hyperspace. Called from TT102 in the main loop when the
  hyperspace countdown has finished.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT18
 
@@ -20956,7 +20956,7 @@ INC QQ11               ; This is a space view, so increment QQ11 to 1
 
                        ; Fall through into TT110 to show the front space view
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT110
        Type: Subroutine
@@ -20971,7 +20971,7 @@ INC QQ11               ; This is a space view, so increment QQ11 to 1
  Called when red key f0 is pressed while docked (launch), after we arrive in a
  new galaxy, or after a hyperspace if the current view is a space view.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT110
 
@@ -21025,7 +21025,7 @@ STX QQ12
 JMP LOOK1              ; Jump to LOOK1 to switch to the front view (X = 0),
                        ; returning from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT114
        Type: Subroutine
@@ -21044,7 +21044,7 @@ JMP LOOK1              ; Jump to LOOK1 to switch to the front view (X = 0),
 
    A                   The current view, loaded from QQ11
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT114
 
@@ -21059,7 +21059,7 @@ TT115
 
 JMP TT23               ; Jump to TT23 to display the Short-range Chart
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LCASH
        Type: Subroutine
@@ -21082,7 +21082,7 @@ JMP TT23               ; Jump to TT23 to display the Short-range Chart
                        If clear, there was not enough cash to do the
                        subtraction
 
- ******************************************************************************
+ ******************************************************************************/
 
 LCASH
 
@@ -21116,7 +21116,7 @@ BCS TT113              ; If the C flag is set then the subtraction didn't
                        ; MCASH to reverse the sum and restore the original
                        ; value in CASH, and returning with the C flag clear
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MCASH
        Type: Subroutine
@@ -21136,7 +21136,7 @@ BCS TT113              ; If the C flag is set then the subtraction didn't
 
    TT113               Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 MCASH
 
@@ -21165,7 +21165,7 @@ TT113
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: GCASH
        Type: Subroutine
@@ -21178,13 +21178,13 @@ RTS                    ; Return from the subroutine
 
    (Y X) = P * Q * 4
 
- ******************************************************************************
+ ******************************************************************************/
 
 GCASH
 
 JSR MULTU              ; Call MULTU to calculate (A P) = P * Q
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: GC2
        Type: Subroutine
@@ -21197,7 +21197,7 @@ JSR MULTU              ; Call MULTU to calculate (A P) = P * Q
 
    (Y X) = (A P) * 4
 
- ******************************************************************************
+ ******************************************************************************/
 
 GC2
 
@@ -21211,7 +21211,7 @@ LDX P
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: EQSHP
        Type: Subroutine
@@ -21231,7 +21231,7 @@ RTS                    ; Return from the subroutine
                        exit to the docking bay (i.e. show the Status Mode
                        screen)
 
- ******************************************************************************
+ ******************************************************************************/
 
 bay
 
@@ -21651,7 +21651,7 @@ JSR dn                 ; We are done buying equipment, so print the amount of
 JMP EQSHP              ; Jump back up to EQSHP to show the Equip Ship screen
                        ; again and see if we can't track down another bargain
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: dn
        Type: Subroutine
@@ -21659,7 +21659,7 @@ JMP EQSHP              ; Jump back up to EQSHP to show the Equip Ship screen
     Summary: Print the amount of money we have left in the cash pot, then make
              a short, high beep and delay for 1 second
 
- ******************************************************************************
+ ******************************************************************************/
 
 dn
 
@@ -21671,14 +21671,14 @@ JSR spc                ; followed by a space
                        ; Fall through into dn2 to make a beep and delay for
                        ; 1 second before returning from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: dn2
        Type: Subroutine
    Category: Text
     Summary: Make a short, high beep and delay for 1 second
 
- ******************************************************************************
+ ******************************************************************************/
 
 dn2
 
@@ -21687,7 +21687,7 @@ JSR BEEP               ; Call the BEEP subroutine to make a short, high beep
 LDY #50                ; Delay for 50 vertical syncs (50/50 = 1 second) and
 JMP DELAY              ; return from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: eq
        Type: Subroutine
@@ -21707,7 +21707,7 @@ JMP DELAY              ; return from the subroutine using a tail call
    A                   The item number of the piece of equipment (0-11) as
                        shown in the table at PRXS
 
- ******************************************************************************
+ ******************************************************************************/
 
 eq
 
@@ -21728,7 +21728,7 @@ JSR prq                ; of equipment, so print recursive token 37 ("CASH")
 JMP err                ; Jump to err to beep, pause and go to the docking bay
                        ; (i.e. show the Status Mode screen)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: prx
        Type: Subroutine
@@ -21760,7 +21760,7 @@ JMP err                ; Jump to err to beep, pause and go to the docking bay
 
    c                   Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 SEC                    ; Decrement A (for when this routine is called via
 SBC #1                 ; prx-3)
@@ -21779,7 +21779,7 @@ c
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: qv
        Type: Subroutine
@@ -21805,7 +21805,7 @@ RTS                    ; Return from the subroutine
 
    X                   The chosen view number (0-3)
 
- ******************************************************************************
+ ******************************************************************************/
 
 qv
 
@@ -21861,11 +21861,11 @@ TAX                    ; We have a valid view number, so transfer it to X
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
  Save ELTD.bin
 
- ******************************************************************************
+ ******************************************************************************/
 
 PRINT "ELITE D"
 PRINT "Assembled at ", CODE_D__
@@ -21877,18 +21877,18 @@ PRINT "Reload at ", LOAD_D__
 PRINT "S.ELTD ", ~CODE_D__, " ", ~*, " ", LOAD__, " ", LOAD_D__
 SAVE "3-assembled-output/ELTD.bin", CODE_D__, *, LOAD__
 
- ******************************************************************************
+ /******************************************************************************
 
  ELITE E FILE
 
  Produces the binary file ELTE.bin that gets loaded by elite-bcfs.asm.
 
- ******************************************************************************
+ ******************************************************************************/
 
 CODE_E__ = *
 LOAD_E__ = LOAD__ + * - CODE__
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Authors' names
        Type: Variable
@@ -21906,7 +21906,7 @@ LOAD_E__ = LOAD__ + * - CODE__
 
    (C)Bell/Braben1984
 
- ******************************************************************************
+ ******************************************************************************/
 
  .by '(' EOR 164
  .by 'C' EOR 164
@@ -21927,7 +21927,7 @@ LOAD_E__ = LOAD__ + * - CODE__
  .by '8' EOR 164
  .by '4' EOR 164
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: cpl
        Type: Subroutine
@@ -21941,7 +21941,7 @@ LOAD_E__ = LOAD__ + * - CODE__
  Print control code 3 (the selected system name, i.e. the one in the crosshairs
  in the Short-range Chart).
 
- ******************************************************************************
+ ******************************************************************************/
 
 cpl
 
@@ -22010,7 +22010,7 @@ BPL TT56               ; Loop back for the next byte to restore
 RTS                    ; Once all the seeds are restored, return from the
                        ; subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: cmn
        Type: Subroutine
@@ -22027,7 +22027,7 @@ RTS                    ; Once all the seeds are restored, return from the
 
    cmn-1               Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 cmn
 
@@ -22049,7 +22049,7 @@ BNE QUL4               ; Loop back for the next character
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ypl
        Type: Subroutine
@@ -22066,7 +22066,7 @@ RTS                    ; Return from the subroutine
 
    ypl-1               Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 ypl
 
@@ -22108,7 +22108,7 @@ BPL TT78               ; Loop back for the next byte to swap
 RTS                    ; Once all bytes are swapped, return from the
                        ; subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: tal
        Type: Subroutine
@@ -22119,7 +22119,7 @@ RTS                    ; Once all bytes are swapped, return from the
 
  Print control code 1 (the current galaxy number, right-aligned to width 3).
 
- ******************************************************************************
+ ******************************************************************************/
 
 tal
 
@@ -22137,7 +22137,7 @@ JMP pr2                ; Jump to pr2, which prints the number in X to a width
                        ; of 3 figures, left-padding with spaces to a width of
                        ; 3, and return from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: fwl
        Type: Subroutine
@@ -22149,7 +22149,7 @@ JMP pr2                ; Jump to pr2, which prints the number in X to a width
  Print control code 5 ("FUEL: ", fuel level, " LIGHT YEARS", newline, "CASH:",
  control code 0).
 
- ******************************************************************************
+ ******************************************************************************/
 
 fwl
 
@@ -22173,7 +22173,7 @@ PCASH
 LDA #119               ; Print recursive token 119 ("CASH:" then control code
 BNE TT27               ; 0, which prints cash levels, then " CR" and newline)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: csh
        Type: Subroutine
@@ -22185,7 +22185,7 @@ BNE TT27               ; 0, which prints cash levels, then " CR" and newline)
  Print control code 0 (the current amount of cash, right-aligned to width 9,
  followed by " CR" and a newline).
 
- ******************************************************************************
+ ******************************************************************************/
 
 csh
 
@@ -22218,7 +22218,7 @@ JSR BPRNT              ; Print the amount of cash to 9 digits with a decimal
 LDA #226               ; Print recursive token 66 (" CR") followed by a
                        ; newline by falling through into plf
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: plf
        Type: Subroutine
@@ -22231,7 +22231,7 @@ LDA #226               ; Print recursive token 66 (" CR") followed by a
 
    A                   The text token to be printed
 
- ******************************************************************************
+ ******************************************************************************/
 
 plf
 
@@ -22240,7 +22240,7 @@ JSR TT27               ; Print the text token in A
 JMP TT67               ; Jump to TT67 to print a newline and return from the
                        ; subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT68
        Type: Subroutine
@@ -22253,28 +22253,28 @@ JMP TT67               ; Jump to TT67 to print a newline and return from the
 
    A                   The text token to be printed
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT68
 
 JSR TT27               ; Print the text token in A and fall through into TT73
                        ; to print a colon
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT73
        Type: Subroutine
    Category: Text
     Summary: Print a colon
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT73
 
 LDA #':'               ; Set A to ASCII ":" and fall through into TT27 to
                        ; actually print the colon
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT27
        Type: Subroutine
@@ -22293,7 +22293,7 @@ LDA #':'               ; Set A to ASCII ":" and fall through into TT27 to
 
    A                   The text token to be printed
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT27
 
@@ -22400,7 +22400,7 @@ BVS TT46               ; either it is bit 6 that is set, or some other flag in
                        ; which is how printing all words in lower case could
                        ; be supported (by setting QQ17 to 1, say)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT42
        Type: Subroutine
@@ -22428,7 +22428,7 @@ BVS TT46               ; either it is bit 6 that is set, or some other flag in
    TT44                Jumps to TT26 to print the character in A (used to
                        enable us to use a branch instruction to jump to TT26)
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT42
 
@@ -22448,7 +22448,7 @@ TT44
 
 JMP TT26               ; Print the character in A
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT41
        Type: Subroutine
@@ -22485,7 +22485,7 @@ JMP TT26               ; Print the character in A
 
    QQ17                Bit 7 is set
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT41
 
@@ -22515,7 +22515,7 @@ BNE TT44               ; Jump to TT26 (via TT44) to print the character in A
                        ; (this BNE is effectively a JMP as A will never be
                        ; zero)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: qw
        Type: Subroutine
@@ -22534,7 +22534,7 @@ BNE TT44               ; Jump to TT26 (via TT44) to print the character in A
    A                   A value from 128-145, which refers to a recursive token
                        in the range 14-31
 
- ******************************************************************************
+ ******************************************************************************/
 
 qw
 
@@ -22542,7 +22542,7 @@ ADC #114               ; This is a recursive token in the range 0-95, so add
 BNE ex                 ; 114 to the argument to get the token number 128-145
                        ; and jump to ex to print it
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: crlf
        Type: Subroutine
@@ -22555,7 +22555,7 @@ BNE ex                 ; 114 to the argument to get the token number 128-145
  name is pretty misleading, as it doesn't have anything to do with carriage
  returns or line feeds.
 
- ******************************************************************************
+ ******************************************************************************/
 
 crlf
 
@@ -22565,7 +22565,7 @@ STA XC
 BNE TT73               ; Jump to TT73, which prints a colon (this BNE is
                        ; effectively a JMP as A will never be zero)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT45
        Type: Subroutine
@@ -22600,7 +22600,7 @@ BNE TT73               ; Jump to TT73, which prints a colon (this BNE is
 
    QQ17                Bits 6 and 7 are set
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT45
 
@@ -22619,7 +22619,7 @@ BCS TT42               ; print the letter in lowercase
                        ; through to TT46 to print the character and set QQ17
                        ; to ensure the next word starts with a capital letter
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT46
        Type: Subroutine
@@ -22649,7 +22649,7 @@ BCS TT42               ; print the letter in lowercase
 
    QQ17                Bits 6 and 7 are set
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT46
 
@@ -22663,7 +22663,7 @@ PLA                    ; Restore the token number into A
 
                        ; Now fall through into TT74 to print the character
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT74
        Type: Subroutine
@@ -22676,13 +22676,13 @@ PLA                    ; Restore the token number into A
 
    A                   The character to be printed
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT74
 
 JMP TT26               ; Print the character in A
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT43
        Type: Subroutine
@@ -22705,7 +22705,7 @@ JMP TT26               ; Print the character in A
                          * 160-255 (the argument to TT27 that refers to a
                            recursive token in the range 0-95)
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT43
 
@@ -22741,7 +22741,7 @@ SBC #160               ; This is a recursive token in the range 160-255, so
                        ; subtract 160 from the argument to get the token
                        ; number 0-95 and fall through into ex to print it
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ex
        Type: Subroutine
@@ -22772,7 +22772,7 @@ SBC #160               ; This is a recursive token in the range 160-255, so
 
    TT48                Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 ex
 
@@ -22882,7 +22882,7 @@ TT48
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DOEXP
        Type: Subroutine
@@ -22891,7 +22891,7 @@ RTS                    ; Return from the subroutine
   Deep dive: Drawing explosion clouds
              Generating random numbers
 
- ******************************************************************************
+ ******************************************************************************/
 
 EX2
 
@@ -23262,7 +23262,7 @@ SBC #0
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SOS1
        Type: Subroutine
@@ -23274,7 +23274,7 @@ RTS                    ; Return from the subroutine
  Update the missile indicators, and set up a data block for the planet, but
  only setting the pitch and roll counters to 127 (no damping).
 
- ******************************************************************************
+ ******************************************************************************/
 
 SOS1
 
@@ -23294,7 +23294,7 @@ JMP NWSHP              ; Add a new planet to our local bubble of universe,
                        ; with an equator and meridian, 130 is a planet with
                        ; a crater)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SOLAR
        Type: Subroutine
@@ -23306,7 +23306,7 @@ JMP NWSHP              ; Add a new planet to our local bubble of universe,
  Halve our legal status, update the missile indicators, and set up data blocks
  and slots for the planet and sun.
 
- ******************************************************************************
+ ******************************************************************************/
 
 SOLAR
 
@@ -23360,7 +23360,7 @@ JSR NWSHP              ; Call NWSHP to set up the sun's data block and add it
                        ; it's the second one to be added to our local bubble
                        ; of this new system's universe
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: NWSTARS
        Type: Subroutine
@@ -23371,7 +23371,7 @@ JSR NWSHP              ; Call NWSHP to set up the sun's data block and add it
 
  This routine is called when the space view is initialised in routine LOOK1.
 
- ******************************************************************************
+ ******************************************************************************/
 
 NWSTARS
 
@@ -23381,7 +23381,7 @@ BNE WPSHPS             ; instruction is commented out in the original source,
                        ; but it would have the effect of also skipping the
                        ; initialisation if we had mis-jumped into witchspace
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: nWq
        Type: Subroutine
@@ -23396,7 +23396,7 @@ BNE WPSHPS             ; instruction is commented out in the original source,
 
  This is called by the DEATH routine when it displays our untimely demise.
 
- ******************************************************************************
+ ******************************************************************************/
 
 nWq
 
@@ -23439,7 +23439,7 @@ BNE SAL4               ; Loop back to SAL4 until we have randomised all the
                        ; Fall through into WPSHPS to clear the scanner and
                        ; reset the LSO block
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: WPSHPS
        Type: Subroutine
@@ -23451,7 +23451,7 @@ BNE SAL4               ; Loop back to SAL4 until we have randomised all the
  Remove all ships from the scanner, reset the sun line heap at LSO, and reset
  the ball line heap at LSX2 and LSY2.
 
- ******************************************************************************
+ ******************************************************************************/
 
 WPSHPS
 
@@ -23516,7 +23516,7 @@ STX LSY2
 
                        ; Fall through into FLFLLS to reset the LSO block
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: FLFLLS
        Type: Subroutine
@@ -23534,7 +23534,7 @@ STX LSY2
 
    A                   A is set to 0
 
- ******************************************************************************
+ ******************************************************************************/
 
 FLFLLS
 
@@ -23562,7 +23562,7 @@ STY LSX                ; Set the first byte of the LSO block, which has its own
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DET1
        Type: Subroutine
@@ -23592,7 +23592,7 @@ RTS                    ; Return from the subroutine
 
    A                   A is set to 6
 
- ******************************************************************************
+ ******************************************************************************/
 
 DET1
 
@@ -23608,7 +23608,7 @@ CLI                    ; Re-enable interrupts
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SHD
        Type: Subroutine
@@ -23626,7 +23626,7 @@ RTS                    ; Return from the subroutine
 
    X                   The value of the shield to recharge
 
- ******************************************************************************
+ ******************************************************************************/
 
 DEX                    ; Increment the shield value so that it doesn't go past
                        ; a maximum of 255
@@ -23644,7 +23644,7 @@ BEQ SHD-2              ; If the shield value is 0 then this means it was 255
                        ; Otherwise fall through into DENGY to drain our energy
                        ; to pay for all this shield charging
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DENGY
        Type: Subroutine
@@ -23657,7 +23657,7 @@ BEQ SHD-2              ; If the shield value is 0 then this means it was 255
 
    Z flag              Set if we have no energy left, clear otherwise
 
- ******************************************************************************
+ ******************************************************************************/
 
 DENGY
 
@@ -23676,14 +23676,14 @@ PLP                    ; Restore the flags from the stack, so we return with
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: COMPAS
        Type: Subroutine
    Category: Dashboard
     Summary: Update the compass
 
- ******************************************************************************
+ ******************************************************************************/
 
 COMPAS
 
@@ -23700,7 +23700,7 @@ JSR SPS1               ; Otherwise we need to draw the planet on the compass,
 JMP SP2                ; Jump to SP2 to draw XX15 on the compass, returning
                        ; from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SPS2
        Type: Subroutine
@@ -23720,7 +23720,7 @@ JMP SP2                ; Jump to SP2 to draw XX15 on the compass, returning
 
    C flag              The C flag is cleared
 
- ******************************************************************************
+ ******************************************************************************/
 
 SPS2
 
@@ -23763,7 +23763,7 @@ INX
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SPS4
        Type: Subroutine
@@ -23775,7 +23775,7 @@ RTS                    ; Return from the subroutine
  Calculate the vector between our ship and the space station and store it in
  XX15.
 
- ******************************************************************************
+ ******************************************************************************/
 
 SPS4
 
@@ -23796,14 +23796,14 @@ BPL SPL1               ; Loop back to SPL1 until we have copied all 9 bytes
 JMP TAS2               ; Call TAS2 to build XX15 from K3, returning from the
                        ; subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SP1
        Type: Subroutine
    Category: Dashboard
     Summary: Draw the space station on the compass
 
- ******************************************************************************
+ ******************************************************************************/
 
 SP1
 
@@ -23812,7 +23812,7 @@ JSR SPS4               ; Call SPS4 to calculate the vector to the space station
 
                        ; Fall through into SP2 to draw XX15 on the compass
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SP2
        Type: Subroutine
@@ -23827,7 +23827,7 @@ JSR SPS4               ; Call SPS4 to calculate the vector to the space station
    XX15 to XX15+2      The normalised vector to the planet or space station,
                        stored as x in XX15, y in XX15+1 and z in XX15+2
 
- ******************************************************************************
+ ******************************************************************************/
 
 SP2
 
@@ -23882,7 +23882,7 @@ STA COMC               ; Store the compass colour in COMC
 
                        ; Fall through into DOT to draw the dot on the compass
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DOT
        Type: Subroutine
@@ -23905,7 +23905,7 @@ STA COMC               ; Store the compass colour in COMC
                          * $FF = a single-height dash in green/cyan, for when
                            the object in the compass is behind us
 
- ******************************************************************************
+ ******************************************************************************/
 
 DOT
 
@@ -23925,7 +23925,7 @@ BNE CPIX2              ; us and we want to draw a double-height dash, so if it
                        ; Otherwise fall through into CPIX4 to draw a double-
                        ; height dash
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: CPIX4
        Type: Subroutine
@@ -23948,7 +23948,7 @@ BNE CPIX2              ; us and we want to draw a double-height dash, so if it
 
    COL                 The colour of the dot as a mode 5 character row byte
 
- ******************************************************************************
+ ******************************************************************************/
 
 CPIX4
 
@@ -23960,7 +23960,7 @@ DEC Y1                 ; Decrement Y1
                        ; dash on the pixel row above the first one, to create a
                        ; double-height dot
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: CPIX2
        Type: Subroutine
@@ -23982,7 +23982,7 @@ DEC Y1                 ; Decrement Y1
 
    COL                 The colour of the dash as a mode 5 character row byte
 
- ******************************************************************************
+ ******************************************************************************/
 
 CPIX2
 
@@ -24067,7 +24067,7 @@ STA (SC),Y             ; A, with the colour in COL, using EOR logic, just as
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: OOPS
        Type: Subroutine
@@ -24088,7 +24088,7 @@ RTS                    ; Return from the subroutine
    INF                 The address of the ship block for the ship that attacked
                        us, or the ship that we just ran into
 
- ******************************************************************************
+ ******************************************************************************/
 
 OOPS
 
@@ -24173,7 +24173,7 @@ JSR EXNO3              ; We didn't die, so call EXNO3 to make the sound of a
 JMP OUCH               ; And jump to OUCH to take damage and return from the
                        ; subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SPS3
        Type: Subroutine
@@ -24202,7 +24202,7 @@ JMP OUCH               ; And jump to OUCH to take damage and return from the
 
                          * X = 6 copies (z_sign, z_hi) into K3(8 7 6)
 
- ******************************************************************************
+ ******************************************************************************/
 
 SPS3
 
@@ -24221,7 +24221,7 @@ STA K3+2,X
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: GINF
        Type: Subroutine
@@ -24241,7 +24241,7 @@ RTS                    ; Return from the subroutine
    X                   The ship slot number for which we want the data block
                        address
 
- ******************************************************************************
+ ******************************************************************************/
 
 GINF
 
@@ -24257,14 +24257,14 @@ STA INF+1              ; from UNIV and store it in INF
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: NWSPS
        Type: Subroutine
    Category: Universe
     Summary: Add a new space station to our local bubble of universe
 
- ******************************************************************************
+ ******************************************************************************/
 
 NWSPS
 
@@ -24304,7 +24304,7 @@ LDA #SST               ; Set A to the space station type, and fall through
                        ; into NWSHP to finish adding the space station to the
                        ; universe
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: NWSHP
        Type: Subroutine
@@ -24334,7 +24334,7 @@ LDA #SST               ; Set A to the space station type, and fall through
 
    INF                 Points to the new ship's data block in K__
 
- ******************************************************************************
+ ******************************************************************************/
 
 NWSHP
 
@@ -24563,7 +24563,7 @@ SEC                    ; We have successfully created our new ship, so set the
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: NwS1
        Type: Subroutine
@@ -24587,7 +24587,7 @@ RTS                    ; Return from the subroutine
 
    X                   X is incremented by 2
 
- ******************************************************************************
+ ******************************************************************************/
 
 NwS1
 
@@ -24600,7 +24600,7 @@ INX
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ABORT
        Type: Subroutine
@@ -24613,7 +24613,7 @@ RTS                    ; Return from the subroutine
 
    Y                   The new status of the leftmost missile indicator
 
- ******************************************************************************
+ ******************************************************************************/
 
 ABORT
 
@@ -24623,7 +24623,7 @@ LDX #$FF               ; Set X to $FF, which is the value of MSTG when we have
                        ; Fall through into ABORT2 to set the missile lock to
                        ; the value in X, which effectively disarms the missile
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ABORT2
        Type: Subroutine
@@ -24651,7 +24651,7 @@ LDX #$FF               ; Set X to $FF, which is the value of MSTG when we have
 
                          * $EE = green/cyan (disarmed)
 
- ******************************************************************************
+ ******************************************************************************/
 
 ABORT2
 
@@ -24665,7 +24665,7 @@ STY MSAR               ; Set MSAR = 0 to indicate that the leftmost missile
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ECBLB2
        Type: Subroutine
@@ -24673,7 +24673,7 @@ RTS                    ; Return from the subroutine
     Summary: Start up the E.C.M. (light up the indicator, start the countdown
              and make the E.C.M. sound)
 
- ******************************************************************************
+ ******************************************************************************/
 
 ECBLB2
 
@@ -24685,14 +24685,14 @@ JSR NOISE              ; of the E.C.M. being switched on
 
                        ; Fall through into ECBLB to light up the E.C.M. bulb
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ECBLB
        Type: Subroutine
    Category: Dashboard
     Summary: Light up the E.C.M. indicator bulb ("E") on the dashboard
 
- ******************************************************************************
+ ******************************************************************************/
 
 ECBLB
 
@@ -24713,14 +24713,14 @@ LDY #HI(ECBT)          ; ECBT. The LDY has no effect, as we overwrite Y with
 BNE BULB-2             ; Jump down to BULB-2 (this BNE is effectively a JMP as
                        ; A will never be zero)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SPBLB
        Type: Subroutine
    Category: Dashboard
     Summary: Light up the space station indicator ("S") on the dashboard
 
- ******************************************************************************
+ ******************************************************************************/
 
 SPBLB
 
@@ -24734,7 +24734,7 @@ LDY #HI(SPBT)
 
                        ; Fall through into BULB to draw the space station bulb
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: BULB
        Type: Subroutine
@@ -24759,7 +24759,7 @@ LDY #HI(SPBT)
 
    BULB-2              Set the Y screen address
 
- ******************************************************************************
+ ******************************************************************************/
 
 BULB
 
@@ -24776,7 +24776,7 @@ JMP RREN               ; Call RREN to print the character definition pointed to
                        ; by P(2 1) at the screen address pointed to by (A SC),
                        ; returning from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ECBT
        Type: Variable
@@ -24793,7 +24793,7 @@ JMP RREN               ; Call RREN to print the character definition pointed to
 
  Each pixel is in mode 5 colour 2 (%10), which is yellow/white.
 
- ******************************************************************************
+ ******************************************************************************/
 
 ECBT
 
@@ -24806,7 +24806,7 @@ ECBT
                        ; x x x .
                        ; x x x .
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SPBT
        Type: Variable
@@ -24820,7 +24820,7 @@ ECBT
 
  Each pixel is in mode 5 colour 2 (%10), which is yellow/white.
 
- ******************************************************************************
+ ******************************************************************************/
 
 SPBT
 
@@ -24833,7 +24833,7 @@ SPBT
  .by %11100000         ; x x x .
  .by %11100000         ; x x x .
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MSBAR
        Type: Subroutine
@@ -24871,7 +24871,7 @@ SPBT
 
    Y                   Y is set to 0
 
- ******************************************************************************
+ ******************************************************************************/
 
 MSBAR
 
@@ -24925,7 +24925,7 @@ BNE MBL1               ; Loop back to MBL1 if have more rows to draw
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PROJ
        Type: Subroutine
@@ -24975,7 +24975,7 @@ RTS                    ; Return from the subroutine
 
    A                   Contains K4+1, the high byte of the y-coordinate
 
- ******************************************************************************
+ ******************************************************************************/
 
 PROJ
 
@@ -25038,7 +25038,7 @@ CLC                    ; Clear the C flag to indicate success
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PL2
        Type: Subroutine
@@ -25051,7 +25051,7 @@ RTS                    ; Return from the subroutine
 
    PL2-1               Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 PL2
 
@@ -25071,7 +25071,7 @@ JMP WPLS               ; This is the sun, so jump to WPLS to remove it from
                        ; screen, returning from the subroutine using a tail
                        ; call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PLANET
        Type: Subroutine
@@ -25084,7 +25084,7 @@ JMP WPLS               ; This is the sun, so jump to WPLS to remove it from
 
    INWK                The planet or sun's ship data block
 
- ******************************************************************************
+ ******************************************************************************/
 
 PLANET
 
@@ -25149,7 +25149,7 @@ BCC PL9                ; 129, which has bit 0 set). So jump to PL9 to draw the
 JMP SUN                ; Otherwise jump to SUN to draw the sun with radius K,
                        ; returning from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PL9 (Part 1 of 3)
        Type: Subroutine
@@ -25173,7 +25173,7 @@ JMP SUN                ; Otherwise jump to SUN to draw the sun with radius K,
 
    INWK                The planet's ship data block
 
- ******************************************************************************
+ ******************************************************************************/
 
 PL9
 
@@ -25205,7 +25205,7 @@ BNE PL26               ; planet with an equator - in other words, if it is a
                        ; meridian, so fall through into the following to draw
                        ; them
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PL9 (Part 2 of 3)
        Type: Subroutine
@@ -25229,7 +25229,7 @@ BNE PL26               ; planet with an equator - in other words, if it is a
 
    INWK                The planet's ship data block
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA K                  ; If the planet's radius is less than 6, the planet is
 CMP #6                 ; too small to show a meridian, so jump to PL20 to
@@ -25299,7 +25299,7 @@ JSR PLS5               ; Call PLS5 to calculate the following:
 JMP PLS2               ; Jump to PLS2 to draw the second meridian, returning
                        ; from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PL9 (Part 3 of 3)
        Type: Subroutine
@@ -25323,7 +25323,7 @@ JMP PLS2               ; Jump to PLS2 to draw the second meridian, returning
 
    INWK                The planet's ship data block
 
- ******************************************************************************
+ ******************************************************************************/
 
 PL26
 
@@ -25429,7 +25429,7 @@ STA CNT2               ; don't need to apply an offset
 JMP PLS22              ; Jump to PLS22 to draw the crater, returning from the
                        ; subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PLS1
        Type: Subroutine
@@ -25476,7 +25476,7 @@ JMP PLS22              ; Jump to PLS22 to draw the crater, returning from the
                        calls to the routine will start with x, then move onto y
                        and then z)
 
- ******************************************************************************
+ ******************************************************************************/
 
 PLS1
 
@@ -25512,7 +25512,7 @@ INX                    ; in this orientation vector (so consecutive calls to
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PLS2
        Type: Subroutine
@@ -25525,7 +25525,7 @@ RTS                    ; Return from the subroutine
 
  Draw a half-ellipse, used for the planet's equator and meridian.
 
- ******************************************************************************
+ ******************************************************************************/
 
 PLS2
 
@@ -25534,7 +25534,7 @@ STA TGT
 
                        ; Fall through into PLS22 to draw the half-ellipse
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PLS22
        Type: Subroutine
@@ -25604,7 +25604,7 @@ STA TGT
 
    CNT2                The starting segment for drawing the half-ellipse
 
- ******************************************************************************
+ ******************************************************************************/
 
 PLS22
 
@@ -25885,7 +25885,7 @@ PL40
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SUN (Part 1 of 4)
        Type: Subroutine
@@ -25914,7 +25914,7 @@ RTS                    ; Return from the subroutine
    SUNX(1 0)           The x-coordinate of the vertical centre axis of the old
                        sun (the one currently on-screen)
 
- ******************************************************************************
+ ******************************************************************************/
 
 JMP WPLS               ; Jump to WPLS to remove the old sun from the screen. We
                        ; only get here via the BCS just after the SUN entry
@@ -26079,7 +26079,7 @@ STA K2
                        ; By the time we get here, the variables should be set
                        ; up as shown in the header for part 3 below
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SUN (Part 2 of 4)
        Type: Subroutine
@@ -26093,7 +26093,7 @@ STA K2
  This part erases the old sun, starting at the bottom of the screen and working
  upwards until we reach the bottom of the new sun.
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDY #2*Y-1             ; Set Y = y-coordinate of the bottom of the screen,
                        ; which we use as a counter in the following routine to
@@ -26129,7 +26129,7 @@ BNE PLFL2              ; Loop back for the next line in the line heap until
                        ; we have either gone through the entire heap, or
                        ; reached the bottom row of the new sun
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SUN (Part 3 of 4)
        Type: Subroutine
@@ -26176,7 +26176,7 @@ BNE PLFL2              ; Loop back for the next line in the line heap until
 
    Y                   The y-coordinate of the bottom row of the new sun
 
- ******************************************************************************
+ ******************************************************************************/
 
 PLFL
 
@@ -26386,7 +26386,7 @@ CPX K                  ; If V <= the radius of the sun, we still have lines to
 BCC PLFLS              ; draw, so jump up to PLFL (via PLFLS) to do the next
 BEQ PLFLS              ; screen line up
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SUN (Part 4 of 4)
        Type: Subroutine
@@ -26406,7 +26406,7 @@ BEQ PLFLS              ; screen line up
 
    RTS2                Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA SUNX               ; Set YY(1 0) = SUNX(1 0), the x-coordinate of the
 STA YY                 ; vertical centre axis of the old sun that's currently
@@ -26452,7 +26452,7 @@ RTS2
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: CIRCLE
        Type: Subroutine
@@ -26475,7 +26475,7 @@ RTS                    ; Return from the subroutine
 
    K4(1 0)             Pixel y-coordinate of the centre of the planet
 
- ******************************************************************************
+ ******************************************************************************/
 
 CIRCLE
 
@@ -26510,7 +26510,7 @@ STA STP                ; Set STP = A. STP is the step size for the circle, so
                        ; Fall through into CIRCLE2 to draw the circle with the
                        ; correct step size
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: CIRCLE2
        Type: Subroutine
@@ -26541,7 +26541,7 @@ STA STP                ; Set STP = A. STP is the step size for the circle, so
 
    C flag              The C flag is cleared
 
- ******************************************************************************
+ ******************************************************************************/
 
 CIRCLE2
 
@@ -26651,7 +26651,7 @@ CLC                    ; Clear the C flag to indicate success
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: WPLS2
        Type: Subroutine
@@ -26664,7 +26664,7 @@ RTS                    ; Return from the subroutine
  We do this by redrawing it using the lines stored in the ball line heap when
  the planet was originally drawn by the BLINE routine.
 
- ******************************************************************************
+ ******************************************************************************/
 
 WPLS2
 
@@ -26723,14 +26723,14 @@ INY                    ; Increment the loop counter to point to the next point
 
 JMP WPL1               ; Loop back to WPL1 for the next point in the heap
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: WP1
        Type: Subroutine
    Category: Drawing planets
     Summary: Reset the ball line heap
 
- ******************************************************************************
+ ******************************************************************************/
 
 WP1
 
@@ -26742,7 +26742,7 @@ STA LSX2
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: WPLS
        Type: Subroutine
@@ -26767,7 +26767,7 @@ RTS                    ; Return from the subroutine
 
    WPLS-1              Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 WPLS
 
@@ -26808,7 +26808,7 @@ STY LSX                ; Set LSX to $FF to indicate the sun line heap is empty
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: EDGES
        Type: Subroutine
@@ -26849,7 +26849,7 @@ RTS                    ; Return from the subroutine
 
    Y                   Y is preserved
 
- ******************************************************************************
+ ******************************************************************************/
 
 EDGES
 
@@ -26919,7 +26919,7 @@ SEC                    ; The line does not fit on the screen, so set the C flag
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: CHKON
        Type: Subroutine
@@ -26949,7 +26949,7 @@ RTS                    ; Return from the subroutine
    P(2 1)              Maximum y-coordinate of the circle on-screen (i.e. the
                        y-coordinate of the bottom edge of the circle)
 
- ******************************************************************************
+ ******************************************************************************/
 
 CHKON
 
@@ -27069,7 +27069,7 @@ CPX #2*Y-1             ; If we get here then A is zero, which means the top
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PL21
        Type: Subroutine
@@ -27082,7 +27082,7 @@ RTS                    ; Return from the subroutine
  planet- or sun-drawing routine with the C flag indicating an overflow in the
  calculation.
 
- ******************************************************************************
+ ******************************************************************************/
 
 PL21
 
@@ -27090,7 +27090,7 @@ SEC                    ; Set the C flag to indicate an overflow
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PLS3
        Type: Subroutine
@@ -27130,7 +27130,7 @@ RTS                    ; Return from the subroutine
                        calls to the routine will start with x, then move onto y
                        and then z)
 
- ******************************************************************************
+ ******************************************************************************/
 
 PLS3
 
@@ -27173,7 +27173,7 @@ LDY #0                 ; Set Y = 0 to be a positive high byte
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PLS4
        Type: Subroutine
@@ -27203,7 +27203,7 @@ RTS                    ; Return from the subroutine
  So it calculates the angle between the planet's orientation vectors, in the
  z-axis.
 
- ******************************************************************************
+ ******************************************************************************/
 
 PLS4
 
@@ -27241,7 +27241,7 @@ STA CNT2
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PLS5
        Type: Subroutine
@@ -27270,7 +27270,7 @@ RTS                    ; Return from the subroutine
 
    INWK                The planet's ship data block
 
- ******************************************************************************
+ ******************************************************************************/
 
 PLS5
 
@@ -27294,7 +27294,7 @@ STY XX16+3             ;   K+3    = |roofv_y / z|
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: PLS6
        Type: Subroutine
@@ -27327,7 +27327,7 @@ RTS                    ; Return from the subroutine
 
    PL44                Clear the C flag and return from the subroutine
 
- ******************************************************************************
+ ******************************************************************************/
 
 PLS6
 
@@ -27384,7 +27384,7 @@ PL6
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT17
        Type: Subroutine
@@ -27416,7 +27416,7 @@ RTS                    ; Return from the subroutine
                        being pressed or joystick movement, as an integer (see
                        above)
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT17
 
@@ -27504,14 +27504,14 @@ DEY
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ping
        Type: Subroutine
    Category: Universe
     Summary: Set the selected system to the current system
 
- ******************************************************************************
+ ******************************************************************************/
 
 ping
 
@@ -27532,11 +27532,11 @@ BPL pl1                ; Loop back for the next byte to copy
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
  Save ELTE.bin
 
- ******************************************************************************
+ ******************************************************************************/
 
 PRINT "ELITE E"
 PRINT "Assembled at ", CODE_E__
@@ -27548,18 +27548,18 @@ PRINT "Reload at ", LOAD_E__
 PRINT "S.ELTE ", ~CODE_E__, " ", ~*, " ", LOAD__, " ", LOAD_E__
 SAVE "3-assembled-output/ELTE.bin", CODE_E__, *, LOAD__
 
- ******************************************************************************
+ /******************************************************************************
 
  ELITE F FILE
 
  Produces the binary file ELTF.bin that gets loaded by elite-bcfs.asm.
 
- ******************************************************************************
+ ******************************************************************************/
 
 CODE_F__ = *
 LOAD_F__ = LOAD__ + * - CODE__
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: KS3
        Type: Subroutine
@@ -27580,7 +27580,7 @@ LOAD_F__ = LOAD__ + * - CODE__
                        occupied slot (i.e. it points to the bottom of the
                        descending heap)
 
- ******************************************************************************
+ ******************************************************************************/
 
 KS3
 
@@ -27591,7 +27591,7 @@ STA SLSP+1
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: KS1
        Type: Subroutine
@@ -27614,7 +27614,7 @@ RTS                    ; Return from the subroutine
 
    INF                 The address of the data block for this ship
 
- ******************************************************************************
+ ******************************************************************************/
 
 KS1
 
@@ -27629,14 +27629,14 @@ LDX XSAV               ; Restore the current ship's slot number from XSAV,
 JMP MAL1               ; Jump to MAL1 to rejoin the main flight loop at the
                        ; start of the ship analysis loop
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: KS4
        Type: Subroutine
    Category: Universe
     Summary: Remove the space station and replace it with the sun
 
- ******************************************************************************
+ ******************************************************************************/
 
 KS4
 
@@ -27664,7 +27664,7 @@ JMP NWSHP              ; Call NWSHP to set up the sun's data block and add it
                        ; we just cleared out the second slot, and the first
                        ; slot is already taken by the planet
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: KS2
        Type: Subroutine
@@ -27689,7 +27689,7 @@ JMP NWSHP              ; Call NWSHP to set up the sun's data block and add it
    XX4                 The slot number of the ship we removed just before
                        calling this routine
 
- ******************************************************************************
+ ******************************************************************************/
 
 KS2
 
@@ -27763,7 +27763,7 @@ STA (SC),Y             ; AI flag to 0 to make it dumb and not locked
 BEQ KSL4               ; Loop back to KSL4 to move on to the next slot (this
                        ; BEQ is effectively a JMP as A is always zero)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: KILLSHP
        Type: Subroutine
@@ -27794,7 +27794,7 @@ BEQ KSL4               ; Loop back to KSL4 to move on to the next slot (this
 
    INF                 The address of the data block for the ship to remove
 
- ******************************************************************************
+ ******************************************************************************/
 
 KILLSHP
 
@@ -28053,7 +28053,7 @@ BEQ KSL1               ; We have now shuffled everything down one slot, so
                        ; that needs shuffling down (this BEQ is effectively a
                        ; JMP as A will always be zero)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SFX
        Type: Variable
@@ -28095,7 +28095,7 @@ BEQ KSL1               ; We have now shuffled everything down one slot, so
  and with pitch $60 (96) and duration $10 (16). The four sound envelopes (1-4)
  are set up by the loading process.
 
- ******************************************************************************
+ ******************************************************************************/
 
 SFX
 
@@ -28110,7 +28110,7 @@ SFX
  .by $13, $04, $C2, $FF    ; 64 - E.C.M. on
  .by $13, $00, $00, $00    ; 72 - E.C.M. off
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: RESET
        Type: Subroutine
@@ -28147,7 +28147,7 @@ SFX
                        into RES2 to reset the stardust and the ship workspace
                        at INWK
 
- ******************************************************************************
+ ******************************************************************************/
 
 RESET
 
@@ -28196,7 +28196,7 @@ BPL REL5               ; Loop back to REL5 until we have recharged both shields
                        ; Fall through into RES2 to reset the stardust and ship
                        ; workspace at INWK
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: RES2
        Type: Subroutine
@@ -28215,7 +28215,7 @@ BPL REL5               ; Loop back to REL5 until we have recharged both shields
 
    Y                   Y is set to $FF
 
- ******************************************************************************
+ ******************************************************************************/
 
 RES2
 
@@ -28277,7 +28277,7 @@ JSR DIALS              ; Update the dashboard
                        ; Finally, fall through into ZINF to reset the INWK
                        ; ship workspace
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ZINF
        Type: Subroutine
@@ -28296,7 +28296,7 @@ JSR DIALS              ; Update the dashboard
 
    Y                   Y is set to $FF
 
- ******************************************************************************
+ ******************************************************************************/
 
 ZINF
 
@@ -28340,7 +28340,7 @@ STA INWK+14            ; Set byte #14 = nosev_z_hi = -96 = -1
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: msblob
        Type: Subroutine
@@ -28352,7 +28352,7 @@ RTS                    ; Return from the subroutine
  Display the dashboard's missile indicators, with all the missiles reset to
  green/cyan (i.e. not armed or locked).
 
- ******************************************************************************
+ ******************************************************************************/
 
 msblob
 
@@ -28386,14 +28386,14 @@ BNE SAL8               ; Loop back to SAL8 if we still have missiles to draw
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: me2
        Type: Subroutine
    Category: Flight
     Summary: Remove an in-flight message from the space view
 
- ******************************************************************************
+ ******************************************************************************/
 
 me2
 
@@ -28407,7 +28407,7 @@ STA DLY                ; messages will be shown instantly
 
 JMP me3                ; Jump back into the main spawning loop at me3
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Ze
        Type: Subroutine
@@ -28435,7 +28435,7 @@ JMP me3                ; Jump back into the main spawning loop at me3
  does not necessarily set the new ship to a totally random location. See the
  deep dive on "Fixing ship positions" for details.
 
- ******************************************************************************
+ ******************************************************************************/
 
 Ze
 
@@ -28471,7 +28471,7 @@ STA INWK+32            ; Store A in the AI flag of this ship
                        ; Fall through into DORND2 to set A, X and the C flag
                        ; randomly
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DORND
        Type: Subroutine
@@ -28498,7 +28498,7 @@ STA INWK+32            ; Store A in the AI flag of this ship
 
    DORND2              Make sure the C flag doesn't affect the outcome
 
- ******************************************************************************
+ ******************************************************************************/
 
 DORND2
 
@@ -28522,7 +28522,7 @@ STX RAND+3             ;   * C and V flags set according to the m2 calculation
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main game loop (Part 1 of 6)
        Type: Subroutine
@@ -28546,7 +28546,7 @@ RTS                    ; Return from the subroutine
 
  We call this from within the main loop, with A set to a random number.
 
- ******************************************************************************
+ ******************************************************************************/
 
 MTT4
 
@@ -28571,7 +28571,7 @@ STA INWK+27
 LDA #CYL               ; Add a new Cobra Mk III to the local bubble and fall
 JSR NWSHP              ; through into the main game loop again
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main game loop (Part 2 of 6)
        Type: Subroutine
@@ -28601,7 +28601,7 @@ JSR NWSHP              ; through into the main game loop again
    me3                 Used by me2 to jump back into the main game loop after
                        printing an in-flight message
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT100
 
@@ -28737,7 +28737,7 @@ LDA #OIL               ; Set A to the ship number of a cargo canister
 
 JSR NWSHP              ; Add our new asteroid or canister to the universe
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main game loop (Part 3 of 6)
        Type: Subroutine
@@ -28755,7 +28755,7 @@ JSR NWSHP              ; Add our new asteroid or canister to the universe
      more often if have been naughty, and very often if we have been properly
      bad
 
- ******************************************************************************
+ ******************************************************************************/
 
 MTT1
 
@@ -28803,7 +28803,7 @@ LDA MANY+COPS          ; If we now have at least one cop in the local bubble,
 BNE MLOOP              ; jump down to MLOOP, otherwise fall through into the
                        ; next part to look at spawning something else
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main game loop (Part 4 of 6)
        Type: Subroutine
@@ -28822,7 +28822,7 @@ BNE MLOOP              ; jump down to MLOOP, otherwise fall through into the
      Python or Cobra Mk III), a Thargoid, or a group of up to 4 pirates
      (Sidewinders and/or Mambas)
 
- ******************************************************************************
+ ******************************************************************************/
 
 DEC EV                 ; Decrement EV, the extra vessels spawning delay, and
 BPL MLOOP              ; jump to MLOOP if it is still positive, so we only
@@ -28926,7 +28926,7 @@ BPL mt3                ; If we need more pirates, loop back up to mt3,
                        ; otherwise we are done spawning, so fall through into
                        ; the end of the main loop at MLOOP
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main game loop (Part 5 of 6)
        Type: Subroutine
@@ -28955,7 +28955,7 @@ BPL mt3                ; If we need more pirates, loop back up to mt3,
                        call the main flight loop or spawning routines if we
                        aren't in space)
 
- ******************************************************************************
+ ******************************************************************************/
 
 MLOOP
 
@@ -28989,7 +28989,7 @@ JSR TT17               ; Scan the keyboard for the cursor keys or joystick,
                        ; returning the cursor's delta values in X and Y and
                        ; the key pressed in A
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: Main game loop (Part 6 of 6)
        Type: Subroutine
@@ -29021,7 +29021,7 @@ JSR TT17               ; Scan the keyboard for the cursor keys or joystick,
 
    tha                 Consider spawning a Thargoid (22% chance)
 
- ******************************************************************************
+ ******************************************************************************/
 
 FRCE
 
@@ -29049,7 +29049,7 @@ JSR GTHG               ; Call GTHG to spawn a Thargoid ship and a Thargon
 JMP MLOOP              ; Jump back into the main loop at MLOOP, which is just
                        ; after the ship-spawning section
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT102
        Type: Subroutine
@@ -29083,7 +29083,7 @@ JMP MLOOP              ; Jump back into the main loop at MLOOP, which is just
 
    T95                 Print the distance to the selected system
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT102
 
@@ -29277,7 +29277,7 @@ INC YC
 JMP TT146              ; Print the distance to the selected system and return
                        ; from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: BAD
        Type: Subroutine
@@ -29304,7 +29304,7 @@ JMP TT146              ; Print the distance to the selected system and return
    A                   A value that determines how bad we are from the amount
                        of contraband in our hold
 
- ******************************************************************************
+ ******************************************************************************/
 
 BAD
 
@@ -29320,7 +29320,7 @@ ADC QQ20+10            ; firearms in the hold
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: FAROF
        Type: Subroutine
@@ -29341,14 +29341,14 @@ RTS                    ; Return from the subroutine
                        Clear otherwise (i.e. if any one of them are bigger than
                        224)
 
- ******************************************************************************
+ ******************************************************************************/
 
 FAROF
 
 LDA #224               ; Set A = 224 and fall through into FAROF2 to do the
                        ; comparison
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: FAROF2
        Type: Subroutine
@@ -29369,7 +29369,7 @@ LDA #224               ; Set A = 224 and fall through into FAROF2 to do the
                        Clear otherwise (i.e. if any one of them are bigger than
                        A)
 
- ******************************************************************************
+ ******************************************************************************/
 
 FAROF2
 
@@ -29387,7 +29387,7 @@ MA34
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MAS4
        Type: Subroutine
@@ -29405,7 +29405,7 @@ RTS                    ; Return from the subroutine
 
    A                   A OR x_hi OR y_hi OR z_hi
 
- ******************************************************************************
+ ******************************************************************************/
 
 MAS4
 
@@ -29415,7 +29415,7 @@ ORA INWK+7
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DEATH
        Type: Subroutine
@@ -29427,7 +29427,7 @@ RTS                    ; Return from the subroutine
  We have been killed, so display the chaos of our destruction above a "GAME
  OVER" sign, and clean up the mess ready for the next attempt.
 
- ******************************************************************************
+ ******************************************************************************/
 
 DEATH
 
@@ -29544,7 +29544,7 @@ JSR DET1               ; the dashboard
 
                        ; Fall through into DEATH2 to reset and restart the game
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DEATH2
        Type: Subroutine
@@ -29556,7 +29556,7 @@ JSR DET1               ; the dashboard
  This routine is called following death, and when the game is quit by pressing
  ESCAPE when paused.
 
- ******************************************************************************
+ ******************************************************************************/
 
 DEATH2
 
@@ -29564,7 +29564,7 @@ JSR RES2               ; Reset a number of flight variables and workspaces
                        ; and fall through into the entry code for the game
                        ; to restart from the title screen
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT170
        Type: Subroutine
@@ -29576,7 +29576,7 @@ JSR RES2               ; Reset a number of flight variables and workspaces
 
  This is the main entry point for the main game code.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT170
 
@@ -29589,7 +29589,7 @@ TXS                    ; location for the 6502 stack, so this instruction
 
                        ; Fall through into BR1 to start the game
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: BR1 (Part 1 of 2)
        Type: Subroutine
@@ -29600,7 +29600,7 @@ TXS                    ; location for the 6502 stack, so this instruction
 
  BRKV is set to point to BR1 by the loading process.
 
- ******************************************************************************
+ ******************************************************************************/
 
 BR1
 
@@ -29643,14 +29643,14 @@ JSR TRNME              ; Once loaded, we copy the commander name to NA__
 JSR TTX66              ; And we clear the top part of the screen and draw a
                        ; white border
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: QU5
        Type: Subroutine
    Category: Start and end
     Summary: Reset the current commander data block to the last saved commander
 
- ******************************************************************************
+ ******************************************************************************/
 
 QU5
 
@@ -29743,7 +29743,7 @@ ORA #%00000010         ; Set bit 1 of A to denote that this is the cassette
 
 STA COK                ; Store the updated competition flags in COK
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: BR1 (Part 2 of 2)
        Type: Subroutine
@@ -29755,7 +29755,7 @@ STA COK                ; Store the updated competition flags in COK
 
  BRKV is set to point to BR1 by the loading process.
 
- ******************************************************************************
+ ******************************************************************************/
 
 JSR msblob             ; Reset the dashboard's missile indicators so none of
                        ; them are targeted
@@ -29772,7 +29772,7 @@ JSR hyp1               ; Arrive in the system closest to (QQ9, QQ10)
 
                        ; Fall through into the docking bay routine below
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: BAY
        Type: Subroutine
@@ -29787,7 +29787,7 @@ JSR hyp1               ; Arrive in the system closest to (QQ9, QQ10)
  too many items when buying, trying to fit an item to your ship when you
  already have it, running out of cargo space, and so on).
 
- ******************************************************************************
+ ******************************************************************************/
 
 BAY
 
@@ -29798,7 +29798,7 @@ LDA #f8                ; Jump into the main loop at FRCE, setting the key
 JMP FRCE               ; that's "pressed" to red key f8 (so we show the Status
                        ; Mode screen)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TITLE
        Type: Subroutine
@@ -29828,7 +29828,7 @@ JMP FRCE               ; that's "pressed" to red key f8 (so we show the Status
    X                   If a key is being pressed, X contains the internal key
                        number, otherwise it contains 0
 
- ******************************************************************************
+ ******************************************************************************/
 
 TITLE
 
@@ -29966,7 +29966,7 @@ DEC JSTK               ; Joystick fire button was pressed, so set JSTK to $FF
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: CHECK
        Type: Subroutine
@@ -29988,7 +29988,7 @@ RTS                    ; Return from the subroutine
 
    A                   The checksum for the last saved commander data block
 
- ******************************************************************************
+ ******************************************************************************/
 
 CHECK
 
@@ -30022,14 +30022,14 @@ BNE QUL2               ; Loop back for the next byte in the calculation, until
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TRNME
        Type: Subroutine
    Category: Save and load
     Summary: Copy the last saved commander's name from INWK to NA__
 
- ******************************************************************************
+ ******************************************************************************/
 
 TRNME
 
@@ -30051,14 +30051,14 @@ BPL GTL1               ; Loop back until we have copied all 8 bytes
                        ; there, but it does save one byte, as we don't need an
                        ; RTS here
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TR1
        Type: Subroutine
    Category: Save and load
     Summary: Copy the last saved commander's name from NA__ to INWK
 
- ******************************************************************************
+ ******************************************************************************/
 
 TR1
 
@@ -30077,7 +30077,7 @@ BPL GTL2               ; Loop back until we have copied all 8 bytes
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: GTNME
        Type: Subroutine
@@ -30099,7 +30099,7 @@ RTS                    ; Return from the subroutine
    INWK                The commander name entered, terminated by a return
                        character (13)
 
- ******************************************************************************
+ ******************************************************************************/
 
 GTNME
 
@@ -30145,7 +30145,7 @@ BEQ TR1                ; If A = 0, no name was entered, so jump to TR1 to copy
 JMP TT67               ; We have a name, so jump to TT67 to print a newline
                        ; and return from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: RLINE
        Type: Variable
@@ -30153,7 +30153,7 @@ JMP TT67               ; We have a name, so jump to TT67 to print a newline
     Summary: The OSWORD configuration block used to fetch a line of text from
              the keyboard
 
- ******************************************************************************
+ ******************************************************************************/
 
 RLINE
 
@@ -30166,7 +30166,7 @@ RLINE
  .by '!'               ; Allow ASCII characters from "!" through to "z" in
  .by 'z'               ; the name
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ZERO
        Type: Subroutine
@@ -30185,7 +30185,7 @@ RLINE
      the local bubble of universe, and various flight and ship status variables
      (only a portion of the LSX/LSO sun line heap is cleared)
 
- ******************************************************************************
+ ******************************************************************************/
 
 ZERO
 
@@ -30203,7 +30203,7 @@ BNE ZEL                ; up to clear the next page
                        ; Then fall through into ZES1 with X set to 9, so we
                        ; clear page $9 too
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ZES1
        Type: Subroutine
@@ -30216,7 +30216,7 @@ BNE ZEL                ; up to clear the next page
 
    X                   The page we want to zero-fill
 
- ******************************************************************************
+ ******************************************************************************/
 
 ZES1
 
@@ -30225,7 +30225,7 @@ STY SC                 ; below, then we will zero-fill 255 bytes starting from
                        ; SC - in other words, we will zero-fill the whole of
                        ; page X
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ZES2
        Type: Subroutine
@@ -30255,7 +30255,7 @@ STY SC                 ; below, then we will zero-fill 255 bytes starting from
 
    Z flag              Z flag is set
 
- ******************************************************************************
+ ******************************************************************************/
 
 ZES2
 
@@ -30277,7 +30277,7 @@ BNE ZEL1               ; Loop back to zero the next byte
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SVE
        Type: Subroutine
@@ -30286,7 +30286,7 @@ RTS                    ; Return from the subroutine
   Deep dive: Commander save files
              The competition code
 
- ******************************************************************************
+ ******************************************************************************/
 
 SVE
 
@@ -30400,7 +30400,7 @@ STX SVN                ; Set SVN to 0 to indicate we are done saving
 
 JMP BAY                ; Go to the docking bay (i.e. show Status Mode)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: QUS1
        Type: Subroutine
@@ -30429,7 +30429,7 @@ JMP BAY                ; Go to the docking bay (i.e. show Status Mode)
                        filename in INWK is stored below (by the STX $0C00
                        instruction)
 
- ******************************************************************************
+ ******************************************************************************/
 
 QUS1
 
@@ -30443,7 +30443,7 @@ JMP OSFILE             ; Jump to OSFILE to do the file operation specified in
                        ; $0C00 (i.e. save or load a file depending on the value
                        ; of A), returning from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LOD
        Type: Subroutine
@@ -30454,7 +30454,7 @@ JMP OSFILE             ; Jump to OSFILE to do the file operation specified in
 
  The filename should be stored at INWK, terminated with a carriage return (13).
 
- ******************************************************************************
+ ******************************************************************************/
 
 LOD
 
@@ -30505,7 +30505,7 @@ LDX #3                 ; Fall through into FX200 to disable the ESCAPE key and
                        ; clear memory if the BREAK key is pressed (*FX 200,3)
                        ; and return from the subroutine there
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: FX200
        Type: Subroutine
@@ -30535,7 +30535,7 @@ LDX #3                 ; Fall through into FX200 to disable the ESCAPE key and
                          * 3 = Disable ESCAPE key
                                Clear memory if the BREAK key is pressed
 
- ******************************************************************************
+ ******************************************************************************/
 
 FX200
 
@@ -30546,7 +30546,7 @@ JMP OSBYTE
 RTS                    ; This instruction has no effect, as we already returned
                        ; from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SPS1
        Type: Subroutine
@@ -30559,7 +30559,7 @@ RTS                    ; This instruction has no effect, as we already returned
 
    SPS1+1              A BRK instruction
 
- ******************************************************************************
+ ******************************************************************************/
 
 SPS1
 
@@ -30574,7 +30574,7 @@ JSR SPS3               ; into K3(8 7 6), separating out the sign bit into K3+8
 
                        ; Fall through into TAS2 to build XX15 from K3
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TAS2
        Type: Subroutine
@@ -30628,7 +30628,7 @@ JSR SPS3               ; into K3(8 7 6), separating out the sign bit into K3+8
    TA2                 Calculate the length of the vector in XX15 (ignoring the
                        low coordinates), returning it in Q
 
- ******************************************************************************
+ ******************************************************************************/
 
 TAS2
 
@@ -30690,7 +30690,7 @@ STA XX15+2             ; store the resulting signed 8-bit  z-coordinate in
                        ; Now we have a signed 8-bit version of the vector K3 in
                        ; XX15, so fall through into NORM to normalise it
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: NORM
        Type: Subroutine
@@ -30733,7 +30733,7 @@ STA XX15+2             ; store the resulting signed 8-bit  z-coordinate in
 
    NO1                 Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 NORM
 
@@ -30804,7 +30804,7 @@ NO1
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: RDKEY
        Type: Subroutine
@@ -30829,7 +30829,7 @@ RTS                    ; Return from the subroutine
 
    A                   Contains the same as X
 
- ******************************************************************************
+ ******************************************************************************/
 
 RDKEY
 
@@ -30863,7 +30863,7 @@ TAX                    ; Copy A into X
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ECMOF
        Type: Subroutine
@@ -30875,7 +30875,7 @@ RTS                    ; Return from the subroutine
  Switch the E.C.M. off, turn off the dashboard bulb and make the sound of the
  E.C.M. switching off).
 
- ******************************************************************************
+ ******************************************************************************/
 
 ECMOF
 
@@ -30890,7 +30890,7 @@ BNE NOISE              ; of the E.C.M. being turned off and return from the
                        ; subroutine using a tail call (this BNE is effectively
                        ; a JMP as A will never be zero)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: EXNO3
        Type: Subroutine
@@ -30906,7 +30906,7 @@ BNE NOISE              ; of the E.C.M. being turned off and return from the
  get scooping right, the sound of us colliding with another ship, and the sound
  of us being hit with depleted shields. It is not a good sound to hear.
 
- ******************************************************************************
+ ******************************************************************************/
 
 EXNO3
 
@@ -30918,7 +30918,7 @@ BNE NOISE              ; death sound and return from the subroutine using a
                        ; tail call (this BNE is effectively a JMP as A will
                        ; never be zero)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SFRMIS
        Type: Subroutine
@@ -30930,7 +30930,7 @@ BNE NOISE              ; death sound and return from the subroutine using a
  An enemy has fired a missile, so add the missile to our universe if there is
  room, and if there is, make the appropriate warnings and noises.
 
- ******************************************************************************
+ ******************************************************************************/
 
 SFRMIS
 
@@ -30950,7 +30950,7 @@ BNE NOISE              ; of the missile being launched and return from the
                        ; subroutine using a tail call (this BNE is effectively
                        ; a JMP as A will never be zero)
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: EXNO2
        Type: Subroutine
@@ -30964,7 +30964,7 @@ BNE NOISE              ; of the missile being launched and return from the
  message of encouragement if the kill total is a multiple of 256, and then
  make a nearby explosion sound.
 
- ******************************************************************************
+ ******************************************************************************/
 
 EXNO2
 
@@ -30982,7 +30982,7 @@ JSR MESS               ; for a pat on the back, so print recursive token 101
 LDX #7                 ; Set X = 7 and fall through into EXNO to make the
                        ; sound of a ship exploding
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: EXNO
        Type: Subroutine
@@ -31019,7 +31019,7 @@ LDX #7                 ; Set X = 7 and fall through into EXNO to make the
    EXNO-2              Set X = 7 and fall through into EXNO to make the sound
                        of a ship exploding
 
- ******************************************************************************
+ ******************************************************************************/
 
 EXNO
 
@@ -31066,21 +31066,21 @@ LDA #16                ; Set A = 16 to denote we have made a hit or kill
                        ; $2C $A9 $20, or BIT $20A9, which does nothing apart
                        ; from affect the flags
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: BEEP
        Type: Subroutine
    Category: Sound
     Summary: Make a short, high beep
 
- ******************************************************************************
+ ******************************************************************************/
 
 BEEP
 
 LDA #32                ; Set A = 32 to denote a short, high beep, and fall
                        ; through into the NOISE routine to make the sound
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: NOISE
        Type: Subroutine
@@ -31095,14 +31095,14 @@ LDA #32                ; Set A = 32 to denote a short, high beep, and fall
                        documentation for variable SFX for a list of sound
                        numbers
 
- ******************************************************************************
+ ******************************************************************************/
 
 NOISE
 
 JSR NOS1               ; Set up the sound block in XX16 for the sound in A and
                        ; fall through into NO3 to make the sound
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: NO3
        Type: Subroutine
@@ -31114,7 +31114,7 @@ JSR NOS1               ; Set up the sound block in XX16 for the sound in A and
  Make a sound from a prepared sound block in XX16 (if sound is enabled). See
  routine NOS1 for details of preparing the XX16 sound block.
 
- ******************************************************************************
+ ******************************************************************************/
 
 NO3
 
@@ -31130,7 +31130,7 @@ LDA #7                 ; Call OSWORD 7 to makes the sound, as described in the
 JMP OSWORD             ; documentation for variable SFX, and return from the
                        ; subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: NOS1
        Type: Subroutine
@@ -31162,7 +31162,7 @@ JMP OSWORD             ; documentation for variable SFX, and return from the
    A                   The sound number to copy from SFX to XX16, which is
                        always a multiple of 8
 
- ******************************************************************************
+ ******************************************************************************/
 
 NOS1
 
@@ -31193,7 +31193,7 @@ BPL NOL1               ; Loop back for the next source byte
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: KYTB
        Type: Variable
@@ -31211,7 +31211,7 @@ RTS                    ; Return from the subroutine
  control keys) have bit 7 set, so they have 128 added to their internal
  values. This doesn't appear to be used anywhere.
 
- ******************************************************************************
+ ******************************************************************************/
 
 KYTB = * - 1          ; Point KYTB to the byte before the start of the table
 
@@ -31237,7 +31237,7 @@ KYTB = * - 1          ; Point KYTB to the byte before the start of the table
  .by $45               ; J         KYTB+14     In-system jump
  .by $52               ; C         KYTB+15     Docking computer
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DKS1
        Type: Subroutine
@@ -31259,7 +31259,7 @@ KYTB = * - 1          ; Point KYTB to the byte before the start of the table
    Y                   The offset into the KYTB table above of the key that we
                        want to scan on the keyboard
 
- ******************************************************************************
+ ******************************************************************************/
 
 DKS1
 
@@ -31277,7 +31277,7 @@ STX KL,Y
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: CTRL
        Type: Subroutine
@@ -31295,14 +31295,14 @@ RTS                    ; Return from the subroutine
 
    A                   Contains the same as X
 
- ******************************************************************************
+ ******************************************************************************/
 
 CTRL
 
 LDX #1                 ; Set X to the internal key number for CTRL and fall
                        ; through to DKS4 to scan the keyboard
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DKS4
        Type: Subroutine
@@ -31329,7 +31329,7 @@ LDX #1                 ; Set X to the internal key number for CTRL and fall
 
    X                   Contains the same as A
 
- ******************************************************************************
+ ******************************************************************************/
 
 DKS4
 
@@ -31369,7 +31369,7 @@ TXA                    ; Transfer X into A
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DKS2
        Type: Subroutine
@@ -31406,7 +31406,7 @@ RTS                    ; Return from the subroutine
 
    DKS2-1              Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 DKS2
 
@@ -31428,7 +31428,7 @@ EOR JSTE               ; The high byte A is now EOR'd with the value in
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DKS3
        Type: Subroutine
@@ -31467,7 +31467,7 @@ RTS                    ; Return from the subroutine
                        against, from the list above (i.e. Y must be from $40 to
                        $46)
 
- ******************************************************************************
+ ******************************************************************************/
 
 DKS3
 
@@ -31505,7 +31505,7 @@ Dk3
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DKJ1
        Type: Subroutine
@@ -31520,7 +31520,7 @@ RTS                    ; Return from the subroutine
 
  This routine is only called if joysticks are enabled (JSTK = non-zero).
 
- ******************************************************************************
+ ******************************************************************************/
 
 DKJ1
 
@@ -31564,7 +31564,7 @@ JMP DK4                ; We are done scanning the joystick flight controls,
                        ; so jump to DK4 to scan for other keys, using a tail
                        ; call so we can return from the subroutine there
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: U__
        Type: Subroutine
@@ -31579,7 +31579,7 @@ JMP DK4                ; We are done scanning the joystick flight controls,
 
    Y                   Y is set to 0
 
- ******************************************************************************
+ ******************************************************************************/
 
 U__
 
@@ -31605,7 +31605,7 @@ BNE DKL3               ; And loop back for the next key, until we have just
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DOKEY
        Type: Subroutine
@@ -31631,7 +31631,7 @@ RTS                    ; Return from the subroutine
  Both options end up at DK4 to scan for other keys, beyond the seven primary
  flight controls.
 
- ******************************************************************************
+ ******************************************************************************/
 
 DOKEY
 
@@ -31690,7 +31690,7 @@ STX JSTY               ; Store the updated roll rate in JSTY
 
                        ; Fall through into DK4 to scan for other keys
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DK4
        Type: Subroutine
@@ -31711,7 +31711,7 @@ STX JSTY               ; Store the updated roll rate in JSTY
    * If this is a space view, scan for secondary flight keys and update the
      relevant bytes in the key logger
 
- ******************************************************************************
+ ******************************************************************************/
 
 DK4
 
@@ -31826,7 +31826,7 @@ DK5
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TT217
        Type: Subroutine
@@ -31856,7 +31856,7 @@ RTS                    ; Return from the subroutine
 
    out                 Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 TT217
 
@@ -31899,7 +31899,7 @@ out
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: me1
        Type: Subroutine
@@ -31914,7 +31914,7 @@ RTS                    ; Return from the subroutine
 
    X                   Must be set to 0
 
- ******************************************************************************
+ ******************************************************************************/
 
 me1
 
@@ -31935,14 +31935,14 @@ PLA                    ; Restore the new message token
                        ; $2C $A9 $6C, or BIT $6CA9, which does nothing apart
                        ; from affect the flags
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ou2
        Type: Subroutine
    Category: Flight
     Summary: Display "E.C.M.SYSTEM DESTROYED" as an in-flight message
 
- ******************************************************************************
+ ******************************************************************************/
 
 ou2
 
@@ -31953,20 +31953,20 @@ LDA #108               ; Set A to recursive token 108 ("E.C.M.SYSTEM")
                        ; $2C $A9 $6F, or BIT $6FA9, which does nothing apart
                        ; from affect the flags
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ou3
        Type: Subroutine
    Category: Flight
     Summary: Display "FUEL SCOOPS DESTROYED" as an in-flight message
 
- ******************************************************************************
+ ******************************************************************************/
 
 ou3
 
 LDA #111               ; Set A to recursive token 111 ("FUEL SCOOPS")
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: MESS
        Type: Subroutine
@@ -31984,7 +31984,7 @@ LDA #111               ; Set A to recursive token 111 ("FUEL SCOOPS")
 
    A                   The text token to be printed
 
- ******************************************************************************
+ ******************************************************************************/
 
 MESS
 
@@ -32006,7 +32006,7 @@ STA MCH                ; Set MCH to the token we are about to display
 
                        ; Fall through into mes9 to print the token in A
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: mes9
        Type: Subroutine
@@ -32018,7 +32018,7 @@ STA MCH                ; Set MCH to the token we are about to display
  Print a text token, followed by " DESTROYED" if the destruction flag is set
  (for when a piece of equipment is destroyed).
 
- ******************************************************************************
+ ******************************************************************************/
 
 mes9
 
@@ -32030,7 +32030,7 @@ BCC out                ; subroutine (as out contains an RTS)
 LDA #253               ; Print recursive token 93 (" DESTROYED") and return
 JMP TT27               ; from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: OUCH
        Type: Subroutine
@@ -32042,7 +32042,7 @@ JMP TT27               ; from the subroutine using a tail call
  Our shields are dead and we are taking damage, so there is a small chance of
  losing cargo or equipment.
 
- ******************************************************************************
+ ******************************************************************************/
 
 OUCH
 
@@ -32104,7 +32104,7 @@ BNE MESS               ; Print recursive token A ("ENERGY BOMB", "ENERGY UNIT"
                        ; followed by " DESTROYED", and return from the
                        ; subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: QQ16
        Type: Variable
@@ -32117,7 +32117,7 @@ BNE MESS               ; Print recursive token A ("ENERGY BOMB", "ENERGY UNIT"
  Two-letter token lookup table for tokens 128-159. See the deep dive on
  "Printing text tokens" for details of how the two-letter token system works.
 
- ******************************************************************************
+ ******************************************************************************/
 
 QQ16
 
@@ -32154,7 +32154,7 @@ EQUS "IS"              ; Token 157
 EQUS "RI"              ; Token 158
 EQUS "ON"              ; Token 159
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: ITEM
        Type: Macro
@@ -32186,7 +32186,7 @@ EQUS "ON"              ; Token 159
 
    mask                Fluctuations mask
 
- ******************************************************************************
+ ******************************************************************************/
 
 ACRO ITEM price, factor, units, quantity, mask
 
@@ -32213,7 +32213,7 @@ e = ABS(factor)
 
 NDMACRO
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: QQ23
        Type: Variable
@@ -32243,7 +32243,7 @@ NDMACRO
    * Base quantity = 6
    * Mask = %00000001
 
- ******************************************************************************
+ ******************************************************************************/
 
 QQ23
 
@@ -32265,7 +32265,7 @@ ITEM 171, -2, 'k',  55, %00011111  ; 14 = Platinum
 ITEM 45,  -1, 'g', 250, %00001111  ; 15 = Gem-Stones
 ITEM 53,  15, 't', 192, %00000111  ; 16 = Alien items
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TIDY
        Type: Subroutine
@@ -32285,7 +32285,7 @@ ITEM 53,  15, 't', 192, %00000111  ; 16 = Alien items
  to get stretched over time, so periodically we tidy the vectors with this
  routine to ensure they remain as orthonormal as possible.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TI2
 
@@ -32434,7 +32434,7 @@ BPL TIL1               ; Loop back until we have zeroed all the low bytes
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TIS2
        Type: Subroutine
@@ -32454,7 +32454,7 @@ RTS                    ; Return from the subroutine
  normalising vectors, where we represent fractions using integers, so this
  gives us an approximation to two decimal places.
 
- ******************************************************************************
+ ******************************************************************************/
 
 TIS2
 
@@ -32521,7 +32521,7 @@ ORA #96                ; Apply the sign bit to 96 (which represents 1)
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: TIS3
        Type: Subroutine
@@ -32556,7 +32556,7 @@ RTS                    ; Return from the subroutine
 
    A                   Index 3 (0 = x, 2 = y, 4 = z)
 
- ******************************************************************************
+ ******************************************************************************/
 
 TIS3
 
@@ -32596,7 +32596,7 @@ EOR #%10000000         ; Flip the sign of A
                        ;         (nosev_x,Y * roofv_x,Y))
                        ;       / nosev_x,A
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: DVIDT
        Type: Subroutine
@@ -32611,7 +32611,7 @@ EOR #%10000000         ; Flip the sign of A
 
  This uses the same shift-and-subtract algorithm as TIS2.
 
- ******************************************************************************
+ ******************************************************************************/
 
 DVIDT
 
@@ -32660,11 +32660,11 @@ ORA T                  ; Set A to the correct sign bit that we set in T above
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
  Save ELTF.bin
 
- ******************************************************************************
+ ******************************************************************************/
 
 PRINT "ELITE F"
 PRINT "Assembled at ", CODE_F__
@@ -32676,25 +32676,25 @@ PRINT "Reload at ", LOAD_F__
 PRINT "S.ELTF ", ~CODE_F__, " ", ~*, " ", LOAD__, " ", LOAD_F__
 SAVE "3-assembled-output/ELTF.bin", CODE_F__, *, LOAD__
 
- ******************************************************************************
+ /******************************************************************************
 
  ELITE G FILE
 
  Produces the binary file ELTG.bin that gets loaded by elite-bcfs.asm.
 
- ******************************************************************************
+ ******************************************************************************/
 
 CODE_G__ = *
 LOAD_G__ = LOAD__ + * - CODE__
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SHPPT
        Type: Subroutine
    Category: Drawing ships
     Summary: Draw a distant ship as a point rather than a full wireframe
 
- ******************************************************************************
+ ******************************************************************************/
 
 SHPPT
 
@@ -32794,7 +32794,7 @@ STA (XX19),Y
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL5
        Type: Subroutine
@@ -32808,7 +32808,7 @@ RTS                    ; Return from the subroutine
 
    Q = SQRT(R Q)
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL5
 
@@ -32877,7 +32877,7 @@ BNE LL6                ; Loop back to LL6 until we have done 8 loops
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL28
        Type: Subroutine
@@ -32922,7 +32922,7 @@ RTS                    ; Return from the subroutine
                        division loop if R is already set to 254 and we know the
                        division will work
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL28
 
@@ -32978,7 +32978,7 @@ STA R                  ; possible answer to 256, i.e. R = 255
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL38
        Type: Subroutine
@@ -32999,7 +32999,7 @@ RTS                    ; Return from the subroutine
 
    C flag              Set if the addition overflowed, clear otherwise
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL38
 
@@ -33043,7 +33043,7 @@ ADC #1                 ; set A = ~A + 1
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL51
        Type: Subroutine
@@ -33119,7 +33119,7 @@ RTS                    ; Return from the subroutine
    XX12(5 4)           The dot product of [x y z] vector with the nosev (or _z)
                        vector, with the sign in XX12+5 and magnitude in XX12+4
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL51
 
@@ -33197,7 +33197,7 @@ BCC ll51
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL9 (Part 1 of 12)
        Type: Subroutine
@@ -33240,7 +33240,7 @@ RTS                    ; Return from the subroutine
    EE51                Remove the current ship from the screen, called from
                        SHPPT before drawing the ship as a point
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL25
 
@@ -33364,7 +33364,7 @@ JMP LL155              ; Jump to LL155 to draw the ship, which removes it from
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL9 (Part 2 of 12)
        Type: Subroutine
@@ -33383,7 +33383,7 @@ RTS                    ; Return from the subroutine
 
    LL10-1              Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL10
 
@@ -33477,7 +33477,7 @@ BNE LL17               ; the ship's explosion cloud
 JMP SHPPT              ; Otherwise jump to SHPPT to draw the ship as a dot,
                        ; returning from the subroutine using a tail call
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL9 (Part 3 of 12)
        Type: Subroutine
@@ -33493,7 +33493,7 @@ JMP SHPPT              ; Otherwise jump to SHPPT to draw the ship as a dot,
 
    * XX18 contains the ship's x, y and z coordinates in space
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL17
 
@@ -33622,7 +33622,7 @@ BEQ EE29               ; to skip the following
                        ; Otherwise we fall through to set up the visibility
                        ; block for an exploding ship
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL9 (Part 4 of 12)
        Type: Subroutine
@@ -33641,7 +33641,7 @@ BEQ EE29               ; to skip the following
  and then skips over the face visibility calculations that we would apply to a
  non-exploding ship.
 
- ******************************************************************************
+ ******************************************************************************/
 
 LDA (XX0),Y            ; Fetch byte #12 of the ship's blueprint, which contains
                        ; the number of faces * 4
@@ -33670,7 +33670,7 @@ JMP LL42               ; Jump to LL42 to skip the face visibility calculations
                        ; as we don't need to do them now we've set up the XX2
                        ; block for the explosion
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL9 (Part 5 of 12)
        Type: Subroutine
@@ -33679,7 +33679,7 @@ JMP LL42               ; Jump to LL42 to skip the face visibility calculations
   Deep dive: Drawing ships
              Back-face culling
 
- ******************************************************************************
+ ******************************************************************************/
 
 EE29
 
@@ -34125,7 +34125,7 @@ BCS LL42               ; LL42 to move on to the
 JMP LL86               ; Otherwise loop back to LL86 to work out the visibility
                        ; of the next face
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL9 (Part 6 of 12)
        Type: Subroutine
@@ -34140,7 +34140,7 @@ JMP LL86               ; Otherwise loop back to LL86 to work out the visibility
  those that are visible, it starts the process of calculating the screen
  coordinates of each vertex
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL42
 
@@ -34538,7 +34538,7 @@ JMP LL57               ; We've added the z-coordinates, so jump to LL57
                        ; The adding process is continued in part 7, after a
                        ; couple of subroutines that we don't need quite yet
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL61
        Type: Subroutine
@@ -34553,7 +34553,7 @@ JMP LL57               ; We've added the z-coordinates, so jump to LL57
 
  This is a sister routine to LL28, which does the division when A < Q.
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL61
 
@@ -34616,7 +34616,7 @@ STA U
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL62
        Type: Subroutine
@@ -34639,7 +34639,7 @@ RTS                    ; Return from the subroutine
 
    X                   X is incremented by 1
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL62
 
@@ -34661,7 +34661,7 @@ STA XX3,X              ; Store the low byte of the result in the X-th byte of
 
 JMP LL66               ; Jump down to LL66
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL9 (Part 7 of 12)
        Type: Subroutine
@@ -34698,7 +34698,7 @@ JMP LL66               ; Jump down to LL66
 
    (U T)               z-coordinate of the current vertex
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL56
 
@@ -34749,7 +34749,7 @@ ROR T
 JMP LL57               ; Jump back to LL57 to see if we can shift the result
                        ; any more
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL9 (Part 8 of 12)
        Type: Subroutine
@@ -34786,7 +34786,7 @@ JMP LL57               ; Jump back to LL57 to see if we can shift the result
    LL66                A re-entry point into the ship-drawing routine, used by
                        the LL62 routine to store 128 - (U R) on the XX3 heap
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL60
 
@@ -34996,7 +34996,7 @@ BCS LL72               ; XX20 in part 6), jump to LL72, as we have processed
 JMP LL48               ; Loop back to LL48 in part 6 to calculate visibility
                        ; and screen coordinates for the next vertex
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL9 (Part 9 of 12)
        Type: Subroutine
@@ -35012,7 +35012,7 @@ JMP LL48               ; Loop back to LL48 in part 6 to calculate visibility
  When we get here, the heap at XX3 contains all the visible vertex screen
  coordinates.
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL72
 
@@ -35169,7 +35169,7 @@ INY                    ; Increment the heap pointer
 
 STY U                  ; Store the updated ship line heap pointer in U
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL9 (Part 10 of 12)
        Type: Subroutine
@@ -35185,7 +35185,7 @@ STY U                  ; Store the updated ship line heap pointer in U
  When we get here, the heap at XX3 contains all the visible vertex screen
  coordinates.
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL170
 
@@ -35313,7 +35313,7 @@ BCS LL78               ; If the C flag is set then the line is not visible on
                        ; screen, so jump to LL78 so we don't store this line
                        ; in the ship line heap
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL9 (Part 11 of 12)
        Type: Subroutine
@@ -35331,7 +35331,7 @@ BCS LL78               ; If the C flag is set then the line is not visible on
    LL81+2              Draw the contents of the ship line heap, used to draw
                        the ship as a dot from SHPPT
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL80
 
@@ -35402,7 +35402,7 @@ LDA U                  ; Fetch the ship line heap pointer from U into A, which
 LDY #0                 ; Store A as the first byte of the ship line heap, so
 STA (XX19),Y           ; the heap is now correctly set up
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL9 (Part 12 of 12)
        Type: Subroutine
@@ -35415,7 +35415,7 @@ STA (XX19),Y           ; the heap is now correctly set up
  This part draws the lines in the ship line heap, which is used both to draw
  the ship, and to remove it from the screen.
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL155
 
@@ -35463,7 +35463,7 @@ BCC LL27               ; loop back to LL27 to draw the next line from the heap
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL118
        Type: Subroutine
@@ -35515,7 +35515,7 @@ RTS                    ; Return from the subroutine
 
    LL118-1             Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL118
 
@@ -35676,7 +35676,7 @@ LL136
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL120
        Type: Subroutine
@@ -35710,7 +35710,7 @@ RTS                    ; Return from the subroutine
    LL122               Calculate (Y X) = (S R) * Q and set the sign to the
                        opposite of the top byte on the stack
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL120
 
@@ -35794,7 +35794,7 @@ BPL LL133              ; If A is positive jump to LL133 to negate (Y X) and
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL123
        Type: Subroutine
@@ -35840,7 +35840,7 @@ RTS                    ; Return from the subroutine
 
    LL128               Contains an RTS
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL123
 
@@ -35949,7 +35949,7 @@ LL128
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL129
        Type: Subroutine
@@ -35969,7 +35969,7 @@ RTS                    ; Return from the subroutine
  This sets up the variables required above to calculate (S R) / XX12+2 and give
  the result the opposite sign to XX13+3.
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL129
 
@@ -35999,7 +35999,7 @@ EOR XX12+3             ; Set A = original argument S EOR'd with XX12+3
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL145 (Part 1 of 4)
        Type: Subroutine
@@ -36067,7 +36067,7 @@ RTS                    ; Return from the subroutine
 
    LL147               Don't initialise the values in SWAP or A
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL145
 
@@ -36165,7 +36165,7 @@ LL108
 LSR XX13               ; If we get here then (x2, y2) is off-screen and XX13 is
                        ; 191, so shift XX13 right to halve it to 95
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL145 (Part 2 of 4)
        Type: Subroutine
@@ -36191,7 +36191,7 @@ LSR XX13               ; If we get here then (x2, y2) is off-screen and XX13 is
  coordinates, or in the case of y-coordinates, having a low byte > 191, the
  y-coordinate of the bottom of the space view.
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL83
 
@@ -36252,7 +36252,7 @@ ORA XX12+2             ; If neither XX12+1 or XX12+2 have bit 7 set, jump to
 BPL LL109              ; LL109 to return from the subroutine with the C flag
                        ; set, as the line doesn't fit on-screen
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL145 (Part 3 of 4)
        Type: Subroutine
@@ -36261,7 +36261,7 @@ BPL LL109              ; LL109 to return from the subroutine with the C flag
   Deep dive: Line-clipping
              Extended screen coordinates
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL115
 
@@ -36386,7 +36386,7 @@ JSR LL28               ; Call LL28 to calculate:
 DEC T                  ; T was set to 0 above, so this sets T = $FF when our
                        ; line is steep
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: LL145 (Part 4 of 4)
        Type: Subroutine
@@ -36415,7 +36415,7 @@ DEC T                  ; T was set to 0 above, so this sets T = $FF when our
 
    * 191 = (x1, y1) off-screen, (x2, y2) off-screen
 
- ******************************************************************************
+ ******************************************************************************/
 
 LL116
 
@@ -36515,11 +36515,11 @@ SEC                    ; Set the C flag to indicate the clipped line does not
 
 RTS                    ; Return from the subroutine
 
- ******************************************************************************
+ /******************************************************************************
 
  Save ELTG.bin
 
- ******************************************************************************
+ ******************************************************************************/
 
 PRINT "ELITE G"
 PRINT "Assembled at ", CODE_G__
@@ -36531,7 +36531,7 @@ PRINT "Reload at ", LOAD_G__
 PRINT "S.ELTG ", ~CODE_G__, " ", ~*, " ", LOAD__, " ", LOAD_G__
 SAVE "3-assembled-output/ELTG.bin", CODE_G__, *, LOAD__
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: checksum0
        Type: Variable
@@ -36544,25 +36544,25 @@ SAVE "3-assembled-output/ELTG.bin", CODE_G__, *, LOAD__
  by elite-checksum.py and is used by the encryption checks in elite-loader.asm
  (see the CHK routine in the loader for more details).
 
- ******************************************************************************
+ ******************************************************************************/
 
 checksum0
 
  .ds 1                 ; This value is checked against the calculated checksum
                        ; in part 6 of the loader in elite-loader.asm
 
- ******************************************************************************
+ /******************************************************************************
 
  ELITE SHIP BLUEPRINTS FILE
 
  Produces the binary file SHIPS.bin that gets loaded by elite-bcfs.asm.
 
- ******************************************************************************
+ ******************************************************************************/
 
 CODE_SHIPS__ = *
 LOAD_SHIPS__ = LOAD__ + * - CODE__
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: XX21
        Type: Variable
@@ -36570,7 +36570,7 @@ LOAD_SHIPS__ = LOAD__ + * - CODE__
     Summary: Ship blueprints lookup table
   Deep dive: Ship blueprints
 
- ******************************************************************************
+ ******************************************************************************/
 
 XX21
 
@@ -36588,7 +36588,7 @@ XX21
  .wo SHIP_THARGON      ; TGL  = 12 = Thargon
  .wo SHIP_ESCAPE_POD   ; ESC  = 13 = Escape pod
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: VERTEX
        Type: Macro
@@ -36627,7 +36627,7 @@ XX21
    visibility          The visibility distance, beyond which the vertex is not
                        shown
 
- ******************************************************************************
+ ******************************************************************************/
 
 ACRO VERTEX x, y, z, face1, face2, face3, face4, visibility
 
@@ -36660,7 +36660,7 @@ az = ABS(z)
 
 NDMACRO
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: EDGE
        Type: Macro
@@ -36693,7 +36693,7 @@ NDMACRO
    visibility          The visibility distance, beyond which the edge is not
                        shown
 
- ******************************************************************************
+ ******************************************************************************/
 
 ACRO EDGE vertex1, vertex2, face1, face2, visibility
 
@@ -36702,7 +36702,7 @@ f = face1 + (face2 << 4)
 
 NDMACRO
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: FACE
        Type: Macro
@@ -36733,7 +36733,7 @@ NDMACRO
    visibility          The visibility distance, beyond which the edge is always
                        shown
 
- ******************************************************************************
+ ******************************************************************************/
 
 ACRO FACE normal_x, normal_y, normal_z, visibility
 
@@ -36764,7 +36764,7 @@ az = ABS(normal_z)
 
 NDMACRO
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SHIP_SIDEWINDER
        Type: Variable
@@ -36772,7 +36772,7 @@ NDMACRO
     Summary: Ship blueprint for a Sidewinder
   Deep dive: Ship blueprints
 
- ******************************************************************************
+ ******************************************************************************/
 
 SHIP_SIDEWINDER
 
@@ -36844,7 +36844,7 @@ FACE      -12,      -47,        6,         31    ; Face 4
 FACE        0,      -32,        8,         31    ; Face 5
 FACE       12,      -47,        6,         31    ; Face 6
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SHIP_VIPER
        Type: Variable
@@ -36852,7 +36852,7 @@ FACE       12,      -47,        6,         31    ; Face 6
     Summary: Ship blueprint for a Viper
   Deep dive: Ship blueprints
 
- ******************************************************************************
+ ******************************************************************************/
 
 SHIP_VIPER
 
@@ -36934,7 +36934,7 @@ FACE       22,      -33,       11,         31    ; Face 4
 FACE        0,      -32,        0,         31    ; Face 5
 FACE        0,        0,      -48,         31    ; Face 6
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SHIP_MAMBA
        Type: Variable
@@ -36942,7 +36942,7 @@ FACE        0,        0,      -48,         31    ; Face 6
     Summary: Ship blueprint for a Mamba
   Deep dive: Ship blueprints
 
- ******************************************************************************
+ ******************************************************************************/
 
 SHIP_MAMBA
 
@@ -37040,7 +37040,7 @@ FACE      -32,       64,       16,         30    ; Face 2
 FACE       32,       64,       16,         30    ; Face 3
 FACE        0,        0,     -127,         30    ; Face 4
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SHIP_COBRA_MK_3
        Type: Variable
@@ -37048,7 +37048,7 @@ FACE        0,        0,     -127,         30    ; Face 4
     Summary: Ship blueprint for a Cobra Mk III
   Deep dive: Ship blueprints
 
- ******************************************************************************
+ ******************************************************************************/
 
 SHIP_COBRA_MK_3
 
@@ -37167,7 +37167,7 @@ FACE       -7,      -42,        9,         31    ; Face 10
 FACE        0,      -30,        6,         31    ; Face 11
 FACE        7,      -42,        9,         31    ; Face 12
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SHIP_THARGOID
        Type: Variable
@@ -37175,7 +37175,7 @@ FACE        7,      -42,        9,         31    ; Face 12
     Summary: Ship blueprint for a Thargoid mothership
   Deep dive: Ship blueprints
 
- ******************************************************************************
+ ******************************************************************************/
 
 SHIP_THARGOID
 
@@ -37271,7 +37271,7 @@ FACE      103,       25,       60,         31    ; Face 7
 FACE      103,      -25,       60,         31    ; Face 8
 FACE      -48,        0,        0,         31    ; Face 9
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SHIP_CORIOLIS
        Type: Variable
@@ -37279,7 +37279,7 @@ FACE      -48,        0,        0,         31    ; Face 9
     Summary: Ship blueprint for a Coriolis space station
   Deep dive: Ship blueprints
 
- ******************************************************************************
+ ******************************************************************************/
 
 SHIP_CORIOLIS
 
@@ -37377,7 +37377,7 @@ FACE      107,      107,     -107,         31    ; Face 11
 FACE     -107,      107,     -107,         31    ; Face 12
 FACE        0,        0,     -160,         31    ; Face 13
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SHIP_MISSILE
        Type: Variable
@@ -37385,7 +37385,7 @@ FACE        0,        0,     -160,         31    ; Face 13
     Summary: Ship blueprint for a missile
   Deep dive: Ship blueprints
 
- ******************************************************************************
+ ******************************************************************************/
 
 SHIP_MISSILE
 
@@ -37475,7 +37475,7 @@ FACE      -32,        0,        0,         31    ; Face 6
 FACE        0,       32,        0,         31    ; Face 7
 FACE        0,        0,     -176,         31    ; Face 8
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SHIP_ASTEROID
        Type: Variable
@@ -37483,7 +37483,7 @@ FACE        0,        0,     -176,         31    ; Face 8
     Summary: Ship blueprint for an asteroid
   Deep dive: Ship blueprints
 
- ******************************************************************************
+ ******************************************************************************/
 
 SHIP_ASTEROID
 
@@ -37567,7 +37567,7 @@ FACE       58,     -102,      -51,         31    ; Face 11
 FACE       81,        9,      -67,         31    ; Face 12
 FACE       47,       94,      -63,         31    ; Face 13
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SHIP_CANISTER
        Type: Variable
@@ -37575,7 +37575,7 @@ FACE       47,       94,      -63,         31    ; Face 13
     Summary: Ship blueprint for a cargo canister
   Deep dive: Ship blueprints
 
- ******************************************************************************
+ ******************************************************************************/
 
 SHIP_CANISTER
 
@@ -37647,7 +37647,7 @@ FACE        0,      -18,      -48,         31    ; Face 4
 FACE        0,       41,      -30,         31    ; Face 5
 FACE      -96,        0,        0,         31    ; Face 6
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SHIP_THARGON
        Type: Variable
@@ -37660,7 +37660,7 @@ FACE      -96,        0,        0,         31    ; Face 6
  The ship blueprint for the Thargon reuses the edges data from the cargo
  canister, so the edges data offset is negative.
 
- ******************************************************************************
+ ******************************************************************************/
 
 SHIP_THARGON
 
@@ -37713,7 +37713,7 @@ FACE       46,       42,      -14,         31    ; Face 4
 FACE       20,        5,        7,         31    ; Face 5
 FACE       36,        0,        0,         31    ; Face 6
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SHIP_ESCAPE_POD
        Type: Variable
@@ -37721,7 +37721,7 @@ FACE       36,        0,        0,         31    ; Face 6
     Summary: Ship blueprint for an escape pod
   Deep dive: Ship blueprints
 
- ******************************************************************************
+ ******************************************************************************/
 
 SHIP_ESCAPE_POD
 
@@ -37775,11 +37775,11 @@ FACE       19,       51,       15,         31    ; Face 1
 FACE       19,      -51,       15,         31    ; Face 2
 FACE      -56,        0,        0,         31    ; Face 3
 
- ******************************************************************************
+ /******************************************************************************
 
  Save SHIPS.bin
 
- ******************************************************************************
+ ******************************************************************************/
 
 PRINT "SHIPS"
 PRINT "Assembled at ", CODE_SHIPS__
@@ -37791,13 +37791,13 @@ PRINT "Reload at ", LOAD_SHIPS__
 PRINT "S.SHIPS ", ~CODE_SHIPS__, " ", ~*, " ", LOAD__, " ", LOAD_SHIPS__
 SAVE "3-assembled-output/SHIPS.bin", CODE_SHIPS__, *, LOAD__
 
- ******************************************************************************
+ /******************************************************************************
 
  ELITE PYTHON SHIP BLUEPRINT FILE
 
  Produces the binary file PYTHON.bin that gets loaded by elite-bcfs.asm.
 
- ******************************************************************************
+ ******************************************************************************/
 
 CLEAR 0, $7F00
 
@@ -37806,7 +37806,7 @@ LOAD_PYTHON__ = $1B00
 
 ORG CODE_PYTHON__
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SHIP_PYTHON
        Type: Variable
@@ -37814,7 +37814,7 @@ ORG CODE_PYTHON__
     Summary: Ship blueprint for a Python
   Deep dive: Ship blueprints
 
- ******************************************************************************
+ ******************************************************************************/
 
 SHIP_PYTHON
 
@@ -37906,14 +37906,14 @@ FACE        0,        0,     -112,         30    ; Face 12
 
  .ds 11                ; This space appears to be unused
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: SVN
        Type: Variable
    Category: Save and load
     Summary: The "saving in progress" flag
 
- ******************************************************************************
+ ******************************************************************************/
 
 SVN
 
@@ -37923,14 +37923,14 @@ SVN
                        ;
                        ;   * 0 otherwise
 
- ******************************************************************************
+ /******************************************************************************
 
        Name: VEC
        Type: Variable
    Category: Drawing the screen
     Summary: The original value of the IRQ1 vector
 
- ******************************************************************************
+ ******************************************************************************/
 
 VEC
 
@@ -37939,11 +37939,11 @@ VEC
                        ; This gets set to the value of the original IRQ1 vector
                        ; by the loading process
 
- ******************************************************************************
+ /******************************************************************************
 
  Save PYTHON.bin
 
- ******************************************************************************
+ ******************************************************************************/
 
 PRINT "PYTHON"
 PRINT "Assembled at ", CODE_PYTHON__
@@ -37955,11 +37955,11 @@ PRINT "Reload at ", LOAD_PYTHON__
 PRINT "S.PYTHON ", ~CODE_B__, " ", ~*, " ", LOAD__, " ", LOAD_PYTHON__
 SAVE "3-assembled-output/PYTHON.bin", CODE_PYTHON__, *, LOAD__
 
- ******************************************************************************
+ /******************************************************************************
 
  Show free space
 
- ******************************************************************************
+ ******************************************************************************/
 
 PRINT "ELITE game code ", ($6000-*), " bytes free"
 PRINT "Ends at ", *
