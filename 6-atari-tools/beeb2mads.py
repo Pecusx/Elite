@@ -19,6 +19,10 @@ replacements = {
     r'PRIN(.*)\~(.*)': r'PRIN\1\2',  # remove the second tilde (haxxx)
     r'PRINT': ' .PRINT',
     r'INCLUDE ': r' ICL ',
+    # r'(?<=[\w)])\s*AND\s*(?=[\w(])': ' & ',  # bitwise operators (not werking)
+    # r'(?<!^)(?<![ \t\w;:])\bOR\b': '|',
+    # r'(?<!^)(?<![ \t\w;:])\bXOR\b': '^',
+    # r'(?<!^)(?<![ \t\w;:])\bNOT\b': '~',
 
 }
 
@@ -31,6 +35,16 @@ def apply_replacements(text, replacements):
     # multiline comment
     #text = re.sub(r'(\*{10,}.*?\*{10,})', r'/\1/', text, flags=re.DOTALL)
 
+    # add beeb macros
+    macros = ('; -----MADS BEEB replacement macros-----\n'
+              '     .MACRO GUARD addr\n'
+              '        .IF * > :addr\n'
+              '            .ERROR :addr, " GUARD ERROR: ", *\n'
+              '        .ENDIF\n'
+              '     .ENDM\n'
+              '; -----end of MADS replacement macros-----\n'
+              '\n')
+    text = macros + text
     return text
 
 

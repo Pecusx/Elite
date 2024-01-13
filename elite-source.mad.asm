@@ -1,3 +1,11 @@
+; -----MADS BEEB replacement macros-----
+     .MACRO GUARD addr
+        .IF * > :addr
+            .ERROR :addr, " GUARD ERROR: ", *
+        .ENDIF
+     .ENDM
+; -----end of MADS replacement macros-----
+
 ; ******************************************************************************
 ;
 ; ELITE GAME SOURCE
