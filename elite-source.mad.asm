@@ -1,11 +1,10 @@
 ; -----MADS BEEB replacement macros-----
-     .MACRO GUARD addr
+    .MACRO GUARD addr
         .IF * > :addr
             .ERROR :addr, " GUARD ERROR: ", *
         .ENDIF
-     .ENDM
+    .ENDM
 ; -----end of MADS replacement macros-----
-
 ; ******************************************************************************
 ;
 ; ELITE GAME SOURCE
@@ -853,7 +852,7 @@ K4
 
   .ds 2                 ; Temporary storage, used in a number of places
 
-  .PRINT "Zero page variables from ", ZP, " to ", *
+  .PRINT "Zero page variables from ", ZP, " to ", * 
 
 ; ******************************************************************************
 ;
@@ -1187,7 +1186,7 @@ SXL
  SKIP NOST + 1          ; This is where we store the x_lo coordinates for all
                         ; the stardust particles
 
-  .PRINT "T__ workspace from  ", T__, " to ", *
+  .PRINT "T__ workspace from  ", T__, " to ", * 
 
 ; ******************************************************************************
 ;
@@ -2580,13 +2579,13 @@ QQ18
 
   .PRINT "WORDS9"
   .PRINT "Assembled at ", CODE_WORDS__
-  .PRINT "Ends at ", *
-  .PRINT "Code size is ", (* - CODE_WORDS__)
+  .PRINT "Ends at ", * 
+  .PRINT "Code size is ", (*  - CODE_WORDS__)
   .PRINT "Execute at ", LOAD_WORDS__
   .PRINT "Reload at ", LOAD_WORDS__
 
-  .PRINT "S.WORDS9 ",~CODE_WORDS__," ",~*," ",LOAD_WORDS__," ",LOAD_WORDS__
- SAVE "3-assembled-output/WORDS9.bin", CODE_WORDS__, *, LOAD_WORDS__
+  .PRINT "S.WORDS9 ",~CODE_WORDS__," ",~* ," ",LOAD_WORDS__," ",LOAD_WORDS__
+ ;SAVE"3-assembled-output/WORDS9.bin", CODE_WORDS__, * , LOAD_WORDS__
 
 ; ******************************************************************************
 ;
@@ -3094,7 +3093,7 @@ NOSTM
                         ; which is 18 (#NOST) for normal space, and 3 for
                         ; witchspace
 
-  .PRINT "WP workspace from  ", WP," to ", *
+  .PRINT "WP workspace from  ", WP," to ", * 
 
 ; ******************************************************************************
 ;
@@ -3341,7 +3340,7 @@ M__
 
  TYA                    ; Set A to the roll rate but with the sign bit flipped
 
- BPL *+7               ; If the value of A is positive, skip the following
+ BPL * +7               ; If the value of A is positive, skip the following
                         ; three instructions
 
  EOR #%11111111         ; A is negative, so change the sign of A using two's
@@ -3352,7 +3351,7 @@ M__
  LSR A
 
  CMP #8                 ; If A >= 8, skip the following two instructions
- BCS *+4
+ BCS * +4
 
  LSR A                  ; A < 8, so halve A again
 
@@ -3397,7 +3396,7 @@ M__
 
  TYA                    ; Set A to the pitch rate but with the sign bit flipped
 
- BPL *+4               ; If the value of A is positive, skip the following
+ BPL * +4               ; If the value of A is positive, skip the following
                         ; instruction
 
  EOR #%11111111         ; A is negative, so flip the bits
@@ -3411,7 +3410,7 @@ M__
  LSR A
 
  CMP #3                 ; If A >= 3, skip the following instruction
- BCS *+3
+ BCS * +3
 
  LSR A                  ; A < 3, so halve A again
 
@@ -3566,7 +3565,7 @@ MA76
 
  LDA KY13               ; If ESCAPE is being pressed and we have an escape pod
  AND ESCP               ; fitted, keep going, otherwise skip the next
- BEQ *+5               ; instruction
+ BEQ * +5               ; instruction
 
  JMP ESCAPE             ; The button is being pressed to launch an escape pod
                         ; and we have an escape pod fitted, so jump to ESCAPE to
@@ -3574,7 +3573,7 @@ MA76
                         ; call
 
  LDA KY18               ; If "J" is being pressed, keep going, otherwise skip
- BEQ *+5               ; the next instruction
+ BEQ * +5               ; the next instruction
 
  JSR WARP               ; Call the WARP routine to do an in-system jump
 
@@ -3728,7 +3727,7 @@ MAL1
  STX XSAV               ; Store the current slot number in XSAV
 
  LDA FRIN,X             ; Fetch the contents of this slot into A. If it is 0
- BNE *+5               ; then this slot is empty and we have no more ships to
+ BNE * +5               ; then this slot is empty and we have no more ships to
  JMP MA18               ; process, so jump to MA18 below, otherwise A contains
                         ; the type of ship that's in this slot, so skip over the
                         ; JMP MA18 instruction and keep going
@@ -3925,7 +3924,7 @@ MAL3
                         ; checks in the TACTICS routine
 
  CPX #OIL               ; If ship type >= OIL (i.e. it's a cargo canister,
- BCS *+5               ; Thargon or escape pod), skip the JMP instruction and
+ BCS * +5               ; Thargon or escape pod), skip the JMP instruction and
  JMP MA58               ; continue on, otherwise jump to MA58 to process a
                         ; potential collision
 
@@ -4499,7 +4498,7 @@ b
  LDA ENGY               ; level goes up by 2 if we have an energy unit fitted,
  ADC ENERGY             ; otherwise it goes up by 1
 
- BCS *+5               ; If the value of A did not overflow (the maximum
+ BCS * +5               ; If the value of A did not overflow (the maximum
  STA ENERGY             ; energy level is $FF), then store A in ENERGY
 
 ; ******************************************************************************
@@ -4631,7 +4630,7 @@ MAL4
                         ; enough to the planet to bump into a space station)
 
  LDA QQ11               ; If the current view is not a space view, skip the
- BNE *+5               ; following instruction (so we only remove the sun from
+ BNE * +5               ; following instruction (so we only remove the sun from
                         ; the screen if we are potentially looking at it)
 
  JSR WPLS               ; Call WPLS to remove the sun from the screen, as we
@@ -4688,7 +4687,7 @@ MA93
 
  LDA #50                ; If our energy bank status in ENERGY is >= 50, skip
  CMP ENERGY             ; printing the following message (so the message is
- BCC *+6               ; only shown if our energy is low)
+ BCC * +6               ; only shown if our energy is low)
 
  ASL A                  ; Print recursive token 100 ("ENERGY LOW{beep}") as an
  JSR MESS               ; in-flight message
@@ -4817,7 +4816,7 @@ MA29
  ADC QQ14               ; Set A = A + the current fuel level * 10 (from QQ14)
 
  CMP #70                ; If A > 70 then set A = 70 (as 70 is the maximum fuel
- BCC *+4               ; level, or 7.0 light years)
+ BCC * +4               ; level, or 7.0 light years)
  LDA #70
 
  STA QQ14               ; Store the updated fuel level in QQ14
@@ -5114,7 +5113,7 @@ MAS3
  ADC R                  ; Add A (high byte of third result) to R, so R now
                         ; contains the sum of x_hi^2 + y_hi^2 + z_hi^2
 
- BCC *+4               ; If there is no carry, skip the following instruction
+ BCC * +4               ; If there is no carry, skip the following instruction
                         ; to return straight from the subroutine
 
 MA30
@@ -5205,7 +5204,7 @@ MVEIT
 MV3
 
  LDX TYPE               ; If the type of the ship we are moving is positive,
- BPL *+5               ; i.e. it is not a planet (types 128 and 130) or sun
+ BPL * +5               ; i.e. it is not a planet (types 128 and 130) or sun
                         ; (type 129), then skip the following instruction
 
  JMP MV40               ; This item is the planet or sun, so jump to MV40 to
@@ -5353,7 +5352,7 @@ MV30
  CLC                    ; acceleration in byte #28
  ADC INWK+28
 
- BPL *+4               ; If the result is positive, skip the following
+ BPL * +4               ; If the result is positive, skip the following
                         ; instruction
 
  LDA #0                 ; Set A to 0 to stop the speed from going negative
@@ -5363,7 +5362,7 @@ MV30
                         ; use as an index
 
  CMP (XX0),Y            ; If A < the ship's maximum speed, skip the following
- BCC *+4               ; instruction
+ BCC * +4               ; instruction
 
  LDA (XX0),Y            ; Set A to the ship's maximum speed
 
@@ -5628,7 +5627,7 @@ MV45
  LDA TYPE               ; If the ship type is not the sun (129) then skip the
  AND #%10000001         ; next instruction, otherwise return from the subroutine
  CMP #129               ; as we don't need to rotate the sun around its origin.
- BNE *+3               ; Having both the AND and the CMP is a little odd, as
+ BNE * +3               ; Having both the AND and the CMP is a little odd, as
                         ; the sun is the only ship type with bits 0 and 7 set,
                         ; so the AND has no effect and could be removed
 
@@ -6759,13 +6758,13 @@ MV2
 
   .PRINT "ELITE A"
   .PRINT "Assembled at ", CODE__
-  .PRINT "Ends at ", *
-  .PRINT "Code size is ", (* - CODE__)
+  .PRINT "Ends at ", * 
+  .PRINT "Code size is ", (*  - CODE__)
   .PRINT "Execute at ", LOAD__
   .PRINT "Reload at ", LOAD_A__
 
-  .PRINT "S.ELTA ", ~CODE__, " ", ~*, " ", LOAD__, " ", LOAD_A__
- SAVE "3-assembled-output/ELTA.bin", CODE__, *, LOAD__
+  .PRINT "S.ELTA ", ~CODE__, " ", ~* , " ", LOAD__, " ", LOAD_A__
+ ;SAVE"3-assembled-output/ELTA.bin", CODE__, * , LOAD__
 
 ; ******************************************************************************
 ;
@@ -6775,8 +6774,8 @@ MV2
 ;
 ; ******************************************************************************
 
- CODE_B__ = *
- LOAD_B__ = LOAD__ + * - CODE__
+ CODE_B__ = * 
+ LOAD_B__ = LOAD__ + *  - CODE__
 
 ; ******************************************************************************
 ;
@@ -6808,7 +6807,7 @@ MV2
 
 NA__
 
- EQUS "JAMESON"         ; The current commander name, which defaults to JAMESON
+  .by "JAMESON"         ; The current commander name, which defaults to JAMESON
   .by 13                ;
                         ; The commander name can be up to 7 characters (the DFS
                         ; limit for filenames), and is terminated by a carriage
@@ -6838,9 +6837,9 @@ NA__
   .wo $B753             ; QQ21 = Seed s2 for system 0, galaxy 0 (Tibedied), #7-8
 
 IF Q__
- EQUD $00CA9A3B         ; CASH = Amount of cash (100,000,000 Cr), #9-12
+  .dword $00CA9A3B         ; CASH = Amount of cash (100,000,000 Cr), #9-12
 ELSE
- EQUD $E8030000         ; CASH = Amount of cash (100 Cr), #9-12
+  .dword $E8030000         ; CASH = Amount of cash (100 Cr), #9-12
 ENDIF
 
   .by 70                ; QQ14 = Fuel level, #13
@@ -6895,7 +6894,7 @@ ENDIF
 
   .by Q__                ; ESCP = Escape pod, #46
 
- EQUD 0                 ; These four bytes appear to be unused, #47-50
+  .dword 0                 ; These four bytes appear to be unused, #47-50
 
   .by 3 + (Q__ AND 1)    ; NOMSL = Number of missiles, #51
 
@@ -9149,7 +9148,7 @@ STC1
  DEY                    ; Decrement the loop counter to point to the next
                         ; stardust particle
 
- BEQ *+5               ; If we have just done the last particle, skip the next
+ BEQ * +5               ; If we have just done the last particle, skip the next
                         ; instruction to return from the subroutine
 
  JMP STL1               ; We have more stardust to process, so jump back up to
@@ -9783,21 +9782,21 @@ st3
 
  LDA CRGO               ; If our ship's cargo capacity is < 26 (i.e. we do not
  CMP #26                ; have a cargo bay extension), skip the following two
- BCC *+7               ; instructions
+ BCC * +7               ; instructions
 
  LDA #107               ; We do have a cargo bay extension, so print recursive
  JSR plf2               ; token 107 ("LARGE CARGO{sentence case} BAY"), followed
                         ; by a newline and an indent of 6 characters
 
  LDA BST                ; If we don't have fuel scoops fitted, skip the
- BEQ *+7               ; following two instructions
+ BEQ * +7               ; following two instructions
 
  LDA #111               ; We do have fuel scoops fitted, so print recursive
  JSR plf2               ; token 111 ("FUEL SCOOPS"), followed by a newline and
                         ; an indent of 6 characters
 
  LDA ECM                ; If we don't have an E.C.M. fitted, skip the following
- BEQ *+7               ; two instructions
+ BEQ * +7               ; two instructions
 
  LDA #108               ; We do have an E.C.M. fitted, so print recursive token
  JSR plf2               ; 108 ("E.C.M.SYSTEM"), followed by a newline and an
@@ -9821,7 +9820,7 @@ stqv
  TAY                    ; Fetch byte BOMB+0 through BOMB+4 for values of XX4
  LDX BOMB-113,Y         ; from 113 through 117
 
- BEQ *+5               ; If it is zero then we do not own that piece of
+ BEQ * +5               ; If it is zero then we do not own that piece of
                         ; equipment, so skip the next instruction
 
  JSR plf2               ; Print the recursive token in A from 113 ("ENERGY
@@ -9855,7 +9854,7 @@ st
 
  LDX CNT                ; If the laser power for view X has bit 7 clear, then it
  LDY LASER,X            ; is a pulse laser, so skip the following instruction
- BPL *+4
+ BPL * +4
 
  LDA #104               ; Set A to token 104 ("BEAM LASER")
 
@@ -9929,7 +9928,7 @@ plf2
 
 TENS
 
- EQUD $00E87648
+  .dword $00E87648
 
 ; ******************************************************************************
 ;
@@ -10310,7 +10309,7 @@ tt34
 TT34
 
  DEC T                  ; Decrement T but keep T >= 0 (by incrementing it
- BPL *+4               ; again if the above decrement made T negative)
+ BPL * +4               ; again if the above decrement made T negative)
  INC T
 
  DEC XX17               ; Decrement the total number of characters left to
@@ -10321,7 +10320,7 @@ TT34
                         ; contains an ORA #$60 instruction, so RR3+1 is $60,
                         ; which is the opcode for an RTS)
 
- BNE *+10              ; If the result is positive (> 0) then we still have
+ BNE * +10              ; If the result is positive (> 0) then we still have
                         ; characters left to print, so loop back to TT35 (via
                         ; the JMP TT35 instruction below) to print the next
                         ; digit
@@ -10330,7 +10329,7 @@ TT34
                         ; of digits that we wanted to, so restore the C flag
                         ; that we stored at the start of the routine
 
- BCC *+7               ; If the C flag is clear, we don't want a decimal point,
+ BCC * +7               ; If the C flag is clear, we don't want a decimal point,
                         ; so loop back to TT35 (via the JMP TT35 instruction
                         ; below) to print the next digit
 
@@ -10545,12 +10544,12 @@ RR1
 
  ASL A                  ; If bit 6 of the character is clear (A is 32-63)
  ASL A                  ; then skip the following instruction
- BCC *+4
+ BCC * +4
 
  LDX #$C1               ; A is 64-126, so set X to point to page $C1
 
  ASL A                  ; If bit 5 of the character is clear (A is 64-95)
- BCC *+3               ; then skip the following instruction
+ BCC * +3               ; then skip the following instruction
 
  INX                    ; Increment X
                         ;
@@ -10847,7 +10846,7 @@ DIALS
                         ; +8
 
  LDX BET1               ; Fetch the magnitude of the pitch angle beta, and if it
- BEQ *+4               ; is 0 (i.e. we are not pitching), skip the next
+ BEQ * +4               ; is 0 (i.e. we are not pitching), skip the next
                         ; instruction
 
  SBC #1                 ; The pitch angle beta is non-zero, so set A = A - 1
@@ -11105,7 +11104,7 @@ PZW
 
  AND FLH                ; A will be zeroed if flashing colours are disabled
 
- BEQ *+4               ; If A is zero, skip to the LDA instruction below
+ BEQ * +4               ; If A is zero, skip to the LDA instruction below
 
  TXA                    ; Otherwise flashing colours are enabled and it's the
                         ; main loop iteration where we flash them, so set A to
@@ -11575,7 +11574,7 @@ VNT3
                         ; palette bytes
 
  LDA LASCT              ; Decrement the value of LASCT, but if we go too far
- BEQ *+5               ; and it becomes negative, bump it back up again (this
+ BEQ * +5               ; and it becomes negative, bump it back up again (this
  DEC LASCT              ; controls the pulsing of pulse lasers)
 
  LDA SVN                ; If SVN is non-zero, we are in the process of saving
@@ -11637,7 +11636,7 @@ IRQ1
 
  DEY                    ; Decrement the palette byte counter
 
- BPL *-7               ; Loop back to the LDA TVT1,Y instruction until we have
+ BPL * -7               ; Loop back to the LDA TVT1,Y instruction until we have
                         ; copied all the palette bytes
 
 jvec
@@ -11723,7 +11722,7 @@ ESL1
  JSR RESET              ; Call RESET to reset our ship and various controls
 
  PLA                    ; Restore the witchspace flag from before the escape pod
- BEQ *+5               ; launch, and if we were in normal space, skip the
+ BEQ * +5               ; launch, and if we were in normal space, skip the
                         ; following instruction
 
  JMP DEATH              ; Launching an escape pod in witchspace is fatal, so
@@ -11767,13 +11766,13 @@ ESL2
 
   .PRINT "ELITE B"
   .PRINT "Assembled at ", CODE_B__
-  .PRINT "Ends at ", *
-  .PRINT "Code size is ", (* - CODE_B__)
+  .PRINT "Ends at ", * 
+  .PRINT "Code size is ", (*  - CODE_B__)
   .PRINT "Execute at ", LOAD__
   .PRINT "Reload at ", LOAD_B__
 
-  .PRINT "S.ELTB ", ~CODE_B__, " ", ~*, " ", LOAD__, " ", LOAD_B__
- SAVE "3-assembled-output/ELTB.bin", CODE_B__, *, LOAD__
+  .PRINT "S.ELTB ", ~CODE_B__, " ", ~* , " ", LOAD__, " ", LOAD_B__
+ ;SAVE"3-assembled-output/ELTB.bin", CODE_B__, * , LOAD__
 
 ; ******************************************************************************
 ;
@@ -11783,8 +11782,8 @@ ESL2
 ;
 ; ******************************************************************************
 
- CODE_C__ = *
- LOAD_C__ = LOAD__ +* - CODE__
+ CODE_C__ = * 
+ LOAD_C__ = LOAD__ +*  - CODE__
 
 ; ******************************************************************************
 ;
@@ -11825,7 +11824,7 @@ TA34
  LDA #0                 ; Set A to x_hi OR y_hi OR z_hi
  JSR MAS4
 
- BEQ *+5               ; If A = 0 then the missile is very close to our ship,
+ BEQ * +5               ; If A = 0 then the missile is very close to our ship,
                         ; so skip the following instruction
 
  JMP TA21               ; Jump down to part 3 to set up the vectors and skip
@@ -12004,7 +12003,7 @@ TACTICS
  BEQ TA18               ; missile tactics
 
  CPX #ESC               ; If this is not an escape pod, skip the following two
- BNE *+8               ; instructions
+ BNE * +8               ; instructions
 
  JSR SPS1               ; This is an escape pod, so call SPS1 to calculate the
                         ; vector to the planet and store it in XX15
@@ -12165,7 +12164,7 @@ TA19
 
  LDA TYPE               ; If this is not a missile, skip the following
  CMP #MSL               ; instruction
- BNE *+5
+ BNE * +5
 
  JMP TA20               ; This is a missile, so jump down to TA20 to get
                         ; straight into some aggressive manoeuvring
@@ -12536,7 +12535,7 @@ TA9
 
  LDX TYPE               ; If this is not a missile then skip the ASL instruction
  CPX #MSL
- BNE *+3
+ BNE * +3
 
  ASL A                  ; This is a missile, so set A = -2, as missiles are more
                         ; nimble and can brake more quickly
@@ -12901,7 +12900,7 @@ ANGRY
                         ; contains an RTS)
 
  CMP #CYL               ; If this is not a Cobra Mk III trader, skip the
- BNE *+5               ; following instruction
+ BNE * +5               ; following instruction
 
  JSR AN2                ; Call AN2 to make the space station hostile
 
@@ -13884,7 +13883,7 @@ MULT3
 
 MUL2
 
- BCC *+4               ; If C (i.e. the next bit from K) is set, do the
+ BCC * +4               ; If C (i.e. the next bit from K) is set, do the
  ADC T                  ; addition for this bit of K:
                         ;
                         ;   A = A + T + C
@@ -14026,7 +14025,7 @@ MULTS
                         ; keeping the running total in A, but instead of using a
                         ; loop like MU11, we just unroll it, starting with bit 0
 
- BCC *+4               ; If C (i.e. the next bit from P) is set, do the
+ BCC * +4               ; If C (i.e. the next bit from P) is set, do the
  ADC T1                 ; addition for this bit of P:
                         ;
                         ;   A = A + T1 + C
@@ -14041,22 +14040,22 @@ MULTS
                         ; the start of P, and shift P right to fetch the next
                         ; bit for the calculation into the C flag
 
- BCC *+4               ; Repeat the shift-and-add loop for bit 1
+ BCC * +4               ; Repeat the shift-and-add loop for bit 1
  ADC T1
  ROR A
  ROR P
 
- BCC *+4               ; Repeat the shift-and-add loop for bit 2
+ BCC * +4               ; Repeat the shift-and-add loop for bit 2
  ADC T1
  ROR A
  ROR P
 
- BCC *+4               ; Repeat the shift-and-add loop for bit 3
+ BCC * +4               ; Repeat the shift-and-add loop for bit 3
  ADC T1
  ROR A
  ROR P
 
- BCC *+4               ; Repeat the shift-and-add loop for bit 4
+ BCC * +4               ; Repeat the shift-and-add loop for bit 4
  ADC T1
  ROR A
  ROR P
@@ -14261,7 +14260,7 @@ MU11
 
 MUL6
 
- BCC *+4               ; If C (i.e. the next bit from P) is set, do the
+ BCC * +4               ; If C (i.e. the next bit from P) is set, do the
  ADC T                  ; addition for this bit of P:
                         ;
                         ;   A = A + T + C
@@ -14458,7 +14457,7 @@ MU7
 
 MUL6
 
- BCC *+4
+ BCC * +4
  ADC T
  ROR A
  ROR P
@@ -14691,7 +14690,7 @@ MULT1
 
 MUL4
 
- BCC *+4               ; If C (i.e. the next bit from P) is set, do the
+ BCC * +4               ; If C (i.e. the next bit from P) is set, do the
  ADC T1                 ; addition for this bit of P:
                         ;
                         ;   A = A + T1 + C
@@ -16829,12 +16828,12 @@ SCAN
                         ; ellipse and took this code out for release
 
  CMP #MSL               ; If this is not a missile, skip the following
- BNE *+4               ; instruction
+ BNE * +4               ; instruction
 
  LDX #$F0               ; This is a missile, so set X to colour 2 (yellow/white)
 
 ;CMP #AST               ; These instructions are commented out in the original
-;BCC *+4               ; source. See above for an explanation of what they do
+;BCC * +4               ; source. See above for an explanation of what they do
 ;LDX #$0F
 ;.SC49
 
@@ -16960,13 +16959,13 @@ SCD6
                         ; and minimum below, but it might save a few cycles)
 
  CMP #194               ; If A >= 194, skip the following instruction, as 194 is
- BCS *+4               ; the minimum allowed value of A
+ BCS * +4               ; the minimum allowed value of A
 
  LDA #194               ; A < 194, so set A to 194, the minimum allowed value
                         ; for the y-coordinate of our ship's dot
 
  CMP #247               ; If A < 247, skip the following instruction, as 246 is
- BCC *+4               ; the maximum allowed value of A
+ BCC * +4               ; the maximum allowed value of A
 
 ld246
 
@@ -17101,7 +17100,7 @@ RTS
                         ; right pixel that the call to CPIX4 finished on)
 
  CPY #8                 ; If the row number in Y is less than 8, then it
- BNE *+6               ; correctly points at the next line down, so jump to
+ BNE * +6               ; correctly points at the next line down, so jump to
                         ; VLL2 to skip the following
 
  LDY #0                 ; We just incremented Y down through the bottom of the
@@ -17167,7 +17166,7 @@ WSCAN
  STA DL
 
  LDA DL                 ; Loop round these two instructions until DL is no
- BEQ *-2               ; longer 0 (DL gets set to 30 in the LINSCN routine,
+ BEQ * -2               ; longer 0 (DL gets set to 30 in the LINSCN routine,
                         ; which is run when vertical sync has occurred on the
                         ; video system, so DL will change to a non-zero value
                         ; at the start of each screen refresh)
@@ -17182,13 +17181,13 @@ WSCAN
 
   .PRINT "ELITE C"
   .PRINT "Assembled at ", CODE_C__
-  .PRINT "Ends at ", *
-  .PRINT "Code size is ", (* - CODE_C__)
+  .PRINT "Ends at ", * 
+  .PRINT "Code size is ", (*  - CODE_C__)
   .PRINT "Execute at ", LOAD__
   .PRINT "Reload at ", LOAD_C__
 
-  .PRINT "S.ELTC ", ~CODE_C__, " ", ~*, " ", LOAD__, " ", LOAD_C__
- SAVE "3-assembled-output/ELTC.bin", CODE_C__, *, LOAD__
+  .PRINT "S.ELTC ", ~CODE_C__, " ", ~* , " ", LOAD__, " ", LOAD_C__
+ ;SAVE"3-assembled-output/ELTC.bin", CODE_C__, * , LOAD__
 
 ; ******************************************************************************
 ;
@@ -17198,8 +17197,8 @@ WSCAN
 ;
 ; ******************************************************************************
 
- CODE_D__ = *
- LOAD_D__ = LOAD__ + * - CODE__
+ CODE_D__ = * 
+ LOAD_D__ = LOAD__ + *  - CODE__
 
 ; ******************************************************************************
 ;
@@ -17336,14 +17335,14 @@ kg
 
 TT20
 
- JSR *+3               ; This line calls the line below as a subroutine, which
+ JSR * +3               ; This line calls the line below as a subroutine, which
                         ; does two twists before returning here, and then we
                         ; fall through to the line below for another two
                         ; twists, so the net effect of these two consecutive
                         ; JSR calls is four twists, not counting the ones
                         ; inside your head as you try to follow this process
 
- JSR *+3               ; This line calls TT54 as a subroutine to do a twist,
+ JSR * +3               ; This line calls TT54 as a subroutine to do a twist,
                         ; and then falls through into TT54 to do another twist
                         ; before returning from the subroutine
 
@@ -18129,7 +18128,7 @@ TT15
                         ; distance from the top-left corner of the screen)
 
  LDX QQ11               ; If the current view is not the Short-range Chart,
- BPL *+4               ; which is the only view with bit 7 set, then skip the
+ BPL * +4               ; which is the only view with bit 7 set, then skip the
                         ; following instruction
 
  LDA #0                 ; This is the Short-range Chart, so set A to 0, so the
@@ -18171,7 +18170,7 @@ TT84
  CLC                    ; to get the x-coordinate of the right edge of the
  ADC QQ19+2             ; crosshairs
 
- BCC *+4               ; If the above addition didn't overflow, then A is
+ BCC * +4               ; If the above addition didn't overflow, then A is
                         ; correct, so skip the next instruction
 
  LDA #255               ; The addition overflowed, so set A to 255 so the
@@ -18830,14 +18829,14 @@ TT212
  INY                    ; Y to point to the next item
 
  CPY #17                ; If Y >= 17 then skip the next instruction as we have
- BCS *+5               ; done the last item
+ BCS * +5               ; done the last item
 
  JMP TT211              ; Otherwise loop back to TT211 to print the next item
                         ; in the hold
 
  LDA QQ11               ; If the current view type in QQ11 is not 4 (Sell Cargo
  CMP #4                 ; screen), skip the next two instructions and just
- BNE *+8               ; return from the subroutine
+ BNE * +8               ; return from the subroutine
 
  JSR dn2                ; This is the Sell Cargo screen, so call dn2 to make a
                         ; short, high beep and delay for 1 second
@@ -18878,7 +18877,7 @@ TT213
 
  LDA CRGO               ; If our ship's cargo capacity is < 26 (i.e. we do not
  CMP #26                ; have a cargo bay extension), skip the following two
- BCC *+7               ; instructions
+ BCC * +7               ; instructions
 
  LDA #107               ; We do have a cargo bay extension, so print recursive
  JSR TT27               ; token 107 ("LARGE CARGO{sentence case} BAY")
@@ -19162,7 +19161,7 @@ TT179
  SBC QQ1
 
  CMP #38                ; If the vertical distance in A is < 38, then the
- BCC *+6               ; crosshairs are close enough to the current system to
+ BCC * +6               ; crosshairs are close enough to the current system to
                         ; appear in the Short-range Chart, so skip the next two
                         ; instructions
 
@@ -21273,7 +21272,7 @@ EQSHP
  ADC #3                 ; now set to between 3 and 17)
 
  CMP #12                ; If A >= 12 then set A = 12, so A is now set to between
- BCC *+4               ; 3 and 12
+ BCC * +4               ; 3 and 12
  LDA #12
 
  STA Q                  ; Set QQ25 = A (so QQ25 is in the range 3-12 and
@@ -21494,7 +21493,7 @@ et4
  BEQ ed5                ; LASER+X, which contains the laser power for view X,
                         ; is zero), jump to ed5 to buy a beam laser
 
-;BPL *+4               ; This instruction is commented out in the original
+;BPL * +4               ; This instruction is commented out in the original
                         ; source, though it would have no effect (it would
                         ; simply skip the BMI if A is positive, which is what
                         ; BMI does anyway)
@@ -21877,13 +21876,13 @@ qv2
 
   .PRINT "ELITE D"
   .PRINT "Assembled at ", CODE_D__
-  .PRINT "Ends at ", *
-  .PRINT "Code size is ", (* - CODE_D__)
+  .PRINT "Ends at ", * 
+  .PRINT "Code size is ", (*  - CODE_D__)
   .PRINT "Execute at ", LOAD__
   .PRINT "Reload at ", LOAD_D__
 
-  .PRINT "S.ELTD ", ~CODE_D__, " ", ~*, " ", LOAD__, " ", LOAD_D__
- SAVE "3-assembled-output/ELTD.bin", CODE_D__, *, LOAD__
+  .PRINT "S.ELTD ", ~CODE_D__, " ", ~* , " ", LOAD__, " ", LOAD_D__
+ ;SAVE"3-assembled-output/ELTD.bin", CODE_D__, * , LOAD__
 
 ; ******************************************************************************
 ;
@@ -21893,8 +21892,8 @@ qv2
 ;
 ; ******************************************************************************
 
- CODE_E__ = *
- LOAD_E__ = LOAD__ + * - CODE__
+ CODE_E__ = * 
+ LOAD_E__ = LOAD__ + *  - CODE__
 
 ; ******************************************************************************
 ;
@@ -21973,7 +21972,7 @@ TT53
 
  BIT QQ15               ; Check bit 6 of s0_lo, which is stored in QQ15
 
- BVS *+3               ; If bit 6 is set then skip over the next instruction
+ BVS * +3               ; If bit 6 is set then skip over the next instruction
 
  DEY                    ; Bit 6 is clear, so we only want to loop three times,
                         ; so decrement the loop counter in Y
@@ -21985,7 +21984,7 @@ TT55
  LDA QQ15+5             ; Step 2: Load s2_hi, which is stored in QQ15+5, and
  AND #%00011111         ; extract bits 0-4 by AND'ing with %11111
 
- BEQ *+7               ; If all those bits are zero, then skip the following
+ BEQ * +7               ; If all those bits are zero, then skip the following
                         ; two instructions to go to step 3
 
  ORA #%10000000         ; We now have a number in the range 1-31, which we can
@@ -22329,7 +22328,7 @@ TT27
                         ; and return from the subroutine using a tail call
 
  DEX                    ; If token > 3, skip the following instruction
- BNE *+5
+ BNE * +5
 
  JMP cpl                ; This token is control code 3 (selected system name)
                         ; so jump to cpl to print the selected system name
@@ -22344,7 +22343,7 @@ TT27
                         ; and return from the subroutine using a tail call
 
  DEX                    ; If token > 6, skip the following three instructions
- BNE *+7
+ BNE * +7
 
  LDA #%10000000         ; This token is control code 6 (switch to Sentence
  STA QQ17               ; Case), so set bit 7 of QQ17 to switch to Sentence Case
@@ -22352,7 +22351,7 @@ TT27
 
  DEX                    ; If token > 8, skip the following two instructions
  DEX
- BNE *+5
+ BNE * +5
 
  STX QQ17               ; This token is control code 8 (switch to ALL CAPS), so
  RTS                    ; set QQ17 to 0 to switch to ALL CAPS and return from
@@ -22369,7 +22368,7 @@ TT27
                         ; correct and doesn't need correcting)
 
  CMP #14                ; If token < 14, skip the following two instructions
- BCC *+6
+ BCC * +6
 
  CMP #32                ; If token < 32, then this means token is in 14-31, so
  BCC qw                 ; this is a recursive token that needs 114 adding to it
@@ -22876,7 +22875,7 @@ TT50
  INY                    ; Increment Y to point to the next character in the
                         ; token we are printing
 
- BNE *+4               ; If Y is zero then we have just crossed into a new
+ BNE * +4               ; If Y is zero then we have just crossed into a new
  INC V+1                ; page, so increment V+1 so that V points to the start
                         ; of the new page
 
@@ -22913,7 +22912,7 @@ DOEXP
 
  LDA INWK+31            ; If bit 6 of the ship's byte #31 is clear, then the
  AND #%01000000         ; ship is not already exploding so there is no existing
- BEQ *+5               ; explosion cloud to remove, so skip the following
+ BEQ * +5               ; explosion cloud to remove, so skip the following
                         ; instruction
 
  JSR PTCLS              ; Call PTCLS to remove the existing cloud by drawing it
@@ -22925,7 +22924,7 @@ DOEXP
  LDA INWK+7             ; Set A = z_hi, so (A T) = z
 
  CMP #32                ; If z_hi < 32, skip the next two instructions
- BCC *+6
+ BCC * +6
 
  LDA #$FE               ; Set A = 254 and jump to yy (this BNE is effectively a
  BNE yy                 ; JMP, as A is never zero)
@@ -22974,7 +22973,7 @@ yy
                         ;   (A R) = 256 * cloud counter / distance
 
  CMP #$1C               ; If A < 28, skip the next two instructions
- BCC *+6
+ BCC * +6
 
  LDA #$FE               ; Set A = 254 and skip the following (this BNE is
  BNE LABEL_1            ; effectively a JMP as A is never zero)
@@ -23050,7 +23049,7 @@ PTCLS
                         ; the cloud counter. We are now going to process this
                         ; into the number of particles in each vertex's cloud
 
- BPL *+4               ; If the cloud counter < 128, then we are in the first
+ BPL * +4               ; If the cloud counter < 128, then we are in the first
                         ; half of the cloud's existence, so skip the next
                         ; instruction
 
@@ -23673,7 +23672,7 @@ DENGY
 
  PHP                    ; Save the flags on the stack
 
- BNE *+5               ; If the energy levels are not yet zero, skip the
+ BNE * +5               ; If the energy levels are not yet zero, skip the
                         ; following instruction
 
  INC ENERGY             ; The minimum allowed energy level is 1, and we just
@@ -23879,7 +23878,7 @@ SP2
                         ; station in the compass is in front of us
 
  LDX XX15+2             ; If the z-coordinate of the XX15 vector is positive,
- BPL *+4               ; skip the following instruction
+ BPL * +4               ; skip the following instruction
 
  LDA #$FF               ; The z-coordinate of XX15 is negative, so the planet or
                         ; station is behind us and the compass dot should be in
@@ -24163,10 +24162,10 @@ OO3
                         ; appear to drain away four times faster than the
                         ; shields did)
 
- BEQ *+4               ; If we have just run out of energy, skip the next
+ BEQ * +4               ; If we have just run out of energy, skip the next
                         ; instruction to jump straight to our death
 
- BCS *+5               ; If the C flag is set, then subtracting the damage from
+ BCS * +5               ; If the C flag is set, then subtracting the damage from
                         ; the energy banks didn't underflow, so we had enough
                         ; energy to survive, and we can skip the next
                         ; instruction to make a sound and take some damage
@@ -24547,7 +24546,7 @@ NW2
 
  TAX                    ; Copy the ship type into X
 
- BMI *+5               ; If the ship type is negative (planet or sun), then
+ BMI * +5               ; If the ship type is negative (planet or sun), then
                         ; skip the following instruction
 
  INC MANY,X             ; Increment the total number of ships of type X
@@ -25066,7 +25065,7 @@ PL2
  LDA TYPE               ; Shift bit 0 of the planet/sun's type into the C flag
  LSR A
 
- BCS *+5               ; If the planet/sun's type has bit 0 clear, then it's
+ BCS * +5               ; If the planet/sun's type has bit 0 clear, then it's
                         ; either 128 or 130, which is a planet; meanwhile, the
                         ; sun has type 129, which has bit 0 set. So if this is
                         ; the sun, skip the following instruction
@@ -25506,7 +25505,7 @@ PLS1
 
  LDY K+1                ; Fetch the second byte of the result into Y
 
- BEQ *+4               ; If the second byte is 0, skip the next instruction
+ BEQ * +4               ; If the second byte is 0, skip the next instruction
 
  LDA #254               ; The second byte is non-zero, so the result won't fit
                         ; into one byte, so set A = 254 as our maximum one-byte
@@ -25878,7 +25877,7 @@ PL43
                         ; the updated value of CNT in A
 
  CMP TGT                ; If CNT > TGT then jump to PL40 to stop drawing the
- BEQ *+4               ; ellipse (which is how we draw half-ellipses)
+ BEQ * +4               ; ellipse (which is how we draw half-ellipses)
  BCS PL40
 
  LDA CNT2               ; Set CNT2 = (CNT2 + STP) mod 64
@@ -26651,7 +26650,7 @@ PL38
                         ; CNT by STP, the step size
 
  CMP #65                ; If CNT >= 65 then skip the next instruction
- BCS *+5
+ BCS * +5
 
  JMP PLL3               ; Jump back for the next segment
 
@@ -26798,7 +26797,7 @@ WPL2
                         ; gives us the half-width of the sun's line on this line
                         ; of the screen
 
- BEQ *+5               ; If A = 0, skip the following call to HLOIN2 as there
+ BEQ * +5               ; If A = 0, skip the following call to HLOIN2 as there
                         ; is no sun line on this line of the screen
 
  JSR HLOIN2             ; Call HLOIN2 to draw a horizontal line on pixel line Y,
@@ -26876,7 +26875,7 @@ EDGES
  BMI ED1                ; If the addition is negative then the calculation has
                         ; overflowed, so jump to ED1 to return a failure
 
- BEQ *+6               ; If the high byte A from the result is 0, skip the
+ BEQ * +6               ; If the high byte A from the result is 0, skip the
                         ; next two instructions, as the result already fits on
                         ; the screen
 
@@ -27227,7 +27226,7 @@ PLS4
                         ; radians)
 
  LDX INWK+14            ; If nosev_z_hi is negative, skip the following
- BMI *+4               ; instruction to leave the angle in A as a positive
+ BMI * +4               ; instruction to leave the angle in A as a positive
                         ; integer in the range 0 to 128 (so when we calculate
                         ; CNT2 below, it will be in the right half of the
                         ; anti-clockwise arc that we describe when drawing
@@ -27495,19 +27494,19 @@ TJ1
  LDY #0                 ; which we now increase or decrease appropriately
 
  CMP #$19               ; If left arrow was pressed, set X = X - 1
- BNE *+3
+ BNE * +3
  DEX
 
  CMP #$79               ; If right arrow was pressed, set X = X + 1
- BNE *+3
+ BNE * +3
  INX
 
  CMP #$39               ; If up arrow was pressed, set Y = Y + 1
- BNE *+3
+ BNE * +3
  INY
 
  CMP #$29               ; If down arrow was pressed, set Y = Y - 1
- BNE *+3
+ BNE * +3
  DEY
 
  RTS                    ; Return from the subroutine
@@ -27548,13 +27547,13 @@ pl1
 
   .PRINT "ELITE E"
   .PRINT "Assembled at ", CODE_E__
-  .PRINT "Ends at ", *
-  .PRINT "Code size is ", (* - CODE_E__)
+  .PRINT "Ends at ", * 
+  .PRINT "Code size is ", (*  - CODE_E__)
   .PRINT "Execute at ", LOAD__
   .PRINT "Reload at ", LOAD_E__
 
-  .PRINT "S.ELTE ", ~CODE_E__, " ", ~*, " ", LOAD__, " ", LOAD_E__
- SAVE "3-assembled-output/ELTE.bin", CODE_E__, *, LOAD__
+  .PRINT "S.ELTE ", ~CODE_E__, " ", ~* , " ", LOAD__, " ", LOAD_E__
+ ;SAVE"3-assembled-output/ELTE.bin", CODE_E__, * , LOAD__
 
 ; ******************************************************************************
 ;
@@ -27564,8 +27563,8 @@ pl1
 ;
 ; ******************************************************************************
 
- CODE_F__ = *
- LOAD_F__ = LOAD__ + * - CODE__
+ CODE_F__ = * 
+ LOAD_F__ = LOAD__ + *  - CODE__
 
 ; ******************************************************************************
 ;
@@ -28257,7 +28256,7 @@ RES2
  STA ALP1               ; Reset ALP1 (magnitude of roll angle alpha) to 3
 
  LDA SSPR               ; Fetch the "space station present" flag, and if we are
- BEQ *+5               ; not inside the safe zone, skip the next instruction
+ BEQ * +5               ; not inside the safe zone, skip the next instruction
 
  JSR SPBLB              ; Light up the space station bulb on the dashboard
 
@@ -28632,7 +28631,7 @@ me3
 
  DEC MCNT               ; Decrement the main loop counter in MCNT
 
- BEQ *+5               ; If the counter has reached zero, which it will do
+ BEQ * +5               ; If the counter has reached zero, which it will do
                         ; every 256 main loops, skip the next JMP instruction
                         ; (or to put it another way, if the counter hasn't
                         ; reached zero, jump down to MLOOP, skipping all the
@@ -28739,7 +28738,7 @@ MTT3
 
  CMP #5                 ; Set A to the ship number of an asteroid, and keep
  LDA #AST               ; this value for 98.5% of the time (i.e. if random
- BCS *+4               ; A >= 5 then skip the following instruction)
+ BCS * +4               ; A >= 5 then skip the following instruction)
 
  LDA #OIL               ; Set A to the ship number of a cargo canister
 
@@ -28778,7 +28777,7 @@ MTT1
  ASL A                  ; Double A to a maximum of 80 or 140
 
  LDX MANY+COPS          ; If there are no cops in the local bubble, skip the
- BEQ *+5               ; next instruction
+ BEQ * +5               ; next instruction
 
  ORA FIST               ; There are cops in the vicinity and we've got a hold
                         ; full of jail time, so OR the value in A with FIST to
@@ -28798,7 +28797,7 @@ MTT1
                         ; "Fixing ship positions" for details
 
  CMP T                  ; If the random value in A >= our badness level, which
- BCS *+7               ; will be the case unless we have been really, really
+ BCS * +7               ; will be the case unless we have been really, really
                         ; bad, then skip the following two instructions (so
                         ; if we are really bad, there's a higher chance of
                         ; spawning a cop, otherwise we got away with it, for
@@ -28984,11 +28983,11 @@ EE20
  JSR DIALS              ; Call DIALS to update the dashboard
 
  LDA QQ11               ; If this is a space view, skip the following four
- BEQ *+11              ; instructions (i.e. jump to JSR TT17 below)
+ BEQ * +11              ; instructions (i.e. jump to JSR TT17 below)
 
  AND PATG               ; If PATG = $FF (author names are shown on start-up)
  LSR A                  ; and bit 0 of QQ11 is 1 (the current view is type 1),
- BCS *+5               ; then skip the following instruction
+ BCS * +5               ; then skip the following instruction
 
  JSR DELAY-5            ; Delay for 8 vertical syncs (8/50 = 0.16 seconds), to
                         ; slow the main loop down a bit
@@ -29049,7 +29048,7 @@ tha
  JSR DORND              ; Set A and X to random numbers
 
  CMP #200               ; If A < 200 (78% chance), skip the next instruction
- BCC *+5
+ BCC * +5
 
  JSR GTHG               ; Call GTHG to spawn a Thargoid ship and a Thargon
                         ; companion
@@ -29096,15 +29095,15 @@ tha
 TT102
 
  CMP #f8                ; If red key f8 was pressed, jump to STATUS to show the
- BNE *+5               ; Status Mode screen, returning from the subroutine
+ BNE * +5               ; Status Mode screen, returning from the subroutine
  JMP STATUS             ; using a tail call
 
  CMP #f4                ; If red key f4 was pressed, jump to TT22 to show the
- BNE *+5               ; Long-range Chart, returning from the subroutine using
+ BNE * +5               ; Long-range Chart, returning from the subroutine using
  JMP TT22               ; a tail call
 
  CMP #f5                ; If red key f5 was pressed, jump to TT23 to show the
- BNE *+5               ; Short-range Chart, returning from the subroutine using
+ BNE * +5               ; Short-range Chart, returning from the subroutine using
  JMP TT23               ; a tail call
 
  CMP #f6                ; If red key f6 was pressed, call TT111 to select the
@@ -29116,11 +29115,11 @@ TT102
 TT92
 
  CMP #f9                ; If red key f9 was pressed, jump to TT213 to show the
- BNE *+5               ; Inventory screen, returning from the subroutine
+ BNE * +5               ; Inventory screen, returning from the subroutine
  JMP TT213              ; using a tail call
 
  CMP #f7                ; If red key f7 was pressed, jump to TT167 to show the
- BNE *+5               ; Market Price screen, returning from the subroutine
+ BNE * +5               ; Market Price screen, returning from the subroutine
  JMP TT167              ; using a tail call
 
  CMP #f0                ; If red key f0 was pressed, jump to TT110 to launch our
@@ -29134,15 +29133,15 @@ fvw
                         ; for f1-f3 and "@" (save commander file) key presses
 
  CMP #f3                ; If red key f3 was pressed, jump to EQSHP to show the
- BNE *+5               ; Equip Ship screen, returning from the subroutine using
+ BNE * +5               ; Equip Ship screen, returning from the subroutine using
  JMP EQSHP              ; a tail call
 
  CMP #f1                ; If red key f1 was pressed, jump to TT219 to show the
- BNE *+5               ; Buy Cargo screen, returning from the subroutine using
+ BNE * +5               ; Buy Cargo screen, returning from the subroutine using
  JMP TT219              ; a tail call
 
  CMP #$47               ; If "@" was pressed, jump to SVE to save the commander
- BNE *+5               ; file, returning from the subroutine using a tail call
+ BNE * +5               ; file, returning from the subroutine using a tail call
  JMP SVE
 
  CMP #f2                ; If red key f2 was pressed, jump to TT208 to show the
@@ -29169,7 +29168,7 @@ INSP
 LABEL_3
 
  CMP #$54               ; If "H" was pressed, jump to hyp to do a hyperspace
- BNE *+5               ; jump (if we are in space), returning from the
+ BNE * +5               ; jump (if we are in space), returning from the
  JMP hyp                ; subroutine using a tail call
 
  CMP #$32               ; If "D" was pressed, jump to T95 to print the distance
@@ -29720,7 +29719,7 @@ IF _REMOVE_CHECKSUMS
 
 ELSE
 
- BNE *-6               ; If the calculated checksum does not match CHK, then
+ BNE * -6               ; If the calculated checksum does not match CHK, then
                         ; loop back to repeat the check - in other words, we
                         ; enter an infinite loop here, as the checksum routine
                         ; will keep returning the same incorrect value
@@ -31221,7 +31220,7 @@ NOL1
 ;
 ; ******************************************************************************
 
- KYTB = * - 1          ; Point KYTB to the byte before the start of the table
+ KYTB = *  - 1          ; Point KYTB to the byte before the start of the table
 
                         ; These are the primary flight controls (pitch, roll,
                         ; speed and lasers):
@@ -31672,11 +31671,11 @@ DKL2
                         ; roll rate by if the roll keys are being pressed
 
  LDY KL+3               ; If the "<" key is being pressed, then call the BUMP2
- BEQ *+5               ; routine to increase the roll rate in X by A
+ BEQ * +5               ; routine to increase the roll rate in X by A
  JSR BUMP2
 
  LDY KL+4               ; If the ">" key is being pressed, then call the REDU2
- BEQ *+5               ; routine to decrease the roll rate in X by A, taking
+ BEQ * +5               ; routine to decrease the roll rate in X by A, taking
  JSR REDU2              ; the keyboard auto re-centre setting into account
 
  STX JSTX               ; Store the updated roll rate in JSTX
@@ -31687,11 +31686,11 @@ DKL2
                         ; DC indicator on the dashboard)
 
  LDY KL+5               ; If the "X" key is being pressed, then call the REDU2
- BEQ *+5               ; routine to decrease the pitch rate in X by A, taking
+ BEQ * +5               ; routine to decrease the pitch rate in X by A, taking
  JSR REDU2              ; the keyboard auto re-centre setting into account
 
  LDY KL+6               ; If the "S" key is being pressed, then call the BUMP2
- BEQ *+5               ; routine to increase the pitch rate in X by A
+ BEQ * +5               ; routine to increase the pitch rate in X by A
  JSR BUMP2
 
  STX JSTY               ; Store the updated roll rate in JSTY
@@ -31782,7 +31781,7 @@ DK55
 DK7
 
  CPX #$70               ; If ESCAPE is not being pressed, skip over the next
- BNE *+5               ; instruction
+ BNE * +5               ; instruction
 
  JMP DEATH2             ; ESCAPE is being pressed, so jump to DEATH2 to end
                         ; the game
@@ -32129,38 +32128,38 @@ ou1
 
 QQ16
 
- EQUS "AL"              ; Token 128
- EQUS "LE"              ; Token 129
- EQUS "XE"              ; Token 130
- EQUS "GE"              ; Token 131
- EQUS "ZA"              ; Token 132
- EQUS "CE"              ; Token 133
- EQUS "BI"              ; Token 134
- EQUS "SO"              ; Token 135
- EQUS "US"              ; Token 136
- EQUS "ES"              ; Token 137
- EQUS "AR"              ; Token 138
- EQUS "MA"              ; Token 139
- EQUS "IN"              ; Token 140
- EQUS "DI"              ; Token 141
- EQUS "RE"              ; Token 142
- EQUS "A?"              ; Token 143
- EQUS "ER"              ; Token 144
- EQUS "AT"              ; Token 145
- EQUS "EN"              ; Token 146
- EQUS "BE"              ; Token 147
- EQUS "RA"              ; Token 148
- EQUS "LA"              ; Token 149
- EQUS "VE"              ; Token 150
- EQUS "TI"              ; Token 151
- EQUS "ED"              ; Token 152
- EQUS "OR"              ; Token 153
- EQUS "QU"              ; Token 154
- EQUS "AN"              ; Token 155
- EQUS "TE"              ; Token 156
- EQUS "IS"              ; Token 157
- EQUS "RI"              ; Token 158
- EQUS "ON"              ; Token 159
+  .by "AL"              ; Token 128
+  .by "LE"              ; Token 129
+  .by "XE"              ; Token 130
+  .by "GE"              ; Token 131
+  .by "ZA"              ; Token 132
+  .by "CE"              ; Token 133
+  .by "BI"              ; Token 134
+  .by "SO"              ; Token 135
+  .by "US"              ; Token 136
+  .by "ES"              ; Token 137
+  .by "AR"              ; Token 138
+  .by "MA"              ; Token 139
+  .by "IN"              ; Token 140
+  .by "DI"              ; Token 141
+  .by "RE"              ; Token 142
+  .by "A?"              ; Token 143
+  .by "ER"              ; Token 144
+  .by "AT"              ; Token 145
+  .by "EN"              ; Token 146
+  .by "BE"              ; Token 147
+  .by "RA"              ; Token 148
+  .by "LA"              ; Token 149
+  .by "VE"              ; Token 150
+  .by "TI"              ; Token 151
+  .by "ED"              ; Token 152
+  .by "OR"              ; Token 153
+  .by "QU"              ; Token 154
+  .by "AN"              ; Token 155
+  .by "TE"              ; Token 156
+  .by "IS"              ; Token 157
+  .by "RI"              ; Token 158
+  .by "ON"              ; Token 159
 
 ; ******************************************************************************
 ;
@@ -32483,7 +32482,7 @@ TIL2
  ASL A                  ; Shift A to the left
 
  CMP Q                  ; If A < Q skip the following subtraction
- BCC *+4
+ BCC * +4
 
  SBC Q                  ; A >= Q, so set A = A - Q
                         ;
@@ -32644,7 +32643,7 @@ DVL2
  ROL A                  ; Shift A to the left
 
  CMP Q                  ; If A < Q skip the following subtraction
- BCC *+4
+ BCC * +4
 
  SBC Q                  ; Set A = A - Q
                         ;
@@ -32676,13 +32675,13 @@ DVL2
 
   .PRINT "ELITE F"
   .PRINT "Assembled at ", CODE_F__
-  .PRINT "Ends at ", *
-  .PRINT "Code size is ", (* - CODE_F__)
+  .PRINT "Ends at ", * 
+  .PRINT "Code size is ", (*  - CODE_F__)
   .PRINT "Execute at ", LOAD__
   .PRINT "Reload at ", LOAD_F__
 
-  .PRINT "S.ELTF ", ~CODE_F__, " ", ~*, " ", LOAD__, " ", LOAD_F__
- SAVE "3-assembled-output/ELTF.bin", CODE_F__, *, LOAD__
+  .PRINT "S.ELTF ", ~CODE_F__, " ", ~* , " ", LOAD__, " ", LOAD_F__
+ ;SAVE"3-assembled-output/ELTF.bin", CODE_F__, * , LOAD__
 
 ; ******************************************************************************
 ;
@@ -32692,8 +32691,8 @@ DVL2
 ;
 ; ******************************************************************************
 
- CODE_G__ = *
- LOAD_G__ = LOAD__ + * - CODE__
+ CODE_G__ = * 
+ LOAD_G__ = LOAD__ + *  - CODE__
 
 ; ******************************************************************************
 ;
@@ -32950,7 +32949,7 @@ LL31
                         ; subtraction
 
  CMP Q                  ; If A < Q, skip the following subtraction
- BCC *+4
+ BCC * +4
 
  SBC Q                  ; A >= Q, so set A = A - Q
 
@@ -33026,7 +33025,7 @@ LL39
  SEC
  SBC Q
 
- BCC *+4               ; If the subtraction underflowed, skip the next two
+ BCC * +4               ; If the subtraction underflowed, skip the next two
                         ; instructions so we can negate the result
 
  CLC                    ; Otherwise the result is correct, and S contains the
@@ -34113,7 +34112,7 @@ LL89
  PLA                    ; Pull the dot product off the stack into A
 
  BIT S                  ; If bit 7 of S is set, i.e. the dot product is
- BMI *+4               ; negative, then this face is visible as its normal is
+ BMI * +4               ; negative, then this face is visible as its normal is
                         ; pointing towards us, so skip the following instruction
 
  LDA #0                 ; Otherwise the face is not visible, so set A = 0 so we
@@ -34460,7 +34459,7 @@ LL52
  SBC XX15
  STA XX15
 
- BCC *+4               ; If the above subtraction underflowed then we need to
+ BCC * +4               ; If the above subtraction underflowed then we need to
  INC XX15+1             ; bump the high byte of the result up by 1
 
  LDA XX15+2             ; And now we flip the sign of the result to get the
@@ -35137,7 +35136,7 @@ LL74
  STA XX12               ; the laser beam move around as the ship moves in space
 
  LDA XX1+2              ; If the ship's x_sign is positive, skip the next
- BPL *+4               ; instruction
+ BPL * +4               ; instruction
 
  DEC XX15+4             ; The ship's x_sign is negative (i.e. it's on the left
                         ; side of the screen), so switch the laser beam so it
@@ -36531,13 +36530,13 @@ LL137
 
   .PRINT "ELITE G"
   .PRINT "Assembled at ", CODE_G__
-  .PRINT "Ends at ", *
-  .PRINT "Code size is ", (* - CODE_G__)
+  .PRINT "Ends at ", * 
+  .PRINT "Code size is ", (*  - CODE_G__)
   .PRINT "Execute at ", LOAD__
   .PRINT "Reload at ", LOAD_G__
 
-  .PRINT "S.ELTG ", ~CODE_G__, " ", ~*, " ", LOAD__, " ", LOAD_G__
- SAVE "3-assembled-output/ELTG.bin", CODE_G__, *, LOAD__
+  .PRINT "S.ELTG ", ~CODE_G__, " ", ~* , " ", LOAD__, " ", LOAD_G__
+ ;SAVE"3-assembled-output/ELTG.bin", CODE_G__, * , LOAD__
 
 ; ******************************************************************************
 ;
@@ -36567,8 +36566,8 @@ checksum0
 ;
 ; ******************************************************************************
 
- CODE_SHIPS__ = *
- LOAD_SHIPS__ = LOAD__ + * - CODE__
+ CODE_SHIPS__ = * 
+ LOAD_SHIPS__ = LOAD__ + *  - CODE__
 
 ; ******************************************************************************
 ;
@@ -37791,13 +37790,13 @@ SHIP_ESCAPE_POD_FACES
 
   .PRINT "SHIPS"
   .PRINT "Assembled at ", CODE_SHIPS__
-  .PRINT "Ends at ", *
-  .PRINT "Code size is ", (* - CODE_SHIPS__)
+  .PRINT "Ends at ", * 
+  .PRINT "Code size is ", (*  - CODE_SHIPS__)
   .PRINT "Execute at ", LOAD__
   .PRINT "Reload at ", LOAD_SHIPS__
 
-  .PRINT "S.SHIPS ", ~CODE_SHIPS__, " ", ~*, " ", LOAD__, " ", LOAD_SHIPS__
- SAVE "3-assembled-output/SHIPS.bin", CODE_SHIPS__, *, LOAD__
+  .PRINT "S.SHIPS ", ~CODE_SHIPS__, " ", ~* , " ", LOAD__, " ", LOAD_SHIPS__
+ ;SAVE"3-assembled-output/SHIPS.bin", CODE_SHIPS__, * , LOAD__
 
 ; ******************************************************************************
 ;
@@ -37955,13 +37954,13 @@ VEC
 
   .PRINT "PYTHON"
   .PRINT "Assembled at ", CODE_PYTHON__
-  .PRINT "Ends at ", *
-  .PRINT "Code size is ", (* - CODE_PYTHON__)
+  .PRINT "Ends at ", * 
+  .PRINT "Code size is ", (*  - CODE_PYTHON__)
   .PRINT "Execute at ", LOAD__
   .PRINT "Reload at ", LOAD_PYTHON__
 
-  .PRINT "S.PYTHON ", ~CODE_B__, " ", ~*, " ", LOAD__, " ", LOAD_PYTHON__
- SAVE "3-assembled-output/PYTHON.bin", CODE_PYTHON__, *, LOAD__
+  .PRINT "S.PYTHON ", ~CODE_B__, " ", ~* , " ", LOAD__, " ", LOAD_PYTHON__
+ ;SAVE"3-assembled-output/PYTHON.bin", CODE_PYTHON__, * , LOAD__
 
 ; ******************************************************************************
 ;
@@ -37969,6 +37968,6 @@ VEC
 ;
 ; ******************************************************************************
 
-  .PRINT "ELITE game code ", ($6000-*), " bytes free"
-  .PRINT "Ends at ", *
+  .PRINT "ELITE game code ", ($6000-* ), " bytes free"
+  .PRINT "Ends at ", * 
 
